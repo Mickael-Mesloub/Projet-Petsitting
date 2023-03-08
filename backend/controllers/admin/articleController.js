@@ -1,6 +1,7 @@
 import articleModel from '../../models/articleModel.js';
 import formidable from 'formidable';
 import fs from 'fs';
+import {generateRandomFilename} from '../../utils/utils.js'
 
 // Fonctions asynchrones: accèdent à la DB donc meilleure gestion des erreurs et exceptions car la requête peut prendre du temps 
 
@@ -12,21 +13,12 @@ export const createArticle = async (req, res) => {
             const promises = files.map((file) => {
 
             })
-
-            
-        }
-        
-        const generateRandomFilename = (originalFilename) => {
-            const fileExtension = originalFilename.split('.').pop();
-            const randomString = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
-            const timestamp = Date.now();
-            return `${timestamp}-${randomString}.${fileExtension}`;
         }
 
         const form = formidable({ multiples: true });
         form.parse(req, async (err, fields, files) => {
 
-            files.file.forEach( async(file) => {
+            const copyFiles = files.file.forEach( async(file) => {
                 const newFilename = generateRandomFilename(file.originalFilename);
                 const oldpath = file.filepath;
                 const newpath = `images/${newFilename}`;
@@ -39,9 +31,7 @@ export const createArticle = async (req, res) => {
                     //     return res.status(200).json({message: "Les fichiers ont été copiés avec succès!" , newpath})
                     // }
                 console.log(copy);
-                })
-    
-                
+                }) 
             })
 
         //     const images = [];
@@ -69,77 +59,73 @@ export const createArticle = async (req, res) => {
 }
 
 
-export const getAllProducts = async (req, res) => {
+export const getAllArticles = async (req, res) => {
 
     try {
 
-        const products = await articleModel.find({})
-        res.status(200).json(products)
+        const articles = await articleModel.find({})
+        res.status(200).json(articles)
 
     } catch (err) {
         res.status(400).json({ message: err })
     }
 }
 
-export const getProductDetails = async (req, res) => {
+export const getArticle = async (req, res) => {
 
     try {
 
-        const product = await articleModel.findOne({ _id: req.params.id })
-        res.status(200).json(product)
+        const article = await articleModel.findOne({ _id: req.params.id })
+        res.status(200).json(article)
 
     } catch (err) {
         res.status(400).json({ message: "Produit introuvable" })
     }
 }
 
-export const updateProduct = async (req, res) => {
+export const updateArticle = async (req, res) => {
 
     try {
 
-        const product = await articleModel.findOne({ _id: req.params.id });
+        const article = await articleModel.findOne({ _id: req.params.id });
         console.log("là");
-        console.log(product);
+        console.log(article);
 
-        if (!product) {
+        if (!article) {
             console.log("pas ok");
         }
 
         const form = formidable({ multiples: true });
         form.parse(req, async (err, fields, files) => {
-            if (err) {
-                return res.status(500).json({ message: "Une erreur s'est produite" });
-            }
 
-            // If the user uploaded a new image file, update the image path
-            let imagePath = product.images;
-            if (files.file) {
-                const oldpath = files.file.filepath;
-                const newFilename = `${Date.now()}-${files.file.originalFilename}`;
-                const newpath = "img/" + newFilename;
-                await fs.promises.copyFile(
-                    oldpath,
-                    "./public/" + newpath
-                );
-                imagePath = newpath;
-            }
+                const copyFiles = files.file.forEach( async(file) => {
+                    const newFilename = generateRandomFilename(file.originalFilename);
+                    const oldpath = file.filepath;
+                    const newpath = `images/${newFilename}`;
+                    console.log(newpath);
+                    const copy = fs.copyFile(oldpath, `public/${newpath}` , (err) => {
+                        if(err) {
+                            return res.status(500).json({message: "La copie de fichier a échouée."})
+                        }
+                        // else {
+                        //     return res.status(200).json({message: "Les fichiers ont été copiés avec succès!" , newpath})
+                        // }
+                    console.log(copy);
+                    }) 
+                })
 
-            // Update the product with the new values
-            const updatedProduct = await articleModel.findByIdAndUpdate(
-                req.params.id,
+            const updatedArticle = await articleModel.findByIdAndUpdate(req.params.id,
                 {
-                    name: fields.name || product.name,
-                    description: fields.description || product.description,
+                    title: fields.title || article.title,
+                    content: fields.content || article.content,
                     images: imagePath,
-                    quantity: fields.quantity || product.quantity,
-                    price: fields.price || product.price,
                 },
-                { new: true } // Return the updated document
+                { new: true }
             );
 
             res.status(200).json({
-                message: `Le produit ${updatedProduct.name} a été modifié avec succès!`,
-                product: updatedProduct,
+                message: `L'article ${updatedArticle.title} a été modifié avec succès!`,
+                article: updatedArticle,
             });
         });
 
@@ -149,25 +135,26 @@ export const updateProduct = async (req, res) => {
     }
         };
 
-export const deleteProduct = (req, res) => {
+export const deleteArticle = (req, res) => {
 
-        try {
-            console.log(req.params.id);
-            articleModel.findOneAndDelete({ _id: req.params.id }, (deletedProduct, err) => {
-                // if(!deletedProduct) {
-                //     return res.status(500).json({message:"Produit introuvable."});
-                // }
-                console.log(deletedProduct);
-                if (deletedProduct) {
-                    deletedProduct.images.forEach((image) => {
-                        fs.unlink(image)
-                    })
-                }
+    console.log(req.params.id);
+    articleModel.findOneAndDelete({ _id: req.params.id })
+        .then(deletedArticle => {
+
+            if(!deletedArticle) {
+                return res.status(500).json({message: "Article non trouvé."})
+            }
+            console.log(deletedArticle.images);
+            deletedArticle.images.forEach((image) => {
+                fs.unlink(`public/${image}`)
             })
+            console.log("deleted");
+            console.log(deletedArticle);
 
-            return res.status(204).json({ message: `Le produit a été supprimé avec succès!` })
-
-        } catch (err) {
-            res.status(500).json({ message: err })
-        }
-    }
+            return res.status(204).send()
+        })
+        .catch (err => {
+            console.log(err);
+            res.status(500).json({ message: "Le produit n'a pas pu être supprimé." });
+        })
+};

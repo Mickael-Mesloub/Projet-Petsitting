@@ -28,7 +28,7 @@ mongoose.connection.on("open", () => {
 app.use('/register' , registerRouter);
 app.use('/login' , loginRouter);
 app.use('/verify-token' , verifyTokenRouter);
-app.use('/news' , articleRouter);
+app.use('/admin' , articleRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

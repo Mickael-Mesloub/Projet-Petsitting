@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const article = new mongoose.Schema({
+const articleModel = new mongoose.Schema({
 
     title: {
         type: String,
@@ -25,4 +25,4 @@ const article = new mongoose.Schema({
     }
 );
 
-export default mongoose.model("Article", article);
+export default mongoose.model("Article", articleModel);
