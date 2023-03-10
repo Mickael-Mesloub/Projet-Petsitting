@@ -5,6 +5,7 @@ import { registerRouter, loginRouter, verifyTokenRouter } from './routers/public
 import serviceRouter from './routers/adminRouters/serviceRouter.js';
 import articleRouter from './routers/adminRouters/articleRouter.js';
 import userRouter from './routers/adminRouters/userRouter.js';
+import publicRouter from './routers/publicRouters/publicRouter.js';
 
 
 const app = express();
@@ -33,6 +34,7 @@ app.use('/verify-token' , verifyTokenRouter);
 app.use('/admin' , articleRouter);
 app.use('/admin' , serviceRouter);
 app.use('/admin' , userRouter);
+app.use('/' , publicRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
