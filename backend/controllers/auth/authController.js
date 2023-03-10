@@ -1,27 +1,47 @@
-import userModel from '../../models/userModel.js';
 import jwt from 'jsonwebtoken';
+import userModel from '../../models/userModel.js';
+import formidable from 'formidable';
+import { copyFile } from '../../utils/utils.js';
 
 export const register = (req, res) => {
-    
-    const { firstName, lastName, email, password, isAdmin } = req.body;
-    userModel.create({
-        firstName,
-        lastName,
-        email,
-        password,
-        isAdmin
-    })
-        .then((user) => {
-            const token = user.createJWT();
-            console.log(`Nouvel utilisateur: ${user} et son TOKEN: ${token}`);
-            res.status(201).json({ message: "Votre compte a bien été créé!", user, token });
+
+    const form = formidable();
+    form.parse(req, (err, fields, files) => {
+        if(err) {
+            return res.status(400).json({error: "Une erreur est survenue."})
+        }
+        let avatar;
+        const { isAdmin, defaultAvatar } = req.body;
+        
+        if(files && files.file) {
+            avatar = copyFile(files.file !== undefined ? files.file : "");
+        } else {
+            avatar = isAdmin ? 'static-images/admin.png' : defaultAvatar;
+        } 
+        
+        userModel.create({
+            firstName: fields.firstName,
+            lastName: fields.lastName,
+            email: fields.email,
+            password: fields.password,
+            avatar,
+            isAdmin
         })
-        .catch((err) => {
-            if(err.code === 11000) {
-                return res.status(400).json({message: "Cet utilisateur existe déjà."})
-            } 
-            return res.status(400).json({ message: err.message });
-        });
+            .then((user) => {
+                const token = user.createJWT();
+                console.log(`Nouvel utilisateur: ${user} et son TOKEN: ${token}`);
+                res.status(201).json({ message: "Votre compte a bien été créé!", user, token });
+            })
+            .catch((err) => {
+                if(err.code === 11000) {
+                    return res.status(400).json({error: "Cet utilisateur existe déjà."})
+                } 
+                return res.status(400).json({ error: err.message });
+            });
+
+        })
+    
+    
 };
 
 export const login = async (req, res) => {
@@ -30,7 +50,7 @@ export const login = async (req, res) => {
         const user = await userModel.findOne({ email });
         
         if (!user) {
-            return res.status(400).json({ message: 'Email ou mot de passe incorrect.' });
+            return res.status(400).json({ error: 'Email ou mot de passe incorrect.' });
         }
         const isMatch = await user.comparePassword(password);
 
@@ -38,10 +58,10 @@ export const login = async (req, res) => {
             const token = user.createJWT();
             return res.status(200).json({ message: `Bienvenue ${user.firstName}`, user, token });
         } else {
-            return res.status(400).json({ message: 'Email ou mot de passe incorrect.' })
+            return res.status(400).json({ error: 'Email ou mot de passe incorrect.' })
         }
     } catch (err) {
-        return res.status(500).json({ message: 'Email ou mot de passe introuvable.' });
+        return res.status(500).json({ error: 'Email ou mot de passe introuvable.' });
     }
 };
 
@@ -52,7 +72,7 @@ export const verifyToken = async (req, res) => {
 
     // Si undefined -> error
     if (!headers) {
-        return res.status(400).json({ message: "Aucun token fourni" })
+        return res.status(400).json({ error: "Aucun token fourni" })
     }
 
     const token = headers.split(' ')[1]
@@ -63,7 +83,7 @@ export const verifyToken = async (req, res) => {
         // Si token invalide: renvoie une erreur
         if (err) {
             console.log(err);
-            res.status(403).send({ message: "Token invalide." });
+            res.status(403).send({ error: "Token invalide." });
             return
         }
 

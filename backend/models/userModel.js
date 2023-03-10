@@ -26,16 +26,23 @@ const userModel = new mongoose.Schema({
         default: function() {
             return this.email === "admin@admin.com" || this.email === "mickael.mesloub@gmail.com" 
         }
-    }
+    },
+    avatar: {
+        type: String,
+        default: function() {
+            if(this.isAdmin) {
+                return 'static-images/admin.png'
+            } else {
+                return 'static-images/user.png'
+            }
+        }
+    },
+    defaultAvatar: {
+        type: String,
+        default: 'static-images/user.png'
+    },
 },  {
-        createdAt: {
-            type: String,
-            default: new Date().toLocaleString('fr-FR')
-        },
-        updatedAt: {
-            type: String,
-            default: new Date().toLocaleString('fr-FR')
-        },
+     timestamps: true
     }
 );
 

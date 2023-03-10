@@ -29,3 +29,16 @@ export const copyFiles = ((files) => {
     })
     return Promise.all(promises)
 })
+
+export const copyFile = ((file) => {
+    const newFilename = generateRandomFilename(file.originalFilename);
+    const oldpath = file.filepath;
+    const newpath = `images/${newFilename}`;
+    fs.copyFile(oldpath, `public/${newpath}` , (err) => {
+        
+        if(err) {
+            return err.message
+        }
+    })
+    return newpath
+})

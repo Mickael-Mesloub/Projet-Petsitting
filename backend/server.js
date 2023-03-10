@@ -2,7 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { registerRouter, loginRouter, verifyTokenRouter } from './routers/publicRouters/authRouter.js'
+import serviceRouter from './routers/adminRouters/serviceRouter.js';
 import articleRouter from './routers/adminRouters/articleRouter.js';
+import userRouter from './routers/adminRouters/userRouter.js';
 
 
 const app = express();
@@ -29,6 +31,8 @@ app.use('/register' , registerRouter);
 app.use('/login' , loginRouter);
 app.use('/verify-token' , verifyTokenRouter);
 app.use('/admin' , articleRouter);
+app.use('/admin' , serviceRouter);
+app.use('/admin' , userRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

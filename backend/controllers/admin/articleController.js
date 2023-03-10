@@ -1,7 +1,6 @@
 import articleModel from '../../models/articleModel.js';
 import formidable from 'formidable';
 import fs from 'fs';
-import { generateRandomFilename } from '../../utils/utils.js'
 import { copyFiles } from '../../utils/utils.js'
 
 // Fonctions asynchrones: accèdent à la DB donc meilleure gestion des erreurs et exceptions car la requête peut prendre du temps 
@@ -33,7 +32,6 @@ export const createArticle = async (req, res) => {
         res.status(500).json({ error: "Erreur lors de la création de l'article." })
     }
 }
-
 
 export const getAllArticles = async (req, res) => {
 
@@ -104,8 +102,6 @@ export const updateArticle = (req, res) => {
         return res.status(400).json({error: "L'article n'a pas pu être modifié."})
     }
 }
-
-
 
 export const deleteArticle = (req, res) => {
 
