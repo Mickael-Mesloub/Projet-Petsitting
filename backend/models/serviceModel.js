@@ -4,26 +4,21 @@ const serviceModel = new mongoose.Schema({
 
     name: {
         type: String,
-        required: true
+        required: [true, 'Le champ "Nom" est requis pour la création de service, veuillez le remplir.']
+    },
+    description: {
+        type: String,
     },
     price: {
         type: Number,
-        required: true
+        required: [true, 'Le champ "Prix" est requis pour la création de service, veuillez le remplir.']
     },
     visible: {
         type: Boolean,
         default: true,
-        required: true
     }
 },  {
-        createdAt: {
-            type: String,
-            default: new Date().toLocaleString('fr-FR')
-        },
-        updatedAt: {
-            type: String,
-            default: new Date().toLocaleString('fr-FR')
-        }
+        timestamps: true   
     }
 );
 

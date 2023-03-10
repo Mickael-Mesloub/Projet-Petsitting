@@ -26,7 +26,7 @@ export const createArticle = async (req, res) => {
                     console.log("CREATION ARTICLE OK");
                     res.status(200).json({ message: "Nouvel article créé avec succès!", article })
                 })
-                .catch((err) => res.status(500).json({ error: err }))
+                .catch((err) => res.status(500).json({ error: "Une erreur est survenue lors de la création de l'article." }))
         })
     } catch (err) {
         res.status(500).json({ error: "Erreur lors de la création de l'article." })
@@ -49,7 +49,7 @@ export const getArticle = async (req, res) => {
 
     try {
 
-        const article = await articleModel.findOne({ _id: req.params.id })
+        const article = await articleModel.findById(req.params.id )
         res.status(200).json(article)
 
     } catch (err) {
@@ -106,7 +106,7 @@ export const updateArticle = (req, res) => {
 export const deleteArticle = (req, res) => {
 
     console.log(req.params.id);
-    articleModel.findOneAndDelete({ _id: req.params.id })
+    articleModel.findByIdAndDelete(req.params.id)
         .then(deletedArticle => {
 
             if (!deletedArticle) {
@@ -135,8 +135,8 @@ export const deleteArticle = (req, res) => {
 export const deleteAllArticles = (req, res) => {
 
     articleModel.deleteMany()
-        .then((data) => {
-            console.log(data);
+        .then((article) => {
+            console.log(article);
             fs.readdir('public/images', (err, files) => {
                 console.log(!files);
                 if (err) return res.status(500).json({ error: "Aucun fichier trouvé." })
@@ -151,11 +151,9 @@ export const deleteAllArticles = (req, res) => {
             console.log("Tous les articles ont été supprimés!");
             return res.status(204).send()
         })
-
-
         .catch(err => {
             console.log("Une erreur est survenue lors de la supression des articles.");
-            return res.status(500).json({ error: "Une erreur est survenue lors de la supression des articles." })
+            return res.status(500).json({ error: "Une erreur est survenue lors de la suppression des articles." })
         })
 
 }
