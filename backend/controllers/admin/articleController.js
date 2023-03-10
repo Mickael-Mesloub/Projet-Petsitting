@@ -3,8 +3,6 @@ import formidable from 'formidable';
 import fs from 'fs';
 import { copyFiles } from '../../utils/utils.js'
 
-// Fonctions asynchrones: accèdent à la DB donc meilleure gestion des erreurs et exceptions car la requête peut prendre du temps 
-
 export const createArticle = async (req, res) => {
 
     try {

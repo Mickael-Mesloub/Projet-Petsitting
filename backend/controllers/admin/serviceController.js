@@ -41,7 +41,7 @@ export const getServiceDetails = async (req, res) => {
 
         const service = await serviceModel.findById(req.params.id)
         if(!service) {
-            return res.status(404).json({error: "Article inexistant."})
+            return res.status(404).json({error: "Service inexistant."})
         } 
         res.status(200).json(service)
 
@@ -86,7 +86,7 @@ export const deleteService = async (req, res) => {
         .then((service) => res.status(204).send())
         .catch((err) => res.status(500).json({error: "Le service n'a pas pu être supprimé."}))
 
-};
+}
 
 export const deleteAllServices = (req, res) => {
 

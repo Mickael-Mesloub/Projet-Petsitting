@@ -34,7 +34,7 @@ app.use('/verify-token' , verifyTokenRouter);
 app.use('/admin' , articleRouter);
 app.use('/admin' , serviceRouter);
 app.use('/admin' , userRouter);
-app.use('/' , publicRouter)
+app.use('/' , publicRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

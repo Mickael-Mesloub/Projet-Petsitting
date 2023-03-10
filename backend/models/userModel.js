@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const phoneRegex = /^(\+\d{1,3}[- ]?)?\d{8,}$/;
+
 const userModel = new mongoose.Schema({
 
     firstName: {
@@ -16,6 +19,11 @@ const userModel = new mongoose.Schema({
         type: String,
         required: [true, 'Le champ "Email" est requis pour la création de compte, veuillez le remplir.'],
         unique: true,
+        match: [emailRegex, "L'adresse e-mail doit être valide."]
+    },
+    phone: {
+        type: String,
+        match: [phoneRegex, "Le numéro de téléphone doit être valide."]
     },
     password: {
         type: String,
