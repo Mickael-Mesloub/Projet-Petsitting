@@ -13,7 +13,7 @@ export const createArticle = async (req, res) => {
                 return res.status(500).json({ erreur: "Un problème est survenu lors du téléchargement de fichiers." })
             }
 
-            const images = await copyFiles(files.file !== undefined ? files.file : []);
+            const images = await copyFiles(files.file !== undefined ? files.file : [], 'images/news');
 
             articleModel.create({
                 title: fields.title,
@@ -85,7 +85,7 @@ export const updateArticle = (req, res) => {
                     })
                 })
             }
-            const images = await copyFiles(files.file !== undefined ? files.file : []);
+            const images = await copyFiles(files.file !== undefined ? files.file : [], 'images/news');
 
             updatedImages.push(...images)
             articleModel.findByIdAndUpdate(req.params.id, {
@@ -135,11 +135,11 @@ export const deleteAllArticles = (req, res) => {
     articleModel.deleteMany()
         .then((article) => {
             console.log(article);
-            fs.readdir('public/images', (err, files) => {
+            fs.readdir('public/images/news/', (err, files) => {
                 console.log(!files);
                 if (err) return res.status(500).json({ error: "Aucun fichier trouvé." })
                 files.forEach((file) => {
-                    fs.unlink(`public/images/${file}`, (err) => {
+                    fs.unlink(`public/images/news/${file}`, (err) => {
                         if (err) {
                             console.log(err);
                         }

@@ -23,6 +23,7 @@ export const register = (req, res) => {
             firstName: fields.firstName,
             lastName: fields.lastName,
             email: fields.email,
+            phone: fields.phone,
             password: fields.password,
             avatar,
             isAdmin
@@ -30,7 +31,17 @@ export const register = (req, res) => {
             .then((user) => {
                 const token = user.createJWT();
                 console.log(`Nouvel utilisateur: ${user} et son TOKEN: ${token}`);
-                res.status(201).json({ message: "Votre compte a bien été créé!", user, token });
+                res.status(201).json({ message: "Votre compte a bien été créé!", 
+                    user: {
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        email: user.email,
+                        phone: user.phone,
+                        avatar: user.avatar,
+                        isAdmin: user.isAdmin
+                    }, 
+                    token 
+                });
             })
             .catch((err) => {
                 if(err.code === 11000) {

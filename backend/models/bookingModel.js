@@ -22,20 +22,14 @@ const bookingModel = new mongoose.Schema({
     },
     animalSize: { 
         type: Number,
+        requried: true
     },
     service: {
         type: mongoose.Schema.Types.ObjectId, ref: "Service"
     }
     
 },  {
-        createdAt: {
-            type: String,
-            default: new Date().toLocaleString('fr-FR')
-        },
-        updatedAt: {
-            type: String,
-            default: new Date().toLocaleString('fr-FR')
-        }
+        timestamps: true
     }
 );
 

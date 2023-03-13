@@ -6,6 +6,7 @@ import serviceRouter from './routers/adminRouters/serviceRouter.js';
 import articleRouter from './routers/adminRouters/articleRouter.js';
 import userRouter from './routers/adminRouters/userRouter.js';
 import publicRouter from './routers/publicRouters/publicRouter.js';
+import profileRouter from './routers/publicRouters/userRouter.js';
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use('/admin' , articleRouter);
 app.use('/admin' , serviceRouter);
 app.use('/admin' , userRouter);
 app.use('/' , publicRouter);
+app.use('/profile', profileRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

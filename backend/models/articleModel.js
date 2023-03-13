@@ -14,14 +14,7 @@ const articleModel = new mongoose.Schema({
         type: Array,
     }
 },  {
-        createdAt: {
-            type: String,
-            default: new Date().toLocaleString('fr-FR')
-        },
-        updatedAt: {
-            type: String,
-            default: new Date().toLocaleString('fr-FR')
-        }
+        timestamps: true
     }
 );
 

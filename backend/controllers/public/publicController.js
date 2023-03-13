@@ -1,75 +1,7 @@
 import formidable from "formidable";
-import { copyFile } from "../../utils/utils.js";
-import userModel from "../../models/userModel.js";
 import articleModel from "../../models/articleModel.js";
 import serviceModel from "../../models/serviceModel.js";
 import bookingModel from "../../models/bookingModel.js";
-
-
-// ********** USERS **********
-
-export const getUserInfos = async (req, res) => {
-    try {
-        const user = await userModel.findById(req.params.id)
-        res.status(200).json({message: "OK", user})
-    }
-
-    catch(err) {
-        res.status(400).json({error: "Utilisateur introuvable."})
-    }
-};
-
-export const updateUserInfos = async (req, res) => {
-
-    try {
-        const user = await userModel.findById(req.params.id);
-
-        if (!user) {
-            console.log("pas ok");
-        }
-
-        const form = formidable();
-        form.parse(req, async (err, fields, files) => {
-            if (err) {
-                return res.status(500).json({ message: "Une erreur s'est produite" });
-            }
-
-            let avatar;
-            const { isAdmin, defaultAvatar } = req.body;
-            
-            if(files && files.file) {
-                avatar = copyFile(files.file !== undefined ? files.file : "");
-            } else {
-                avatar = isAdmin ? 'static-images/admin.png' : defaultAvatar;
-            }
-
-            await userModel.findByIdAndUpdate(req.params.id,
-                {
-                    firstName: fields.firstName || user.firstName,
-                    lastName: fields.lastName || user.lastName,
-                    email: fields.email || user.email,
-                    password: fields.password || user.password,
-                    avatar,
-                    isAdmin
-                },
-                { new: true }
-            )
-                .then((user) => {
-                    res.status(200).json({
-                        message: `Votre profil a été modifié avec succès!`,
-                        user: user
-                    })
-                })
-                .catch((err) => {
-                    res.status(500).json({error: err.message})
-                })
-        });
-
-    } catch (err) {
-        console.log(err);
-        res.status(400).json({ error: "Utilisateur introuvable."});
-    }
-};
 
 
 // ********** SERVICES **********
@@ -132,40 +64,41 @@ export const createArticle = async (req, res) => {
     }
 }
 
+
 // ********** BOOKINGS **********
 
 export const createBooking = async (req, res) => {
     
     try {
-        const {name, description, price, visible} = req.body;
+        const {startTime, endTime, userName, animalName, animalSize, service} = req.body;
         serviceModel.create({
-            name,
-            description,
-            price,
-            visible
+            startTime,
+            endTime,
+            animalName,
+            animalSize,
+            service
         })
-            .then((service) => {
-                console.log(`Nouveau service créé : ${service}`);
-                res.status(201).json({message: "Un nouveau service a été créé!" , service})
+            .then((booking) => {
+                console.log(`Nouvelle réservation créée : ${booking}`);
+                res.status(201).json({message: "Une nouvelle réservation a été créée!" , booking})
             })
             .catch((error) => {
-                res.status(500).json({error: "Une erreur est survenue lors de la création du service."})
+                res.status(500).json({error: "Une erreur est survenue lors de la création de la réservation."})
             })
 
     } catch (err) {
-        res.status(500).json({ error: "Erreur lors de la création du service." })
+        res.status(500).json({ error: "Erreur lors de la création de la réservation." })
     }
 }
 
 export const getAllBookings = async (req, res) => {
 
     try {
-
-        const services = await serviceModel.find({})
-        res.status(200).json(services)
+        const bookings = await serviceModel.find({})
+        res.status(200).json(bookings)
 
     } catch (err) {
-        res.status(400).json({ message: "Services introuvables." })
+        res.status(400).json({ message: "Réservations introuvables." })
     }
 }
 
@@ -173,39 +106,39 @@ export const getBookingDetails = async (req, res) => {
 
     try {
 
-        const service = await serviceModel.findById(req.params.id)
-        if(!service) {
-            return res.status(404).json({error: "Service inexistant."})
+        const booking = await bookingModel.findById(req.params.id)
+        if(!booking) {
+            return res.status(404).json({error: "Réservation inexistant."})
         } 
-        res.status(200).json(service)
+        res.status(200).json(booking)
 
     } catch (err) {
-        res.status(400).json({ message: "Service introuvable" })
+        res.status(400).json({ message: "Réservation introuvable" })
     }
 }
 
 export const updateBooking = async (req, res) => {
 
     try {
-        const service = await serviceModel.findById(req.params.id);
+        const booking = await bookingModel.findById(req.params.id);
         const {name, description, price, visible} = req.body;
 
-        if(!service) {
-            return res.status(404).json({error: "Ce service n'existe pas."})
+        if(!booking) {
+            return res.status(404).json({error: "Cette réservation n'existe pas."})
         }
         
-        serviceModel.findByIdAndUpdate(req.params.id, 
+        bookingModel.findByIdAndUpdate(req.params.id, 
         {
-            name: name || service.name,
-            description: description || service.description,
-            price: price || service.price,
-            visible: visible || service.visible
+            name: name || booking.name,
+            description: description || booking.description,
+            price: price || booking.price,
+            visible: visible || booking.visible
         }, {new: true})
-            .then((service) => res.status(201).json({message: "Service modifié avec succès!", service}))
-            .catch((err) => res.status(400).json({error: "Le service n'a pas pu être modifié."}) )
+            .then((booking) => res.status(201).json({message: "Réservation modifiée avec succès!", booking}))
+            .catch((err) => res.status(400).json({error: "La réservation n'a pas pu être modifiée."}) )
         
     } catch(err) {
-        return res.status(400).json({error: "Le service n'a pas pu être modifié."})
+        return res.status(400).json({error: "La réservation n'a pas pu être modifiée."})
     }
 }
 
@@ -236,3 +169,4 @@ export const deleteAllBookings = (req, res) => {
         })
 
 }
+

@@ -1,4 +1,13 @@
 import fs from 'fs';
+import jwt from 'jsonwebtoken';
+
+export const getUserIdFromToken = (req) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, "key_secret");
+    const userId = decoded.id;
+  
+    return userId;
+}
 
 export const generateRandomFilename = (originalFilename) => {
     const fileExtension = originalFilename.split('.').pop();
@@ -7,7 +16,7 @@ export const generateRandomFilename = (originalFilename) => {
     return `${timestamp}-${randomString}.${fileExtension}`;
 }
 
-export const copyFiles = ((files) => {
+export const copyFiles = ((files, path) => {
     if (!Array.isArray(files)) {
         files = [files];
     }
@@ -15,7 +24,7 @@ export const copyFiles = ((files) => {
         return new Promise((resolve, reject) => {
             const newFilename = generateRandomFilename(file.originalFilename);
             const oldpath = file.filepath;
-            const newpath = `images/${newFilename}`;
+            const newpath = `${path}/${newFilename}`;
             fs.copyFile(oldpath, `public/${newpath}` , (err) => {
                 
                 if(err) {
