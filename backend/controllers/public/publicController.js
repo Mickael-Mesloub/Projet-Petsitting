@@ -70,12 +70,12 @@ export const createArticle = async (req, res) => {
 export const createBooking = async (req, res) => {
     
     try {
-        const {startTime, endTime, userName, animalName, animalSize, service} = req.body;
+        const {date, startTime, endTime, animal, service} = req.body;
         serviceModel.create({
+            date,
             startTime,
             endTime,
-            animalName,
-            animalSize,
+            animal,
             service
         })
             .then((booking) => {

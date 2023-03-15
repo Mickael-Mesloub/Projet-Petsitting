@@ -7,6 +7,7 @@ import articleRouter from './routers/adminRouters/articleRouter.js';
 import userRouter from './routers/adminRouters/userRouter.js';
 import publicRouter from './routers/publicRouters/publicRouter.js';
 import profileRouter from './routers/publicRouters/userRouter.js';
+import animalRouter from './routers/adminRouters/animalRouter.js';
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use('/verify-token' , verifyTokenRouter);
 app.use('/admin' , articleRouter);
 app.use('/admin' , serviceRouter);
 app.use('/admin' , userRouter);
+app.use('/admin' , animalRouter);
 app.use('/' , publicRouter);
 app.use('/profile', profileRouter)
 

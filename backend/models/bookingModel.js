@@ -4,6 +4,10 @@ import mongoose from 'mongoose';
 
 const bookingModel = new mongoose.Schema({
 
+    date: {
+        type: String,
+        required: true
+    },
     startTime: {
         type: Number,
         required: true
@@ -12,17 +16,9 @@ const bookingModel = new mongoose.Schema({
         type: Number,
         required: true
     },
-    userName: {
-        type: String,
+    animal: {
+        type: mongoose.Schema.Types.ObjectId, ref: "Animal",
         required: true
-    },
-    animalName: {
-        type: String,
-        required: true
-    },
-    animalSize: { 
-        type: Number,
-        requried: true
     },
     service: {
         type: mongoose.Schema.Types.ObjectId, ref: "Service"
