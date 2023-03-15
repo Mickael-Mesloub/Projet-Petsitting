@@ -32,7 +32,7 @@ const userModel = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: function() {
-            return this.email === "admin@admin.com" || this.email === "mickael.mesloub@gmail.com" 
+            return this.email === "admin@admin.com" || this.email === "fromont.ludivine@orange.fr" 
         }
     },
     avatar: {

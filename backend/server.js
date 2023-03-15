@@ -1,12 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import { verifyToken } from './middlewares/authMiddleware.js'
 import { registerRouter, loginRouter, verifyTokenRouter } from './routers/publicRouters/authRouter.js'
 import serviceRouter from './routers/adminRouters/serviceRouter.js';
 import articleRouter from './routers/adminRouters/articleRouter.js';
 import userRouter from './routers/adminRouters/userRouter.js';
 import publicRouter from './routers/publicRouters/publicRouter.js';
-import profileRouter from './routers/publicRouters/userRouter.js';
+import profileRouter from './routers/publicRouters/profileRouter.js';
 import animalRouter from './routers/adminRouters/animalRouter.js';
 
 
@@ -38,7 +39,7 @@ app.use('/admin' , serviceRouter);
 app.use('/admin' , userRouter);
 app.use('/admin' , animalRouter);
 app.use('/' , publicRouter);
-app.use('/profile', profileRouter)
+app.use('/profile', [verifyToken] , profileRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

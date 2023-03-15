@@ -3,25 +3,24 @@ import fs from "fs";
 import formidable from "formidable";
 import animalModel from "../../models/animalModel.js";
 import userModel from "../../models/userModel.js";
+import { verifyToken } from '../../middlewares/authMiddleware.js'
 
 // ********** USER **********
 
 export const getUserInfos = async (req, res) => {
     try {
-        console.log(req.params);
-        const userID = getUserIdFromToken(req)
+        const userId = req.userId;
+        if(!userId) return res.status(404).json({error: "Utilisateur introuvable."})
         const user = await userModel.findById(req.params.id);
-        const animals = await animalModel.find({owner: userID})
-        res.status(200).json({user, animals})
+        const animals = await animalModel.find({owner: userId});
+        res.status(200).json({user, animals});
     }
-
     catch(err) {
         res.status(400).json({error: "Utilisateur introuvable."})
     }
 };
 
 export const updateUserInfos = async (req, res) => {
-
     try {
         const user = await userModel.findById(req.params.id);
 
@@ -31,6 +30,7 @@ export const updateUserInfos = async (req, res) => {
 
         const form = formidable();
         form.parse(req, async (err, fields, files) => {
+
             if (err) {
                 return res.status(500).json({ message: "Une erreur s'est produite" });
             }
@@ -75,14 +75,13 @@ export const updateUserInfos = async (req, res) => {
 // ********** ANIMAL **********
 
 export const createAnimal = async (req, res) => {
-    const userID = getUserIdFromToken(req)
-        
+    
     try {
-            
+        const userId = req.userId;
+        console.log(`USERID ====== ${userId}`);
         const form = formidable({ multiples: true });
         form.parse(req, async (err, fields, files) => {
-        
-
+            
             if (err) {
                 return res.status(500).json({ erreur: "Un problème est survenu lors du téléchargement de fichiers." })
             }
@@ -90,7 +89,7 @@ export const createAnimal = async (req, res) => {
             const images = await copyFiles(files.file !== undefined ? files.file : [], 'images/animals');
 
             animalModel.create({
-                owner: userID,
+                owner: userId,
                 name: fields.name,
                 description: fields.description,
                 size: fields.size,
@@ -109,7 +108,6 @@ export const createAnimal = async (req, res) => {
 }
 
 export const getAllAnimals = async (req, res) => {
-
     try {
         const userID = getUserIdFromToken(req);
         const animals = await animalModel.find({owner: userID});
@@ -122,66 +120,61 @@ export const getAllAnimals = async (req, res) => {
 }
 
 export const getAnimalInfos = async (req, res) => {
-
     try {
         console.log(req.params.animalid);
-        const animal = await animalModel.findById(req.params.animalid)
+        const animal = await animalModel.findById(req.params.animalid);
+
         if(!animal) {
             return res.status(404).json({error: "Animal inexistant."})
         } 
-        res.status(200).json(animal)
+
+        res.status(200).json(animal);
 
     } catch (err) {
-        res.status(400).json({ message: "Animal introuvable" })
+        res.status(400).json({ error: "Animal introuvable." })
     }
 }
 
-export const updateAnimal = (req, res) => {
-
+export const updateAnimal = async (req, res) => {
     try {
-        const form = formidable({ multiples: true })
-        form.parse(req, async(err, fields, files) => {
-            
-            if (err) {
-                return res.status(500).json({ erreur: "Un problème est survenu lors du téléchargement de fichiers." })
+      const form = formidable({ multiples: true })
+      form.parse(req, async (err, fields, files) => {
+        if (err) {
+          return res.status(500).json({ error: "Un problème est survenu lors du téléchargement de fichiers." })
+        }
+        
+        const animal = await animalModel.findById(req.params.animalid)
+        
+        if (!animal) {
+          return res.status(404).json({error: "Cet animal n'existe pas."})
+        }
+        
+        // Supprimer les images sélectionnées
+        const deletedImages = fields.deleteImages || []
+        for (const image of deletedImages) {
+            console.log(`PUUUUUUUUUBLICCCCCCCCCC public/${image}`);
+          fs.unlink(`public/${image}`, (err) => {
+            if (err && err.code !== "ENOENT") {
+              return res.status(500).json({error: "La suppression d'image(s) a échoué."})
             }
-            
-            const animal = await animalModel.findById(req.params.animalid)
-            if(!animal) {
-                return res.status(404).json({error: "Cet animal n'existe pas."})
-            }
-            const updatedImages = animal.images.filter((i) => !fields.deleteImages?.includes(i))
-            console.log(fields.deleteImages);
-            if(!Array.isArray(fields.deleteImages)){
-                fields.deleteImages = [fields.deleteImages]
-            }
-            if(fields.deleteImages) {
-                fields.deleteImages.forEach((image) => {
-                    fs.unlink(`public/${image}`, (err) => {
-                        if(err) {
-                            if(err.code !== "ENOENT") {
-                                return res.status(500).json({error: "La supression d'image(s) a échouée."})
-                            }
-                        }
-                    })
-                })
-            }
-            const images = await copyFiles(files.file !== undefined ? files.file : [], 'images/animals');
-
-            updatedImages.push(...images)
-            animalModel.findByIdAndUpdate(req.params.animalid, {
-                name: fields.name,
-                description: fields.description,
-                size: fields.size,
-                images
-            }, {new: true})
-                .then((animal) => res.status(201).json({message: "Animal modifié avec succès!", animal}))
-                .catch((err) => res.status(400).json({error: "L'animal n'a pas pu être modifié."}) )
-        })
-    } catch(err) {
-        return res.status(400).json({error: "L'animal n'a pas pu être modifié."})
+          })
+        }
+  
+        // Ajouter les nouvelles images et mettre à jour la base de données
+        const images = await copyFiles(files.file !== undefined ? files.file : [], 'images/animals')
+        const updatedImages = animal.images.filter((i) => !deletedImages.includes(i)).concat(images)
+        
+        animal.title = fields.title || animal.title
+        animal.content = fields.content || animal.content
+        animal.images = updatedImages
+        animal.save()
+          .then((animal) => res.status(201).json({message: "Animal modifié avec succès!", animal}))
+          .catch((err) => res.status(400).json({error: "L'animal n'a pas pu être modifié."}))
+      })
+    } catch (err) {
+      return res.status(400).json({error: "L'animal n'a pas pu être modifié."})
     }
-}
+  }
 
 export const deleteAnimal = (req, res) => {
 
@@ -191,6 +184,7 @@ export const deleteAnimal = (req, res) => {
             if (!deletedAnimal) {
                 return res.status(500).json({ error: "Animal non trouvé." })
             }
+
             console.log(deletedAnimal.images);
             deletedAnimal.images.forEach((image) => {
                 fs.unlink(`public/${image}`, (err) => {
@@ -218,7 +212,9 @@ export const deleteAllAnimals = (req, res) => {
             console.log(animal);
             fs.readdir('public/images/animals', (err, files) => {
                 console.log(files);
-                if (err) return res.status(500).json({ error: "Aucun fichier trouvé." })
+
+                if (err) return res.status(500).json({ error: "Aucun fichier trouvé." });
+
                 files.forEach((file) => {
                     console.log(file);
                     fs.unlink(`public/images/animals/${file}`, (err) => {

@@ -50,9 +50,7 @@ export const register = (req, res) => {
                 return res.status(400).json({ error: err.message });
             });
 
-        })
-    
-    
+        })   
 };
 
 export const login = async (req, res) => {
@@ -83,7 +81,7 @@ export const verifyToken = async (req, res) => {
 
     // Si undefined -> error
     if (!headers) {
-        return res.status(400).json({ error: "Aucun token fourni" })
+        return res.status(400).json({ error: "Aucun token fourni." })
     }
 
     const token = headers.split(' ')[1]

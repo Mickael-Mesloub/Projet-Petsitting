@@ -56,10 +56,6 @@ export const updateService = async (req, res) => {
         const service = await serviceModel.findById(req.params.id);
         const {name, description, price, visible} = req.body;
 
-        if(!service) {
-            return res.status(404).json({error: "Ce service n'existe pas."})
-        }
-        
         serviceModel.findByIdAndUpdate(req.params.id, 
         {
             name: name || service.name,
@@ -68,10 +64,10 @@ export const updateService = async (req, res) => {
             visible: visible || service.visible
         }, {new: true})
             .then((service) => res.status(201).json({message: "Service modifié avec succès!", service}))
-            .catch((err) => res.status(400).json({error: "Le service n'a pas pu être modifié."}) )
+            .catch((err) => res.status(500).json({error: "Une erreur s'est produit et le service n'a pas pu être modifié. Veuillez réessayer."}) )
         
     } catch(err) {
-        return res.status(400).json({error: "Le service n'a pas pu être modifié."})
+        return res.status(404).json({error: "Ce service n'existe pas."})
     }
 }
 
@@ -84,15 +80,12 @@ export const deleteService = async (req, res) => {
 
     serviceModel.findByIdAndDelete(req.params.id)
         .then((service) => res.status(204).send())
-        .catch((err) => res.status(500).json({error: "Le service n'a pas pu être supprimé."}))
-
+        .catch((err) => res.status(500).json({error: "Une erreur est survenue et le service n'a pas pu être supprimé. Veuillez réessayer."}))
 }
 
 export const deleteAllServices = (req, res) => {
-
     serviceModel.deleteMany()
         .then((service) => {
-            
             console.log("Tous les services ont été supprimés!");
             return res.status(204).send()
         })
@@ -100,5 +93,4 @@ export const deleteAllServices = (req, res) => {
             console.log("Une erreur est survenue lors de la supression des services.");
             return res.status(500).json({ error: "Une erreur est survenue lors de la suppression des services." })
         })
-
 }
