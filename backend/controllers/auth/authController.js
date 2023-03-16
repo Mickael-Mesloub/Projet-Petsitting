@@ -4,12 +4,11 @@ import formidable from 'formidable';
 import { copyFile } from '../../utils/utils.js';
 
 export const register = (req, res) => {
-
     const form = formidable();
-    form.parse(req, (err, fields, files) => {
-        if(err) {
-            return res.status(400).json({error: "Une erreur est survenue."})
-        }
+    form.parse(req, (error, fields, files) => {
+
+        if(error) return res.status(400).json({error: "Une erreur est survenue."})
+        
         let avatar;
         const { isAdmin, defaultAvatar } = req.body;
         
@@ -17,7 +16,7 @@ export const register = (req, res) => {
             avatar = copyFile(files.file !== undefined ? files.file : "");
         } else {
             avatar = isAdmin ? 'static-images/admin.png' : defaultAvatar;
-        } 
+        } ;
         
         userModel.create({
             firstName: fields.firstName,
@@ -43,14 +42,15 @@ export const register = (req, res) => {
                     token 
                 });
             })
-            .catch((err) => {
-                if(err.code === 11000) {
-                    return res.status(400).json({error: "Cet utilisateur existe déjà."})
-                } 
-                return res.status(400).json({ error: err.message });
-            });
+            .catch((error) => {
 
-        })   
+                if(error.code === 11000) {
+                    return res.status(400).json({error: "Cet utilisateur existe déjà."});
+                } 
+
+                return res.status(400).json({ error: `Une erreur est survenue et le compte n'a pas pu être créé. Veuillez réessayer.` });
+            });
+        })   ;
 };
 
 export const login = async (req, res) => {
@@ -60,18 +60,20 @@ export const login = async (req, res) => {
         
         if (!user) {
             return res.status(400).json({ error: 'Email ou mot de passe incorrect.' });
-        }
+        };
+
         const isMatch = await user.comparePassword(password);
 
         if (isMatch) {
             const token = user.createJWT();
             return res.status(200).json({ message: `Bienvenue ${user.firstName}`, user, token });
         } else {
-            return res.status(400).json({ error: 'Email ou mot de passe incorrect.' })
-        }
-    } catch (err) {
+            return res.status(400).json({ error: 'Email ou mot de passe incorrect.' });
+        };
+
+    } catch (error) {
         return res.status(500).json({ error: 'Email ou mot de passe introuvable.' });
-    }
+    };
 };
 
 export const verifyToken = async (req, res) => {
@@ -81,29 +83,29 @@ export const verifyToken = async (req, res) => {
 
     // Si undefined -> error
     if (!headers) {
-        return res.status(400).json({ error: "Aucun token fourni." })
-    }
+        return res.status(400).json({ error: "Aucun token fourni." });
+    };
 
-    const token = headers.split(' ')[1]
+    const token = headers.split(' ')[1];
     console.log(token);
 
     // Analyser le token
-    jwt.verify(token, "key_secret", async (err, decoded) => {
+    jwt.verify(token, "key_secret", async (error, decoded) => {
         // Si token invalide: renvoie une erreur
-        if (err) {
-            console.log(err);
-            res.status(403).send({ error: "Token invalide." });
-            return
-        }
+        if (error) {
+            console.log(error);
+            return res.status(403).send({ error: "Token invalide." });
+            
+        };
 
         // Si token valide: renvoie les infos du user
-        const user = await userModel.findOne({ _id: decoded.id })
-        res.status(200).json({
+        const user = await userModel.findOne({ _id: decoded.id });
+        return res.status(200).json({
             user: {
                 id: user._id,
                 email: user.email,
                 isAdmin: user.isAdmin
             }
-        })
+        });
     });
-}
+};

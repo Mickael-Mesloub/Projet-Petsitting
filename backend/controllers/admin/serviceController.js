@@ -1,7 +1,6 @@
 import serviceModel from '../../models/serviceModel.js';
 
 export const createService = async (req, res) => {
-    console.log("ok");
     try {
         const {name, description, price, visible} = req.body;
         serviceModel.create({
@@ -15,47 +14,42 @@ export const createService = async (req, res) => {
                 res.status(201).json({message: "Un nouveau service a été créé!" , service})
             })
             .catch((error) => {
-                res.status(500).json({error: "Une erreur est survenue lors de la création du service."})
+                res.status(500).json({error: `Une erreur est survenue et le service n'a pas pu être créé : ${error.message}. Veuillez réessayer.`})
             })
 
-    } catch (err) {
-        res.status(500).json({ error: "Erreur lors de la création du service." })
+    } catch (error) {
+        res.status(500).json({ error: `Une erreur et le service n'a pas pu être créé : ${error.message}. Veuillez réessayer.` })
     }
 }
 
 export const getAllServices = async (req, res) => {
-
     try {
-
         const services = await serviceModel.find({})
         res.status(200).json(services)
 
-    } catch (err) {
-        res.status(400).json({ message: "Services introuvables." })
+    } catch (error) {
+        res.status(400).json({ error: `Services introuvables : ${error.message}. Veuillez réessayer.` })
     }
 }
 
 export const getServiceDetails = async (req, res) => {
-
     try {
+        const service = await serviceModel.findById(req.params.id);
 
-        const service = await serviceModel.findById(req.params.id)
         if(!service) {
-            return res.status(404).json({error: "Service inexistant."})
+            return res.status(404).json({error: `Service inexistant : ${error.message}. Veuillez réessayer.`});
         } 
-        res.status(200).json(service)
 
-    } catch (err) {
-        res.status(400).json({ message: "Service introuvable" })
+        res.status(200).json(service);
+    } catch (error) {
+        res.status(400).json({ error: `Service introuvable : ${error.message}. Veuillez réessayer.` });
     }
 }
 
 export const updateService = async (req, res) => {
-
     try {
         const service = await serviceModel.findById(req.params.id);
         const {name, description, price, visible} = req.body;
-
         serviceModel.findByIdAndUpdate(req.params.id, 
         {
             name: name || service.name,
@@ -64,10 +58,9 @@ export const updateService = async (req, res) => {
             visible: visible || service.visible
         }, {new: true})
             .then((service) => res.status(201).json({message: "Service modifié avec succès!", service}))
-            .catch((err) => res.status(500).json({error: "Une erreur s'est produit et le service n'a pas pu être modifié. Veuillez réessayer."}) )
-        
-    } catch(err) {
-        return res.status(404).json({error: "Ce service n'existe pas."})
+            .catch((error) => res.status(500).json({error: `Une erreur est survenue et le service n'a pas pu être modifié : ${error.message}`  }) )
+    } catch(error) {
+        return res.status(404).json({error: `Service inexistant : ${error.message}. Veuillez réessayer.`})
     }
 }
 
@@ -80,7 +73,7 @@ export const deleteService = async (req, res) => {
 
     serviceModel.findByIdAndDelete(req.params.id)
         .then((service) => res.status(204).send())
-        .catch((err) => res.status(500).json({error: "Une erreur est survenue et le service n'a pas pu être supprimé. Veuillez réessayer."}))
+        .catch((error) => res.status(500).json({error: `Une erreur est survenue et le service n'a pas pu être supprimé : ${error.message}` }))
 }
 
 export const deleteAllServices = (req, res) => {
@@ -89,8 +82,8 @@ export const deleteAllServices = (req, res) => {
             console.log("Tous les services ont été supprimés!");
             return res.status(204).send()
         })
-        .catch(err => {
-            console.log("Une erreur est survenue lors de la supression des services.");
-            return res.status(500).json({ error: "Une erreur est survenue lors de la suppression des services." })
+        .catch(error => {
+            console.log(`Une erreur est survenue et les services n'ont pas pu être supprimés : ${error.message}`);
+            return res.status(500).json({error: `Une erreur est survenue et les services n'ont pas pu être supprimés : ${error.message}` })
         })
 }

@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import { verifyToken } from './middlewares/authMiddleware.js'
+import { verifyToken, verifyIfIsAdmin } from './middlewares/authMiddleware.js'
 import { registerRouter, loginRouter, verifyTokenRouter } from './routers/publicRouters/authRouter.js'
 import serviceRouter from './routers/adminRouters/serviceRouter.js';
 import articleRouter from './routers/adminRouters/articleRouter.js';
@@ -34,13 +34,13 @@ mongoose.connection.on("open", () => {
 app.use('/register' , registerRouter);
 app.use('/login' , loginRouter);
 app.use('/verify-token' , verifyTokenRouter);
-app.use('/admin' , articleRouter);
-app.use('/admin' , serviceRouter);
-app.use('/admin' , userRouter);
-app.use('/admin' , animalRouter);
+app.use('/admin' , [verifyToken , verifyIfIsAdmin] , articleRouter);
+app.use('/admin' , [verifyToken , verifyIfIsAdmin] , serviceRouter);
+app.use('/admin' , [verifyToken , verifyIfIsAdmin] , userRouter);
+app.use('/admin' , [verifyToken , verifyIfIsAdmin] , animalRouter);
 app.use('/' , publicRouter);
 app.use('/profile', [verifyToken] , profileRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
-})
+});

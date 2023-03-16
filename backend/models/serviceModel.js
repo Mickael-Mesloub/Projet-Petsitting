@@ -4,7 +4,7 @@ const serviceModel = new mongoose.Schema({
 
     name: {
         type: String,
-        required: [true, 'Le champ "Nom" est requis pour la création de service, veuillez le remplir.']
+        required: [true, 'Le champ "Nom de la prestation" est requis pour la création de service, veuillez le remplir.']
     },
     description: {
         type: String,

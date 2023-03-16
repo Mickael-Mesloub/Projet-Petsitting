@@ -3,34 +3,33 @@ import animalModel from "../../models/animalModel.js";
 
 export const getAllUsers = async (req, res) => {
     try {
-        const users = await userModel.find({})
-        res.status(200).json({message: "Voici la liste des utilisateurs : ", users})
+        const users = await userModel.find({});
+        res.status(200).json({message: "Voici la liste des utilisateurs : ", users});
     }
-    catch(err) {
-        res.status(400).json({error: "Utilisateurs introuvables."})
+    catch(error) {
+        res.status(400).json({error: "Utilisateurs introuvables."});
     }  
 }
 
 export const getUserDetails = async (req, res) => {
     try {
-        const user = await userModel.findById(req.params.id)
-        const animals = await animalModel.find({owner: user._id})
-        res.status(200).json({message: "Voici les détails de l'utilisateur et de ses animaux : ", user, animals})
+        const user = await userModel.findById(req.params.id);
+        const animals = await animalModel.find({owner: user._id});
+        res.status(200).json({message: "Voici les détails de l'utilisateur et de ses animaux : ", user, animals});
     }
-
-    catch(err) {
-        res.status(400).json({error: "Utilisateur introuvable."})
+    catch(error) {
+        res.status(400).json({error: "Utilisateur introuvable."});
     }
 }
 
 export const deleteUser = async (req, res) => {
-    const user = await userModel.findById(req.params.id)
+    const user = await userModel.findById(req.params.id);
     
-    if(!user) return res.status(404).json({error: "Utilisateur introuvable."})
+    if(!user) return res.status(404).json({error: "Utilisateur introuvable."});
 
     userModel.findByIdAndDelete(req.params.id)
         .then((user) => res.status(204).send())
-        .catch((err) => res.status(500).json({error: "Une erreur est survenue et le service n'a pas pu être supprimé. Veuillez réessayer."}))
+        .catch((error) => res.status(500).json({error: `Une erreur est survenue et l'utilisateur n'a pas pu être supprimé : ${error.message}`  }))
 }
 
 export const deleteAllUsers = (req, res) => {
@@ -39,8 +38,8 @@ export const deleteAllUsers = (req, res) => {
             console.log("Tous les utilisateurs ont été supprimés!");
             return res.status(204).send()
         })
-        .catch(err => {
+        .catch(error => {
             console.log("Une erreur est survenue lors de la supression des utilisateurs.");
-            return res.status(500).json({ error: "Une erreur est survenue lors de la suppression des utilisateurs." })
+            return res.status(500).json({ error: ` Une erreur est survenue et les utilisateurs n'ont pas pu être supprimés : ${error.message}` })
         })
 }
