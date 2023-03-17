@@ -1,7 +1,8 @@
+import './index.scss'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { loginUser, logoutUser } from './store/slices/user/userSlice';
+import { loginUser } from './store/slices/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Home from './pages/publicPages/Home'
 import Register from './pages/publicPages/authPages/Register';
 import Login from './pages/publicPages/authPages/Login';
@@ -31,22 +32,21 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes>
+                {/* PUBLIC */}
                 <Route path="/" element={<Home/>} />
                 <Route path="/news" element={<PublicNews/>} />
                 <Route path="/services" element={<PublicServices/>} />
                 <Route path="/profile" element={<Profile/>} />
                 <Route path="/profile/create-animal" element={<CreateAnimal/>} />
 
-        
-                        <Route path="/admin" element={<AdminHome/>} />
-                        <Route path="/admin/services" element={<AdminServices/>} />
-                        <Route path="/admin/news" element={<AdminNews/>} />
-                        <Route path="/admin/users" element={<Users/>} />
-                        <Route path="/admin/animals" element={<Animals/>} />
-                
-                
-                
+                {/* ADMIN */}
+                <Route path="/admin" element={<AdminHome/>} />
+                <Route path="/admin/services" element={<AdminServices/>} />
+                <Route path="/admin/news" element={<AdminNews/>} />
+                <Route path="/admin/users" element={<Users/>} />
+                <Route path="/admin/animals" element={<Animals/>} />
 
+                {/* AUTH */}
                 <Route path="/register" element={<Register/>} />
                 <Route path="/login" element={<Login/>} />
             </Routes>        

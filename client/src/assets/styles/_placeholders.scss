@@ -1,0 +1,28 @@
+@import './_variables.scss';
+
+%flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+%button {
+    padding: 8px;
+    text-align: center;
+    background-color: $medium-green;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-family: $main-font;
+    letter-spacing: 1px;
+    font-size: 18px;
+    
+    &:hover {
+        background-color: $light-green;
+        color: $dark-green;
+    }
+}
+

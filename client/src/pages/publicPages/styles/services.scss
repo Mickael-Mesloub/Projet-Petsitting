@@ -1,0 +1,16 @@
+@import '../../../assets/styles/placeholders';
+
+.services-container {
+    @extend %flex-center;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.service {
+    @extend %flex-center;
+    flex-direction: column;
+    width: 48%;
+    margin: 1%;
+}

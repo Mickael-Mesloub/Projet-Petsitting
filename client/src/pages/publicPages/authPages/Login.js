@@ -6,7 +6,7 @@ import { loginUser, logoutUser } from '../../../store/slices/user/userSlice.js';
 import { Link } from "react-router-dom"
 import Header from '../../../components/Header.js';
 import LogNav from '../../../components/auth/LogNav.js';
-import { authLogin } from '../../../components/auth/Auth.js';
+import { authLogin } from '../../../helpers/auth.js';
 
 const Login = () => {
     

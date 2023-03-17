@@ -1,5 +1,20 @@
-html, body {
-    height: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Delius+Swash+Caps&family=Mali:wght@400;700&display=swap');
+
+* {
     margin: 0;
 }
 
+#root {
+    margin: 0;
+}
+
+h1 {
+    font-family: "Delius Swash Caps";
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: 1px;
+    margin: 25px 0;
+}
+
+// Grand Hotel
+// Delius Swash Caps [VALIDÉE]

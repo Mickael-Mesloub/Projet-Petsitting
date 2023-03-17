@@ -17,7 +17,6 @@ export const verifyToken = async (req, res, next) => {
             console.log(error);
             return res.status(403).send({ error: "Token invalide." });
         }
-        console.log( "REQ: " + req);
         req.userId = decoded.id;
         next();
     });
