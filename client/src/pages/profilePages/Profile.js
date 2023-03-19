@@ -13,7 +13,7 @@ const Profile = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('jwt');
-        getMethod('http://localhost:9900/profile', token)
+        getMethod('http://localhost:9900/profile/:id', token)
             .then((data) => setProfile(data))
             .catch((error) => console.log(error))
     },[])
@@ -28,7 +28,9 @@ const Profile = () => {
         <>
             <Header />
             <h1>Profil</h1>
-
+            {profile.map((info, i) => {
+                <div key={i} >{info.firstName} {info.lastName}</div>
+            })}
         </>
     )
 

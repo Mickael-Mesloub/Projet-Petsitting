@@ -1,49 +1,93 @@
-@import '../assets/styles/_placeholders';
-@import '../assets/styles/_variables';
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Delius+Swash+Caps&family=Mali:wght@400;700&display=swap');
+@import "../assets/styles/_placeholders";
+@import "../assets/styles/_variables";
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Delius+Swash+Caps&family=Mali:wght@400;700&display=swap");
 
 header {
-    height: 200px;
-    background: rgb(9,9,121);
-    background: linear-gradient(90deg, rgb(50, 50, 179) 0%, rgba(99,1,190,1) 35%, rgba(163,3,164,1) 100%);
-    position: relative
-}
-
-nav {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;  
-}
-
-nav ul {
     @extend %flex-center;
-    align-items: flex-end;
+    justify-content: space-between;
     padding: 20px;
 }
 
-nav ul li {
-    font-family: "Mali";
-    text-transform: uppercase;
-    list-style: none;
-    padding: 8px;
-    text-align: center;
-    margin-right: 10px;
-    border: .5px solid #6b19b4;
-    border-radius: 8px;
-    background-color: #eee;  
+// LOGO
 
-    &:hover {
-        background: linear-gradient(90deg, rgb(153, 48, 153) 50%, rgb(239, 83, 101) 100%);
-    }
-    
-    &:hover .nav-link {
-        color: #eee;
-    } 
+.header-logo img {
+    max-height: 50px;
+    width: auto;
 }
 
-.nav-link {
+// ***** BOUTON BURGER ******
+
+.burger-menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    transition: all .3s ease-in-out;
+}
+
+.burger-menu-btn:hover {
+    background: rgba(190, 130, 255, 0.884);
+    transition: all .3s ease-in-out;
+    border-radius: 50%;
+}
+
+.navbar {
+    background-color: #333;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    transform: translateX(-100%);
+    width: 100%;
+    z-index: 1;
+
+}
+
+.show-menu .navbar {
+    transform: translateX(0);
+    transition: all .3s ease-in;
+
+}
+
+.navbar-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 10px;
+    padding: 0;
+    list-style: none;
+}
+
+.navbar-links li {
+    margin-bottom: 15px;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        transform: translateX(15px);
+        transition: all .3s ease-in-out;
+    }
+}
+
+.navbar-link {
+    color: #fff;
+    font-family: "Delius Swash Caps" , serif;
+    font-size: 24px;
+    padding: 10px 20px;
     text-decoration: none;
-    color: #6b19b4;
+    border-radius: 10px;
+}
+
+
+
+.navbar-link:hover {
+    color: rgba(190, 130, 255, 0.884);
+    transform: translateX(15px);
+    transition: all .3s ease-in-out;
 }
