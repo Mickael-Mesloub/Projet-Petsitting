@@ -9,7 +9,7 @@
 %button {
     padding: 8px;
     text-align: center;
-    background-color: $medium-green;
+    background: linear-gradient(90deg, $blue-violet-gradient) ;
     color: #fff;
     font-weight: 700;
     text-transform: uppercase;
@@ -21,8 +21,13 @@
     font-size: 18px;
     
     &:hover {
-        background-color: $light-green;
-        color: $dark-green;
+        background: linear-gradient(90deg, $revert-blue-violet-gradient);
     }
+}
+
+%form {
+    @extend %flex-center;
+    flex-direction: column;
+    padding: 15px;
 }
 

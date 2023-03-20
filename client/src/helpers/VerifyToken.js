@@ -1,9 +1,5 @@
-const verifyToken = async (url, token, dispatch, actionCreator) => {
-
-// pour secret key : voir process.env
-
+const verifyToken = async (url, token) => {
     try {
-
         const response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -15,10 +11,10 @@ const verifyToken = async (url, token, dispatch, actionCreator) => {
         const data = await response.json();
 
         if (response.ok) {
-            dispatch(actionCreator(data.user));
+            console.log(data);
+            return data;
         }
-    } 
-    catch (error) {
+    } catch (error) {
         console.log(error);
     }
 };

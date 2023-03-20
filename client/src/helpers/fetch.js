@@ -1,3 +1,14 @@
+const findToken = () => {
+    const token = localStorage.getItem("jwt")
+    if(token){
+        return token;
+    } else {
+        return ""
+    }
+}
+
+const token = findToken()
+
 export const getMethod = (url, JWT) => {
     return new Promise((resolve, reject) => {
         fetch(url, {
@@ -26,14 +37,14 @@ export const getMethod = (url, JWT) => {
     })
 };
 
-export const postMethod = async (url, JWT, formData) => {
+export const postMethod = async (url, formData) => {
+
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify(formData),
+            body: formData,
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${JWT}`
+                Authorization: `Bearer ${token}`
             }
         })
             .then((response) => {
@@ -45,12 +56,8 @@ export const postMethod = async (url, JWT, formData) => {
                             reject(data)
                         }
                     })
-                    .catch((error) => {
-                        reject(error)
-                    })
+                    .catch((err) => reject(err))
             })
-            .catch(error => {
-                reject(error)
-            })
+            .catch(error => reject(error))
     })
-};
+}

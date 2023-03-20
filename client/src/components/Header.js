@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './header.scss'
 import { CgMenuHotdog, CgClose } from 'react-icons/cg'
 import logo from '../assets/images/logo3.jpg'
@@ -15,6 +15,8 @@ const Header = () => {
     const handleMenuClick = () => {
         setShowMenu(!showMenu);
     };
+
+    console.log(user)
 
     return (
 
@@ -44,7 +46,7 @@ const Header = () => {
 
                         {user.isLogged && (
                             <li>
-                                <Link to="/profile" className="navbar-link">
+                                <Link to={`/profile/${user.id}`} className="navbar-link">
                                     Profil
                                 </Link>
                             </li>

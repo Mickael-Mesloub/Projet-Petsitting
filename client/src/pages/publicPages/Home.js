@@ -12,11 +12,7 @@ const Home = () => {
     return (
         <>  
             <Header/>
-            <h1>Accueil</h1>
-            {user.isAdmin && 
-                <Link to="/admin">Admin</Link>
-            }
-            
+            <h1>Accueil</h1>            
         </>
     )
 }

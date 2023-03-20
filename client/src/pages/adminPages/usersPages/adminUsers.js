@@ -1,4 +1,4 @@
-const Users = () => {
+const adminUsers = () => {
 
     return (
         <>
@@ -8,4 +8,4 @@ const Users = () => {
 
 }
 
-export default Users;
+export default adminUsers;

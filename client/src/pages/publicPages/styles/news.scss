@@ -1,18 +1,10 @@
 @import '../../../assets/styles/placeholders';
 
-.articles-container {
-    @extend %flex-center;
-    box-sizing: border-box;
-    flex-wrap: nowrap;
-    width: 80%;
-    margin: 0 auto;
-}
-
 .article {
     @extend %flex-center;
     flex-direction: column;
-    width: 38%;
-    margin: 1%;
+    width: 96%;
+    margin: 2%;
     border-radius: 20px;
     position: relative;
     box-sizing: border-box;
@@ -32,7 +24,12 @@
     border-radius: 20px;
 }
 
-.article-inner-text {
-    font-size: 25px;
+.article h3 {
+    font-size: 30px;
+    font-family: "Mali"
+}
+
+.article-inner-text p{
+    font-size: 20px;
     font-family: "Mali";
 }

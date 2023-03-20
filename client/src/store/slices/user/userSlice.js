@@ -12,6 +12,7 @@ export const userSlice = createSlice({
         loginUser: (state, action) => {
             return {
                 ...state,
+                id: action.payload.id,
                 email: action.payload.email,
                 isLogged: true,
                 isAdmin: action.payload.isAdmin

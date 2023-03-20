@@ -1,0 +1,32 @@
+@import "./_placeholders";
+
+form {
+    @extend %form;
+}
+
+form label {
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+fieldset {
+    @extend %flex-center;
+    flex-direction: column;
+}
+
+
+form input, fieldset, select {
+    margin-bottom: 10px;
+}
+
+select, input[type="number"] {
+    text-align: center;
+}
+
+form input[type="text"], select {
+    padding: 10px;
+}
+
+form input[type="submit" ] {
+    @extend %button;
+}

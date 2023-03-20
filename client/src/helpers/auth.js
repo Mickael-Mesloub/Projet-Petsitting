@@ -17,7 +17,7 @@ export const authLogin = (event, url, JWT, setJWT, dispatcher, actionCreator) =>
             response.json()
             .then(data => {
                 if(response.ok){
-                    dispatcher(actionCreator({email: data.user.email, isAdmin: data.user.isAdmin}));
+                    dispatcher(actionCreator({id: data.user.id, email: data.user.email, isAdmin: data.user.isAdmin}));
                     setJWT(data.token);
                     localStorage.setItem('jwt' , data.token);
                 } else {
@@ -31,8 +31,8 @@ export const authLogin = (event, url, JWT, setJWT, dispatcher, actionCreator) =>
         });
 };
 
-export const authRegister = (event, url, state, setState, dispatcher, actionCreator) => {
-
+export const authRegister = (event, url, JWT, setJWT, dispatcher, actionCreator) => {
+    
     const formData = new FormData();
     formData.append('firstName', event.target.firstName.value);
     formData.append('lastName', event.target.lastName.value);
@@ -45,7 +45,7 @@ export const authRegister = (event, url, state, setState, dispatcher, actionCrea
         method: 'POST',
         body: formData,
         headers: {
-            'Authorization': `Bearer ${state}`,
+            'Authorization': `Bearer ${JWT}`,
         }
     })
     .then(response => {
@@ -53,7 +53,7 @@ export const authRegister = (event, url, state, setState, dispatcher, actionCrea
         .then(data => {
             if(response.ok){
                 dispatcher(actionCreator({email: data.user.email, isAdmin: data.user.isAdmin}))
-                setState(data.token)
+                setJWT(data.token)
                 localStorage.setItem('jwt' , data.token)
             } else {
                 console.log('err');
@@ -63,4 +63,5 @@ export const authRegister = (event, url, state, setState, dispatcher, actionCrea
             console.log(error)
         })
     })
+    .catch(error => console.log(error))
 }

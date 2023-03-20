@@ -26,8 +26,8 @@ const News = () => {
                 {articles.map((article, i) => 
                     <div key={i} className="article">
                         <div className="article-image"><img src={`http://localhost:9900/${article.images}`} alt="" /></div>
-                        <div className="article-inner-text">{article.title}</div>
-                        <div className="article-inner-text">{article.content}</div>
+                        <h3>{article.title}</h3>
+                        <p className="article-inner-text">{article.content}</p>
                         
                     </div>                    
                 )}

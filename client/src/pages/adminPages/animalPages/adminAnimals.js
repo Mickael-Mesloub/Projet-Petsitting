@@ -2,7 +2,7 @@ import { getMethod } from "../../../helpers/fetch.js";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../../store/slices/user/userSlice';
-import verifyToken from '../../../components/auth/VerifyToken';
+import verifyToken from '../../../helpers/VerifyToken';
 
 
 const Animals = () => {
@@ -39,7 +39,9 @@ const Animals = () => {
                 <div>Aucun animal trouvé</div>
                 :
                 <div>
-                {animals.map((animal, i) => <p key={i}>{animal.name}</p>)}
+                {animals.map((animal, i) => 
+                <p key={i}>{animal.name}</p>)
+                }
                 </div>
             }   
             

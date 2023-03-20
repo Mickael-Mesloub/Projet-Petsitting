@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import verifyToken from '../../components/auth/VerifyToken';
+import verifyToken from '../../helpers/VerifyToken';
 
 const AdminHome = () => {
 
