@@ -4,7 +4,7 @@ import { getUserInfos, updateUserInfos, createAnimal, getAllAnimals, getAnimalIn
 const profileRouter = express.Router();
 
 profileRouter.get('/:id' , getUserInfos);
-profileRouter.put('/:id' , updateUserInfos);
+profileRouter.put('/:id/update-profile' , updateUserInfos);
 
 profileRouter.get('/:id/animals' , getAllAnimals);
 profileRouter.get('/:id/animals/:animalid' , getAnimalInfos);

@@ -9,6 +9,9 @@ import Login from './pages/publicPages/authPages/Login';
 import PublicNews from './pages/publicPages/News';
 import PublicServices from './pages/publicPages/Services';
 import Profile from './pages/profilePages/Profile';
+import UserAnimals from './pages/profilePages/AllUserAnimals'
+import Animal from './pages/profilePages/Animal';
+import UpdateProfile from './pages/profilePages/UpdateProfile';
 import CreateAnimal from './pages/profilePages/CreateAnimal';
 import AdminHome from './pages/adminPages/AdminHome';
 import AdminServices from './pages/adminPages/servicesPages/adminServices';
@@ -19,11 +22,11 @@ import CreateNews from './pages/adminPages/newsPages/createNews';
 import Users from './pages/adminPages/usersPages/adminUsers';
 import Animals from './pages/adminPages/animalPages/adminAnimals';
 import verifyToken from './helpers/VerifyToken';
+import NotFoundPage from './pages/publicPages/NotFound';
 
 const App = () => {
 
     const {user} = useSelector(state => state);
-    const [userId, setUserId] = useState('');
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,11 +34,7 @@ const App = () => {
         const token = localStorage.getItem('jwt')
         if(token && !user.isLogged) {
             verifyToken('http://localhost:9900/verify-token', token)
-                .then((data) => {
-                    console.log(data.user);
-                    dispatch(loginUser(data.user))
-                    setUserId(data.user.id)
-                })
+                .then((data) => {dispatch(loginUser(data.user))})
                 .catch((error) => console.log(error))        
         }
     }, []);
@@ -47,8 +46,14 @@ const App = () => {
                 <Route path="/" element={<Home/>} />
                 <Route path="/news" element={<PublicNews/>} />
                 <Route path="/services" element={<PublicServices/>} />
+
+
+                {/* PROFILE */}
                 <Route path={`/profile/:userId`} element={<Profile/>} />
+                <Route path={`/profile/:userId/update-profile`} element={<UpdateProfile/>} />
                 <Route path={`/profile/:userId/create-animal`} element={<CreateAnimal/>} />
+                <Route path={`/profile/:userId/animals`} element={<UserAnimals/>} />
+                <Route path={`/profile/:userId/animals/:animalId`} element={<Animal/>} />
 
                 {/* ADMIN */}
                 <Route path="/admin" element={<AdminHome/>} />
@@ -63,6 +68,10 @@ const App = () => {
                 {/* AUTH */}
                 <Route path="/register" element={<Register/>} />
                 <Route path="/login" element={<Login/>} />
+
+                {/* NOT FOUND */}
+                <Route path="*" element={<NotFoundPage />} />
+
             </Routes>        
         </BrowserRouter>
     )   

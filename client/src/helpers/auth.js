@@ -17,7 +17,7 @@ export const authLogin = (event, url, JWT, setJWT, dispatcher, actionCreator) =>
             response.json()
             .then(data => {
                 if(response.ok){
-                    dispatcher(actionCreator({id: data.user.id, email: data.user.email, isAdmin: data.user.isAdmin}));
+                    dispatcher(actionCreator({id: data.user._id, email: data.user.email, isAdmin: data.user.isAdmin}));
                     setJWT(data.token);
                     localStorage.setItem('jwt' , data.token);
                 } else {

@@ -55,7 +55,7 @@ const CreateAnimal = () => {
                     <option value="medium">Moyen toutou (entre 10kg et 25kg)</option>
                     <option value="large">Grand toutou (plus de 25kg)</option>
                 </select>
-                <input type="file" name="file" onChange={(event) => setFiles(event.target.files)} multiple />
+                <input type="file" name="file" accept="image/png, image/jpeg" onChange={(event) => setFiles(event.target.files)} multiple />
                 <input type="submit" value="Ajouter un animal" />
             </form>
         </>

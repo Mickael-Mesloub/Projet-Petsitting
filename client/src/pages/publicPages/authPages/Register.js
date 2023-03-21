@@ -76,7 +76,7 @@ const Register = () => {
                         </div>
                         <div className="register-form-inputs">
                             <label htmlFor="file">Avatar : </label>
-                            <input type="file" name="file" id="file" />
+                            <input type="file" name="file" accept="image/jpeg, image/png" id="file" />
                         </div>
                         <input type="submit" name="submit" className="register-btn" value="M'inscrire" />
                     </form>
