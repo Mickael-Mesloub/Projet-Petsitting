@@ -50,7 +50,7 @@ export const register = (req, res) => {
 
                 return res.status(400).json({ error: `Une erreur est survenue et le compte n'a pas pu être créé. Veuillez réessayer.` });
             });
-        })   ;
+        });
 };
 
 export const login = async (req, res) => {

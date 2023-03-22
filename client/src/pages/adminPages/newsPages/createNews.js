@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
+import Header from "../../../components/Header.js";
+import AdminLinks from "../../../components/AdminLinks.js";
 
 const createNews = () => {
 
     return (
         <>
+            <Header />
+            <AdminLinks />
             <h1>Nouveau post</h1>
             <form>
                 <label htmlFor="title">Titre : </label>

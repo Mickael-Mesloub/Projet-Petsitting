@@ -18,11 +18,15 @@ import AdminServices from './pages/adminPages/servicesPages/adminServices';
 import AdminServiceDetails from './pages/adminPages/servicesPages/adminServiceDetails';
 import CreateService from './pages/adminPages/servicesPages/createService';
 import AdminNews from './pages/adminPages/newsPages/adminNews';
+import AdminNewsDetails from './pages/adminPages/newsPages/adminNewsDetails';
 import CreateNews from './pages/adminPages/newsPages/createNews';
 import Users from './pages/adminPages/usersPages/adminUsers';
 import Animals from './pages/adminPages/animalPages/adminAnimals';
 import verifyToken from './helpers/VerifyToken';
 import NotFoundPage from './pages/publicPages/NotFound';
+import Contact from './pages/publicPages/Contact';
+import Booking from './pages/publicPages/Booking';
+import Bookings from './pages/adminPages/bookingPages/Bookings';
 
 const App = () => {
 
@@ -46,7 +50,8 @@ const App = () => {
                 <Route path="/" element={<Home/>} />
                 <Route path="/news" element={<PublicNews/>} />
                 <Route path="/services" element={<PublicServices/>} />
-
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/booking" element={<Booking />} />
 
                 {/* PROFILE */}
                 <Route path={`/profile/:userId`} element={<Profile/>} />
@@ -59,11 +64,13 @@ const App = () => {
                 <Route path="/admin" element={<AdminHome/>} />
                 <Route path="/admin/services" element={<AdminServices/>} />
                 <Route path="/admin/services/create-service" element={<CreateService/>} />
-                <Route path="/admin/services/:id" element={<AdminServiceDetails/>} />
+                <Route path="/admin/services/:serviceId" element={<AdminServiceDetails/>} />
                 <Route path="/admin/news" element={<AdminNews/>} />
+                <Route path="/admin/news/:articleId" element={<AdminNewsDetails/>} />
                 <Route path="/admin/news/create-article" element={<CreateNews/>} />
                 <Route path="/admin/users" element={<Users/>} />
                 <Route path="/admin/animals" element={<Animals/>} />
+                <Route path="/admin/bookings" element={<Bookings />} />
 
                 {/* AUTH */}
                 <Route path="/register" element={<Register/>} />

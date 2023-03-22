@@ -1,0 +1,17 @@
+@import '../../../assets/styles/_placeholders';
+
+.admin-links-container {
+    @extend %flex-center;
+    margin: 20px;
+}
+
+.admin-link {
+    @extend %admin-links;
+    width: 200px;
+    margin-right: 10px;
+    text-decoration: none;
+
+    &:hover .admin-link {
+        color: #000;
+    }
+}

@@ -17,7 +17,17 @@ export const authLogin = (event, url, JWT, setJWT, dispatcher, actionCreator) =>
             response.json()
             .then(data => {
                 if(response.ok){
-                    dispatcher(actionCreator({id: data.user._id, email: data.user.email, isAdmin: data.user.isAdmin}));
+                    dispatcher(actionCreator(
+                        {
+                            id: data.user._id,
+                            firstName: data.user.firstName,
+                            lastName: data.user.lastName,
+                            phone: data.user.phone,
+                            avatar: data.user.avatar,
+                            email: data.user.email, 
+                            isAdmin: data.user.isAdmin
+                        }
+                    ));
                     setJWT(data.token);
                     localStorage.setItem('jwt' , data.token);
                 } else {

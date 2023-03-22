@@ -38,9 +38,6 @@ const CreateAnimal = () => {
             .catch((error) => console.log(error))
     }
     
-    
-
-
     return (
         <>
             <h1>Ajouter un animal</h1>

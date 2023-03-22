@@ -39,6 +39,7 @@ export const updateUserInfos = async (req, res) => {
             const { isAdmin, defaultAvatar } = req.body;
             
             if(files && files.file) {
+                console.log(files.file);
                 avatar = copyFile(files.file !== undefined ? files.file : "");
             } else {
                 avatar = isAdmin ? 'static-images/admin.png' : defaultAvatar;
@@ -48,6 +49,7 @@ export const updateUserInfos = async (req, res) => {
                 {
                     firstName: fields.firstName || user.firstName,
                     lastName: fields.lastName || user.lastName,
+                    phone: fields.phone || user.phone,
                     email: fields.email || user.email,
                     password: fields.password || user.password,
                     avatar,

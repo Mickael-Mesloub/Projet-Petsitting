@@ -85,3 +85,35 @@ export const deleteMethod = async (url, token) => {
             });
     });
 };
+
+export const putMethod = (url, token, formData) => {
+    console.log("OK 1");
+    return new Promise((resolve, reject) => {
+        console.log("OK 2");
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            body: formData
+        })
+            .then((response) => {
+                console.log("OK 3");
+                if(!response.ok) {
+                    console.log("OK 4");
+                    throw new Error(response.statusText);
+                }
+                console.log("OK 5");
+                return response.json();
+            })
+            .then((data) => {
+                console.log("OK 6");
+                console.log(`DATA UPDATE : ${data.user.avatar}`);
+                resolve(data);
+            })
+            .catch((error) => {
+                console.log("OK 7");
+                reject(error);
+            });
+    });
+};

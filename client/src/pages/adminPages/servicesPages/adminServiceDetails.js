@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMethod } from "../../../helpers/fetch";
 import Header from "../../../components/Header.js";
+import AdminLinks from "../../../components/AdminLinks.js";
 
 const AdminServiceDetails = () => {
 
@@ -33,6 +34,7 @@ const AdminServiceDetails = () => {
     return (
         <>
             <Header />
+            <AdminLinks />
             <h1>Modifier la prestation</h1>
             <form>
                 <label htmlFor="title">Titre : </label>

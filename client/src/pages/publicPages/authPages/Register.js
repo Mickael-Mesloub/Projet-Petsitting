@@ -64,7 +64,7 @@ const Register = () => {
                         </div>
                         <div className="register-form-inputs">
                             <label htmlFor="phone">Téléphone : </label>
-                            <input type="phone" name="phone" id="phone" placeholder="Téléphone"/>
+                            <input type="tel" name="phone" id="phone" placeholder="Format XX XX XX XX XX" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" />
                         </div>
                         <div className="register-form-inputs">
                             <label htmlFor="email">Email : </label>
@@ -80,11 +80,7 @@ const Register = () => {
                         </div>
                         <input type="submit" name="submit" className="register-btn" value="M'inscrire" />
                     </form>
-                    {user.isLogged && 
-                        <span className="register-msg">Votre compte a bien été créé !</span>}
-                        {user.isLogged === false && 
-                        <span className="register-msg error">Cet utilisateur existe déjà. Veuillez entrer une nouvelle adresse email.</span>
-                    }
+                    
                 </>
             }
         </>
