@@ -9,6 +9,7 @@ import userRouter from './routers/adminRouters/userRouter.js';
 import publicRouter from './routers/publicRouters/publicRouter.js';
 import profileRouter from './routers/publicRouters/profileRouter.js';
 import animalRouter from './routers/adminRouters/animalRouter.js';
+import bookingRouter from './routers/adminRouters/bookingRouter.js';
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use('/admin' , [verifyToken , verifyIfIsAdmin] , articleRouter);
 app.use('/admin' , [verifyToken , verifyIfIsAdmin] , serviceRouter);
 app.use('/admin' , [verifyToken , verifyIfIsAdmin] , userRouter);
 app.use('/admin' , [verifyToken , verifyIfIsAdmin] , animalRouter);
+app.use('/admin' , [verifyToken , verifyIfIsAdmin] , bookingRouter);
 app.use('/' , publicRouter);
 app.use('/profile', [verifyToken] , profileRouter)
 

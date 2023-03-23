@@ -1,5 +1,6 @@
 import userModel from "../../models/userModel.js";
 import animalModel from "../../models/animalModel.js";
+import bookingModel from "../../models/bookingModel.js";
 
 export const getAllUsers = async (req, res) => {
     try {
@@ -15,7 +16,13 @@ export const getUserDetails = async (req, res) => {
     try {
         const user = await userModel.findById(req.params.id);
         const animals = await animalModel.find({owner: user._id});
-        res.status(200).json({message: "Voici les détails de l'utilisateur et de ses animaux : ", user, animals});
+        const promises = animals.map((animal) => {
+            return bookingModel.find({ animal: animal._id });   
+        });
+        const bookings = await Promise.all(promises);
+        const animalsBookings = bookings.flat();
+
+        res.status(200).json({message: "Voici les détails de l'utilisateur, ses animaux et ses réservations : ", user, animals, animalsBookings});
     }
     catch(error) {
         res.status(400).json({error: "Utilisateur introuvable."});

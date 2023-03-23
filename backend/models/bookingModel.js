@@ -9,11 +9,11 @@ const bookingModel = new mongoose.Schema({
         required: true
     },
     startTime: {
-        type: Number,
+        type: String,
         required: true
     },
     endTime: {
-        type: Number,
+        type: String,
         required: true
     },
     animal: {
@@ -21,7 +21,8 @@ const bookingModel = new mongoose.Schema({
         required: true
     },
     service: {
-        type: mongoose.Schema.Types.ObjectId, ref: "Service"
+        type: mongoose.Schema.Types.ObjectId, ref: "Service",
+        required: true
     }
     
 },  {
