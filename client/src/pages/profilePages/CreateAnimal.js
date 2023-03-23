@@ -16,9 +16,7 @@ const CreateAnimal = () => {
     const { userId } = useParams();
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod(`http://localhost:9900/profile/${userId}`, token)
-        console.log(token);
+        getMethod(`http://localhost:9900/profile/${userId}`)
     },[])
 
     const handleSubmit = (event) => {
@@ -29,13 +27,15 @@ const CreateAnimal = () => {
         formData.append('name', name);
         formData.append('description', description);
         formData.append('size', size);
-        for(const i of files) {
-            formData.append('file', i)
+        for(const file of files) {
+            formData.append('file', file)
         }
 
-        postMethod(`http://localhost:9900/profile/${userId}/create-animal` , formData)
-            .then(() => localStorage.setItem('jwt', token))
-            .catch((error) => console.log(error))
+        //  VOIR LE .THEN() CI DESSOUS
+
+        // postMethod(`http://localhost:9900/profile/${userId}/create-animal` , formData)
+        //     .then(() => localStorage.setItem('jwt', token)) 
+        //     .catch((error) => console.log(error))
     }
     
     return (

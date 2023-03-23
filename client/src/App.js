@@ -19,7 +19,7 @@ import AdminServiceDetails from './pages/adminPages/servicesPages/adminServiceDe
 import CreateService from './pages/adminPages/servicesPages/createService';
 import AdminNews from './pages/adminPages/newsPages/adminNews';
 import AdminNewsDetails from './pages/adminPages/newsPages/adminNewsDetails';
-import CreateNews from './pages/adminPages/newsPages/createNews';
+import CreateArticle from './pages/adminPages/newsPages/createArticle';
 import Users from './pages/adminPages/usersPages/adminUsers';
 import Animals from './pages/adminPages/animalPages/adminAnimals';
 import verifyToken from './helpers/VerifyToken';
@@ -27,6 +27,7 @@ import NotFoundPage from './pages/publicPages/NotFound';
 import Contact from './pages/publicPages/Contact';
 import Booking from './pages/publicPages/Booking';
 import Bookings from './pages/adminPages/bookingPages/Bookings';
+import UpdateArticle from './pages/adminPages/newsPages/updateNews';
 
 const App = () => {
 
@@ -67,7 +68,8 @@ const App = () => {
                 <Route path="/admin/services/:serviceId" element={<AdminServiceDetails/>} />
                 <Route path="/admin/news" element={<AdminNews/>} />
                 <Route path="/admin/news/:articleId" element={<AdminNewsDetails/>} />
-                <Route path="/admin/news/create-article" element={<CreateNews/>} />
+                <Route path="/admin/news/create-article" element={<CreateArticle/>} />
+                <Route path="/admin/news/:articleId/update-article" element={<UpdateArticle/>} />
                 <Route path="/admin/users" element={<Users/>} />
                 <Route path="/admin/animals" element={<Animals/>} />
                 <Route path="/admin/bookings" element={<Bookings />} />

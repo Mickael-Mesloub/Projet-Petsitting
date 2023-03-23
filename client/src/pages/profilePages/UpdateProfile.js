@@ -1,4 +1,4 @@
-import { getMethod, postMethod, putMethod } from "../../helpers/fetch";
+import { getMethod, putMethod } from "../../helpers/fetch";
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -23,15 +23,13 @@ const UpdateProfile = () => {
     },[avatar])
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod(`http://localhost:9900/profile/${userId}`, token)
+        getMethod(`http://localhost:9900/profile/${userId}`)
             .then((data) => setProfile(data))
             .catch((error) => console.log(error))
     },[])
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const token = localStorage.getItem('jwt');
         const formData = new FormData();
         formData.append('firstName' , firstName)
         formData.append('lastName' , lastName)
@@ -43,7 +41,7 @@ const UpdateProfile = () => {
         }
         
         console.log(formData);
-        putMethod(`http://localhost:9900/profile/${userId}/update-profile` , token, formData)
+        putMethod(`http://localhost:9900/profile/${userId}/update-profile` , formData)
             .then((data) => console.log(`UPDATEPROFILE LIGNE 43 - DATA : ${data.user.avatar}`))
             .then((error) => console.log(error))
     }
@@ -54,6 +52,7 @@ const UpdateProfile = () => {
         <>
             {profile.user && 
                 <>
+                    <Header />
                     <h1>Modifier le profil</h1>
                     <form onSubmit={handleSubmit} method="post" encType="multipart/form-data" className="register-form">
                         <div className="register-form-inputs">

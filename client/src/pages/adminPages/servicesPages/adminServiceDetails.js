@@ -22,8 +22,7 @@ const AdminServiceDetails = () => {
     },[visible])
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod('http://localhost:9900/services/:id', token)
+        getMethod('http://localhost:9900/services/:id')
             .then((data) => {
                 console.log(data);
                 setServices(data)

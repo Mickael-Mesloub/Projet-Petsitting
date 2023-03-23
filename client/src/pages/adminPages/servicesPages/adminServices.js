@@ -9,8 +9,7 @@ const AdminServices = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod('http://localhost:9900/services', token)
+        getMethod('http://localhost:9900/services')
             .then((data) => {
                 console.log(data);
                 setServices(data)

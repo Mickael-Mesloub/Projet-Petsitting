@@ -10,8 +10,7 @@ const AdminNewsDetails = () => {
     const [article, setArticle] = useState({});
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod(`http://localhost:9900/admin/news/${articleId}`, token)
+        getMethod(`http://localhost:9900/admin/news/${articleId}`)
             .then((data) => setArticle(data))
             .catch((error) => console.log(error))
     },[articleId])
@@ -33,6 +32,7 @@ const AdminNewsDetails = () => {
                         :
                         <div>Aucune image n'a été ajoutée pour cet article</div>
                     }
+                        <Link className="admin-link" to={`/admin/news/${articleId}/update-article`}>Modifier l'article</Link>
                 </div>
             }
         </>

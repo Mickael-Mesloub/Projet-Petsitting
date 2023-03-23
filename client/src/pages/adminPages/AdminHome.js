@@ -12,7 +12,6 @@ const AdminHome = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
         if(!user && user.isAdmin) {
             navigate('/')
         }

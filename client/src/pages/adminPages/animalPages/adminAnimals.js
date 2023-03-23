@@ -24,8 +24,7 @@ const Animals = () => {
     }, [])
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt')
-        getMethod('http://localhost:9900/admin/animals', token)
+        getMethod('http://localhost:9900/admin/animals')
             .then((data) => {
                 console.log(data.animals)
                 setAnimals(data.animals)

@@ -17,8 +17,7 @@ const Profile = () => {
     const { userId } = useParams();
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod(`http://localhost:9900/profile/${userId}`, token)
+        getMethod(`http://localhost:9900/profile/${userId}`)
             .then((data) => setProfile(data))
             .catch((error) => console.log(error))
     },[])

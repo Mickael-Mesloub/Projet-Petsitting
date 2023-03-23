@@ -9,8 +9,7 @@ const AdminNews = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod('http://localhost:9900/admin/news' , token)
+        getMethod('http://localhost:9900/admin/news')
             .then((data) => {setNews(data)})
             .catch((error) => console.log(error))
     },[])
@@ -52,7 +51,7 @@ const AdminNews = () => {
             }
             </div>
             <div className="admin-links-container">
-                <Link className="admin-link" to="/admin/news/create-article">Nouveau post</Link>
+            <Link className="admin-link" to="/admin/news/create-article">Nouvel article</Link>
             </div>
         </>
     )

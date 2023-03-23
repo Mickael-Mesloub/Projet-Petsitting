@@ -9,12 +9,12 @@ const findToken = () => {
 
 const token = findToken();
 
-export const getMethod = (url, JWT) => {
+export const getMethod = (url) => {
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${JWT}`
+                'Authorization': `Bearer ${token}`
             }
         })
             .then((response) => {
@@ -62,7 +62,7 @@ export const postMethod = async (url, formData) => {
     });
 };
 
-export const deleteMethod = async (url, token) => {
+export const deleteMethod = async (url) => {
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: "DELETE",

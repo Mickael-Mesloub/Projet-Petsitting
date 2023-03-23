@@ -8,11 +8,9 @@ const Animal = () => {
 
     const [animal, setAnimal] = useState({});
     const { userId, animalId } = useParams();
-    const token = localStorage.getItem('jwt');
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}`, token)
+        getMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}`)
             .then((data) => {setAnimal(data)})
             .catch((error) => console.log(error))
     },[userId, animalId])
@@ -34,7 +32,7 @@ const Animal = () => {
                         <div>Aucune image téléchargée</div>
                     }
                 </div>
-                <button onClick={() => deleteMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}` , token)}>Supprimer</button>
+                <button onClick={() => deleteMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}`)}>Supprimer</button>
             </div>
         </>
     )
