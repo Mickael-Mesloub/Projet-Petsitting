@@ -19,7 +19,7 @@ export const authLogin = (event, url, JWT, setJWT, dispatcher, actionCreator) =>
                 if(response.ok){
                     dispatcher(actionCreator(
                         {
-                            id: data.user._id,
+                            _id: data.user._id,
                             firstName: data.user.firstName,
                             lastName: data.user.lastName,
                             phone: data.user.phone,
@@ -62,7 +62,7 @@ export const authRegister = (event, url, JWT, setJWT, dispatcher, actionCreator)
         response.json()
         .then(data => {
             if(response.ok){
-                dispatcher(actionCreator({email: data.user.email, isAdmin: data.user.isAdmin}))
+                dispatcher(actionCreator({_id: data.user._id, email: data.user.email, isAdmin: data.user.isAdmin}))
                 setJWT(data.token)
                 localStorage.setItem('jwt' , data.token)
             } else {

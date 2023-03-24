@@ -6,6 +6,7 @@ import verifyToken from '../../../helpers/VerifyToken';
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header.js";
 import AdminLinks from "../../../components/AdminLinks.js";
+import { animalSize } from "../../../helpers/utils.js";
 
 const Animals = () => {
 
@@ -52,10 +53,10 @@ const Animals = () => {
                 <div>
                     {animals.map((animal, i) =>
                         <div key={i}>
-                            <div>{animal.name}</div>
-                            <div>{animal.description}</div>
-                            <div>{animal.size}</div>
-                            {animal.images.length === 0 ?
+                            <div>Nom : {animal.name}</div>
+                            <div>Présentation : {animal.description}</div>
+                            <div>Taille : {animalSize(animal.size)} </div>
+                            { animal.images.length === 0 ?
                                 <div>Aucune image téléchargé pour cet animal</div>
                             :
                                 <>
@@ -63,7 +64,7 @@ const Animals = () => {
                                     
                                     {visible &&
                                         <div>
-                                            {animal.images.map((image, i) =>
+                                            { animal.images.map((image, i) =>
                                                 <Link key={i} to={`http://localhost:9900/${image}`}>${image}</Link>
                                             )}
                                         </div>    

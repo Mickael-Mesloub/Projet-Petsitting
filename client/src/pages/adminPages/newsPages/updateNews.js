@@ -36,8 +36,6 @@ const UpdateArticle = () => {
         const formData = new FormData();
         putMethod(`http://localhost:9900/admin/news/${articleId}` , formData)
     }
-        
-
 
     return (
         <>

@@ -10,7 +10,7 @@ export const userSlice = createSlice({
         loginUser: (state, action) => {
             return {
                 ...state,
-                id: action.payload.id,
+                _id: action.payload._id,
                 firstName: action.payload.firstName,
                 lastName: action.payload.lastName,
                 phone: action.payload.phone,
@@ -23,7 +23,7 @@ export const userSlice = createSlice({
         logoutUser: (state) => {
             return {
                 ...state,
-                id: '',
+                _id: '',
                 email: '',
                 isLogged: null,
                 isAdmin: null

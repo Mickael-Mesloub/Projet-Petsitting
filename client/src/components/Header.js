@@ -34,7 +34,7 @@ const Header = () => {
 
                         {user && user.isLogged && (
                             <>
-                                <li><Link to={`/profile/${user.id}`} className="navbar-link">Profil</Link></li>
+                                <li><Link to={`/profile/${user._id}`} className="navbar-link">Profil</Link></li>
                                 <li><Link to="/booking" className="navbar-link">Réserver</Link></li>
                             </>
                         )}

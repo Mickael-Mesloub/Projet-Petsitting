@@ -22,20 +22,7 @@ const Profile = () => {
             .catch((error) => console.log(error))
     },[])
 
-    useEffect(() => {
-        console.log(user.isLogged);
-        const token = localStorage.getItem('jwt')
-        if(token && !user.isLogged) {
-            verifyToken('http://localhost:9900/verify-token', token)
-                .then((data) => {
-                    console.log(data.user);
-                    dispatch(loginUser(data.user))
-                })
-                .catch((error) => console.log(error))        
-        }
-    }, [user])
-
-    console.log(profile);
+    console.log(user);
 
     return (
         <>

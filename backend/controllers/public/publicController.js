@@ -1,6 +1,7 @@
 import serviceModel from "../../models/serviceModel.js";
 import bookingModel from "../../models/bookingModel.js";
 import articleModel from "../../models/articleModel.js";
+import animalModel from "../../models/animalModel.js";
 
 
 // ********** SERVICES **********
@@ -44,13 +45,19 @@ export const getAllArticles = async (req, res) => {
 
 export const createBooking = async (req, res) => {
     try {
-        console.log("ENTREE DANS CATCH");
         // const { userId } =  req.params.id;
-        console.log(`USER-ID : ${req}`);
-        const { service, date, startTime, endTime, animal } = req.body;
-        console.log(`SERVICE : ${service} // DATE : ${date} // STARTTIME : ${startTime} // ENDTIME : ${endTime} // ANIMAL : ${animal} `);
+        
+        const { date, startTime, endTime } = req.body;
+        const animal = await animalModel.findById(req.body.animal); 
+        const service = await serviceModel.findById(req.body.service);
 
-        bookingModel.create({
+        console.log(animal);
+
+        if(!animal) {
+            return res.status(404).json({error: "Cet animal n'existe pas."})
+        }
+
+        await bookingModel.create({
             service,
             date,
             startTime,
@@ -59,12 +66,14 @@ export const createBooking = async (req, res) => {
         })
             .then((booking) => {
                 console.log(`Nouvelle réservation créée : ${booking}`);
-                res.status(201).json({message: "Une nouvelle réservation a été créée!" , booking});
+                return res.status(201).json({message: "Une nouvelle réservation a été créée!" , booking});
             })
             .catch((error) => {
-                res.status(500).json({error: `Une erreur est survenue et la réservation n'a pas pu être créée : ${error.message}. Veuillez réessayer.`});
+                return res.status(500).json({error: `Une erreur est survenue et la réservation n'a pas pu être créée : ${error.message}. Veuillez réessayer.`});
             })
+            
     } catch (error) {
-        res.status(500).json({ error: `Une erreur est survenue et la réservation n'a pas pu être créée : ${error.message}. Veuillez réessayer.` });
+        return res.status(500).json({ error: `Une erreur est survenue et la réservation n'a pas pu être créée : ${error.message}. Veuillez réessayer.` });
     };
 };
+

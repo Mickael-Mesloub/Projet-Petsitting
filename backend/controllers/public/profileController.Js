@@ -4,6 +4,7 @@ import formidable from "formidable";
 import animalModel from "../../models/animalModel.js";
 import userModel from "../../models/userModel.js";
 import bookingModel from "../../models/bookingModel.js";
+import serviceModel from "../../models/serviceModel.js";
 
 // ********** USER **********
 
@@ -122,24 +123,25 @@ export const getAllAnimals = async (req, res) => {
 
 export const getAnimalInfos = async (req, res) => {
     try {
-
         const animal = await animalModel.findById(req.params.animalId);
 
         if (!animal) {
             return res.status(404).json({ error: "Animal inexistant." });
         };
 
-        const bookings = await bookingModel.find({ animal: req.params.animalId })
+        let bookings = await bookingModel.find({ animal: req.params.animalId })
 
-        if (bookings.length === 0) {
-            return res.status(404).json({ error: "Aucune réservation n'a été faite pour cet animal." })
+        if (bookings.length > 0) {
+            bookings = await bookingModel.find({ animal: req.params.animalId }).populate('service');
         }
-
+        
         return res.status(200).json({ animal, bookings });
     } catch (error) {
         return res.status(500).json({ error: `Une erreur est survenue et l'animal n'a pas pu être affiché : ${error.message}. Veuillez réessayer.` });
     };
 };
+
+
 
 export const updateAnimal = async (req, res) => {
     try {
@@ -154,7 +156,7 @@ export const updateAnimal = async (req, res) => {
                 return res.status(500).json({ error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être téléchargé(s) : ${error.message}. Veuillez réessayer.` });
             };
 
-            const animal = await animalModel.findById(req.params.animalid);
+            const animal = await animalModel.findById(req.params.animalId);
 
             if (!animal) {
                 return res.status(404).json({ error: "Cet animal n'existe pas." });
@@ -177,8 +179,8 @@ export const updateAnimal = async (req, res) => {
             const images = await copyFiles(files.file !== undefined ? files.file : [], 'images/animals');
             const updatedImages = animal.images.filter((i) => !deletedImages.includes(i)).concat(images);
 
-            animal.title = fields.title || animal.title
-            animal.content = fields.content || animal.content
+            animal.name = fields.name || animal.name
+            animal.description = fields.description || animal.description
             animal.images = updatedImages
             animal.save()
                 .then((animal) => res.status(201).json({ message: "Les informations de l'animal ont été modifiées avec succès!", animal }))
@@ -189,36 +191,62 @@ export const updateAnimal = async (req, res) => {
     };
 };
 
-export const deleteAnimal = (req, res) => {
-    const userId = req.userId;
-    if (userId !== req.params.id) return res.status(401).json({ error: "Vous n'êtes pas autorisé(e) à consulter ce profil." });
-    animalModel.findByIdAndDelete(req.params.animalid)
-        .then(deletedAnimal => {
+export const deleteAnimal = async (req, res) => {
+    try {
+        const userId = req.userId;
 
-            if (!deletedAnimal) {
-                return res.status(500).json({ error: "Animal introuvable." });
-            }
+        if (userId !== req.params.id) {
+            return res.status(401).json({ error: "Vous n'êtes pas autorisé(e) à consulter ce profil."});
+        };
 
-            console.log(deletedAnimal.images);
-            deletedAnimal.images.forEach((image) => {
-                fs.unlink(`public/${image}`, (error) => {
+        const animal = await animalModel.findById(req.params.animalId);
 
-                    if (error) {
-                        console.log(error);
-                        return res.status(500).json({ error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.` });
-                    }
-                    console.log("Fichier(s) supprimé(s) avec succès!");
+        if(!animal) {
+            return res.status(404).json({error: "Cet animal est introuvable."});
+        };
+
+        const bookings = await bookingModel.find({animal: req.params.animalId});
+
+        console.log(bookings);
+
+        animalModel.findByIdAndDelete(req.params.animalId)
+             .then(deletedAnimal => {
+
+                if (!deletedAnimal) {
+                    return res.status(404).json({ error: "Animal introuvable." });
+                }
+
+                if(bookings && bookings.length !== 0) {
+                    const deletePromises = bookings.map((booking) => {
+                        return bookingModel.findByIdAndDelete(booking._id);
+                    });
+                    Promise.all(deletePromises);
+                };
+                
+
+                console.log(deletedAnimal.images);
+                deletedAnimal.images && deletedAnimal.images.forEach((image) => {
+                    fs.unlink(`public/${image}`, (error) => {
+
+                        if (error) {
+                            console.log(error);
+                            return res.status(500).json({ error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.` });
+                        }
+                        console.log("Fichier(s) supprimé(s) avec succès!");
+                    });
                 });
-            });
-            console.log("deleted");
-            console.log(deletedAnimal);
+                console.log("deleted");
+                console.log(deletedAnimal);
 
-            return res.status(204).send();
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({ error: `Une erreur est survenue et l'animal n'a pas pu être supprimé : ${error.message}. Veuillez réessayer.` });
-        });
+                return res.status(204).send();
+            })
+            .catch(error => {
+                console.log(error);
+                return res.status(500).json({ error: `Une erreur est survenue et l'animal n'a pas pu être supprimé : ${error.message}. Veuillez réessayer.` });
+            });
+    } catch(error) {
+        return res.status(500).json({ error: `Une erreur est survenue et l'animal n'a pas pu être supprimé : ${error.message}. Veuillez réessayer.` });
+    };
 };
 
 export const deleteAllAnimals = (req, res) => {
@@ -260,9 +288,9 @@ export const getAllBookings = async (req, res) => {
             return bookingModel.find({ animal: animal._id });   
         });
         const bookings = await Promise.all(promises);
-        res.status(200).json(bookings.flat());
+        return res.status(200).json(bookings.flat());
     } catch (error) {
-        res.status(400).json({ error: "Réservations introuvables." });
+        return res.status(400).json({ error: "Réservations introuvables." });
     };
 };
 

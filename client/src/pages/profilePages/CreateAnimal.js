@@ -2,6 +2,7 @@ import '../../assets/styles/createForms.scss'
 import { postMethod, getMethod } from './../../helpers/fetch';
 import { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import Header from './../../components/Header';
 
 
 const CreateAnimal = () => {
@@ -40,6 +41,7 @@ const CreateAnimal = () => {
     
     return (
         <>
+            <Header />
             <h1>Ajouter un animal</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name" >Nom : </label>

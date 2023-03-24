@@ -24,7 +24,7 @@ profileRouter.put('/:id/update-profile' , updateUserInfos);
 profileRouter.get('/:id/animals' , getAllAnimals);
 profileRouter.get('/:id/animals/:animalId' , getAnimalInfos);
 profileRouter.post('/:id/create-animal' , createAnimal);
-profileRouter.put('/:id/animals/:animalId' , updateAnimal);
+profileRouter.put('/:id/animals/:animalId/update-animal' , updateAnimal);
 profileRouter.delete('/:id/animals/:animalId' , deleteAnimal);
 profileRouter.delete('/:id/animals' , deleteAllAnimals);
 

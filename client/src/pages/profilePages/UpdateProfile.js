@@ -1,8 +1,9 @@
 import { getMethod, putMethod } from "../../helpers/fetch";
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Header from './../../components/Header';
+import { loginUser } from "../../store/slices/user/userSlice";
 import './styles/profile.scss';
 
 const UpdateProfile = () => {
@@ -17,6 +18,7 @@ const UpdateProfile = () => {
 
     const {user} = useSelector(state => state);
     const { userId } = useParams();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         console.log(avatar);
@@ -26,6 +28,10 @@ const UpdateProfile = () => {
         getMethod(`http://localhost:9900/profile/${userId}`)
             .then((data) => setProfile(data))
             .catch((error) => console.log(error))
+    },[])
+
+    useEffect(() => {
+        console.log(user);
     },[])
 
     const handleSubmit = (event) => {
@@ -42,7 +48,7 @@ const UpdateProfile = () => {
         
         console.log(formData);
         putMethod(`http://localhost:9900/profile/${userId}/update-profile` , formData)
-            .then((data) => console.log(`UPDATEPROFILE LIGNE 43 - DATA : ${data.user.avatar}`))
+            .then((data) => dispatch(loginUser(data.user)))
             .then((error) => console.log(error))
     }
 

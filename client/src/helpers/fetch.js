@@ -1,4 +1,4 @@
-const findToken = () => {
+export const findToken = () => {
     const token = localStorage.getItem("jwt");
     if (token) {
         return token;
@@ -72,10 +72,11 @@ export const deleteMethod = async (url) => {
         })
             .then((response) => {
                 if (!response.ok) {
+                    console.log(response);
                     throw new Error(response.statusText);
                 }
                 console.log(response);
-                return response.json();
+                return response
             })
             .then((data) => {
                 resolve(data);
@@ -86,7 +87,7 @@ export const deleteMethod = async (url) => {
     });
 };
 
-export const putMethod = (url, token, formData) => {
+export const putMethod = (url, formData) => {
     console.log("OK 1");
     return new Promise((resolve, reject) => {
         console.log("OK 2");
@@ -108,7 +109,6 @@ export const putMethod = (url, token, formData) => {
             })
             .then((data) => {
                 console.log("OK 6");
-                console.log(`DATA UPDATE : ${data.user.avatar}`);
                 resolve(data);
             })
             .catch((error) => {

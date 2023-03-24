@@ -21,12 +21,10 @@ export const getBooking = async (req, res) => {
         if(!booking) {
             return res.status(404).json({error: "Cette réservation n'existe pas."});
         };
+        console.log({booking});
 
-        bookingModel.findOneAndDelete(req.params.bookingId)
-            .then((booking) => {
-                console.log("Cette réservation a été annulée.");
-                res.status(204).send()
-            })
+        return res.status(200).json({booking})
+            
     } catch(error) {
         return res.status(500).json({error: `Une erreur est survenue et la réservation n'a pas pu être affichée : ${error.message}. Veuillez réessayer.`});
     };
@@ -40,7 +38,7 @@ export const cancelUserBooking = async (req, res) => {
             return res.status(404).json({error: "Cette réservation n'existe pas."});
         };
 
-        return res.status(204).json({});
+        return res.status(204).send();
 
     } catch(error) {
         return res.status(500).json({error: `Une erreur est survenue et cette réservation n'a pas pu être supprimée : ${error.message}. Veuillez réessayer.`})
