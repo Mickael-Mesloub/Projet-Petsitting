@@ -35,7 +35,7 @@ const CreateNews = () => {
                 <label htmlFor="content">Contenu : </label>
                 <textarea name="content" rows="5" cols="50" onChange={(e) => setContent(e.target.value)}></textarea>
                 <label htmlFor="file">Images : </label>
-                <input type="file" name="file" accept="image/jpeg, image/png" onChange={(e) => setFiles(e.target.files)}/>
+                <input type="file" name="file" accept="image/jpeg, image/png" multiple onChange={(e) => setFiles(e.target.files)}/>
                 <input type="submit" value="Créer"/>
             </form>
         </>

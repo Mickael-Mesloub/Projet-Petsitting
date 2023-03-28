@@ -2,7 +2,7 @@ import './index.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { loginUser } from './store/slices/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Home from './pages/publicPages/Home';
 import Register from './pages/publicPages/authPages/Register';
 import Login from './pages/publicPages/authPages/Login';
@@ -13,14 +13,16 @@ import UserAnimals from './pages/profilePages/AllUserAnimals'
 import Animal from './pages/profilePages/Animal';
 import UpdateProfile from './pages/profilePages/UpdateProfile';
 import CreateAnimal from './pages/profilePages/CreateAnimal';
+
 import AdminHome from './pages/adminPages/AdminHome';
 import AdminServices from './pages/adminPages/servicesPages/adminServices';
-import AdminServiceDetails from './pages/adminPages/servicesPages/adminServiceDetails';
+import ServiceDetails from './pages/adminPages/servicesPages/serviceDetails';
+import UpdateService from './pages/adminPages/servicesPages/updateService';
 import CreateService from './pages/adminPages/servicesPages/createService';
 import AdminNews from './pages/adminPages/newsPages/adminNews';
 import AdminNewsDetails from './pages/adminPages/newsPages/adminNewsDetails';
 import CreateArticle from './pages/adminPages/newsPages/createArticle';
-import Users from './pages/adminPages/usersPages/adminUsers';
+import AllUsers from './pages/adminPages/usersPages/adminUsers';
 import Animals from './pages/adminPages/animalPages/adminAnimals';
 import UpdateAnimal from './pages/profilePages/UpdateAnimal';
 import NotFoundPage from './pages/publicPages/NotFound';
@@ -30,6 +32,7 @@ import Bookings from './pages/adminPages/bookingPages/Bookings';
 import UpdateArticle from './pages/adminPages/newsPages/updateNews';
 import GetBooking from './pages/profilePages/Booking'
 import { getMethod } from './helpers/fetch';
+
 
 const App = () => {
 
@@ -68,12 +71,13 @@ const App = () => {
                 <Route path="/admin" element={<AdminHome/>} />
                 <Route path="/admin/services" element={<AdminServices/>} />
                 <Route path="/admin/services/create-service" element={<CreateService/>} />
-                <Route path="/admin/services/:serviceId" element={<AdminServiceDetails/>} />
+                <Route path="/admin/services/:serviceId" element={<ServiceDetails/>} />
+                <Route path="/admin/services/:serviceId/update-service" element={<UpdateService/>} />
                 <Route path="/admin/news" element={<AdminNews/>} />
                 <Route path="/admin/news/:articleId" element={<AdminNewsDetails/>} />
                 <Route path="/admin/news/create-article" element={<CreateArticle/>} />
                 <Route path="/admin/news/:articleId/update-article" element={<UpdateArticle/>} />
-                <Route path="/admin/users" element={<Users/>} />
+                <Route path="/admin/users" element={<AllUsers/>} />
                 <Route path="/admin/animals" element={<Animals/>} />
                 <Route path="/admin/bookings" element={<Bookings />} />
 

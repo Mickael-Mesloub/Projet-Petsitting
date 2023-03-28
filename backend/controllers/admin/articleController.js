@@ -40,7 +40,7 @@ export const getAllArticles = async (req, res) => {
 
 export const getArticle = async (req, res) => {
     try {
-        const article = await articleModel.findById(req.params.articleId );
+        const article = await articleModel.findById(req.params.articleId);
         res.status(200).json(article);
 
     } catch (error) {
@@ -50,48 +50,50 @@ export const getArticle = async (req, res) => {
 
 export const updateArticle = async (req, res) => {
     try {
-      const form = formidable({ multiples: true })
-      form.parse(req, async (error, fields, files) => {
+        const form = formidable({ multiples: true })
+        form.parse(req, async (error, fields, files) => {
 
-        if (error) {
-          return res.status(500).json({ error: `Une erreur est survenue : ${error.message}. Veuillez réessayer.` });
-        }
-        
-        const article = await articleModel.findById(req.params.articleId);
-        
-        if (!article) {
-          return res.status(404).json({error: "Article inexistant."});
-        }
-        
-        // Supprimer les images sélectionnées
-        const deletedImages = fields.deleteImages || []
+            if (error) {
+                return res.status(500).json({ error: `Une erreur est survenue : ${error.message}. Veuillez réessayer.` });
+            }
+            const article = await articleModel.findById(req.params.articleId);
 
-        for (const image of deletedImages) {
-          fs.unlink(`public/${image}`, (error) => {
-
-            if (error && error.code !== "ENOENT") {
-              return res.status(500).json({error: "La suppression d'image(s) a échoué."});
+            if (!article) {
+                return res.status(404).json({ error: "Article inexistant." });
             }
 
-          })
-        }
-  
-        // Ajouter les nouvelles images et mettre à jour la base de données
-        const images = await copyFiles(files.file !== undefined ? files.file : [], 'images/news');
-        const updatedImages = article.images.filter((i) => !deletedImages.includes(i)).concat(images);
-        
-        article.title = fields.title || article.title
-        article.content = fields.content || article.content
-        article.images = updatedImages
-        article.save()
-          .then((article) => res.status(201).json({message: "Article modifié avec succès!", article}))
-          .catch((error) => res.status(400).json({error: `Une erreur est survenue et l'article n'a pas pu être modifié : ${error.message}. Veuillez réessayer.`}));
-      })
+            // Supprimer les images sélectionnées
+            const deletedImages = fields.deleteImages || []
+
+            for (const image of deletedImages) {
+                fs.unlink(`public/${image}`, (error) => {
+
+                    if (error && error.code !== "ENOENT") {
+                        return res.status(500).json({ error: "La suppression d'image(s) a échoué." });
+                    }
+
+                })
+            }
+
+            // Ajouter les nouvelles images et mettre à jour la base de données
+            const images = await copyFiles(files.file !== undefined ? files.file : [], 'images/news');
+            const updatedImages = article.images.filter((i) => !deletedImages.includes(i)).concat(images);
+            article.title = fields.title || article.title
+            article.content = fields.content || article.content
+            article.images = updatedImages
+            article.save()
+                .then((article) => {
+                    return res.status(201).json({ message: "Article modifié avec succès!", article })
+                })
+                .catch((error) => {
+                    return res.status(400).json({ error: `Une erreur est survenue et l'article n'a pas pu être modifié : ${error.message}. Veuillez réessayer.` });
+                })
+        })
     } catch (error) {
-      return res.status(400).json({error: `Une erreur est survenue et l'article n'a pas pu être modifié : ${error.message}. Veuillez réessayer.`});
+        return res.status(400).json({ error: `Une erreur est survenue et l'article n'a pas pu être modifié : ${error.message}. Veuillez réessayer.` });
     }
 };
-  
+
 export const deleteArticle = (req, res) => {
     articleModel.findByIdAndDelete(req.params.articleId)
         .then(deletedArticle => {
@@ -115,7 +117,7 @@ export const deleteArticle = (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ error: `Une erreur est survenue et l'article n'a pas pu être supprimé : ${error.message}. Veuillez réessayer.` });
+            return res.status(500).json({ error: `Une erreur est survenue et l'article n'a pas pu être supprimé : ${error.message}. Veuillez réessayer.` });
         })
 };
 
@@ -144,7 +146,7 @@ export const deleteAllArticles = (req, res) => {
 
                         if (error.code !== "ENOENT") {
                             console.log(`Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.`);
-                            return res.status(500).json({error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.`})
+                            return res.status(500).json({ error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.` })
                         }
 
                     }

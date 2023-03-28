@@ -6,8 +6,8 @@ const articleRouter = express.Router();
 articleRouter.get('/news' , getAllArticles);
 articleRouter.get('/news/:articleId' , getArticle);
 articleRouter.post('/news/create-article' , createArticle);
-articleRouter.put('/news:/articleId' , updateArticle);
+articleRouter.put('/news/:articleId' , updateArticle);
 articleRouter.delete('/news/:articleId' , deleteArticle);
-articleRouter.delete('/news/' , deleteAllArticles);
+articleRouter.delete('/news' , deleteAllArticles);
 
 export default articleRouter;

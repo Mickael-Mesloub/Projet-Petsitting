@@ -51,8 +51,8 @@ const UpdateArticle = () => {
         };
 
     useEffect(() => {
-        console.log(article);
-    },[article])
+        console.log(selectedImages);
+    },[selectedImages])
 
     return (
         <>
@@ -61,9 +61,9 @@ const UpdateArticle = () => {
             <h1>Modifier l'article</h1>
             <form onSubmit={handleSubmit} >
                 <label htmlFor="title">Titre : </label>
-                <input type="text" name="title" onChange={(e) => setTitle(e.target.value)} />
+                <input type="text" name="title" placeholder={article.title} onChange={(e) => setTitle(e.target.value)} />
                 <label htmlFor="content">Contenu : </label>
-                <textarea name="content" rows="5" cols="50" onChange={(e) => setContent(e.target.value)}></textarea>
+                <textarea name="content" rows="5" cols="50" placeholder={article.content} onChange={(e) => setContent(e.target.value)}></textarea>
                 <label htmlFor="file">Images : </label>
                 <input type="file" name="file" accept="image/jpeg, image/png" multiple onChange={(e) => setImages(e.target.files)}/>
                 {article.images && article.images.length > 0 &&

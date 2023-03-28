@@ -3,10 +3,9 @@ import { useState, useEffect } from "react";
 import { getMethod, putMethod } from "../../../helpers/fetch";
 import Header from "../../../components/Header.js";
 import AdminLinks from "../../../components/AdminLinks.js";
-import { putFormData } from './../../../helpers/fetch';
 
 
-const AdminServiceDetails = () => {
+const UpdateService = () => {
 
     // Récupérer l'id de l'article 
     // Faire un fetch avec l'id de l'article
@@ -17,11 +16,13 @@ const AdminServiceDetails = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);    
     const [visible, setVisible] = useState(true);
+    const [selectedInput, setSelectedInput] = useState(true)
     const { serviceId } = useParams();
     
 
     const handleRadioChange = (event) => {
-        setVisible(event.target.value === "yes");
+        setSelectedInput(!selectedInput);
+        setVisible(event.target.value);
     };
 
     useEffect(() => {
@@ -42,12 +43,6 @@ const AdminServiceDetails = () => {
             price,
             visible
         }
-
-        // const formData = new FormData();
-        // formData.append('name', name);
-        // formData.append('description', description);
-        // formData.append('price', price);
-        // formData.append('visible', visible);
 
         putMethod(`http://localhost:9900/admin/services/${serviceId}`, updatedService)
             .then((data) => {
@@ -76,12 +71,13 @@ const AdminServiceDetails = () => {
                 <fieldset>
                     <legend>Rendre la prestation visible pour les utilisateurs?</legend>
                     <div>
-                        <input type="radio" name="yes" value="yes" checked={visible} onChange={handleRadioChange} /><label htmlFor="yes">Oui</label>
+                        <input type="radio" name="yes" value="true" checked={selectedInput} onChange={handleRadioChange} /><label htmlFor="true">Oui</label>
                     </div>
                     <div>
-                    <input type="radio" name="no" value="no" checked={!visible} onChange={handleRadioChange} /><label htmlFor="no">Non</label>
+                        <input type="radio" name="no" value="false" checked={!selectedInput} onChange={handleRadioChange} /><label htmlFor="false">Non</label>
                     </div>
                 </fieldset>
+                
                 <input type="submit" value="Modifier"/>
             </form>
         </>
@@ -89,4 +85,4 @@ const AdminServiceDetails = () => {
 
 }
 
-export default AdminServiceDetails;
+export default UpdateService;

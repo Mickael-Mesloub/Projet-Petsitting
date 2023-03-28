@@ -89,6 +89,7 @@ export const deleteMethod = async (url) => {
 
 export const putFormData = (url, formData) => {
     console.log("OK 1");
+    console.log(token);
     return new Promise((resolve, reject) => {
         console.log("OK 2");
         fetch(url, {
@@ -120,6 +121,7 @@ export const putFormData = (url, formData) => {
 
 export const putMethod = (url, data) => {
     return new Promise((resolve, reject) => {
+        
         fetch(url, {
             method: 'PUT',
             headers: {

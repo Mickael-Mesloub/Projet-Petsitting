@@ -1,12 +1,5 @@
 @import '../../../assets/styles/_placeholders';
 
-h1 {
-    margin: 10px auto 0;
-    padding: 5px;
-    background-color: rgba(246, 155, 155, 0.664);
-    border-radius: 15px;
-}
-
 .animal-container {
     @extend %flex-center;
     flex-direction: column;

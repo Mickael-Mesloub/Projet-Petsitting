@@ -2,12 +2,10 @@
 
 .admin-links-container {
     @extend %flex-center;
-    margin: 20px;
+    width: 100%;
 }
 
 .admin-link {
-    @extend %admin-links;
-    width: 200px;
     margin-right: 10px;
     text-decoration: none;
 

@@ -1,7 +1,7 @@
 import Header from "../../../components/Header"
 import AdminLinks from './../../../components/AdminLinks';
 import { useState, useEffect } from "react";
-import { getMethod } from "../../../helpers/fetch";
+import { deleteMethod, getMethod } from "../../../helpers/fetch";
 import { Link, useParams } from "react-router-dom"; 
 
 const AdminNewsDetails = () => {
@@ -32,6 +32,13 @@ const AdminNewsDetails = () => {
                         :
                         <div>Aucune image n'a été ajoutée pour cet article</div>
                     }
+                        <button onClick={() => {
+
+                            if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet article ?")) {
+                                deleteMethod(`http://localhost:9900/admin/news/${articleId}`);
+                        }
+
+                        }}>Supprimer</button>
                         <Link className="admin-link" to={`/admin/news/${articleId}/update-article`}>Modifier l'article</Link>
                 </div>
             }

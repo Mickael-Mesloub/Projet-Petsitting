@@ -46,9 +46,11 @@ const Animal = () => {
                         }
                     </div>
                     <button onClick={() => {
+
                         if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet animal ?")) {
                             deleteMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}`);
                         }
+                        
                     }}>Supprimer</button>
                     <Link to={`/profile/${userId}/animals/${animalId}/update-animal`}>Modifier</Link>
                 </div>

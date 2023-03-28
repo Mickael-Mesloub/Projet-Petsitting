@@ -16,20 +16,29 @@ const Services = () => {
 
     return (
         <>
-            <Header />
-            <h1>Services</h1>
-            <div className="services-container">
-                {services.map((service, i) =>
-                    <div key={i} className="service">
-                        <div>{service.name}</div>
-                        <div>{service.description}</div>
-                        <div>{service.price}€</div>
+            {services && services.length > 0 ?
+                <>
+                    <Header />
+                    <h1>Services</h1>
+                    <div className="services-container">
+                        {services.map((service, i) =>
+                            <>
+                                {service.visible &&
+                                    <div key={i} className="service">
+                                        <div>{service.name}</div>
+                                        <div>{service.description}</div>
+                                        <div>{service.price}€</div>
+                                    </div>
+                                }
+                            </>
+                        )}
                     </div>
-                )}
-            </div>
+                </>
+            :
+                <div>Aucune prestation n'est disponible pour le moment.</div>
+            }  
         </>
     )
-
 }
 
 export default Services;

@@ -27,6 +27,7 @@
 
 %admin-links {
     @extend %button;
+    @extend %flex-center;
     transition: all .5s ease-in-out;
     background-image: linear-gradient(90deg, $violet-orange-gradient);
 
@@ -42,5 +43,20 @@
     @extend %flex-center;
     flex-direction: column;
     padding: 15px;
+}
+
+%admin-tables {
+    border-collapse: collapse;
+    margin: 20px auto;
+    border: 1px solid #888;
+
+    th {
+        background-color: rgba(163, 102, 255, .3);
+    }
+
+    th, td {
+        border: 1px solid #888;
+        padding: 10px;
+    }
 }
 

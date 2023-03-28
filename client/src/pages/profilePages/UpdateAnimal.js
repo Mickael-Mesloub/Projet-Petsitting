@@ -28,7 +28,7 @@ const UpdateAnimal = () => {
         // Supprimer les images sélectionnées
         const formData = new FormData();
         for (const image of selectedImages) {
-          formData.append("deleteImages[]", image);
+            formData.append("deleteImages[]", image);
         }
         putFormData(`http://localhost:9900/profile/${userId}/animals/${animalId}/update-animal`, formData)
             .then((data) => setAnimal(data))
@@ -39,15 +39,14 @@ const UpdateAnimal = () => {
         formData.append("description", description);
         formData.append("size", size);
         if (images && images.length > 0) {
-          for (const image of images) {
-            formData.append("file", image);
-          }
+            for (const image of images) {
+                formData.append("file", image);
+            }
         }
         putFormData(
-          `http://localhost:9900/profile/${userId}/animals/${animalId}/update-animal`,
-          formData
-        ).then((data) => setAnimal(data));
-      };
+          `http://localhost:9900/profile/${userId}/animals/${animalId}/update-animal`,formData )
+            .then((data) => setAnimal(data));
+    };
       
 
     useEffect(() => {
