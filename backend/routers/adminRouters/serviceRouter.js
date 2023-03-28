@@ -5,9 +5,9 @@ const serviceRouter = express.Router();
 
 serviceRouter.post('/create-service' , createService);
 serviceRouter.get('/services' , getAllServices);
-serviceRouter.get('/services/:id' , getServiceDetails);
-serviceRouter.put('/services/:id' , updateService);
-serviceRouter.delete('/services/:id' , deleteService);
+serviceRouter.get('/services/:serviceId' , getServiceDetails);
+serviceRouter.put('/services/:serviceId' , updateService);
+serviceRouter.delete('/services/:serviceId' , deleteService);
 serviceRouter.delete('/services' , deleteAllServices);
 
 

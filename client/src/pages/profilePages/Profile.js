@@ -4,12 +4,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Header from './../../components/Header';
 import './styles/profile.scss';
-import verifyToken from "../../helpers/VerifyToken";
 import { loginUser } from "../../store/slices/user/userSlice";
 
 const Profile = () => {
 
-    const [profile, setProfile] = useState([])
+    const [profile, setProfile] = useState([]);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -17,9 +16,12 @@ const Profile = () => {
     const { userId } = useParams();
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/profile/${userId}`)
+        if(user) {
+            getMethod(`http://localhost:9900/profile/${userId}`)
             .then((data) => setProfile(data))
             .catch((error) => console.log(error))
+        }
+        
     },[])
 
     console.log(user);

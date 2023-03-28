@@ -73,7 +73,7 @@ userModel.methods.createJWT = function () {
     return jwt.sign({
         id: this._id,
         email: this.email
-    }, 'key_secret', {expiresIn: '24h'})
+    }, 'key_secret', {expiresIn: '364d'})
 }
 
 export default mongoose.model("User", userModel);

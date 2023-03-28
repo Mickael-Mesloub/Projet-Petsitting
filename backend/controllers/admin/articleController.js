@@ -40,7 +40,7 @@ export const getAllArticles = async (req, res) => {
 
 export const getArticle = async (req, res) => {
     try {
-        const article = await articleModel.findById(req.params.id );
+        const article = await articleModel.findById(req.params.articleId );
         res.status(200).json(article);
 
     } catch (error) {
@@ -57,7 +57,7 @@ export const updateArticle = async (req, res) => {
           return res.status(500).json({ error: `Une erreur est survenue : ${error.message}. Veuillez réessayer.` });
         }
         
-        const article = await articleModel.findById(req.params.id);
+        const article = await articleModel.findById(req.params.articleId);
         
         if (!article) {
           return res.status(404).json({error: "Article inexistant."});
@@ -93,7 +93,7 @@ export const updateArticle = async (req, res) => {
 };
   
 export const deleteArticle = (req, res) => {
-    articleModel.findByIdAndDelete(req.params.id)
+    articleModel.findByIdAndDelete(req.params.articleId)
         .then(deletedArticle => {
 
             if (!deletedArticle) {

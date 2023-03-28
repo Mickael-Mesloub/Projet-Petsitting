@@ -100,9 +100,13 @@ export const verifyToken = async (req, res) => {
         const user = await userModel.findOne({ _id: decoded.id });
         return res.status(200).json({
             user: {
-                id: user._id,
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phone: user.phone,
+                avatar: user.avatar,
                 email: user.email,
-                isAdmin: user.isAdmin
+                isAdmin: user.isAdmin,
             }
         });
     });

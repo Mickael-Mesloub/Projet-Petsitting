@@ -1,4 +1,4 @@
-import { getMethod, putMethod } from "../../helpers/fetch";
+import { getMethod, putFormData } from "../../helpers/fetch";
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,18 +21,15 @@ const UpdateProfile = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(avatar);
-    },[avatar])
-
-    useEffect(() => {
         getMethod(`http://localhost:9900/profile/${userId}`)
             .then((data) => setProfile(data))
             .catch((error) => console.log(error))
-    },[])
+    },[userId])
 
     useEffect(() => {
-        console.log(user);
-    },[])
+        console.log(profile.user);
+    },[profile.user])
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -47,12 +44,11 @@ const UpdateProfile = () => {
         }
         
         console.log(formData);
-        putMethod(`http://localhost:9900/profile/${userId}/update-profile` , formData)
+        putFormData(`http://localhost:9900/profile/${userId}/update-profile` , formData)
             .then((data) => dispatch(loginUser(data.user)))
             .then((error) => console.log(error))
     }
 
-    console.log(user);
     return (
 
         <>
@@ -60,32 +56,32 @@ const UpdateProfile = () => {
                 <>
                     <Header />
                     <h1>Modifier le profil</h1>
-                    <form onSubmit={handleSubmit} method="post" encType="multipart/form-data" className="register-form">
-                        <div className="register-form-inputs">
+                    <form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
+                        <div>
                             <label htmlFor="firstName">Prénom : </label>
                             <input type="text" name="firstName" id="firstName" placeholder="Prénom" onChange={(e) => setFirstName(e.target.value)} />
                         </div>
-                        <div className="register-form-inputs">
+                        <div>
                             <label htmlFor="lastName">Nom : </label>
                             <input type="text" name="lastName" id="lastName" placeholder="Nom" onChange={(e) => setLastName(e.target.value)} />
                         </div>
-                        <div className="register-form-inputs">
+                        <div>
                             <label htmlFor="phone">Téléphone : </label>
                             <input type="tel" name="phone" id="phone" placeholder="Format XX XX XX XX XX" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" onChange={(e) => setPhone(e.target.value)}/>
                         </div>
-                        <div className="register-form-inputs">
+                        <div>
                             <label htmlFor="email">Email : </label>
                             <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} />
                         </div>
-                        <div className="register-form-inputs">
+                        <div>
                             <label htmlFor="password">Mot de passe : </label>
                             <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} />  
                         </div>
-                        <div className="register-form-inputs">
+                        <div>
                             <label htmlFor="file">Avatar : </label>
                             <input type="file" name="file" accept="image/jpeg, image/png" id="file" onChange={(e) => setAvatar(e.target.files)} />
                         </div>
-                        <input type="submit" name="submit" className="register-btn" value="Modifier" />
+                        <input type="submit" name="submit" value="Modifier" />
                     </form>
                 </>
             }

@@ -8,6 +8,7 @@ import { GiDogHouse } from 'react-icons/gi'
 const Header = () => {
 
     const { user } = useSelector(state => state);
+    console.log(user);
     const [showMenu, setShowMenu] = useState(false);
 
     const handleMenuClick = () => {
@@ -35,7 +36,7 @@ const Header = () => {
                         {user && user.isLogged && (
                             <>
                                 <li><Link to={`/profile/${user._id}`} className="navbar-link">Profil</Link></li>
-                                <li><Link to="/booking" className="navbar-link">Réserver</Link></li>
+                                <li><Link to={`${user._id}/booking`} className="navbar-link">Réserver</Link></li>
                             </>
                         )}
 

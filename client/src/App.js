@@ -25,9 +25,10 @@ import Animals from './pages/adminPages/animalPages/adminAnimals';
 import UpdateAnimal from './pages/profilePages/UpdateAnimal';
 import NotFoundPage from './pages/publicPages/NotFound';
 import Contact from './pages/publicPages/Contact';
-import Booking from './pages/publicPages/Booking';
+import Booking from './pages/publicPages/BookingPage';
 import Bookings from './pages/adminPages/bookingPages/Bookings';
 import UpdateArticle from './pages/adminPages/newsPages/updateNews';
+import GetBooking from './pages/profilePages/Booking'
 import { getMethod } from './helpers/fetch';
 
 const App = () => {
@@ -36,7 +37,6 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(user.isLogged);
         const token = localStorage.getItem('jwt')
         if(token && !user.isLogged) {
             getMethod('http://localhost:9900/verify-token')
@@ -53,7 +53,7 @@ const App = () => {
                 <Route path="/news" element={<PublicNews/>} />
                 <Route path="/services" element={<PublicServices/>} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/booking" element={<Booking />} />
+                <Route path="/:userId/booking" element={<Booking />} />
 
                 {/* PROFILE */}
                 <Route path={`/profile/:userId`} element={<Profile/>} />
@@ -62,6 +62,7 @@ const App = () => {
                 <Route path={`/profile/:userId/animals`} element={<UserAnimals/>} />
                 <Route path={`/profile/:userId/animals/:animalId`} element={<Animal/>} />
                 <Route path={`/profile/:userId/animals/:animalId/update-animal`} element={<UpdateAnimal/>} />
+                <Route path={`/profile/:userId/bookings/:bookingId`} element={<GetBooking/>} />
 
                 {/* ADMIN */}
                 <Route path="/admin" element={<AdminHome/>} />

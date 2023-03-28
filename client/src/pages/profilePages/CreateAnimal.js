@@ -1,5 +1,5 @@
-import '../../assets/styles/createForms.scss'
-import { postMethod, getMethod } from './../../helpers/fetch';
+import '../../assets/styles/forms.scss'
+import { getMethod, postMethod } from './../../helpers/fetch';
 import { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import Header from './../../components/Header';
@@ -31,12 +31,9 @@ const CreateAnimal = () => {
         for(const file of files) {
             formData.append('file', file)
         }
-
-        //  VOIR LE .THEN() CI DESSOUS
-
-        // postMethod(`http://localhost:9900/profile/${userId}/create-animal` , formData)
-        //     .then(() => localStorage.setItem('jwt', token)) 
-        //     .catch((error) => console.log(error))
+        
+        postMethod(`http://localhost:9900/profile/${userId}/create-animal` , formData)
+            
     }
     
     return (

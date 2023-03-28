@@ -68,7 +68,7 @@ const Animal = () => {
                     <div>
                         <div>Aucune prestation n'a été réservée pour cet animal.</div>
                         <div>Pour réserver, c'est par ici : </div>
-                        <div><Link to="/booking">Réserver</Link></div>
+                        <div><Link to={`/${userId}/booking`} >Réserver</Link></div>
                     </div>
 
                 }

@@ -87,15 +87,15 @@ export const deleteMethod = async (url) => {
     });
 };
 
-export const putMethod = (url, formData) => {
+export const putFormData = (url, formData) => {
     console.log("OK 1");
     return new Promise((resolve, reject) => {
         console.log("OK 2");
         fetch(url, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${token}`
-            },
+                Authorization: `Bearer ${token}`,
+                },
             body: formData
         })
             .then((response) => {
@@ -113,6 +113,32 @@ export const putMethod = (url, formData) => {
             })
             .catch((error) => {
                 console.log("OK 7");
+                reject(error);
+            });
+    });
+};
+
+export const putMethod = (url, data) => {
+    return new Promise((resolve, reject) => {
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                "Content-Type" : "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response) => {
+                if(!response.ok) {
+                    throw new Error(response.statusText);
+                } else {
+                    return response.json();
+                }
+            })
+            .then((data) => {
+                resolve(data);
+            })
+            .catch((error) => {
                 reject(error);
             });
     });

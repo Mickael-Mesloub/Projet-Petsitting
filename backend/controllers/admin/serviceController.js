@@ -34,7 +34,7 @@ export const getAllServices = async (req, res) => {
 
 export const getServiceDetails = async (req, res) => {
     try {
-        const service = await serviceModel.findById(req.params.id);
+        const service = await serviceModel.findById(req.params.serviceId);
 
         if(!service) {
             return res.status(404).json({error: `Service inexistant : ${error.message}. Veuillez réessayer.`});
@@ -48,9 +48,9 @@ export const getServiceDetails = async (req, res) => {
 
 export const updateService = async (req, res) => {
     try {
-        const service = await serviceModel.findById(req.params.id);
+        const service = await serviceModel.findById(req.params.serviceId);
         const {name, description, price, visible} = req.body;
-        serviceModel.findByIdAndUpdate(req.params.id, 
+        serviceModel.findByIdAndUpdate(req.params.serviceId, 
         {
             name: name || service.name,
             description: description || service.description,
@@ -65,13 +65,13 @@ export const updateService = async (req, res) => {
 }
 
 export const deleteService = async (req, res) => {
-    const service = await serviceModel.findById(req.params.id);
+    const service = await serviceModel.findById(req.params.serviceId);
     
     if(!service) {
         return res.status(404).json({error: "Ce service n'existe pas."})
     }
 
-    serviceModel.findByIdAndDelete(req.params.id)
+    serviceModel.findByIdAndDelete(req.params.serviceId)
         .then((service) => res.status(204).send())
         .catch((error) => res.status(500).json({error: `Une erreur est survenue et le service n'a pas pu être supprimé : ${error.message}` }))
 }

@@ -27,10 +27,12 @@
 
 %admin-links {
     @extend %button;
+    transition: all .5s ease-in-out;
     background-image: linear-gradient(90deg, $violet-orange-gradient);
 
     &:hover { 
         background: rgb(252,69,69);
+        transition: all .5s ease-in-out;
         background: linear-gradient(90deg, rgba(252,69,69,1) 0%, rgba(252,167,69,1) 50%, rgba(255,217,23,1) 100%);
     }
 

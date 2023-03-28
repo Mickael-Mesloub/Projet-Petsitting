@@ -24,6 +24,10 @@ export const userSlice = createSlice({
             return {
                 ...state,
                 _id: '',
+                firstName: '',
+                lastName: '',
+                phone: '',
+                avatar: '',
                 email: '',
                 isLogged: null,
                 isAdmin: null

@@ -28,8 +28,8 @@ const Login = () => {
                     <div className="login-register-div">
                         <ul className="login-register-ul">
                             <li>
-                                <Link 
-                                    onClick={() => {
+                                <Link onClick={() => 
+                                    {
                                         dispatch(logoutUser()); 
                                         localStorage.removeItem('jwt')
                                     }} 

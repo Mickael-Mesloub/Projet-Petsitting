@@ -11,7 +11,7 @@ import serviceModel from "../../models/serviceModel.js";
 export const getUserInfos = async (req, res) => {
     try {
         const userId = req.userId;
-
+        console.log(req.params);
         if (!userId) return res.status(404).json({ error: "Utilisateur introuvable." });
         if (userId !== req.params.id) return res.status(401).json({ error: "Vous n'êtes pas autorisé(e) à consulter ce profil." });
 
@@ -297,13 +297,25 @@ export const getAllBookings = async (req, res) => {
 
 export const getBookingDetails = async (req, res) => {
     try {
-        console.log(req.params.bookingId);
+
         const booking = await bookingModel.findById(req.params.bookingId);
-        console.log(booking);
+
 
         if (!booking) {
             return res.status(404).json({ error: "Réservation inexistante." });
         };
+
+        const animal = await animalModel.findById(booking.animal);
+
+        if(!animal) {
+            return res.status(404).json({error: "L'animal associé à cette réservation n'a pas été trouvé."})
+        }
+
+        booking.animal = animal;
+
+        console.log(booking);
+        
+        
 
         return res.status(200).json({booking});
     } catch (error) {

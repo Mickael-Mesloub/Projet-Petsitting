@@ -1,10 +1,9 @@
-import { getMethod, putMethod } from "../../helpers/fetch";
+import { getMethod, putFormData } from "../../helpers/fetch";
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import Header from './../../components/Header';
-import { loginUser } from "../../store/slices/user/userSlice";
 import './styles/animal.scss';
+import '../../assets/styles/forms.scss';
 
 const UpdateAnimal = () => {
 
@@ -13,20 +12,9 @@ const UpdateAnimal = () => {
     const [description, setDescription] = useState('');
     const [size, setSize] = useState('');
     const [images, setImages] = useState([]);
-    const [deleteImages, setDeleteImages] = useState([]);
+    const [selectedImages, setSelectedImages] = useState([]);
 
-    /*
-        créer un tableau d'images à supprimer
-        quand je clique sur l'image, ça met à jour le tableau (ajoute ou supprime l'image)
-        quand je clique sur l'image, ça change la classeName de l'image pour que l'image se grise quand elle est sélectionnée
-        quand je supprime, récupérer le tableau d'images à supprimer et supprimer les images de la base de données
-
-    */
-
-    const formData = new FormData();
-    const { userId,animalId } = useParams();
-    const dispatch = useDispatch();
-    
+    const { userId,animalId } = useParams();    
 
     useEffect(() => {
         getMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}`)
@@ -36,26 +24,35 @@ const UpdateAnimal = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        formData.append('name' , name)
-        formData.append('description' , description)
-        formData.append('size' , size)
-        if(images && images.length > 0){
-            for(const image of images) {
-                formData.append('file' , image)
-            }
+      
+        // Supprimer les images sélectionnées
+        const formData = new FormData();
+        for (const image of selectedImages) {
+          formData.append("deleteImages[]", image);
         }
-
-        putMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}/update-animal` , formData)
+        putFormData(`http://localhost:9900/profile/${userId}/animals/${animalId}/update-animal`, formData)
             .then((data) => setAnimal(data))
-
-    }
+            .then(() => setSelectedImages([]));
+        
+        // Mettre à jour les autres données de l'animal
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("size", size);
+        if (images && images.length > 0) {
+          for (const image of images) {
+            formData.append("file", image);
+          }
+        }
+        putFormData(
+          `http://localhost:9900/profile/${userId}/animals/${animalId}/update-animal`,
+          formData
+        ).then((data) => setAnimal(data));
+      };
+      
 
     useEffect(() => {
-        console.log(animal.images);
+        console.log(selectedImages);
     },[])
-
-    
-       
 
     return (
 
@@ -78,12 +75,24 @@ const UpdateAnimal = () => {
                     <fieldset>
                         <legend>Sélectionnez les images à remplacer</legend>
                         {animal.images.map((image, i) => 
-                            <>
-                                <input type="checkbox" name="deleteImages[0]"/>
-                                <div key={i} className={deleteImages.includes(image) ? "selected-image" : "choose-animal-image"}>
+                            <div key={i}>
+                                <input type="checkbox" checked={selectedImages.includes(image)} onChange={(e) => 
+                                    {
+                                        if (e.target.checked) {
+                                            setSelectedImages([...selectedImages, image]);
+                                        } else {
+                                            setSelectedImages(
+                                                selectedImages.filter((selectedImage) => selectedImage !== image)
+                                            );
+                                        }
+                                    }}
+                                    name={`deleteImages[${i}]`}
+                                />
+
+                                <div className={selectedImages.includes(image) ? "selected-image" : "choose-image"}>
                                     <img src={`http://localhost:9900/${image}`} alt="" />
                                 </div>
-                            </>
+                            </div>
                         )}
                     </fieldset>
                     

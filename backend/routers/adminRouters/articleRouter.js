@@ -4,10 +4,10 @@ import { createArticle, getAllArticles, getArticle, updateArticle, deleteArticle
 const articleRouter = express.Router();
 
 articleRouter.get('/news' , getAllArticles);
-articleRouter.get('/news/:id' , getArticle);
+articleRouter.get('/news/:articleId' , getArticle);
 articleRouter.post('/news/create-article' , createArticle);
-articleRouter.put('/news/:id' , updateArticle);
-articleRouter.delete('/news/:id' , deleteArticle);
+articleRouter.put('/news:/articleId' , updateArticle);
+articleRouter.delete('/news/:articleId' , deleteArticle);
 articleRouter.delete('/news/' , deleteAllArticles);
 
 export default articleRouter;
