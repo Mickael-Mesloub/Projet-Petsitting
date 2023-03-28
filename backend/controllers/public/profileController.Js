@@ -4,7 +4,7 @@ import formidable from "formidable";
 import animalModel from "../../models/animalModel.js";
 import userModel from "../../models/userModel.js";
 import bookingModel from "../../models/bookingModel.js";
-import serviceModel from "../../models/serviceModel.js";
+
 
 // ********** USER **********
 
@@ -15,12 +15,12 @@ export const getUserInfos = async (req, res) => {
         if (!userId) return res.status(404).json({ error: "Utilisateur introuvable." });
         if (userId !== req.params.id) return res.status(401).json({ error: "Vous n'êtes pas autorisé(e) à consulter ce profil." });
 
-        const user = await userModel.findById(req.params.id);
+        const user = await userModel.findById(userId);
         const animals = await animalModel.find({ owner: userId });
-        res.status(200).json({ user, animals });
+        return res.status(200).json({ user, animals });
     }
     catch (error) {
-        res.status(400).json({ error: "Utilisateur introuvable." });
+       return res.status(400).json({ error: "Utilisateur introuvable." });
     };
 };
 

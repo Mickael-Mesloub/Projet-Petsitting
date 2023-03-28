@@ -8,11 +8,10 @@ const Services = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
-        getMethod('http://localhost:9900/services', token)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/services`)
             .then((data) => setServices(data))
             .catch((error) => console.log(error))
-    }, [])
+    }, []);
 
     return (
         <>
@@ -36,9 +35,9 @@ const Services = () => {
                 </>
             :
                 <div>Aucune prestation n'est disponible pour le moment.</div>
-            }  
+            }
         </>
-    )
-}
+    );
+};
 
 export default Services;

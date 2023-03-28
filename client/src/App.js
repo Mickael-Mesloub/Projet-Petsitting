@@ -3,9 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { loginUser } from './store/slices/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+
 import Home from './pages/publicPages/Home';
 import Register from './pages/publicPages/authPages/Register';
 import Login from './pages/publicPages/authPages/Login';
+import Logout from './pages/publicPages/authPages/Logout';
 import PublicNews from './pages/publicPages/News';
 import PublicServices from './pages/publicPages/Services';
 import Profile from './pages/profilePages/Profile';
@@ -42,8 +44,11 @@ const App = () => {
     useEffect(() => {
         const token = localStorage.getItem('jwt')
         if(token && !user.isLogged) {
-            getMethod('http://localhost:9900/verify-token')
-                .then((data) => {dispatch(loginUser(data.user))})
+            getMethod( `${process.env.REACT_APP_BACKEND_URL}/verify-token` )
+                .then((data) => {
+                    console.log(data);
+                    dispatch(loginUser(data.user))
+                })
                 .catch((error) => console.log(error))        
         }
     }, []);
@@ -84,6 +89,7 @@ const App = () => {
                 {/* AUTH */}
                 <Route path="/register" element={<Register/>} />
                 <Route path="/login" element={<Login/>} />
+                <Route path="/logout" element={<Logout/>} />
 
                 {/* NOT FOUND */}
                 <Route path="*" element={<NotFoundPage />} />

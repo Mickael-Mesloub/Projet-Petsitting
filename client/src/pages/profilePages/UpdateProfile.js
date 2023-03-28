@@ -1,6 +1,6 @@
 import { getMethod, putFormData } from "../../helpers/fetch";
 import { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Header from './../../components/Header';
 import { loginUser } from "../../store/slices/user/userSlice";
@@ -21,7 +21,7 @@ const UpdateProfile = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/profile/${userId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
             .then((data) => setProfile(data))
             .catch((error) => console.log(error))
     },[userId])
@@ -44,7 +44,7 @@ const UpdateProfile = () => {
         }
         
         console.log(formData);
-        putFormData(`http://localhost:9900/profile/${userId}/update-profile` , formData)
+        putFormData(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/update-profile` , formData)
             .then((data) => dispatch(loginUser(data.user)))
             .then((error) => console.log(error))
     }

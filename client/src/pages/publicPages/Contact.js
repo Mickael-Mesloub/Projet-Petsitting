@@ -1,4 +1,4 @@
-import Header from "../../components/Header"
+import Header from "../../components/Header";
 
 const Contact = () => {
 
@@ -35,7 +35,7 @@ const Contact = () => {
                 <input type="submit" name="submit" className="register-btn" value="Envoyer" />
             </form>
         </>
-    )
-}
+    );
+};
 
 export default Contact;

@@ -4,7 +4,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Header from './../../components/Header';
 import './styles/profile.scss';
-import { loginUser } from "../../store/slices/user/userSlice";
 
 const Profile = () => {
 
@@ -16,25 +15,32 @@ const Profile = () => {
     const { userId } = useParams();
 
     useEffect(() => {
-        if(user) {
-            getMethod(`http://localhost:9900/profile/${userId}`)
-            .then((data) => setProfile(data))
+        const token = localStorage.getItem('jwt')
+        if(user && token) {
+            getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
+            .then((data) => 
+            {
+                console.log(data);
+                setProfile(data)
+            })
             .catch((error) => console.log(error))
         }
         
-    },[])
+    },[userId])
 
     console.log(user);
 
     return (
         <>
-            {profile.user && 
+            {profile && profile.user &&
                 <>
                     <Header />
                     <h1>Profil</h1>
                     <div className="profile-container">
                         <h2>Vos informations personnelles</h2>
-                        <div className="user-avatar"><img src={`http://localhost:9900/${profile.user.avatar}`} alt=""/></div>
+                        <div className="user-avatar">
+                            <img src={`${process.env.REACT_APP_BACKEND_URL}/${profile.user.avatar}`} alt=""/>
+                        </div>
                         <p>Prénom : {profile.user.firstName}</p>
                         <p>Nom : {profile.user.lastName}</p>
                         <p>Téléphone : {profile.user.phone}</p>
@@ -44,10 +50,8 @@ const Profile = () => {
                     </div>
                 </>
             }
-            
         </>
     )
-
 }
 
 export default Profile;

@@ -30,7 +30,7 @@ const UpdateService = () => {
     },[visible])
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/admin/services/${serviceId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/services/${serviceId}`)
             .then((data) => {setService(data)})
             .catch((error) => console.log(error))
     },[])
@@ -44,7 +44,7 @@ const UpdateService = () => {
             visible
         }
 
-        putMethod(`http://localhost:9900/admin/services/${serviceId}`, updatedService)
+        putMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/services/${serviceId}`, updatedService)
             .then((data) => {
                 console.log(data)
                 setService(data.service)

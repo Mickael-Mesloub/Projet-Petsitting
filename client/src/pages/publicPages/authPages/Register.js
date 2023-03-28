@@ -1,5 +1,5 @@
 // import '../assets/styles/logPages.scss';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {loginUser, logoutUser} from '../../../store/slices/user/userSlice.js';
 import { Link } from "react-router-dom"
@@ -23,8 +23,8 @@ const Register = () => {
     // ***** FONCTIONS *****
     const handleSubmit = (event) => {
         event.preventDefault();
-        authRegister(event, 'http://localhost:9900/register', token, setToken, dispatch, loginUser);
-    }
+        authRegister(event, `${process.env.REACT_APP_BACKEND_URL}/register` , token, setToken, dispatch, loginUser);
+    };
     console.log(token);
 
     return (
@@ -82,9 +82,9 @@ const Register = () => {
                     </form>
                     
                 </>
-            }
+            };
         </>
     );
-}
+};
 
 export default Register;

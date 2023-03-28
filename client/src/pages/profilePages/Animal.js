@@ -14,7 +14,7 @@ const Animal = () => {
     const { userId, animalId } = useParams();
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}`)
             .then((data) => {
                 setAnimal(data.animal)
                 setAnimalBookings(data.bookings)
@@ -38,7 +38,7 @@ const Animal = () => {
                     <div className="animal-images-container">
                         {animal.images && animal.images.length > 0 ? animal.images.map((image, i) => 
                             <div key={i} className="animal-image">
-                                <img src={`http://localhost:9900/${image}`} alt="" />
+                                <img src={`${process.env.REACT_APP_BACKEND_URL}/${image}`} alt="" />
                             </div>
                         )
                         :
@@ -48,7 +48,7 @@ const Animal = () => {
                     <button onClick={() => {
 
                         if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet animal ?")) {
-                            deleteMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}`);
+                            deleteMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}`);
                         }
                         
                     }}>Supprimer</button>

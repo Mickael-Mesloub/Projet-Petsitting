@@ -10,7 +10,7 @@ const AdminNewsDetails = () => {
     const [article, setArticle] = useState({});
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/admin/news/${articleId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`)
             .then((data) => setArticle(data))
             .catch((error) => console.log(error))
     },[articleId])
@@ -27,7 +27,7 @@ const AdminNewsDetails = () => {
                     {article.images ?
                         <>
                             {article.images.map((image, i) =>
-                                <div key={i} className="admin-news-image"><Link key={i} to={`http://localhost:9900/${image}`}>${image}</Link></div>)}
+                                <div key={i} className="admin-news-image"><Link key={i} to={`${process.env.REACT_APP_BACKEND_URL}/${image}`}>${image}</Link></div>)}
                         </>
                         :
                         <div>Aucune image n'a été ajoutée pour cet article</div>
@@ -35,7 +35,7 @@ const AdminNewsDetails = () => {
                         <button onClick={() => {
 
                             if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet article ?")) {
-                                deleteMethod(`http://localhost:9900/admin/news/${articleId}`);
+                                deleteMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`);
                         }
 
                         }}>Supprimer</button>

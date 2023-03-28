@@ -11,7 +11,7 @@ const ServiceDetails = () => {
 
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/admin/services/${serviceId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/services/${serviceId}`)
             .then((data) => setService(data))
             .catch((error) => console.log(error))
     }, [])
@@ -36,7 +36,7 @@ const ServiceDetails = () => {
                         <button onClick={() => {
 
                             if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer cette prestation ?")) {
-                                deleteMethod(`http://localhost:9900/admin/services/${serviceId}`);
+                                deleteMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/services/${serviceId}`);
                             }
 
                             }}>Supprimer</button>

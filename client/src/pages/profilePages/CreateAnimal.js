@@ -17,7 +17,7 @@ const CreateAnimal = () => {
     const { userId } = useParams();
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/profile/${userId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
     },[])
 
     const handleSubmit = (event) => {
@@ -32,7 +32,7 @@ const CreateAnimal = () => {
             formData.append('file', file)
         }
         
-        postMethod(`http://localhost:9900/profile/${userId}/create-animal` , formData)
+        postMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/create-animal` , formData)
             
     }
     

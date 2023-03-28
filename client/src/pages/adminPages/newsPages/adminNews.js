@@ -9,7 +9,7 @@ const AdminNews = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        getMethod('http://localhost:9900/admin/news')
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news`)
             .then((data) => {setNews(data)})
             .catch((error) => console.log(error))
     },[])
@@ -45,7 +45,7 @@ const AdminNews = () => {
                                     :
                                         <>
                                             {article.images.map((image, i) => 
-                                                <div key={i} className="admin-news-image"><Link key={i} to={`http://localhost:9900/${image}`}>${image}</Link></div>)}
+                                                <div key={i} className="admin-news-image"><Link key={i} to={`${process.env.REACT_APP_BACKEND_URL}/${image}`}>${image}</Link></div>)}
                                         </>
                                     }
                                         
@@ -54,7 +54,6 @@ const AdminNews = () => {
                             </div>
                         )}
                     </>
-            
                 }
                 </div>
                 <div className="admin-links-container">
@@ -63,7 +62,6 @@ const AdminNews = () => {
             </main>
         </>
     )
-
 }
 
 export default AdminNews;

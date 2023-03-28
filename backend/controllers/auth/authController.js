@@ -55,8 +55,10 @@ export const register = (req, res) => {
 
 export const login = async (req, res) => {
     try {
+        
         const { email, password } = req.body;
         const user = await userModel.findOne({ email });
+
         if (!user) {
             return res.status(400).json({ error: 'Une erreur est survenue' });
         };
@@ -88,7 +90,8 @@ export const verifyToken = async (req, res) => {
     const token = headers.split(' ')[1];
 
     // Analyser le token
-    jwt.verify(token, "key_secret", async (error, decoded) => {
+    jwt.verify(token, process.env.SECRET_KEY, async (error, decoded) => {
+        console.log(decoded);
         // Si token invalide: renvoie une erreur
         if (error) {
             console.log(error);

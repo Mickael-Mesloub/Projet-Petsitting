@@ -17,6 +17,7 @@ export const authLogin = (event, url, JWT, setJWT, dispatcher, actionCreator) =>
             response.json()
             .then(data => {
                 if(response.ok){
+                    console.log(data);
                     dispatcher(actionCreator(
                         {
                             _id: data.user._id,

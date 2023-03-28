@@ -17,7 +17,7 @@ const UpdateAnimal = () => {
     const { userId,animalId } = useParams();    
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/profile/${userId}/animals/${animalId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}`)
             .then((data) => setAnimal(data.animal))
             .catch((error) => console.log(error))
     },[])
@@ -30,7 +30,7 @@ const UpdateAnimal = () => {
         for (const image of selectedImages) {
             formData.append("deleteImages[]", image);
         }
-        putFormData(`http://localhost:9900/profile/${userId}/animals/${animalId}/update-animal`, formData)
+        putFormData(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}/update-animal`, formData)
             .then((data) => setAnimal(data))
             .then(() => setSelectedImages([]));
         
@@ -44,7 +44,7 @@ const UpdateAnimal = () => {
             }
         }
         putFormData(
-          `http://localhost:9900/profile/${userId}/animals/${animalId}/update-animal`,formData )
+          `${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}/update-animal`,formData )
             .then((data) => setAnimal(data));
     };
       
@@ -89,7 +89,7 @@ const UpdateAnimal = () => {
                                 />
 
                                 <div className={selectedImages.includes(image) ? "selected-image" : "choose-image"}>
-                                    <img src={`http://localhost:9900/${image}`} alt="" />
+                                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${image}`} alt="" />
                                 </div>
                             </div>
                         )}

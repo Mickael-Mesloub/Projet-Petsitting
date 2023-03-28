@@ -10,6 +10,7 @@ export const findToken = () => {
 const token = findToken();
 
 export const getMethod = (url) => {
+    console.log("HELLO");
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'GET',
@@ -37,15 +38,16 @@ export const getMethod = (url) => {
     });
 };
 
-export const postMethod = async (url, formData) => {
+export const postMethod = async (url, data) => {
 
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'POST',
-            body: formData,
             headers: {
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify(data)
         })
             .then((response) => {
                 response.json()

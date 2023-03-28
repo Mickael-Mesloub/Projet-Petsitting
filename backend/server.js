@@ -10,10 +10,11 @@ import publicRouter from './routers/publicRouters/publicRouter.js';
 import profileRouter from './routers/publicRouters/profileRouter.js';
 import animalRouter from './routers/adminRouters/animalRouter.js';
 import bookingRouter from './routers/adminRouters/bookingRouter.js';
-
+import * as dotenv from 'dotenv'
 
 const app = express();
-const PORT = 9900;
+dotenv.config();
+const PORT = process.env.PORT;
 
 app.use(cors());
 
@@ -22,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://mickaelmesloub:123@projetcluster.h7ing0k.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("error", () => {
     console.log("Erreur lors de la connexion à la base de données");

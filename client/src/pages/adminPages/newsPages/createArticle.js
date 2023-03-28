@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import Header from "../../../components/Header.js";
 import AdminLinks from "../../../components/AdminLinks.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { postMethod } from "../../../helpers/fetch.js";
 
 const CreateNews = () => {
@@ -19,7 +18,7 @@ const CreateNews = () => {
             formData.append('file' , file);
         }
         
-        postMethod(`http://localhost:9900/admin/news/create-article`, formData)
+        postMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/create-article`, formData)
             .then((data) => console.log(data))
             .catch((error) => console.log(error))
     }
@@ -39,8 +38,7 @@ const CreateNews = () => {
                 <input type="submit" value="Créer"/>
             </form>
         </>
-    )
-
-}
+    );
+};
 
 export default CreateNews;

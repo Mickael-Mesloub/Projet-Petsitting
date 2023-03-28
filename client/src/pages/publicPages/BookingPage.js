@@ -17,14 +17,14 @@ const Booking = () => {
     useEffect(() => {
         const token = localStorage.getItem('jwt')
         if(token && !user.isLogged) {
-            getMethod('http://localhost:9900/verify-token')
+            getMethod( `${process.env.REACT_APP_BACKEND_URL}/verify-token`)
                 .then((data) => {dispatch(loginUser(data.user))})
                 .catch((error) => console.log(error))        
         }
     }, []);
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/profile/${userId}/animals`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals`)
             .then((data) => {
                 console.log(data);
                 setAnimals(data.animal)
@@ -34,7 +34,7 @@ const Booking = () => {
     },[])
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/services`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/services`)
         .then((data) => setServices(data))
         .catch((error) => console.log(error))
     },[])

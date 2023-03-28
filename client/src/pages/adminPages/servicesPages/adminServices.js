@@ -9,7 +9,7 @@ const AdminServices = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        getMethod('http://localhost:9900/services')
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/services`)
             .then((data) => {
                 console.log(data);
                 setServices(data)

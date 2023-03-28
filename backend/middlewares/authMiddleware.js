@@ -10,11 +10,14 @@ export const verifyToken = async (req, res, next) => {
     }
 
     const token = headers.split(' ')[1];
+    console.log(`TOKEN : ${token}`);
 
-    jwt.verify(token, "key_secret", async (error, decoded) => {
+    jwt.verify(token, process.env.SECRET_KEY, async (error, decoded) => {
+
+        console.log(`DECODED : ${decoded}`);
 
         if (error) {
-            console.log(error);
+            console.log(`GROSSE ERREUR ${error}`);
             return res.status(403).send({ error: "Token invalide." });
         }
         req.userId = decoded.id;

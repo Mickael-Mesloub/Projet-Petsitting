@@ -22,7 +22,7 @@ const UpdateArticle = () => {
         
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/admin/news/${articleId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`)
             .then((data) => setArticle(data))
             .catch((error) => console.log(error))
     },[])
@@ -35,7 +35,7 @@ const UpdateArticle = () => {
         for (const image of selectedImages) {
           formData.append("deleteImages[]", image);
         }
-        putFormData(`http://localhost:9900/admin/news/${articleId}`, formData)
+        putFormData(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`, formData)
             .then((data) => setArticle(data))
             .then(() => setSelectedImages([]));
         
@@ -46,7 +46,7 @@ const UpdateArticle = () => {
             formData.append("file", image);
           }
         }
-        putFormData(`http://localhost:9900/admin/news/${articleId}`, formData)
+        putFormData(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`, formData)
             .then((data) => setArticle(data));
         };
 
@@ -85,7 +85,7 @@ const UpdateArticle = () => {
                                 />
 
                                 <div className={selectedImages.includes(image) ? "selected-image" : "choose-image"}>
-                                    <img src={`http://localhost:9900/${image}`} alt="" />
+                                    <img src={`${process.env.REACT_APP_BACKEND_URL}/${image}`} alt="" />
                                 </div>
                             </div>
                         )}

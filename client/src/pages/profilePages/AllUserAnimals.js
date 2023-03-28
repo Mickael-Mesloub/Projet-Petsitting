@@ -1,20 +1,16 @@
 import { getMethod } from "../../helpers/fetch";
 import { useState, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import Header from '../../components/Header';
 import './styles/profile.scss';
 
 const UserAnimals = () => {
 
-    const [profile, setProfile] = useState([])
-
-    const dispatch = useDispatch();
-    const {user} = useSelector(state => state);
+    const [profile, setProfile] = useState([]);
     const { userId } = useParams();
 
     useEffect(() => {
-        getMethod(`http://localhost:9900/profile/${userId}`)
+        getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
             .then((data) => {setProfile(data)})
             .catch((error) => console.log(error))
     },[])
@@ -35,14 +31,13 @@ const UserAnimals = () => {
                                 <div className="animals-images-box">
                                     {animal.images.length > 0 ? animal.images.map((image, i) => 
                                         <div key={i} className="animal-image">
-                                            <img src={`http://localhost:9900/${image}`} alt="" />
+                                            <img src={`${process.env.REACT_APP_BACKEND_URL}/${image}`} alt="" />
                                             
                                         </div>
                                     )
                                     :
                                         <div>Aucune image téléchargée</div>
                                     }
-
                                 </div>
                             </div>
                         )}
@@ -56,7 +51,6 @@ const UserAnimals = () => {
             }
         </>
     )
-
 }
 
 export default UserAnimals;
