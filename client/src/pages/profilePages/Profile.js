@@ -16,14 +16,16 @@ const Profile = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('jwt')
+        console.log(token);
+
         if(user && token) {
             getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
-            .then((data) => 
-            {
-                console.log(data);
-                setProfile(data)
-            })
-            .catch((error) => console.log(error))
+                .then((data) => 
+                {
+                    console.log(data);
+                    setProfile(data)
+                })
+                .catch((error) => console.log(error))
         }
         
     },[userId])

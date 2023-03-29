@@ -8,7 +8,6 @@ import { GiDogHouse } from 'react-icons/gi'
 const Header = () => {
 
     const { user } = useSelector(state => state);
-    console.log(user);
     const [showMenu, setShowMenu] = useState(false);
 
     const handleMenuClick = () => {
@@ -21,6 +20,7 @@ const Header = () => {
             <div className="paw-icon"><GiDogHouse style={{fontSize: "200px", opacity: "0.2", color: "#f0f"}}/></div>
             <div className="main-title">RubieLand</div>
             <button className="burger-menu-btn" onClick={handleMenuClick}><CgMenuHotdog style={{ fontSize: "34px", color:"#fff"}} /></button>
+            
             {showMenu && (
 
                 <nav className="navbar navbar-transition">

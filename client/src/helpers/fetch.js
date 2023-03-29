@@ -7,24 +7,23 @@ export const findToken = () => {
     };
 };
 
-const token = findToken();
-
 export const getMethod = (url) => {
-    console.log("HELLO");
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${findToken()}`
             }
         })
             .then((response) => {
+                console.log(response)
                 response.json()
                     .then((data) => {
                         if (response.ok) {
                             resolve(data);
                             console.log(data);
                         } else {
+                            console.log(response.message);
                             reject(data)
                         };
                     })
@@ -45,7 +44,7 @@ export const postMethod = async (url, data) => {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${findToken()}`
             },
             body: JSON.stringify(data)
         })
@@ -69,7 +68,7 @@ export const deleteMethod = async (url) => {
         fetch(url, {
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${findToken()}`,
             },
         })
             .then((response) => {
@@ -91,13 +90,12 @@ export const deleteMethod = async (url) => {
 
 export const putFormData = (url, formData) => {
     console.log("OK 1");
-    console.log(token);
     return new Promise((resolve, reject) => {
         console.log("OK 2");
         fetch(url, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${findToken()}`,
                 },
             body: formData
         })
@@ -128,7 +126,7 @@ export const putMethod = (url, data) => {
             method: 'PUT',
             headers: {
                 "Content-Type" : "application/json",
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${findToken()}`
             },
             body: JSON.stringify(data)
         })
