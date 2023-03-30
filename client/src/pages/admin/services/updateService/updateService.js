@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMethod, putMethod } from "../../../../helpers/fetch";
-import Header from "../../../../components/Header.js";
-import AdminLinks from "../../../../components/AdminLinks.js";
+import Header from "../../../../components/header/Header.js";
+import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
 
 
 const UpdateService = () => {

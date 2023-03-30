@@ -1,7 +1,7 @@
 // import '../assets/styles/logPages.scss';
 import {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../../../../components/Header.js';
+import Header from '../../../../components/header/Header.js';
 import { postFormData } from '../../../../helpers/fetch';
 
 const Register = () => {

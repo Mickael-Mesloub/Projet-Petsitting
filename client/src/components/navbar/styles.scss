@@ -1,0 +1,65 @@
+@import "../../assets/styles/mixins";
+@import "../../assets/styles/_placeholders";
+@import "../../assets/styles/_variables";
+
+.navbar {
+    display: none;
+
+    @include tablet {
+        display: flex;
+        justify-content: center;
+        position: sticky;
+        top: 0px;
+        padding: 20px;
+        width: 100%;
+        background: linear-gradient(90deg, $revert-blue-violet-gradient);
+        z-index: 3;
+
+        .navbar ul {
+            padding: 0;
+        }
+
+        .navbar-links {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+        .navbar-links li {
+            list-style: none;
+            padding: 5px;
+        }
+
+        .tablet-desktop-auth-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .navbar-link {
+            display: inline-block;
+            color: $beige;
+            text-decoration: none;
+            font-family: $title-nav-font;
+            font-size: 20px;
+            margin-right: 15px;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                color: $gold;
+                transform: scale(1.2);
+            }
+        }
+
+        .auth-link {
+            color: $light-green;
+        }
+
+        .logout-link {
+            color: $red;
+        }
+    }
+
+    @include desktop {
+        
+    }
+}

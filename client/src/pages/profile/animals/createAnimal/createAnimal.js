@@ -2,7 +2,7 @@ import '../../../../assets/styles/forms.scss'
 import { getMethod, postMethod } from '../../../../helpers/fetch';
 import { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../../../../components/Header';
+import Header from '../../../../components/header/Header';
 
 
 const CreateAnimal = () => {

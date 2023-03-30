@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { getMethod } from "../helpers/fetch";
+import { getMethod } from "../../helpers/fetch";
 import { useSelector } from "react-redux";
-import { loginUser } from "../store/slices/user/userSlice";
+import { loginUser } from "../../store/slices/user/userSlice";
 
 const AdminLinks = () => {
 

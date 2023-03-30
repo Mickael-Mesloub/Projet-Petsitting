@@ -1,13 +1,9 @@
-// import '../assets/styles/logPages.scss';
-// import '../assets/styles/logNav.scss';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, logoutUser } from '../../../../store/slices/user/userSlice.js';
-import { Link } from "react-router-dom"
-import Header from '../../../../components/Header.js';
+import { loginUser } from '../../../../store/slices/user/userSlice.js';
+import Header from '../../../../components/header/Header.js';
 import LogNav from '../../../../components/auth/LogNav.js';
 import { postMethod } from '../../../../helpers/fetch';
-import { useEffect } from 'react';
 
 const Login = () => {
     
@@ -34,7 +30,6 @@ const Login = () => {
     
     return (
         <>
-            <LogNav />
             <Header />
             <h2>Connectez-vous</h2>
             <form onSubmit={handleSubmit}>

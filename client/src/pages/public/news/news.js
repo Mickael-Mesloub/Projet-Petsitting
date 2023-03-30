@@ -1,6 +1,6 @@
 import { getMethod } from "../../../helpers/fetch";
 import { useState, useEffect } from 'react';
-import Header from '../../../components/Header';
+import Header from '../../../components/header/Header';
 import './styles.scss'
 
 const News = () => {

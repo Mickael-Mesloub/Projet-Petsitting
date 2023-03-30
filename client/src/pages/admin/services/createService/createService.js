@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Header from "../../../../components/Header.js";
-import AdminLinks from "../../../../components/AdminLinks.js";
+import Header from "../../../../components/header/Header.js";
+import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
 
 const CreateService = () => {
 

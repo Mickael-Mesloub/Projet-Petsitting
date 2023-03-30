@@ -1,5 +1,5 @@
-import Header from "../../../../components/Header.js";
-import AdminLinks from "../../../../components/AdminLinks.js";
+import Header from "../../../../components/header/Header.js";
+import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
 import { useState } from "react";
 import { postMethod } from "../../../../helpers/fetch.js";
 

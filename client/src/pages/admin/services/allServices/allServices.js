@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMethod } from "../../../../helpers/fetch";
-import Header from "../../../../components/Header.js";
-import AdminLinks from "../../../../components/AdminLinks";
+import Header from "../../../../components/header/Header.js";
+import AdminLinks from "../../../../components/adminLinks/AdminLinks";
 
 const AdminServices = () => {
 

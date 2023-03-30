@@ -1,5 +1,5 @@
-import Header from "../../../../components/Header"
-import AdminLinks from '../../../../components/AdminLinks';
+import Header from "../../../../components/header/Header"
+import AdminLinks from '../../../../components/adminLinks/AdminLinks';
 import { useState, useEffect } from "react";
 import { deleteMethod, getMethod } from "../../../../helpers/fetch";
 import { Link, useParams } from "react-router-dom"; 

@@ -1,6 +1,6 @@
-import Header from '../../../components/Header'
+import Header from '../../../components/header/Header'
 import './styles.scss'
-import AdminLinks from '../../../components/AdminLinks';
+import AdminLinks from '../../../components/adminLinks/AdminLinks';
 
 const AdminHome = () => {
 

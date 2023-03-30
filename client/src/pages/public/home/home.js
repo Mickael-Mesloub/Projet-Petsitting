@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import Header from '../../../components/Header';
+import Header from '../../../components/header/Header';
 import './styles.scss'
 
 const Home = () => {

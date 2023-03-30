@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import './componentsStyles/notFound.scss'
+import './styles.scss'
 
 const NotFound = () => {
     
@@ -11,7 +11,6 @@ const NotFound = () => {
             <p>Revenir à l'accueil : </p>
             <Link to="/">Accueil</Link>
         </main>
-        
     )
 }
 
