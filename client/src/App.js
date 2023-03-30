@@ -4,35 +4,40 @@ import { loginUser } from './store/slices/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import Home from './pages/publicPages/Home';
-import Register from './pages/publicPages/authPages/Register';
-import Login from './pages/publicPages/authPages/Login';
-import Logout from './pages/publicPages/authPages/Logout';
-import PublicNews from './pages/publicPages/News';
-import PublicServices from './pages/publicPages/Services';
-import Profile from './pages/profilePages/Profile';
-import UserAnimals from './pages/profilePages/AllUserAnimals'
-import Animal from './pages/profilePages/Animal';
-import UpdateProfile from './pages/profilePages/UpdateProfile';
-import CreateAnimal from './pages/profilePages/CreateAnimal';
+// public
+import Home from './pages/public/home/home';
+import Register from './pages/public/auth/register/register';
+import Login from './pages/public/auth/login/login';
+import Logout from './pages/public/auth/logout/logout';
+import PublicNews from './pages/public/news/news';
+import PublicServices from './pages/public/services/services';
+import NotFoundPage from './pages/public/notFound/notFound';
+import Contact from './pages/public/contact/contact';
+import Booking from './pages/public/createBooking/createBooking';
 
-import AdminHome from './pages/adminPages/AdminHome';
-import AdminServices from './pages/adminPages/servicesPages/adminServices';
-import ServiceDetails from './pages/adminPages/servicesPages/serviceDetails';
-import UpdateService from './pages/adminPages/servicesPages/updateService';
-import CreateService from './pages/adminPages/servicesPages/createService';
-import AdminNews from './pages/adminPages/newsPages/adminNews';
-import AdminNewsDetails from './pages/adminPages/newsPages/adminNewsDetails';
-import CreateArticle from './pages/adminPages/newsPages/createArticle';
-import AllUsers from './pages/adminPages/usersPages/adminUsers';
-import Animals from './pages/adminPages/animalPages/adminAnimals';
-import UpdateAnimal from './pages/profilePages/UpdateAnimal';
-import NotFoundPage from './pages/publicPages/NotFound';
-import Contact from './pages/publicPages/Contact';
-import Booking from './pages/publicPages/BookingPage';
-import Bookings from './pages/adminPages/bookingPages/Bookings';
-import UpdateArticle from './pages/adminPages/newsPages/updateNews';
-import GetBooking from './pages/profilePages/Booking'
+// profile
+import Profile from './pages/profile/user/userDetails/userDetails';
+import UserAnimals from './pages/profile/animals/allUserAnimals/allUserAnimals'
+import Animal from './pages/profile/animals/animalDetails/animalDetails';
+import UpdateProfile from './pages/profile/user/updateUserDetails/updateUserDetails';
+import CreateAnimal from './pages/profile/animals/createAnimal/createAnimal';
+import UpdateAnimal from './pages/profile/animals/updateAnimal/updateAnimal';
+import GetBooking from './pages/profile/bookings/allUserBookings/allUserBookings'
+
+//admin
+import AdminHome from './pages/admin/home/home';
+import Animals from './pages/admin/animals/allAnimals/allAnimals';
+import AdminServices from './pages/admin/services/allServices/allServices';
+import ServiceDetails from './pages/admin/services/serviceDetails/serviceDetails';
+import UpdateService from './pages/admin/services/updateService/updateService';
+import CreateService from './pages/admin/services/createService/createService';
+import AdminNews from './pages/admin/news/allNewsArticles/allNewsArticles';
+import AdminNewsDetails from './pages/admin/news/newsArticleDetails/newsArticleDetails';
+import CreateArticle from './pages/admin/news/createNewsArticle/createNewsArticle';
+import UpdateArticle from './pages/admin/news/updateNewsArticle/updateNewsArticle';
+import AllUsers from './pages/admin/users/allUsers/allUsers';
+import Bookings from './pages/admin/bookings/allBookings/allBookings';
+
 import { getMethod } from './helpers/fetch';
 
 

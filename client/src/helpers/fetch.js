@@ -38,7 +38,6 @@ export const getMethod = (url) => {
 };
 
 export const postMethod = async (url, data) => {
-
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'POST',
@@ -60,6 +59,37 @@ export const postMethod = async (url, data) => {
                     .catch((err) => reject(err));
             })
             .catch(error => reject(error));
+    });
+};
+
+export const postFormData = (url, formData) => {
+    console.log("OK 1");
+    return new Promise((resolve, reject) => {
+        console.log("OK 2");
+        fetch(url, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${findToken()}`,
+                },
+            body: formData
+        })
+            .then((response) => {
+                console.log("OK 3");
+                if(!response.ok) {
+                    console.log(response);
+                    throw new Error(response.statusText);
+                }
+                console.log("OK 5");
+                return response.json();
+            })
+            .then((data) => {
+                console.log("OK 6");
+                resolve(data);
+            })
+            .catch((error) => {
+                console.log("OK 7");
+                reject(error);
+            });
     });
 };
 
