@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getMethod } from './helpers/fetch';
 import Navigation from './routes/routes';
+import Header from './components/header/Header';
+import Navbar from './components/navbar/Navbar';
+import Footer from './components/footer/Footer';
 
 
 const App = () => {
@@ -26,7 +29,9 @@ const App = () => {
 
     return (
         <BrowserRouter>
+            <Navbar />
             <Navigation />
+            <Footer />
         </BrowserRouter>
     )   
 }
