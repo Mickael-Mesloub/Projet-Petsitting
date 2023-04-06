@@ -1,39 +1,38 @@
-import './index.scss';
-import { BrowserRouter } from 'react-router-dom';
-import { loginUser } from './store/slices/user/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getMethod } from './helpers/fetch';
-import Navigation from './routes/routes';
-import Header from './components/header/Header';
-import Navbar from './components/navbar/Navbar';
-import Footer from './components/footer/Footer';
-
+import "./index.scss";
+import { BrowserRouter } from "react-router-dom";
+import { loginUser } from "./store/slices/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getMethod } from "./helpers/fetch";
+import Navigation from "./routes/routes";
+import Header from "./components/header/Header";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
 
 const App = () => {
+  const { user } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-    const {user} = useSelector(state => state);
-    const dispatch = useDispatch();
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token && !user.isLogged) {
+      getMethod(`${process.env.REACT_APP_BACKEND_URL}/verify-token`)
+        .then((data) => {
+          console.log(data);
+          dispatch(loginUser(data.user));
+        })
+        .catch((error) => console.log(error));
+    }
+  }, []);
 
-    useEffect(() => {
-        const token = localStorage.getItem('jwt')
-        if(token && !user.isLogged) {
-            getMethod( `${process.env.REACT_APP_BACKEND_URL}/verify-token` )
-                .then((data) => {
-                    console.log(data);
-                    dispatch(loginUser(data.user))
-                })
-                .catch((error) => console.log(error))        
-        }
-    }, []);
-
-    return (
-        <BrowserRouter>
-            <Navbar />
-            <Navigation />
-            <Footer />
-        </BrowserRouter>
-    )   
-}
+  return (
+    <BrowserRouter>
+      <Header />
+      <Navbar />
+      <Navigation />
+      <Footer />
+    </BrowserRouter>
+  );
+};
 
 export default App;

@@ -3,188 +3,23 @@
 @import "../../assets/styles/_variables";
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Delius+Swash+Caps&family=Mali:wght@400;700&display=swap");
 
-
 header {
-    
-    @extend %flex-center;
-    justify-content: center;
-    padding: 20px;
-    background: linear-gradient(90deg , $revert-blue-violet-gradient);
-    min-height: 100vh;
+  @extend %flex-center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(90deg, $revert-blue-violet-gradient);
+  min-height: 100vh;
 
-    .background-icon {
-        position: absolute;
-        border-radius: 45%;
-        z-index: -1;
-    }
-    
-    .main-title {
-        font-family: $title-nav-font;
-        font-size: 50px;
-        color: rgba(230,230,230, .6);
-    }
-    
-    
-    // ***** BOUTON BURGER ******
-    
-    .burger-menu-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 10px;
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        transition: all .3s ease-in-out;
-    }
-    
-    .burger-menu-btn:hover {
-        background: rgba(190, 130, 255, 0.884);
-        transition: all .3s ease-in-out;
-        border-radius: 50%;
-    }
-    
-    .burger-menu {        
-        background-color: #333;
-        height: 100vh;
-        top: 0;
-        right: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-    }
+  .background-icon {
+    position: absolute;
+    border-radius: 45%;
+    z-index: -1;
+  }
 
-    .navbar {
-        display: none;
-    }
-    
-    .burger-menu-links {
-        @extend %flex-center;
-        flex-direction: column;
-        margin: 60px 0 10px;
-        padding: 0;
-        list-style: none;
-    }
-    
-    .burger-menu-links li {
-        margin-bottom: 15px;
-        transition: all .3s ease-in-out;
-    
-        &:hover {
-            transform: translateX(15px);
-            transition: all .3s ease-in-out;
-        }
-    }
-    
-    .burger-menu-link {
-        color: $beige;
-        font-family: $title-nav-font , serif;
-        font-size: 24px;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 10px;
-    }
-    
-    .burger-menu-link:hover {
-        color: rgba(190, 130, 255, 0.884);
-        transform: translateX(15px);
-        transition: all .3s ease-in-out;
-    }
-    
-    .auth-link, .logged-link {
-        color: $gold;
-    }
-
-    .logout-link {
-        color: $red;
-    }
-
-    @include tablet {
-        min-height: 250px;
-        padding: 0;
-
-        
-
-        .burger-menu-btn, .burger-menu {
-            display: none;
-        }
-
-        .burger-menu-links {
-            @extend %flex-center;
-            flex-direction: row;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        
-        .burger-menu-links li {
-            margin-bottom: 0;
-            transition: all .3s ease-in-out;
-        
-            &:hover {
-                transform: translateX(0);
-                transition: all .3s ease-in-out;
-            }
-        }
-    
-        .navbar {
-            display: flex;
-            justify-content: center;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            background: $red;
-            z-index: 3;
-            transform: translateY(260%);
-    
-            .navbar ul {
-                padding: 0;
-            }
-    
-            .navbar-links {
-                display: flex;
-                flex-direction: row;
-                margin: 0;            
-            }
-    
-            .navbar-links li {
-                list-style: none;
-                padding: 5px;
-            }
-    
-            .tablet-desktop-auth-links {
-                display: flex;
-                gap: 10px;
-            }
-    
-            .navbar-link {
-                display: inline-block;
-                color: $beige;
-                text-decoration: none;
-                font-family: $title-nav-font;
-                font-size: 20px;
-                margin-right: 15px;
-                transition: all .2s ease-in-out;
-    
-                &:hover {
-                    color: $gold;
-                    transform: scale(1.2);
-                }
-            }
-    
-            .auth-link {
-                color: $light-green;
-            }
-    
-            .logout-link {
-                color: $red;
-            }
-        }
-    } 
-}
-
-@include tablet {
-    h1 {
-        margin-top: 128px;
-    }
+  .main-title {
+    font-family: $title-nav-font;
+    font-size: 50px;
+    color: $beige;
+    text-shadow: 0.75px 0.75px 0.75px #000;
+  }
 }
