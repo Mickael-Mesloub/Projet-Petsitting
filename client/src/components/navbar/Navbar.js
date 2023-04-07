@@ -21,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
+    <>
       <div
         className={
           isMenuClicked ? "burger-menu-btn clicked" : "burger-menu-btn"
@@ -32,107 +32,112 @@ const Navbar = () => {
         <div className={burger_class}></div>
         <div className={burger_class}></div>
       </div>
+      <nav>
+        <div className={menu_class}>
+          <ul className="burger-menu-links">
+            {user && user.isAdmin && (
+              <li>
+                <Link
+                  to="/admin"
+                  onClick={updateMenu}
+                  className="burger-menu-link"
+                >
+                  Admin
+                </Link>
+              </li>
+            )}
 
-      <div className={menu_class}>
-        <ul className="burger-menu-links">
-          {user && user.isAdmin && (
+            <li>
+              <Link to="/" onClick={updateMenu} className="burger-menu-link">
+                Accueil
+              </Link>
+            </li>
             <li>
               <Link
-                to="/admin"
+                to="/news"
                 onClick={updateMenu}
                 className="burger-menu-link"
               >
-                Admin
+                News
               </Link>
             </li>
-          )}
+            <li>
+              <Link
+                to="/services"
+                onClick={updateMenu}
+                className="burger-menu-link"
+              >
+                Prestations
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                onClick={updateMenu}
+                className="burger-menu-link"
+              >
+                Contact
+              </Link>
+            </li>
 
-          <li>
-            <Link to="/" onClick={updateMenu} className="burger-menu-link">
-              Accueil
-            </Link>
-          </li>
-          <li>
-            <Link to="/news" onClick={updateMenu} className="burger-menu-link">
-              News
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/services"
-              onClick={updateMenu}
-              className="burger-menu-link"
-            >
-              Prestations
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/contact"
-              onClick={updateMenu}
-              className="burger-menu-link"
-            >
-              Contact
-            </Link>
-          </li>
+            {user && !user.isLogged && (
+              <>
+                <li>
+                  <Link
+                    to="/login"
+                    onClick={updateMenu}
+                    className="burger-menu-link auth-link"
+                  >
+                    Connexion
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/register"
+                    onClick={updateMenu}
+                    className="burger-menu-link auth-link"
+                  >
+                    Inscription
+                  </Link>
+                </li>
+              </>
+            )}
 
-          {user && !user.isLogged && (
-            <>
-              <li>
-                <Link
-                  to="/login"
-                  onClick={updateMenu}
-                  className="burger-menu-link auth-link"
-                >
-                  Connexion
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/register"
-                  onClick={updateMenu}
-                  className="burger-menu-link auth-link"
-                >
-                  Inscription
-                </Link>
-              </li>
-            </>
-          )}
-
-          {user && user.isLogged && (
-            <>
-              <li>
-                <Link
-                  to={`/profile/${user._id}`}
-                  onClick={updateMenu}
-                  className="burger-menu-link logged-link"
-                >
-                  Profil
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={`/${user._id}/booking`}
-                  onClick={updateMenu}
-                  className="burger-menu-link logged-link"
-                >
-                  Réserver
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/logout"
-                  onClick={updateMenu}
-                  className="burger-menu-link logout-link"
-                >
-                  Déconnexion
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </div>
-    </nav>
+            {user && user.isLogged && (
+              <>
+                <li>
+                  <Link
+                    to={`/profile/${user._id}`}
+                    onClick={updateMenu}
+                    className="burger-menu-link logged-link"
+                  >
+                    Profil
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={`/${user._id}/booking`}
+                    onClick={updateMenu}
+                    className="burger-menu-link logged-link"
+                  >
+                    Réserver
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/logout"
+                    onClick={updateMenu}
+                    className="burger-menu-link logout-link"
+                  >
+                    Déconnexion
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      </nav>
+    </>
   );
 };
 

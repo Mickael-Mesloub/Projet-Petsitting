@@ -8,7 +8,7 @@ header {
   justify-content: center;
   padding: 20px;
   background: linear-gradient(90deg, $revert-blue-violet-gradient);
-  min-height: 100vh;
+  height: 100vh;
 
   .background-icon {
     position: absolute;
@@ -21,5 +21,9 @@ header {
     font-size: 50px;
     color: $beige;
     text-shadow: 0.75px 0.75px 0.75px #000;
+  }
+
+  @include tablet {
+    height: 50vh;
   }
 }

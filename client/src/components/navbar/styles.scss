@@ -2,7 +2,59 @@
 @import "../../assets/styles/_placeholders";
 @import "../../assets/styles/_variables";
 
-// NAVBAR AND BURGER MENU
+// BURGER MENU BUTTON
+
+.burger-menu-btn {
+  position: fixed;
+  top: 5px;
+  right: 20px;
+  height: 50px;
+  padding: 5px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  cursor: pointer;
+  transition: right 0.7s ease-in-out;
+
+  &.clicked {
+    right: 50px;
+  }
+
+  @include tablet {
+    display: none;
+  }
+
+  .burger-bar {
+    width: 2em;
+    height: 0.25em;
+    background-color: $beige;
+    border-radius: 0.5em;
+  }
+
+  .burger-bar.clicked:nth-child(1) {
+    transform: rotate(45deg) translate(0.375em, 0.625em);
+    transition: all 0.7s ease-out;
+  }
+
+  .burger-bar.clicked:nth-child(2) {
+    transform: scale(0.1);
+    transition: all 0.7s ease-out;
+  }
+
+  .burger-bar.clicked:nth-child(3) {
+    transform: rotate(135deg) translate(-0.5em, 0.85em);
+    transition: all 0.7s ease-out;
+  }
+
+  .burger-bar.unclicked {
+    transform: rotate(0) translate(0);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.75s;
+  }
+}
+
+// MENU AND LINKS
 
 nav {
   position: fixed;
@@ -12,60 +64,26 @@ nav {
   height: 5em;
   display: flex;
   justify-content: flex-end;
-
-  .burger-menu-btn {
-    position: fixed;
-    top: 5px;
-    right: 20px;
-    height: 50px;
-    padding: 5px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-around;
-    cursor: pointer;
-    transition: right 0.7s ease-in-out;
-
-    .burger-bar {
-      width: 2em;
-      height: 0.25em;
-      background-color: $beige;
-      border-radius: 0.5em;
-    }
-
-    .burger-bar.clicked:nth-child(1) {
-      transform: rotate(45deg) translate(0.375em, 0.625em);
-      transition: all 0.7s ease-out;
-    }
-
-    .burger-bar.clicked:nth-child(2) {
-      transform: scale(0.1);
-      transition: all 0.7s ease-out;
-    }
-
-    .burger-bar.clicked:nth-child(3) {
-      transform: rotate(135deg) translate(-0.5em, 0.85em);
-      transition: all 0.7s ease-out;
-    }
-
-    .burger-bar.unclicked {
-      transform: rotate(0) translate(0);
-      transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.75s;
-    }
-  }
-
-  .burger-menu-btn.clicked {
-    right: 50px;
-  }
+  transition: right 0.7s ease-in-out;
 
   .menu {
-    position: absolute;
+    position: fixed;
     height: 100vh;
     background: $nav-transp-purple;
     right: 0;
     z-index: 9;
     transition: right 0.7s ease-in-out;
+
+    &.hidden {
+      position: fixed;
+      right: -100%;
+      display: flex;
+      transition: right 0.7s ease-in-out;
+    }
+
+    &.visible {
+      @extend %flex-center;
+    }
 
     .burger-menu-links {
       @extend %flex-center;
@@ -83,6 +101,7 @@ nav {
           transition: all 0.3s ease-in-out;
         }
       }
+
       .burger-menu-link {
         color: $gold;
         font-family: $title-nav-font, serif;
@@ -109,23 +128,13 @@ nav {
     }
   }
 
-  .menu.hidden {
-    right: -100%;
-    display: flex;
-  }
-
-  .menu.visible {
-    @extend %flex-center;
-  }
-
   @include tablet {
-    position: sticky;
-    top: 0;
-    justify-content: center;
-
     .burger-menu-btn {
       display: none;
     }
+    position: sticky;
+    top: 0;
+    justify-content: center;
 
     .menu.visible,
     .menu.hidden {
