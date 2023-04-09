@@ -7,7 +7,7 @@ header {
   @extend %flex-center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(90deg, $revert-blue-violet-gradient);
+  background: $banner-bg;
   height: 100vh;
 
   .background-icon {

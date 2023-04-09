@@ -8,10 +8,13 @@ import Navigation from "./routes/routes";
 import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import SecondaryMenu from "./components/secondary-menu/SecondaryMenu";
 
 const App = () => {
   const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  // VERIFY USER JWT TO AUTO LOGIN
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -27,6 +30,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <SecondaryMenu />
       <Header />
       <Navbar />
       <Navigation />
