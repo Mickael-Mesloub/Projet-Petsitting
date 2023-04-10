@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice.js";
-import Header from "../../../../components/header/Header.js";
-import LogNav from "../../../../components/auth/LogNav.js";
 import { postMethod } from "../../../../helpers/fetch";
 
 const Login = () => {

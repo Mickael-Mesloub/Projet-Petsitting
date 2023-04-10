@@ -1,13 +1,12 @@
 @import "../../assets/styles/mixins";
 @import "../../assets/styles/_placeholders";
 @import "../../assets/styles/_variables";
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Delius+Swash+Caps&family=Mali:wght@400;700&display=swap");
 
 header {
   @extend %flex-center;
   justify-content: center;
   padding: 20px;
-  background: $banner-bg;
+  background: $banner-footer-bg;
   height: 100vh;
 
   .background-icon {

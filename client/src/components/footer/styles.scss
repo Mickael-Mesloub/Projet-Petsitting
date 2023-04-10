@@ -1,25 +1,80 @@
 @import "../../assets/styles/mixins";
 @import "../../assets/styles/_placeholders";
 @import "../../assets/styles/_variables";
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Delius+Swash+Caps&family=Mali:wght@400;700&display=swap");
 
 footer {
+  min-height: 250px;
+  padding-top: 50px;
+  background-color: $banner-footer-bg;
+
+  .footer-container {
     @extend %flex-center;
-    min-height: 250px;
-    background-color: #000;
-    width: 100%;
+    border-top: 2px solid $beige;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20px;
+    gap: 10px;
 
-    .social-media-container {
-        display: flex;
-        width: 50%;
-        background-color: #fff;
+    .footer-content-box {
+      width: 33%;
+      height: 100px;
     }
 
-    .social-media-link {
-        width: 100px;
-        height: 100px;
-        background-color: $red;
-        color: #fff;
-        font-size: 20px;
+    .social-media-box {
+      padding: 5px;
+
+      > p {
+        text-align: center;
+        color: $beige;
+        padding-bottom: 16px;
+      }
+      .social-media-icons-boxes {
+        @extend %flex-center;
+        gap: 10px;
+        height: auto;
+
+        .social-media-icon {
+          @extend %flex-center;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          font-size: 1.5em;
+          transition: all 0.2s ease-in-out;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+        .fb-icon {
+          color: $beige;
+          &:hover {
+            background-color: #3b5998;
+            color: #fff;
+          }
+        }
+        .ig-icon {
+          color: $beige;
+          &:hover {
+            background: #d6249f;
+            background: radial-gradient(
+              circle at 30% 107%,
+              #fdf497 0%,
+              #fdf497 5%,
+              #fd5949 45%,
+              #d6249f 60%,
+              #285aeb 90%
+            );
+            color: #fff;
+          }
+        }
+        .tt-icon {
+          color: $beige;
+          &:hover {
+            background: #fff;
+            color: #00acee;
+          }
+        }
+      }
     }
+  }
 }

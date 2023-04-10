@@ -14,7 +14,7 @@ const App = () => {
   const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  // VERIFY USER JWT TO AUTO LOGIN
+  // VERIFY USER JWT TO KEEP USER LOGGED IN
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");

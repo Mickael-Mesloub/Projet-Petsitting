@@ -18,11 +18,12 @@
       padding: 5px;
       margin: 0;
       cursor: pointer;
+      transition: all 0.2s ease-in-out;
 
       &:hover {
         background-color: $beige;
         .secondary-menu-link {
-          color: $banner-bg;
+          color: $banner-footer-bg;
         }
         .logout-icon {
           color: $red;
@@ -43,7 +44,7 @@
       padding: 10px;
       border: 0.8px solid $beige;
       .secondary-menu-link {
-        font-size: 25px;
+        font-size: 22px;
       }
     }
   }

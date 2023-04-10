@@ -1,4 +1,3 @@
-import Header from "../../../components/header/Header";
 import { useState, useEffect } from "react";
 import { getMethod } from "../../../helpers/fetch";
 import "./styles.scss";

@@ -1,6 +1,5 @@
 import { getMethod } from "../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import Header from "../../../components/header/Header";
 import "./styles.scss";
 
 const News = () => {
@@ -13,10 +12,12 @@ const News = () => {
   }, []);
 
   return (
-    <>
+    <main>
       <h1>News</h1>
       {articles.length === 0 ? (
-        <p>Aucun articles publié</p>
+        <p>
+          Vous pourrez suivre mes actualités prochainement sur cette page ✍️ !
+        </p>
       ) : (
         <div className="articles-container">
           {articles.map((article, i) => (
@@ -33,7 +34,7 @@ const News = () => {
           ))}
         </div>
       )}
-    </>
+    </main>
   );
 };
 

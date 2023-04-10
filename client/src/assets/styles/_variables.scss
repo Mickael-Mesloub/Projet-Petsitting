@@ -6,10 +6,11 @@ $title-nav-font: "Delius Swash Caps";
 
 // COLORS
 
-$banner-bg: rgba(99, 1, 190, 0.9);
+$banner-footer-bg: rgba(99, 1, 190, 0.9);
 $burger-menu-bg: rgba(88, 3, 167, 0.9);
 $light-violet: rgba(190, 130, 255, 0.884);
 $medium-violet: rgba(152, 63, 248, 0.884);
+$dark-violet: rgba(69, 4, 127, 0.9);
 $blue-violet-gradient: rgba(9, 9, 121, 1) 0%, rgba(99, 1, 190, 1) 35%,
   rgba(163, 3, 164, 1) 100%;
 $revert-blue-violet-gradient: rgba(163, 3, 164, 0.9) 0%,
@@ -20,6 +21,7 @@ $gold: rgba(255, 162, 24, 0.884);
 $red: rgb(250, 76, 76);
 $light-green: rgb(65, 127, 80);
 $beige: rgba(255, 245, 238, 0.8);
+$pink: rgba(244, 170, 219, 0.6);
 
 // BREAKPOINTS
 $breakpoint-tablet: 768px;

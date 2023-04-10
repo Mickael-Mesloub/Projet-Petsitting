@@ -2,7 +2,6 @@ import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Header from "../../../../components/header/Header";
 import { loginUser } from "../../../../store/slices/user/userSlice";
 import "../../styles/profile.scss";
 
