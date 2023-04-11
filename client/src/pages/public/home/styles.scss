@@ -5,14 +5,15 @@
 main {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding: 32px 0;
+
+  section:nth-child(1) {
+    padding-top: 32px;
+  }
 
   > section {
     display: flex;
     flex-direction: column;
     gap: 32px;
-    min-height: 100vh;
     width: 100%;
     padding: 16px;
     background: $dark-violet;
@@ -20,15 +21,37 @@ main {
     margin: 0 auto;
 
     > h3 {
-      border-radius: 8px;
-      background: $pink;
-      color: $dark-violet;
+      color: #fff;
+      margin: 0 auto;
+      border-top: 3px solid #fff;
+      border-bottom: 3px solid #fff;
     }
     .articles-container {
       display: flex;
       flex-direction: column;
       gap: 16px;
+
+      .link-button {
+        text-align: center;
+
+        .link-to-page {
+          @extend %button;
+          background: $dark-violet;
+          color: #fff;
+          transition: all 0.2s ease-in-out;
+          padding: 5px;
+
+          &:hover {
+            background: $pink;
+            color: $dark-violet;
+            letter-spacing: normal;
+          }
+        }
+      }
       > article {
+        @extend %flex-center;
+        flex-direction: column;
+        gap: 16px;
         padding: 16px;
         text-align: justify;
         border-radius: 8px;
@@ -41,24 +64,6 @@ main {
         @extend %flex-center;
         flex-direction: column;
         gap: 20px;
-
-        .link-button {
-          text-align: center;
-
-          .link-to-news-page {
-            @extend %button;
-            background: $dark-violet;
-            color: $pink;
-            transition: all 0.2s ease-in-out;
-            padding: 5px;
-
-            &:hover {
-              background: $pink;
-              color: $dark-violet;
-              letter-spacing: normal;
-            }
-          }
-        }
       }
     }
   }
@@ -76,17 +81,34 @@ main {
           width: 48%;
         }
         > article:nth-child(3) {
-          width: 100%;
+          width: 98%;
         }
       }
 
       .last-news-container {
         > article {
-          width: 100%;
+          width: 98%;
 
           .article-image {
             max-width: 80%;
           }
+        }
+      }
+    }
+  }
+}
+
+// ********** DESKTOP FORMAT **********
+
+@include desktop {
+  main {
+    .presentation {
+      .articles-container {
+        > article {
+          width: 31%;
+        }
+        > article:nth-child(3) {
+          width: 31%;
         }
       }
     }

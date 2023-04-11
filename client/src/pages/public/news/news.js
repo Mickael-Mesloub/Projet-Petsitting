@@ -13,7 +13,7 @@ const News = () => {
 
   return (
     <main>
-      <h1>News</h1>
+      <h1>Actualités</h1>
       {articles.length === 0 ? (
         <p>
           Vous pourrez suivre mes actualités prochainement sur cette page ✍️ !

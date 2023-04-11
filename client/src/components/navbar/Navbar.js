@@ -48,7 +48,7 @@ const Navbar = () => {
                 onClick={updateMenu}
                 className="burger-menu-link"
               >
-                News
+                Actualités
               </Link>
             </li>
             <li>
