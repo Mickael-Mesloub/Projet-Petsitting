@@ -1,4 +1,5 @@
 import "./index.scss";
+import "./assets/styles/forms.scss";
 import { BrowserRouter } from "react-router-dom";
 import { loginUser } from "./store/slices/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";

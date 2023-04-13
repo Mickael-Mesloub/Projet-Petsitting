@@ -25,7 +25,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <main className="login-page-main">
       <h2>Connectez-vous</h2>
       <form onSubmit={handleSubmit}>
         <div className="register-form-inputs">
@@ -51,7 +51,7 @@ const Login = () => {
           value="Connexion"
         />
       </form>
-    </>
+    </main>
   );
 };
 

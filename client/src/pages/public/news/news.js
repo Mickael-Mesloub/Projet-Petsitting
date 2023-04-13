@@ -12,7 +12,7 @@ const News = () => {
   }, []);
 
   return (
-    <main>
+    <main className="newspage-main">
       <h1>Actualités</h1>
       {articles.length === 0 ? (
         <p>

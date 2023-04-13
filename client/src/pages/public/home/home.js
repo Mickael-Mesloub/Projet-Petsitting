@@ -36,7 +36,7 @@ const Home = () => {
   };
 
   return (
-    <main>
+    <main className="homepage-main">
       {user.isLogged ? (
         <h3>Bienvenue {usernameCapitalized} 👋 !</h3>
       ) : (
