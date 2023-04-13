@@ -1,7 +1,7 @@
 import { getMethod, deleteMethod } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Header from "../../../../components/header/Header";
+
 import "../allUserAnimals/styles.scss";
 
 const Animal = () => {

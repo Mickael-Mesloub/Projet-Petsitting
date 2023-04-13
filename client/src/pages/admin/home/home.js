@@ -1,4 +1,3 @@
-import Header from "../../../components/header/Header";
 import "./styles.scss";
 import AdminLinks from "../../../components/adminLinks/AdminLinks";
 

@@ -48,8 +48,10 @@ main {
           }
         }
       }
+
       > article {
         @extend %flex-center;
+        justify-content: flex-start;
         flex-direction: column;
         gap: 16px;
         padding: 16px;
@@ -64,6 +66,16 @@ main {
         @extend %flex-center;
         flex-direction: column;
         gap: 20px;
+        max-width: 50%;
+      }
+    }
+    .last-news-container {
+      > article {
+        .article-image {
+          img {
+            object-fit: cover;
+          }
+        }
       }
     }
   }
@@ -88,10 +100,6 @@ main {
       .last-news-container {
         > article {
           width: 98%;
-
-          .article-image {
-            max-width: 80%;
-          }
         }
       }
     }

@@ -1,9 +1,7 @@
-import Header from "../../../../components/header/Header";
 import AdminLinks from "../../../../components/adminLinks/AdminLinks";
 import { useState, useEffect } from "react";
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useParams } from "react-router-dom";
-import "../../../../assets/styles/forms.scss";
 
 const UpdateArticle = () => {
   const { articleId } = useParams();

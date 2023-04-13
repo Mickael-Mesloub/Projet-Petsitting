@@ -1,4 +1,3 @@
-import Header from "../../../components/header/Header";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getMethod } from "../../../helpers/fetch";

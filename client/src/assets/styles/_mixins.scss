@@ -1,6 +1,12 @@
-@import './_variables.scss';
+@import "./_variables.scss";
 
 // MEDIA QUERRIES
+
+@mixin smallScreens {
+  @media screen and (max-width: $breakpoint-small-screens) {
+    @content;
+  }
+}
 
 @mixin tablet {
   @media screen and (min-width: $breakpoint-tablet) {

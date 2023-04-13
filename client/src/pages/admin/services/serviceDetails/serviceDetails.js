@@ -1,4 +1,3 @@
-import Header from "../../../../components/header/Header";
 import AdminLinks from "../../../../components/adminLinks/AdminLinks";
 import { useState, useEffect } from "react";
 import { deleteMethod, getMethod } from "../../../../helpers/fetch";

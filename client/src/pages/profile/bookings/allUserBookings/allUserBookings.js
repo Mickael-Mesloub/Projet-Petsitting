@@ -1,8 +1,6 @@
-import "../../../../assets/styles/forms.scss";
 import { getMethod } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Header from "../../../../components/header/Header";
 
 const Booking = () => {
   const { userId, bookingId } = useParams();

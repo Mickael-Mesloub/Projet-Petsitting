@@ -1,5 +1,3 @@
-import Header from "../../../../components/header/Header";
-
 const Bookings = () => {
   // REACT_APP_BACKEND_URL
 

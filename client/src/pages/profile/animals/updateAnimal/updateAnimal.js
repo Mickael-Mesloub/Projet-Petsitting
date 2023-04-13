@@ -1,9 +1,7 @@
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Header from "../../../../components/header/Header";
 import "../allUserAnimals/styles.scss";
-import "../../../../assets/styles/forms.scss";
 
 const UpdateAnimal = () => {
   const [animal, setAnimal] = useState({});

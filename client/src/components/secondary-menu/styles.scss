@@ -44,13 +44,34 @@
       padding: 10px;
       border: 0.8px solid $beige;
       .secondary-menu-link {
-        font-size: 22px;
+        font-size: 20px;
       }
     }
   }
-  @include tablet {
+}
+
+// ********** SMALLER SCREENS **********
+
+@include smallScreens {
+  .secondary-menu {
+    > ul {
+      flex-direction: column;
+      width: auto;
+    }
+  }
+}
+
+// ********** TABLET FORMAT **********
+
+@include tablet {
+  .secondary-menu {
     > ul {
       justify-content: flex-end;
+      > li {
+        .secondary-menu-auth-link {
+          flex-direction: column;
+        }
+      }
     }
   }
 }

@@ -2,7 +2,6 @@ import { getMethod } from "../../../../helpers/fetch.js";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../../../../components/header/Header.js";
 import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
 import { animalSize } from "../../../../helpers/utils.js";
 

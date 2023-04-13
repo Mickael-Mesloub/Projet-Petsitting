@@ -13,7 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     getMethod(`${process.env.REACT_APP_BACKEND_URL}/news`)
-      .then((data) => setArticles(data.slice(-1)))
+      .then((data) => setArticles(data.slice(-3)))
       .catch((error) => console.log(error));
   }, []);
 
@@ -44,20 +44,20 @@ const Home = () => {
           <h3>Bienvenue sur mon site 👋 !</h3>
           <div className="articles-container">
             <article>
-              <h4>Pas encore inscrit(e) ?</h4>
-              <p>Suivez ce lien 👇 !</p>
-              <div className="link-button">
-                <Link to="/register" className="link-to-page">
-                  Inscription
-                </Link>
-              </div>
-            </article>
-            <article>
               <h4>Vous avez déjà un compte ?</h4>
               <p>Connectez-vous 👇 !</p>
               <div className="link-button">
                 <Link to="/login" className="link-to-page">
                   Connexion
+                </Link>
+              </div>
+            </article>
+            <article>
+              <h4>Pas encore inscrit(e) ?</h4>
+              <p>Suivez ce lien 👇 !</p>
+              <div className="link-button">
+                <Link to="/register" className="link-to-page">
+                  Inscription
                 </Link>
               </div>
             </article>

@@ -2,7 +2,7 @@ import { getMethod } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../../../../components/header/Header";
+
 import "../../styles/profile.scss";
 
 const Profile = () => {
