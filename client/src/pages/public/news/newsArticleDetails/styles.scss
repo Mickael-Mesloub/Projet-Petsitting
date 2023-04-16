@@ -1,0 +1,20 @@
+@import "../../../../assets/styles/_placeholders";
+@import "../../../../assets/styles/_variables";
+@import "../../../../assets/styles/_mixins";
+
+main {
+  padding: 16px;
+  > article {
+    padding: 16px;
+    > p {
+      text-align: justify;
+    }
+  }
+  .link-button {
+    text-align: center;
+
+    .link-to-page {
+      @extend %link;
+    }
+  }
+}

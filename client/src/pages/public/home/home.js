@@ -155,9 +155,9 @@ const Home = () => {
               ✍️ !
             </p>
           ) : (
-            <article className="last-news-articles">
+            <article className="news-articles">
               {articles.map((article, i) => (
-                <div key={i} className="last-news-article">
+                <div key={i} className="news-article">
                   {article.images.length > 0 && (
                     <div className="article-image">
                       <img

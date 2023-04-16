@@ -7,23 +7,17 @@
   flex-direction: column;
   gap: 64px;
 
+  // LINKS STYLE
+
   .link-button {
     text-align: center;
 
     .link-to-page {
-      @extend %button;
-      background: $dark-violet;
-      color: #fff;
-      transition: all 0.2s ease-in-out;
-      padding: 5px;
-
-      &:hover {
-        background: $pink;
-        color: $dark-violet;
-        letter-spacing: normal;
-      }
+      @extend %link;
     }
   }
+
+  // SECTIONS AND ARTICLES
 
   > section {
     @extend %section;
@@ -41,16 +35,7 @@
       }
 
       > article {
-        @extend %flex-center;
-        justify-content: flex-start;
-        flex-direction: column;
-        gap: 16px;
-        padding: 32px 16px;
-        text-align: justify;
-        border-radius: 8px;
-        background: #fff;
-        color: $dark-violet;
-        box-shadow: 5px 5px 10px #000;
+        @extend %article;
 
         > h4 {
           padding: 0;
@@ -66,12 +51,15 @@
         max-width: 80%;
       }
     }
+
+    // LAST NEWS SECTION
+
     .last-news-container {
       align-items: flex-start;
-      .last-news-articles {
+      .news-articles {
         flex-flow: column wrap;
         gap: 16px;
-        .last-news-article {
+        .news-article {
           @extend %flex-center;
           flex-direction: column;
           gap: 12px;
@@ -82,6 +70,7 @@
 
           .article-image {
             width: 15em;
+            align-self: center;
             > img {
               width: 100%;
               border-radius: 12px;
@@ -128,10 +117,10 @@
 
     .last-news-section {
       .last-news-container {
-        .last-news-articles {
-          width: 100%;
+        .news-articles {
+          width: 40em;
 
-          .last-news-article {
+          .news-article {
             flex-direction: row;
             justify-content: flex-start;
             align-items: flex-start;
@@ -173,7 +162,7 @@
     .last-news-section {
       .last-news-container {
         flex-wrap: nowrap;
-        .last-news-articles {
+        .news-articles {
           width: 50em;
         }
       }
