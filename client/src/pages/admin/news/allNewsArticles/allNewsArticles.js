@@ -19,7 +19,7 @@ const AdminNews = () => {
     <>
       <AdminLinks />
       <main>
-        <h1>Actualités</h1>
+        <h2>Actualités</h2>
         <div className="news-container">
           {news && news.length === 0 ? (
             <>
@@ -51,7 +51,7 @@ const AdminNews = () => {
                               key={i}
                               to={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
                             >
-                              ${image}
+                              &{image}
                             </Link>
                           </div>
                         ))}

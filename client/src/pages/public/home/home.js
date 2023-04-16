@@ -40,9 +40,9 @@ const Home = () => {
       {user.isLogged ? (
         <h3>Bienvenue {usernameCapitalized} 👋 !</h3>
       ) : (
-        <section>
+        <section className="welcome-section">
           <h3>Bienvenue sur mon site 👋 !</h3>
-          <div className="articles-container">
+          <div className="homepage-articles-container">
             <article>
               <h4>Vous avez déjà un compte ?</h4>
               <p>Connectez-vous 👇 !</p>
@@ -65,9 +65,9 @@ const Home = () => {
         </section>
       )}
 
-      <section className="presentation">
+      <section className="presentation-section">
         <h3>Laissez-moi vous présenter... </h3>
-        <div className="articles-container">
+        <div className="homepage-articles-container">
           <article>
             <h4>Qui je suis 📜</h4>
             <p>
@@ -146,19 +146,18 @@ const Home = () => {
           </article>
         </div>
       </section>
-      <section>
+      <section className="last-news-section">
         <h3>Mes dernières actus 📣</h3>
-        <div className="articles-container last-news-container">
+        <div className="homepage-articles-container last-news-container">
           {articles.length === 0 ? (
-            <p>
+            <p className="no-news">
               Vous trouverez dans cette section mes actualités les plus récentes
               ✍️ !
             </p>
           ) : (
-            <article>
+            <article className="last-news-articles">
               {articles.map((article, i) => (
-                <div key={i} className="article-container">
-                  <h4>{article.title}</h4>
+                <div key={i} className="last-news-article">
                   {article.images.length > 0 && (
                     <div className="article-image">
                       <img
@@ -167,18 +166,21 @@ const Home = () => {
                       />
                     </div>
                   )}
-                  <p className="article-content">
-                    {article.content.substring(0, 100)}...
-                  </p>
-                  <div className="link-button">
-                    <Link to="/news" className="link-to-page">
-                      Toutes mes actus 📰
-                    </Link>
+                  <div className="article-text-container">
+                    <h4>{article.title}</h4>
+                    <p className="article-content">
+                      {article.content.substring(0, 150)}...
+                    </p>
                   </div>
                 </div>
               ))}
             </article>
           )}
+        </div>
+        <div className="link-button">
+          <Link to="/news" className="link-to-page">
+            Toutes mes actus 📰
+          </Link>
         </div>
       </section>
     </main>

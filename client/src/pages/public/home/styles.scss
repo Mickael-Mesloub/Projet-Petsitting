@@ -5,48 +5,39 @@
 .homepage-main {
   display: flex;
   flex-direction: column;
+  gap: 64px;
 
-  section:nth-child(1) {
-    padding-top: 32px;
+  .link-button {
+    text-align: center;
+
+    .link-to-page {
+      @extend %button;
+      background: $dark-violet;
+      color: #fff;
+      transition: all 0.2s ease-in-out;
+      padding: 5px;
+
+      &:hover {
+        background: $pink;
+        color: $dark-violet;
+        letter-spacing: normal;
+      }
+    }
   }
 
   > section {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    width: 100%;
-    padding: 16px;
-    background: $dark-violet;
-    color: $beige;
-    margin: 0 auto;
-
+    @extend %section;
     > h3 {
-      color: #fff;
-      margin: 0 auto;
-      border-top: 3px solid #fff;
-      border-bottom: 3px solid #fff;
+      @extend %section-h3;
     }
-    .articles-container {
+    .homepage-articles-container {
       display: flex;
       flex-direction: column;
       gap: 16px;
 
-      .link-button {
+      .no-news {
         text-align: center;
-
-        .link-to-page {
-          @extend %button;
-          background: $dark-violet;
-          color: #fff;
-          transition: all 0.2s ease-in-out;
-          padding: 5px;
-
-          &:hover {
-            background: $pink;
-            color: $dark-violet;
-            letter-spacing: normal;
-          }
-        }
+        color: $dark-violet;
       }
 
       > article {
@@ -54,26 +45,58 @@
         justify-content: flex-start;
         flex-direction: column;
         gap: 16px;
-        padding: 16px;
+        padding: 32px 16px;
         text-align: justify;
         border-radius: 8px;
         background: #fff;
         color: $dark-violet;
         box-shadow: 5px 5px 10px #000;
+
+        > h4 {
+          padding: 0;
+        }
       }
 
       .article-container {
         @extend %flex-center;
-        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
         gap: 20px;
-        max-width: 50%;
+        width: 80%;
+        max-width: 80%;
       }
     }
     .last-news-container {
-      > article {
-        .article-image {
-          img {
-            object-fit: cover;
+      align-items: flex-start;
+      .last-news-articles {
+        flex-flow: column wrap;
+        gap: 16px;
+        .last-news-article {
+          @extend %flex-center;
+          flex-direction: column;
+          gap: 12px;
+          width: 100%;
+          background: $section-bg;
+          border-radius: 12px;
+          padding: 12px;
+
+          .article-image {
+            width: 15em;
+            > img {
+              width: 100%;
+              border-radius: 12px;
+              box-shadow: 5px 5px 10px #000;
+            }
+          }
+          .article-text-container {
+            @extend %flex-center;
+            flex-direction: column;
+            padding: 16px;
+            border-radius: 12px;
+
+            > h4 {
+              padding: 0;
+            }
           }
         }
       }
@@ -84,22 +107,51 @@
 // ********** TABLET FORMAT **********
 
 @include tablet {
-  main {
+  .homepage-main {
     > section {
-      .articles-container {
-        flex-flow: row wrap;
+      .homepage-articles-container {
+        flex-flow: row nowrap;
         justify-content: center;
         > article {
-          width: 48%;
-        }
-        > article:nth-child(3) {
-          width: 98%;
+          width: 38%;
         }
       }
+    }
+    .presentation-section {
+      .homepage-articles-container {
+        flex-direction: column;
+        article {
+          width: 100%;
+        }
+      }
+    }
 
+    .last-news-section {
       .last-news-container {
-        > article {
-          width: 98%;
+        .last-news-articles {
+          width: 100%;
+
+          .last-news-article {
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+            gap: 2.5em;
+            .article-image {
+              display: flex;
+              justify-content: center;
+              width: 15em;
+            }
+            .article-text-container {
+              flex: 1;
+              align-items: center;
+              gap: 1.5em;
+
+              > h4 {
+                font-size: 20px;
+              }
+            }
+          }
         }
       }
     }
@@ -109,14 +161,20 @@
 // ********** DESKTOP FORMAT **********
 
 @include desktop {
-  main {
-    .presentation {
-      .articles-container {
+  .homepage-main {
+    .presentation-section {
+      .homepage-articles-container {
+        flex-flow: row wrap;
         > article {
-          width: 31%;
+          width: 48%;
         }
-        > article:nth-child(3) {
-          width: 31%;
+      }
+    }
+    .last-news-section {
+      .last-news-container {
+        flex-wrap: nowrap;
+        .last-news-articles {
+          width: 50em;
         }
       }
     }

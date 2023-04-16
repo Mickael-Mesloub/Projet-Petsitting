@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice.js";
 import { postMethod } from "../../../../helpers/fetch";
+import "./styles.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -29,18 +30,18 @@ const Login = () => {
       <h2>Connectez-vous</h2>
       <form onSubmit={handleSubmit}>
         <div className="register-form-inputs">
-          <label htmlFor="email">Email : </label>
           <input
             type="email"
             name="email"
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="register-form-inputs">
-          <label htmlFor="password">Mot de passe : </label>
           <input
             type="password"
             name="password"
+            placeholder="Mot de passe"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>

@@ -13,27 +13,29 @@ const News = () => {
 
   return (
     <main className="newspage-main">
-      <h1>Actualités</h1>
-      {articles.length === 0 ? (
-        <p>
-          Vous pourrez suivre mes actualités prochainement sur cette page ✍️ !
-        </p>
-      ) : (
-        <div className="articles-container">
-          {articles.map((article, i) => (
-            <div key={i} className="article">
-              <div className="article-image">
-                <img
-                  src={`${process.env.REACT_APP_BACKEND_URL}/${article.images}`}
-                  alt=""
-                />
+      <h2>Actualités</h2>
+      <section>
+        {articles && articles.length === 0 ? (
+          <p>
+            Vous pourrez suivre mes actualités prochainement sur cette page ✍️ !
+          </p>
+        ) : (
+          <div className="articles-container">
+            {articles.map((article, i) => (
+              <div key={i} className="article">
+                <div className="article-image">
+                  <img
+                    src={`${process.env.REACT_APP_BACKEND_URL}/${article.images}`}
+                    alt={article.title}
+                  />
+                </div>
+                <h3>{article.title}</h3>
+                <p className="article-inner-text">{article.content}</p>
               </div>
-              <h3>{article.title}</h3>
-              <p className="article-inner-text">{article.content}</p>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </section>
     </main>
   );
 };

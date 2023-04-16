@@ -1,9 +1,11 @@
 @import "./_placeholders";
+@import "./mixins";
+@import "./variables";
 
 form {
   @extend %flex-center;
   flex-direction: column;
-  max-width: 30%;
+  max-width: 80%;
   margin: auto;
   gap: 8px;
   padding: 16px;
@@ -59,5 +61,17 @@ form {
       transform: scale(1.05);
       transition: all 0.3s ease-in-out;
     }
+  }
+}
+
+@include tablet {
+  form {
+    max-width: 50%;
+  }
+}
+
+@include desktop {
+  form {
+    max-width: 30%;
   }
 }

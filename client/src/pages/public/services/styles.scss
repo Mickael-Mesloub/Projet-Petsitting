@@ -1,25 +1,2 @@
-@import '../../../assets/styles/_placeholders';
-@import '../../../assets/styles/_variables';
-
-
-
-.service {
-    @extend %flex-center;
-    flex-direction: column;
-    width: 86%;
-    margin: 7% auto;
-    background-color: $light-violet;
-    border-radius: 8px;
-    transition: all .3s ease-in-out;
-
-    &:hover {
-        background-color: $medium-violet;
-        transform: scale(1.05);
-        transition: all .3s ease-in-out;
-    }
-}
-
-.service div {
-    padding: 10px;
-    
-}
+@import "../../../assets/styles/_placeholders";
+@import "../../../assets/styles/_variables";

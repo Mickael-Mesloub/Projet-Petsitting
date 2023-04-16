@@ -6,6 +6,25 @@
   align-items: center;
 }
 
+%section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  padding: 32px;
+  background: $section-bg;
+  color: $beige;
+  margin: 0 auto;
+}
+
+%section-h3,
+%article-h3 {
+  color: $dark-violet;
+  margin: 0 auto;
+  border-top: 3px solid $dark-violet;
+  border-bottom: 3px solid $dark-violet;
+}
+
 %button {
   padding: 8px;
   text-align: center;
