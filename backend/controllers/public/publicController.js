@@ -54,6 +54,7 @@ export const getAllArticles = async (req, res) => {
 export const getArticle = async (req, res) => {
   try {
     const article = await articleModel.findById(req.params.articleId);
+    console.log(article);
 
     if (!article) {
       return res.status(404).json({ error: "Cet article n'existe pas." });

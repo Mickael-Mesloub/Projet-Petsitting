@@ -17,7 +17,6 @@ footer {
 
     .footer-content-box {
       width: 33%;
-      height: 100px;
     }
 
     .social-media-box {
@@ -31,7 +30,6 @@ footer {
       .social-media-icons-boxes {
         @extend %flex-center;
         gap: 10px;
-        height: auto;
 
         .social-media-icon {
           @extend %flex-center;

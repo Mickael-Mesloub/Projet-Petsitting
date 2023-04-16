@@ -8,12 +8,9 @@ export const createArticle = async (req, res) => {
     const form = formidable({ multiples: true });
     form.parse(req, async (error, fields, files) => {
       if (error) {
-        return res
-          .status(500)
-          .json({
-            error:
-              "Un problème est survenu lors du téléchargement de fichiers.",
-          });
+        return res.status(500).json({
+          error: "Un problème est survenu lors du téléchargement de fichiers.",
+        });
       }
 
       const images = await copyFiles(
@@ -33,19 +30,15 @@ export const createArticle = async (req, res) => {
             .json({ message: "Nouvel article créé avec succès!", article });
         })
         .catch((error) => {
-          return res
-            .status(500)
-            .json({
-              error: `Une erreur est survenue et l'article n'a pas pu être créé : ${error.message}. Veuillez réessayer.`,
-            });
+          return res.status(500).json({
+            error: `Une erreur est survenue et l'article n'a pas pu être créé : ${error.message}. Veuillez réessayer.`,
+          });
         });
     });
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        error: `Une erreur est survenue et l'article n'a pas pu être créé : ${error.message}. Veuillez réessayer.`,
-      });
+    return res.status(500).json({
+      error: `Une erreur est survenue et l'article n'a pas pu être créé : ${error.message}. Veuillez réessayer.`,
+    });
   }
 };
 
@@ -54,24 +47,24 @@ export const getAllArticles = async (req, res) => {
     const articles = await articleModel.find({});
     return res.status(200).json(articles);
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        error: `Articles introuvables : ${error.message}. Veuillez réessayer.`,
-      });
+    return res.status(500).json({
+      error: `Articles introuvables : ${error.message}. Veuillez réessayer.`,
+    });
   }
 };
 
 export const getArticle = async (req, res) => {
   try {
     const article = await articleModel.findById(req.params.articleId);
+
+    if (!article) {
+      return res.status(404).json({ error: "Cet article n'existe pas." });
+    }
     return res.status(200).json(article);
   } catch (error) {
-    resreturn
-      .status(400)
-      .json({
-        error: `Article introuvable : ${error.message}. Veuillez réessayer.`,
-      });
+    return res.status(400).json({
+      error: `Article introuvable : ${error.message}. Veuillez réessayer.`,
+    });
   }
 };
 
@@ -80,11 +73,9 @@ export const updateArticle = async (req, res) => {
     const form = formidable({ multiples: true });
     form.parse(req, async (error, fields, files) => {
       if (error) {
-        return res
-          .status(500)
-          .json({
-            error: `Une erreur est survenue : ${error.message}. Veuillez réessayer.`,
-          });
+        return res.status(500).json({
+          error: `Une erreur est survenue : ${error.message}. Veuillez réessayer.`,
+        });
       }
       const article = await articleModel.findById(req.params.articleId);
 
@@ -124,19 +115,15 @@ export const updateArticle = async (req, res) => {
             .json({ message: "Article modifié avec succès!", article });
         })
         .catch((error) => {
-          return res
-            .status(400)
-            .json({
-              error: `Une erreur est survenue et l'article n'a pas pu être modifié : ${error.message}. Veuillez réessayer.`,
-            });
+          return res.status(400).json({
+            error: `Une erreur est survenue et l'article n'a pas pu être modifié : ${error.message}. Veuillez réessayer.`,
+          });
         });
     });
   } catch (error) {
-    return res
-      .status(400)
-      .json({
-        error: `Une erreur est survenue et l'article n'a pas pu être modifié : ${error.message}. Veuillez réessayer.`,
-      });
+    return res.status(400).json({
+      error: `Une erreur est survenue et l'article n'a pas pu être modifié : ${error.message}. Veuillez réessayer.`,
+    });
   }
 };
 
@@ -155,11 +142,9 @@ export const deleteArticle = (req, res) => {
         } catch (error) {
           console.log(error);
           if (error.code !== "ENOENT") {
-            return res
-              .status(500)
-              .json({
-                error: `Une erreur est survenue et le(s) fichier(s) n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.`,
-              });
+            return res.status(500).json({
+              error: `Une erreur est survenue et le(s) fichier(s) n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.`,
+            });
           }
         }
       });
@@ -167,11 +152,9 @@ export const deleteArticle = (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      return res
-        .status(500)
-        .json({
-          error: `Une erreur est survenue et l'article n'a pas pu être supprimé : ${error.message}. Veuillez réessayer.`,
-        });
+      return res.status(500).json({
+        error: `Une erreur est survenue et l'article n'a pas pu être supprimé : ${error.message}. Veuillez réessayer.`,
+      });
     });
 };
 
@@ -182,11 +165,9 @@ export const deleteAllArticles = (req, res) => {
       fs.readdir("public/images/news/", (error, files) => {
         if (error) {
           console.log(error);
-          return res
-            .status(500)
-            .json({
-              error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être récupéré(s) : ${error.message}. Veuillez réessayer.`,
-            });
+          return res.status(500).json({
+            error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être récupéré(s) : ${error.message}. Veuillez réessayer.`,
+          });
         }
 
         if (files.length === 0) {
@@ -206,11 +187,9 @@ export const deleteAllArticles = (req, res) => {
               console.log(
                 `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.`
               );
-              return res
-                .status(500)
-                .json({
-                  error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.`,
-                });
+              return res.status(500).json({
+                error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.`,
+              });
             }
           }
         });
@@ -220,10 +199,8 @@ export const deleteAllArticles = (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      return res
-        .status(500)
-        .json({
-          error: `Une erreur est survenue et les articles n'ont pas pu être supprimés : ${error.message}. Veuillez réessayer.`,
-        });
+      return res.status(500).json({
+        error: `Une erreur est survenue et les articles n'ont pas pu être supprimés : ${error.message}. Veuillez réessayer.`,
+      });
     });
 };

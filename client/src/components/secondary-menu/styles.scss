@@ -55,8 +55,12 @@
 @include smallScreens {
   .secondary-menu {
     > ul {
-      flex-direction: column;
       width: auto;
+      .secondary-menu-auth-link {
+        .secondary-menu-link {
+          font-size: 15px;
+        }
+      }
     }
   }
 }

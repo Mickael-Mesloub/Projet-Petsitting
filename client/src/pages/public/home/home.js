@@ -6,6 +6,7 @@ import "./styles.scss";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
+  const [articleImages, setArticleImages] = useState([]);
   const [usernameCapitalized, setUsernameCapitalized] = useState("");
   const { user } = useSelector((state) => state);
 
@@ -161,7 +162,7 @@ const Home = () => {
                   {article.images.length > 0 && (
                     <div className="article-image">
                       <img
-                        src={`${process.env.REACT_APP_BACKEND_URL}/${article.images}`}
+                        src={`${process.env.REACT_APP_BACKEND_URL}/${article.images[0]}`}
                         alt={article.title}
                       />
                     </div>
