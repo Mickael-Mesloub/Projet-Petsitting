@@ -34,15 +34,17 @@
 %article-h3 {
   color: $dark-violet;
   margin: 0 auto;
+  padding: 16px 0;
   border-top: 3px solid $dark-violet;
   border-bottom: 3px solid $dark-violet;
 }
 
 %button {
-  padding: 8px;
   text-align: center;
-  background-image: linear-gradient(90deg, $blue-violet-gradient);
+  background: $dark-violet;
   color: $beige;
+  transition: all 0.2s ease-in-out;
+  padding: 5px;
   font-weight: 700;
   text-transform: uppercase;
   border-radius: 5px;
@@ -52,21 +54,8 @@
   box-shadow: 5px 5px 10px #000;
 
   &:hover {
-    background-image: linear-gradient(90deg, $violet-orange-gradient);
-  }
-}
-
-%link {
-  @extend %button;
-  background: $dark-violet;
-  color: #fff;
-  transition: all 0.2s ease-in-out;
-  padding: 5px;
-
-  &:hover {
     background: $pink;
     color: $dark-violet;
-    letter-spacing: normal;
   }
 }
 

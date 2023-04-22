@@ -8,14 +8,15 @@ form {
   max-width: 80%;
   margin: auto;
   gap: 8px;
-  padding: 16px;
-  border: 0.75px solid #3d3c3c;
+  padding: 32px;
   border-radius: 12px;
+  background: $section-bg;
 
-  .register-form-inputs {
+  .form-inputs {
     @extend %flex-center;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
   }
 
   fieldset {
@@ -23,11 +24,20 @@ form {
     flex-direction: column;
   }
 
-  label,
   input,
   fieldset,
-  select {
-    padding: 5px;
+  select,
+  textarea {
+    padding: 8px;
+    width: 15em;
+    border-radius: 8px;
+    border: 0.5px solid $dark-violet;
+
+    &:focus {
+      outline: none;
+      border: 3px solid $pink;
+      box-shadow: 5px 5px 10px $dark-violet;
+    }
   }
 
   select,
@@ -37,11 +47,12 @@ form {
 
   input[type="text"],
   select {
-    padding: 10px;
+    padding: 12px;
   }
 
   input[type="submit"] {
     @extend %button;
+    width: 10em;
   }
 
   .selected-image,
@@ -64,14 +75,47 @@ form {
   }
 }
 
-@include tablet {
+// ********** MEDIA QUERRIES **********
+
+// ********** MEDIUM SCREENS **********
+
+@include mediumScreens {
   form {
-    max-width: 50%;
+    .form-inputs {
+      label,
+      input,
+      fieldset,
+      select,
+      textarea {
+        width: 18em;
+      }
+    }
   }
 }
 
+// ********** TABLETS **********
+
+@include tablet {
+  form {
+    width: 50%;
+    max-width: 50%;
+    .form-inputs {
+      label,
+      input,
+      fieldset,
+      select,
+      textarea {
+        width: 20em;
+      }
+    }
+  }
+}
+
+// ********** DESKTOP **********
+
 @include desktop {
   form {
-    max-width: 30%;
+    width: 40%;
+    max-width: 40%;
   }
 }

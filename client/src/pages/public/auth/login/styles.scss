@@ -1,7 +1,9 @@
-@import "../../../../assets/styles/mixins";
-@import "../../../../assets/styles/_placeholders";
 @import "../../../../assets/styles/_variables";
 
-.login-page-main {
+.loginPage-main {
   background: $form-bg;
+
+  > h2 {
+    padding-bottom: 32px;
+  }
 }

@@ -1,56 +1,37 @@
+import "./styles.scss";
+
 const Contact = () => {
   return (
-    <>
-      <h1>Contact</h1>
+    <main className="contactPage-main">
+      <h2>Contact</h2>
       <p>
         Pour toute demande d'information, n'hésitez pas à me contacter en
         remplissant le formulaire ci-dessous !
       </p>
-      <form
-        method="post"
-        encType="multipart/form-data"
-        className="register-form"
-      >
-        <div className="register-form-inputs">
-          <label htmlFor="firstName">Prénom : </label>
+      <form className="contact-form">
+        <div className="form-inputs">
           <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            placeholder="Prénom"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
           />
         </div>
-        <div className="register-form-inputs">
-          <label htmlFor="lastName">Nom : </label>
-          <input type="text" name="lastName" id="lastName" placeholder="Nom" />
-        </div>
-        <div className="register-form-inputs">
-          <label htmlFor="phone">Téléphone : </label>
+        <div className="form-inputs">
           <input
             type="tel"
             name="phone"
             id="phone"
-            placeholder="Format XX XX XX XX XX"
+            placeholder="Téléphone (format XX XX XX XX XX)"
             pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
           />
         </div>
-        <div className="register-form-inputs">
-          <label htmlFor="email">Email : </label>
-          <input type="email" name="email" id="email" />
+
+        <div className="form-inputs">
+          <textarea placeholder="Écrivez votre message ici" required></textarea>
         </div>
-        <div className="register-form-inputs">
-          <label htmlFor="password">Mot de passe : </label>
-          <input type="password" name="password" id="password" />
-        </div>
-        <div className="register-form-inputs">
-          <label htmlFor="file">Avatar : </label>
-          <input
-            type="file"
-            name="file"
-            accept="image/jpeg, image/png"
-            id="file"
-          />
-        </div>
+
         <input
           type="submit"
           name="submit"
@@ -58,7 +39,7 @@ const Contact = () => {
           value="Envoyer"
         />
       </form>
-    </>
+    </main>
   );
 };
 

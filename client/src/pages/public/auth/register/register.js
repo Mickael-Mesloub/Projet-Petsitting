@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postFormData } from "../../../../helpers/fetch";
+import "./styles.scss";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -29,11 +30,10 @@ const Register = () => {
   };
 
   return (
-    <>
+    <main className="registerPage-main">
       <h2>Inscrivez-vous</h2>
       <form onSubmit={handleSubmit}>
-        <div className="register-form-inputs">
-          <label htmlFor="firstName">Prénom : </label>
+        <div className="form-inputs">
           <input
             type="text"
             name="firstName"
@@ -41,8 +41,7 @@ const Register = () => {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-        <div className="register-form-inputs">
-          <label htmlFor="lastName">Nom : </label>
+        <div className="form-inputs">
           <input
             type="text"
             name="lastName"
@@ -50,34 +49,33 @@ const Register = () => {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <div className="register-form-inputs">
-          <label htmlFor="phone">Téléphone : </label>
+        <div className="form-inputs">
           <input
             type="tel"
             name="phone"
-            placeholder="Format XX XX XX XX XX"
+            placeholder="Téléphone (format XX XX XX XX XX)"
             pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
             onChange={(e) => setPhone(e.target.value)}
           />
         </div>
-        <div className="register-form-inputs">
-          <label htmlFor="email">Email : </label>
+        <div className="form-inputs">
           <input
             type="email"
             name="email"
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="register-form-inputs">
-          <label htmlFor="password">Mot de passe : </label>
+        <div className="form-inputs">
           <input
             type="password"
             name="password"
+            placeholder="Mot de passe"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="register-form-inputs">
-          <label htmlFor="file">Avatar : </label>
+        <div className="form-inputs file-input">
+          <label htmlFor="file">Choisissez un avatar : </label>
           <input
             type="file"
             name="file"
@@ -92,7 +90,7 @@ const Register = () => {
           value="M'inscrire"
         />
       </form>
-    </>
+    </main>
   );
 };
 

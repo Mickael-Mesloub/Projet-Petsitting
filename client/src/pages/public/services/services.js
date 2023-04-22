@@ -12,26 +12,30 @@ const Services = () => {
   }, []);
 
   return (
-    <main>
-      {services && services.length > 0 ? (
+    <main className="prestationPage-main">
+      {services && services.length === 0 ? (
+        <p>Aucune prestation n'est disponible pour le moment.</p>
+      ) : (
         <section>
-          <h2>Services</h2>
-          <div className="services-container">
+          <h2>Mes prestations</h2>
+          <article>
             {services.map((service, i) => (
-              <>
+              <div className="services-container" key={i}>
                 {service.visible && (
                   <div key={i} className="service">
-                    <div>{service.name}</div>
-                    {/* <div>{service.description}</div> */}
-                    <div>{service.price}€</div>
+                    <p className="service-text service-name">{service.name}</p>
+                    <p className="service-text service-description">
+                      {service.description}
+                    </p>
+                    <p className="service-text service-price">
+                      À partir de <b>{service.price}€</b>
+                    </p>
                   </div>
                 )}
-              </>
+              </div>
             ))}
-          </div>
+          </article>
         </section>
-      ) : (
-        <p>Aucune prestation n'est disponible pour le moment.</p>
       )}
     </main>
   );

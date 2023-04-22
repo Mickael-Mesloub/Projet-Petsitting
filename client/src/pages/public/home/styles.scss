@@ -13,7 +13,7 @@
     text-align: center;
 
     .link-to-page {
-      @extend %link;
+      @extend %button;
     }
   }
 
@@ -21,7 +21,7 @@
 
   > section {
     @extend %section;
-    > h3 {
+    h3 {
       @extend %section-h3;
     }
     .homepage-articles-container {

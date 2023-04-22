@@ -1,2 +1,73 @@
 @import "../../../assets/styles/_placeholders";
 @import "../../../assets/styles/_variables";
+@import "../../../assets/styles/_mixins";
+
+.prestationPage-main {
+  @extend %flex-center;
+  > section {
+    @extend %section;
+    > h2 {
+      color: $dark-violet;
+    }
+
+    > article {
+      @extend %article;
+
+      .services-container {
+        width: 100%;
+
+        .service {
+          @extend %flex-center;
+          flex-direction: column;
+          color: $pink;
+          background: $dark-violet;
+          border-radius: 12px;
+          padding: 16px;
+          transition: all 0.15s ease-in-out;
+
+          &:hover {
+            transform: scale(1.05);
+            opacity: 0.95;
+          }
+
+          .service-text {
+            width: 100%;
+            text-align: center;
+            padding: 8px;
+          }
+          .service-name {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.25em;
+            color: $beige;
+          }
+
+          .service-description {
+            padding-bottom: 32px;
+          }
+
+          .service-price {
+            text-align: right;
+            background: $beige;
+            color: $dark-violet;
+            border-radius: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  .prestationPage-main > section > article {
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    > .services-container {
+      width: 22em;
+      max-width: 22em;
+    }
+  }
+}

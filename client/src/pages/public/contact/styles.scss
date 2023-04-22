@@ -1,0 +1,19 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/_placeholders";
+@import "../../../assets/styles/_variables";
+
+.contactPage-main {
+  @extend %flex-center;
+  background: $section-bg;
+  flex-direction: column;
+  gap: 16px;
+
+  > p {
+    padding: 12px;
+    text-align: justify;
+  }
+
+  .contact-form {
+    width: 90%;
+  }
+}
