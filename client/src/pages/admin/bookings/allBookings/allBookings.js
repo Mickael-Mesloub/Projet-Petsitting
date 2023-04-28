@@ -2,9 +2,9 @@ const Bookings = () => {
   // REACT_APP_BACKEND_URL
 
   return (
-    <>
-      <h1>Réservations</h1>
-    </>
+    <main>
+      <h2>Réservations</h2>
+    </main>
   );
 };
 

@@ -1,9 +1,9 @@
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice";
-import "../../styles/profile.scss";
+// import "../../styles/profile.scss";
 
 const UpdateProfile = () => {
   const [profile, setProfile] = useState([]);
@@ -16,12 +16,16 @@ const UpdateProfile = () => {
 
   const { user } = useSelector((state) => state);
   const { userId } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
-      .then((data) => setProfile(data))
-      .catch((error) => console.log(error));
+    if (user && user._id === userId) {
+      getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
+        .then((data) => setProfile(data))
+        .catch((error) => console.log(error));
+    }
+    navigate("/");
   }, [userId]);
 
   useEffect(() => {
@@ -50,10 +54,10 @@ const UpdateProfile = () => {
   };
 
   return (
-    <>
+    <main>
       {profile.user && (
         <>
-          <h1>Modifier le profil</h1>
+          <h2>Modifier le profil</h2>
           <form
             onSubmit={handleSubmit}
             method="post"
@@ -122,7 +126,7 @@ const UpdateProfile = () => {
           </form>
         </>
       )}
-    </>
+    </main>
   );
 };
 

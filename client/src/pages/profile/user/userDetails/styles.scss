@@ -1,0 +1,64 @@
+@import "../../../../assets/styles/_variables";
+@import "../../../../assets/styles/_placeholders";
+
+.profilePage-main {
+  @extend %flex-center;
+  background: $section-bg;
+
+  .profile-container {
+    @extend %flex-center;
+    flex-direction: column;
+    gap: 32px;
+    background: $article-bg;
+    padding: 32px;
+    border-radius: 80% / 10%;
+    box-shadow: 5px 5px 10px $dark-violet;
+
+    > h2 {
+      padding: 16px;
+      border-radius: 80% / 20%;
+      background: $beige;
+      color: $dark-violet;
+      box-shadow: 5px 5px 10px $dark-violet;
+    }
+
+    .user-avatar {
+      margin: auto;
+      width: 100px;
+      height: 100px;
+      background: $article-bg;
+      border-radius: 50%;
+      padding: 8px;
+      box-shadow: -5px 5px 8px $beige;
+
+      > img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+    .user-information {
+      @extend %flex-center;
+      flex-direction: column;
+      padding: 12px;
+      border-radius: 80% / 20%;
+      background: $beige;
+      color: $dark-violet;
+      box-shadow: 5px 5px 10px $dark-violet;
+    }
+    .update-profile-link-container {
+      padding: 16px;
+      .update-profile-link {
+        @extend %button;
+        box-shadow: -5px 5px 8px $beige;
+        border-radius: 80% / 20%;
+
+        &:hover {
+          background: $beige;
+          color: $dark-violet;
+          box-shadow: 5px 5px 10px $dark-violet;
+        }
+      }
+    }
+  }
+}

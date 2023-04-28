@@ -32,9 +32,9 @@ const Animals = () => {
   };
 
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>Animaux</h1>
+      <h2>Animaux</h2>
       {animals.length === 0 ? (
         <div>Aucun animal trouvé</div>
       ) : (
@@ -67,7 +67,7 @@ const Animals = () => {
           ))}
         </div>
       )}
-    </>
+    </main>
   );
 };
 

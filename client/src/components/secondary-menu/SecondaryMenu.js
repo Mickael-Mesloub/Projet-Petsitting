@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./styles.scss";
 import { BiUserCircle, BiCalendar, BiDesktop } from "react-icons/bi";
@@ -46,7 +46,7 @@ const SecondaryMenu = () => {
                 </Link>
               </Tooltip>
             </li>
-            <li>
+            {/* <li>
               <Tooltip text={"Réserver"}>
                 <Link
                   to={`/${user._id}/booking`}
@@ -55,7 +55,7 @@ const SecondaryMenu = () => {
                   <BiCalendar />
                 </Link>
               </Tooltip>
-            </li>
+            </li> */}
             <li className="logout-link">
               <Link to="/logout" className="secondary-menu-link logout-icon">
                 <BsPower />

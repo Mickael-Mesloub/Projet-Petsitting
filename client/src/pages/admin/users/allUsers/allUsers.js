@@ -14,44 +14,42 @@ const AdminAllUsers = () => {
   }, []);
 
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>Utilisateurs</h1>
+      <h2>Utilisateurs</h2>
       {users && (
-        <main>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Prénom</th>
-                <th>Nom de famille</th>
-                <th>Téléphone</th>
-                <th>Email</th>
-                <th>Avatar</th>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Prénom</th>
+              <th>Nom de famille</th>
+              <th>Téléphone</th>
+              <th>Email</th>
+              <th>Avatar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, i) => (
+              <tr key={i}>
+                <td>
+                  <Link
+                    to={`${process.env.REACT_APP_BACKEND_URL}/admin/users/${user._id}`}
+                  >
+                    {user._id}
+                  </Link>
+                </td>
+                <td>{user.firstName}</td>
+                <td>{user.lastName}</td>
+                <td>{user.phone}</td>
+                <td>{user.email}</td>
+                <td>{user.avatar}</td>
               </tr>
-            </thead>
-            <tbody>
-              {users.map((user, i) => (
-                <tr key={i}>
-                  <td>
-                    <Link
-                      to={`${process.env.REACT_APP_BACKEND_URL}/admin/users/${user._id}`}
-                    >
-                      {user._id}
-                    </Link>
-                  </td>
-                  <td>{user.firstName}</td>
-                  <td>{user.lastName}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.email}</td>
-                  <td>{user.avatar}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </main>
+            ))}
+          </tbody>
+        </table>
       )}
-    </>
+    </main>
   );
 };
 

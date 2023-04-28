@@ -17,9 +17,9 @@ const AdminServices = () => {
   }, []);
 
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>Services</h1>
+      <h2>Services</h2>
       <div className="services-container">
         {services.map((service, i) => (
           <div key={i} className="service">
@@ -31,7 +31,7 @@ const AdminServices = () => {
           </div>
         ))}
       </div>
-    </>
+    </main>
   );
 };
 

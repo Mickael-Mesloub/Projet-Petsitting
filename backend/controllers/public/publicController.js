@@ -45,7 +45,7 @@ export const getAllArticles = async (req, res) => {
 
     return res.status(200).json(articles);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       error: `Articles introuvables : ${error.message}. Veuillez réessayer.`,
     });
   }
@@ -54,7 +54,6 @@ export const getAllArticles = async (req, res) => {
 export const getArticle = async (req, res) => {
   try {
     const article = await articleModel.findById(req.params.articleId);
-    console.log(article);
 
     if (!article) {
       return res.status(404).json({ error: "Cet article n'existe pas." });
@@ -76,8 +75,6 @@ export const createBooking = async (req, res) => {
     const animal = await animalModel.findById(req.body.animal);
     const service = await serviceModel.findById(req.body.service);
 
-    console.log(animal);
-
     if (!animal) {
       return res.status(404).json({ error: "Cet animal n'existe pas." });
     }
@@ -91,7 +88,6 @@ export const createBooking = async (req, res) => {
         animal,
       })
       .then((booking) => {
-        console.log(`Nouvelle réservation créée : ${booking}`);
         return res
           .status(201)
           .json({ message: "Une nouvelle réservation a été créée!", booking });

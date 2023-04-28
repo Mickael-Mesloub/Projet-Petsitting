@@ -3,10 +3,10 @@ import AdminLinks from "../../../components/adminLinks/AdminLinks";
 
 const AdminHome = () => {
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>AdminHome</h1>
-    </>
+      <h2>AdminHome</h2>
+    </main>
   );
 };
 

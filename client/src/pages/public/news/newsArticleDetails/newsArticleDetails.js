@@ -59,10 +59,13 @@ const NewsArticleDetails = () => {
               </div>
             </div>
           )}
-
-          <h3>{article.title}</h3>
-          <em>Publié le {new Date(article.createdAt).toLocaleDateString()}</em>
-          <p>{article.content}</p>
+          <div className="article-content">
+            <h3>{article.title}</h3>
+            <em>
+              Publié le {new Date(article.createdAt).toLocaleDateString()}
+            </em>
+            <p>{article.content}</p>
+          </div>
         </article>
       )}
       <div className="link-button">

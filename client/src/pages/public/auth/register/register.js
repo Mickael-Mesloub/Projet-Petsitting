@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postFormData } from "../../../../helpers/fetch";
+import { postFormData, postMethod } from "../../../../helpers/fetch";
 import "./styles.scss";
 
 const Register = () => {
@@ -17,22 +17,52 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
-    formData.append("phone", phone);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("avatar", avatar[0]);
+
+    if (firstName && lastName && phone && email && password) {
+      formData.append("firstName", firstName);
+      console.log(formData.get("firstName"));
+
+      formData.append("lastName", lastName);
+      console.log(formData.get("lastName"));
+
+      formData.append("phone", phone);
+      console.log(formData.get("phone"));
+
+      formData.append("email", email);
+      console.log(formData.get("email"));
+
+      formData.append("password", password);
+      console.log(formData.get("password"));
+    }
+
+    if (avatar && avatar.length > 0) {
+      for (const image of avatar) {
+        formData.append("avatar", image);
+      }
+    } else {
+      formData.append("avatar", "");
+    }
+    console.log(formData.get("avatar"));
+
+    for (const [key, value] of formData) {
+      console.log(key + " " + value);
+    }
 
     postFormData(`${process.env.REACT_APP_BACKEND_URL}/register`, formData)
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
 
+  //   useEffect(() => {
+  //     console.log(
+  //       `${firstName}-${lastName}-${email}-${phone}-${password}-${avatar}`
+  //     );
+  //   }, [firstName, lastName, email, phone, password, avatar]);
+
   return (
     <main className="registerPage-main">
       <h2>Inscrivez-vous</h2>
-      <form onSubmit={handleSubmit}>
+      <form encType="multipart/form-data" method="POST" onSubmit={handleSubmit}>
         <div className="form-inputs">
           <input
             type="text"

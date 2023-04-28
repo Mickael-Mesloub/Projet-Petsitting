@@ -35,70 +35,49 @@ import UpdateArticle from "../pages/admin/news/updateNewsArticle/updateNewsArtic
 import AllUsers from "../pages/admin/users/allUsers/allUsers";
 import Bookings from "../pages/admin/bookings/allBookings/allBookings";
 
-const Navigation = () => {
-  return (
-    <Routes>
-      {/* PUBLIC */}
-      <Route path="/" element={<Home />} />
-      <Route path="/news" element={<PublicNews />} />
-      <Route path="/news/:articleId" element={<PublicNewsDetails />} />
-      <Route path="/services" element={<PublicServices />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/:userId/booking" element={<Booking />} />
+export const publicRoutes = [
+  { path: "/", element: <Home /> },
+  { path: "/news", element: <PublicNews /> },
+  { path: "/news/:articleId", element: <PublicNewsDetails /> },
+  { path: "/services", element: <PublicServices /> },
+  { path: "/contact", element: <Contact /> },
+  { path: "/:userId/booking", element: <Booking /> },
+  { path: "*", element: <NotFoundPage /> },
+];
 
-      {/* PROFILE */}
-      <Route path={`/profile/:userId`} element={<Profile />} />
-      <Route
-        path={`/profile/:userId/update-profile`}
-        element={<UpdateProfile />}
-      />
-      <Route
-        path={`/profile/:userId/create-animal`}
-        element={<CreateAnimal />}
-      />
-      <Route path={`/profile/:userId/animals`} element={<UserAnimals />} />
-      <Route path={`/profile/:userId/animals/:animalId`} element={<Animal />} />
-      <Route
-        path={`/profile/:userId/animals/:animalId/update-animal`}
-        element={<UpdateAnimal />}
-      />
-      <Route
-        path={`/profile/:userId/bookings/:bookingId`}
-        element={<GetBooking />}
-      />
+export const profileRoutes = [
+  { path: `/profile/:userId`, element: <Profile /> },
+  { path: `/profile/:userId/update-profile`, element: <UpdateProfile /> },
+  { path: `/profile/:userId/create-animal`, element: <CreateAnimal /> },
+  { path: `/profile/:userId/animals`, element: <UserAnimals /> },
+  { path: `/profile/:userId/animals/:animalId`, element: <Animal /> },
+  {
+    path: `/profile/:userId/animals/:animalId/update-animal`,
+    element: <UpdateAnimal />,
+  },
+  { path: `/profile/:userId/bookings/:bookingId`, element: <GetBooking /> },
+];
 
-      {/* ADMIN */}
-      <Route path="/admin" element={<AdminHome />} />
-      <Route path="/admin/services" element={<AdminServices />} />
-      <Route
-        path="/admin/services/create-service"
-        element={<CreateService />}
-      />
-      <Route path="/admin/services/:serviceId" element={<ServiceDetails />} />
-      <Route
-        path="/admin/services/:serviceId/update-service"
-        element={<UpdateService />}
-      />
-      <Route path="/admin/news" element={<AdminNews />} />
-      <Route path="/admin/news/:articleId" element={<AdminNewsDetails />} />
-      <Route path="/admin/news/create-article" element={<CreateArticle />} />
-      <Route
-        path="/admin/news/:articleId/update-article"
-        element={<UpdateArticle />}
-      />
-      <Route path="/admin/users" element={<AllUsers />} />
-      <Route path="/admin/animals" element={<Animals />} />
-      <Route path="/admin/bookings" element={<Bookings />} />
+export const adminRoutes = [
+  { path: "/admin", element: <AdminHome /> },
+  { path: "/admin/services", element: <AdminServices /> },
+  { path: "/admin/services/create-service", element: <CreateService /> },
+  { path: "/admin/services/:serviceId", element: <ServiceDetails /> },
+  {
+    path: "/admin/services/:serviceId/update-service",
+    element: <UpdateService />,
+  },
+  { path: "/admin/news", element: <AdminNews /> },
+  { path: "/admin/news/:articleId", element: <AdminNewsDetails /> },
+  { path: "/admin/news/create-article", element: <CreateArticle /> },
+  { path: "/admin/news/:articleId/update-article", element: <UpdateArticle /> },
+  { path: "/admin/users", element: <AllUsers /> },
+  { path: "/admin/animals", element: <Animals /> },
+  { path: "/admin/bookings", element: <Bookings /> },
+];
 
-      {/* AUTH */}
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/logout" element={<Logout />} />
-
-      {/* NOT FOUND */}
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-  );
-};
-
-export default Navigation;
+export const authRoutes = [
+  { path: "/register", element: <Register /> },
+  { path: "/login", element: <Login /> },
+  { path: "/logout", element: <Logout /> },
+];

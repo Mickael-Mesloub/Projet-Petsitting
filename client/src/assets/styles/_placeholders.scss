@@ -22,7 +22,7 @@
   justify-content: flex-start;
   flex-direction: column;
   gap: 16px;
-  padding: 16px;
+  padding: 32px;
   text-align: justify;
   border-radius: 8px;
   background: #fff;
@@ -54,8 +54,7 @@
   box-shadow: 5px 5px 10px #000;
 
   &:hover {
-    background: $pink;
-    color: $dark-violet;
+    background: linear-gradient(90deg, $blue-violet-gradient);
   }
 }
 

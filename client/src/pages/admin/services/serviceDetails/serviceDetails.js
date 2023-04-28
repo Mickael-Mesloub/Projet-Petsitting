@@ -20,12 +20,12 @@ const ServiceDetails = () => {
   }, [service]);
 
   return (
-    <>
+    <main>
       {service && (
         <>
           <AdminLinks />
           <main>
-            <h1>Détails du service {service.name} </h1>
+            <h2>Détails du service {service.name} </h2>
             <div className="services-container">
               <div>Intitulé du service : {service.name}</div>
               <div>description du service : {service.description}</div>
@@ -55,7 +55,7 @@ const ServiceDetails = () => {
           </main>
         </>
       )}
-    </>
+    </main>
   );
 };
 

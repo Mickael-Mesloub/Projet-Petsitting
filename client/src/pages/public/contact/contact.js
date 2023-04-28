@@ -29,7 +29,11 @@ const Contact = () => {
         </div>
 
         <div className="form-inputs">
-          <textarea placeholder="Écrivez votre message ici" required></textarea>
+          <textarea
+            placeholder="Écrivez votre message ici"
+            required
+            rows="10"
+          ></textarea>
         </div>
 
         <input

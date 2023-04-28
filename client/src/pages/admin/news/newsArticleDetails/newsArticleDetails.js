@@ -14,9 +14,9 @@ const AdminNewsDetails = () => {
   }, [articleId]);
 
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>Détails de l'article</h1>
+      <h2>Détails de l'article</h2>
       {article && (
         <div className="admin-news-article">
           <div>{article.title}</div>
@@ -60,7 +60,7 @@ const AdminNewsDetails = () => {
           </Link>
         </div>
       )}
-    </>
+    </main>
   );
 };
 

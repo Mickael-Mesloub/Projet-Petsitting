@@ -3,6 +3,9 @@
 @import "../../../../assets/styles/_mixins";
 
 .newspage-main {
+  > h2 {
+    padding-bottom: 42px;
+  }
   > section {
     @extend %section;
 
@@ -17,25 +20,33 @@
         width: 100%;
         background: $section-bg;
         border-radius: 12px;
-        padding: 12px;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+
+        &:hover {
+          transform: scale(1.02);
+          opacity: 0.8;
+        }
 
         .article-image {
-          width: 15em;
           align-self: center;
           > img {
             width: 100%;
-            border-radius: 12px;
-            box-shadow: 5px 5px 10px #000;
+            border-radius: 12px 12px 0 0;
           }
         }
         .article-text-container {
           @extend %flex-center;
           flex-direction: column;
-          padding: 16px;
+          padding: 8px;
           border-radius: 12px;
 
           > h4 {
             padding: 0;
+          }
+
+          > p {
+            line-height: 1.5;
           }
         }
       }
@@ -58,10 +69,16 @@
           align-items: flex-start;
           width: 100%;
           gap: 2.5em;
+          padding: 16px;
           .article-image {
             display: flex;
             justify-content: center;
             width: 15em;
+
+            > img {
+              border-radius: 12px 12px 12px 12px;
+              box-shadow: 5px 5px 10px #000;
+            }
           }
           .article-text-container {
             flex: 1;

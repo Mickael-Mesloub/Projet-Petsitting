@@ -4,6 +4,8 @@ import { getMethod } from "../../../helpers/fetch";
 import { useParams } from "react-router-dom";
 import { loginUser } from "../../../store/slices/user/userSlice";
 
+// En cours de réflexion pour le fonctionnement des réservations...
+
 const Booking = () => {
   const [animals, setAnimals] = useState([]);
   const [services, setServices] = useState([]);
@@ -13,14 +15,11 @@ const Booking = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token && !user.isLogged) {
-      getMethod(`${process.env.REACT_APP_BACKEND_URL}/verify-token`)
-        .then((data) => {
-          dispatch(loginUser(data.user));
-        })
-        .catch((error) => console.log(error));
-    }
+    getMethod(`${process.env.REACT_APP_BACKEND_URL}/verify-token`)
+      .then((data) => {
+        dispatch(loginUser(data.user));
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -44,9 +43,9 @@ const Booking = () => {
   }, []);
 
   return (
-    <>
-      <h1>Réserver</h1>
-    </>
+    <main>
+      <h2>Réserver</h2>
+    </main>
   );
 };
 

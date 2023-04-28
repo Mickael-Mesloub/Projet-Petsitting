@@ -56,9 +56,9 @@ const UpdateArticle = () => {
   }, [selectedImages]);
 
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>Modifier l'article</h1>
+      <h2>Modifier l'article</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Titre : </label>
         <input
@@ -123,7 +123,7 @@ const UpdateArticle = () => {
         )}
         <input type="submit" value="Modifier" />
       </form>
-    </>
+    </main>
   );
 };
 

@@ -1,10 +1,11 @@
 import { getMethod } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles.scss";
 
 const News = () => {
   const [articles, setArticles] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getMethod(`${process.env.REACT_APP_BACKEND_URL}/news`)
@@ -23,7 +24,11 @@ const News = () => {
         ) : (
           <article className="news-articles">
             {articles.map((article, i) => (
-              <div key={i} className="news-article">
+              <div
+                key={i}
+                className="news-article"
+                onClick={() => navigate(`/news/${article._id}`)}
+              >
                 {article.images.length > 0 && (
                   <div className="article-image">
                     <img
@@ -33,9 +38,7 @@ const News = () => {
                   </div>
                 )}
                 <div className="article-text-container">
-                  <h4>
-                    <Link to={`/news/${article._id}`}>{article.title}</Link>
-                  </h4>
+                  <h4>{article.title}</h4>
                   <p className="article-content">
                     {article.content.substring(0, 150)}...
                   </p>

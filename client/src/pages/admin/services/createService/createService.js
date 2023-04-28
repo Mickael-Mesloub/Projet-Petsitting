@@ -14,9 +14,9 @@ const CreateService = () => {
   }, [visible]);
 
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>Créer une nouvelle prestation</h1>
+      <h2>Créer une nouvelle prestation</h2>
       <form>
         <label htmlFor="title">Titre : </label>
         <input type="text" name="title" />
@@ -52,7 +52,7 @@ const CreateService = () => {
 
         <input type="submit" value="Créer" />
       </form>
-    </>
+    </main>
   );
 };
 

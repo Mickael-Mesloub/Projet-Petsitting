@@ -5,7 +5,7 @@
 // BURGER MENU BUTTON
 
 .burger-menu-btn {
-  z-index: 9999;
+  z-index: 99;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -59,7 +59,7 @@
 // MENU AND LINKS
 
 .main-nav {
-  z-index: 9998;
+  z-index: 98;
   display: flex;
   justify-content: flex-end;
   transition: right 0.7s ease-in-out;
@@ -78,10 +78,10 @@
     transition: right 0.7s ease-in-out;
 
     &.hidden {
+      display: flex;
       position: fixed;
       right: -100%;
-      display: flex;
-      transition: right 0.7s ease-in-out;
+      transition: right 0.15s ease-in-out;
     }
 
     &.visible {
@@ -96,11 +96,11 @@
 
       > li {
         margin-bottom: 15px;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.15s ease-in-out;
 
         &:hover {
           transform: translateX(5px);
-          transition: all 0.3s ease-in-out;
+          transition: all 0.15s ease-in-out;
         }
       }
 

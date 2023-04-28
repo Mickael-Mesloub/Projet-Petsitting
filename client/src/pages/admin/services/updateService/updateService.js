@@ -61,9 +61,9 @@ const UpdateService = () => {
   }, [name]);
 
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>Modifier la prestation</h1>
+      <h2>Modifier la prestation</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Titre : </label>
         <input
@@ -113,7 +113,7 @@ const UpdateService = () => {
 
         <input type="submit" value="Modifier" />
       </form>
-    </>
+    </main>
   );
 };
 

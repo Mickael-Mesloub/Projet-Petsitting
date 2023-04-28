@@ -40,6 +40,10 @@ form {
     }
   }
 
+  textarea {
+    resize: none;
+  }
+
   select,
   input[type="number"] {
     text-align: center;
@@ -97,8 +101,6 @@ form {
 
 @include tablet {
   form {
-    width: 50%;
-    max-width: 50%;
     .form-inputs {
       label,
       input,
@@ -115,7 +117,5 @@ form {
 
 @include desktop {
   form {
-    width: 40%;
-    max-width: 40%;
   }
 }

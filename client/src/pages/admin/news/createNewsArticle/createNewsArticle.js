@@ -1,6 +1,6 @@
 import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
 import { useState } from "react";
-import { postMethod } from "../../../../helpers/fetch.js";
+import { postFormData, postMethod } from "../../../../helpers/fetch.js";
 
 const CreateNews = () => {
   const [title, setTitle] = useState("");
@@ -9,14 +9,16 @@ const CreateNews = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
+
     for (const file of files) {
       formData.append("file", file);
     }
 
-    postMethod(
+    postFormData(
       `${process.env.REACT_APP_BACKEND_URL}/admin/news/create-article`,
       formData
     )
@@ -25,9 +27,9 @@ const CreateNews = () => {
   };
 
   return (
-    <>
+    <main>
       <AdminLinks />
-      <h1>Nouvel article</h1>
+      <h2>Nouvel article</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Titre : </label>
         <input
@@ -52,7 +54,7 @@ const CreateNews = () => {
         />
         <input type="submit" value="Créer" />
       </form>
-    </>
+    </main>
   );
 };
 

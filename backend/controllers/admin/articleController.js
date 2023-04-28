@@ -18,6 +18,8 @@ export const createArticle = async (req, res) => {
         "images/news"
       );
 
+      console.log(fields);
+
       articleModel
         .create({
           title: fields.title,

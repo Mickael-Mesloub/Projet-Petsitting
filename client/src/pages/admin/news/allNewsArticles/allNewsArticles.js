@@ -16,7 +16,7 @@ const AdminNews = () => {
   }, []);
 
   return (
-    <>
+    <main>
       <AdminLinks />
       <main>
         <h2>Actualités</h2>
@@ -70,7 +70,7 @@ const AdminNews = () => {
           </Link>
         </div>
       </main>
-    </>
+    </main>
   );
 };
 

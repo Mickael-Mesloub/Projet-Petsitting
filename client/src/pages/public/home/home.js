@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getMethod } from "../../../helpers/fetch";
 import { useState, useEffect } from "react";
@@ -9,6 +9,7 @@ const Home = () => {
   const [articleImages, setArticleImages] = useState([]);
   const [usernameCapitalized, setUsernameCapitalized] = useState("");
   const { user } = useSelector((state) => state);
+  const navigate = useNavigate();
 
   // Get news articles for the "latest news" section
 
@@ -158,7 +159,11 @@ const Home = () => {
           ) : (
             <article className="news-articles">
               {articles.map((article, i) => (
-                <div key={i} className="news-article">
+                <div
+                  key={i}
+                  className="news-article"
+                  onClick={() => navigate(`/news/${article._id}`)}
+                >
                   {article.images.length > 0 && (
                     <div className="article-image">
                       <img

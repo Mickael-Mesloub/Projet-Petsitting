@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice.js";
 import { postMethod } from "../../../../helpers/fetch";
 import "./styles.scss";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ const Login = () => {
 
   const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,6 +25,7 @@ const Login = () => {
         localStorage.setItem("jwt", data.token);
       })
       .catch((error) => console.log(error));
+    navigate("/");
   };
 
   return (
@@ -48,7 +51,7 @@ const Login = () => {
         <input
           type="submit"
           name="submit"
-          className="register-btn"
+          className="login-btn"
           value="Connexion"
         />
       </form>

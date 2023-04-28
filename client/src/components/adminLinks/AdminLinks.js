@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const AdminLinks = () => {
-  const { user } = useSelector((state) => state);
-  const navigate = useNavigate();
+  //   const { user } = useSelector((state) => state);
+  //   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user.isAdmin) {
-      navigate("/");
-    }
-  }, []);
+  //   useEffect(() => {
+  //     if (!user.isAdmin) {
+  //       navigate("/");
+  //     }
+  //   }, []);
 
   return (
     <div className="admin-links-container">
