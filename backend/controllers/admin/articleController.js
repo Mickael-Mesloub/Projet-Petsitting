@@ -22,6 +22,7 @@ export const createArticle = async (req, res) => {
 
       articleModel
         .create({
+          forWhichPage: fields.forWhichPage,
           title: fields.title,
           content: fields.content,
           images,
@@ -107,6 +108,7 @@ export const updateArticle = async (req, res) => {
         .filter((i) => !deletedImages.includes(i))
         .concat(images);
       article.title = fields.title || article.title;
+      article.forWhichPage = fields.forWhichPage || article.forWhichPage;
       article.content = fields.content || article.content;
       article.images = updatedImages;
       article

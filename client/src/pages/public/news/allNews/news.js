@@ -9,7 +9,12 @@ const News = () => {
 
   useEffect(() => {
     getMethod(`${process.env.REACT_APP_BACKEND_URL}/news`)
-      .then((data) => setArticles(data))
+      .then((data) => {
+        const newsArticles = data.filter(
+          (article) => article.forWhichPage === "news"
+        );
+        setArticles(newsArticles);
+      })
       .catch((error) => console.log(error));
   }, []);
 

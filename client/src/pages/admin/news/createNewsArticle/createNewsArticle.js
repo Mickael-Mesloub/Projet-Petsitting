@@ -1,8 +1,9 @@
 import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postFormData, postMethod } from "../../../../helpers/fetch.js";
 
 const CreateNews = () => {
+  const [forWhichPage, setForWhichPage] = useState("news");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);
@@ -11,6 +12,7 @@ const CreateNews = () => {
     event.preventDefault();
 
     const formData = new FormData();
+    formData.append("forWhichPage", forWhichPage);
     formData.append("title", title);
     formData.append("content", content);
 
@@ -26,11 +28,29 @@ const CreateNews = () => {
       .catch((error) => console.log(error));
   };
 
+  useEffect(() => {
+    console.log(forWhichPage);
+  }, [forWhichPage]);
+
   return (
     <main>
       <AdminLinks />
       <h2>Nouvel article</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="forWhichPage">Pour quelle page ?</label>
+        <select
+          name="forWhichPage"
+          value={forWhichPage}
+          onChange={(e) => setForWhichPage(e.target.value)}
+        >
+          <option name="news" value="news">
+            Actualités
+          </option>
+          <option name="home" value="home">
+            Accueil
+          </option>
+        </select>
+
         <label htmlFor="title">Titre : </label>
         <input
           type="text"

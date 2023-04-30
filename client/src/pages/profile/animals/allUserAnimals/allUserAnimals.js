@@ -1,7 +1,6 @@
 import { getMethod } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-
 import "./styles.scss";
 
 const UserAnimals = () => {
@@ -20,7 +19,7 @@ const UserAnimals = () => {
 
   return (
     <>
-      <h1>Animaux :</h1>
+      <h2>Animaux :</h2>
       {profile.animals && profile.animals.length > 0 ? (
         <>
           <div className="animals-container">

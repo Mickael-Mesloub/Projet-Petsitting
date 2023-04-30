@@ -5,22 +5,30 @@ import { useState, useEffect } from "react";
 import "./styles.scss";
 
 const Home = () => {
-  const [articles, setArticles] = useState([]);
-  const [articleImages, setArticleImages] = useState([]);
+  const [homeArticles, setHomeArticles] = useState([]);
+  const [newsArticles, setNewsArticles] = useState([]);
   const [usernameCapitalized, setUsernameCapitalized] = useState("");
   const { user } = useSelector((state) => state);
   const navigate = useNavigate();
 
-  // Get news articles for the "latest news" section
-
   useEffect(() => {
     getMethod(`${process.env.REACT_APP_BACKEND_URL}/news`)
-      .then((data) => setArticles(data.slice(-3)))
+      .then((data) => {
+        const homeArticles = data.filter(
+          (article) => article.forWhichPage === "home"
+        );
+        setHomeArticles(homeArticles);
+        const newsArticles = data.filter(
+          (article) => article.forWhichPage === "news"
+        );
+
+        // set the last 3 news articles for the "latest news" section
+        setNewsArticles(newsArticles.slice(-3));
+      })
       .catch((error) => console.log(error));
   }, []);
 
   // Capitalize username's first letter
-
   useEffect(() => {
     capitalizeUsername(user.firstName).then((username) =>
       setUsernameCapitalized(username)
@@ -36,6 +44,10 @@ const Home = () => {
       return capitalizeUsername;
     }
   };
+
+  useEffect(() => {
+    console.log(homeArticles);
+  }, [homeArticles]);
 
   return (
     <main className="homepage-main">
@@ -66,99 +78,31 @@ const Home = () => {
           </div>
         </section>
       )}
+      {homeArticles && (
+        <section className="presentation-section">
+          <h3>Laissez-moi vous présenter... </h3>
+          <div className="homepage-articles-container">
+            {homeArticles.map((article, i) => (
+              <article key={i}>
+                <h4>{article.title} </h4>
+                <p>{article.content} </p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
-      <section className="presentation-section">
-        <h3>Laissez-moi vous présenter... </h3>
-        <div className="homepage-articles-container">
-          <article>
-            <h4>Qui je suis 📜</h4>
-            <p>
-              Nunc elit leo, viverra quis libero non, tincidunt vehicula est.
-              Sed ultricies sit amet dolor egestas blandit. Fusce lobortis
-              pharetra sem, in aliquet erat sodales non. Etiam eu tellus
-              placerat, auctor tortor euismod, scelerisque justo. Proin vel
-              iaculis purus. Nunc a auctor lectus, non tincidunt magna. Aliquam
-              erat volutpat. Aenean sagittis interdum nunc porttitor blandit.
-              Quisque ut ante sit amet odio commodo bibendum. Orci varius
-              natoque penatibus et magnis dis parturient montes, nascetur
-              ridiculus mus. Maecenas pellentesque diam at fermentum hendrerit.
-            </p>
-            <p>
-              In rutrum, tellus at molestie luctus, est felis hendrerit diam,
-              nec mollis erat sem vitae lectus. Nunc ac nunc a odio interdum
-              tempus id a neque. Duis eget scelerisque nibh. Quisque molestie
-              pharetra nulla, ut tristique lectus aliquam suscipit. Sed
-              facilisis et mi quis condimentum. Donec nec lacinia justo. Nam in
-              massa imperdiet, auctor ante sit amet, elementum urna. Sed
-              hendrerit imperdiet elit, vitae consequat nunc lacinia ac. Mauris
-              venenatis ac ex eget consectetur. Duis sed luctus quam. Vestibulum
-              pulvinar metus eu enim fermentum, eget faucibus justo viverra.
-            </p>
-          </article>
-          <article>
-            <h4>Mon site 💻</h4>
-            <p>
-              Maecenas non magna risus. Sed vel quam eu ipsum accumsan imperdiet
-              at facilisis mauris. Pellentesque porta, nunc vel faucibus
-              vehicula, nunc lectus maximus ante, quis elementum augue dui sed
-              augue. In sem lectus, posuere ut bibendum suscipit, tincidunt sit
-              amet elit. Nunc porttitor, turpis vel iaculis faucibus, velit
-              lectus efficitur mi, nec fermentum turpis nibh at nulla. Etiam
-              sagittis, leo in maximus vehicula, ipsum purus efficitur justo,
-              non convallis nibh libero quis magna. Sed egestas, nibh a laoreet
-              elementum, leo velit ornare lorem, non dictum turpis magna eget
-              quam. Nunc eget erat sed tortor convallis ultrices eu vitae
-              tellus.
-            </p>
-            <p>
-              Pellentesque molestie porta urna, id pulvinar velit tempus in.
-              Mauris sapien turpis, lacinia et turpis ac, consequat lacinia
-              nulla. Nulla viverra placerat tincidunt. Donec tempor leo vel
-              interdum interdum. Donec pellentesque molestie euismod. Nunc
-              cursus nisl vehicula nulla finibus, eget iaculis ante luctus.
-              Vivamus eleifend nisi eget tortor finibus, non imperdiet dui
-              gravida. Duis nec feugiat metus.
-            </p>
-          </article>
-          <article>
-            <h4>Lorem ipsum</h4>
-            <p>
-              Suspendisse ut sem mattis metus laoreet ullamcorper. Proin
-              pulvinar interdum lorem eget elementum. Integer sit amet tristique
-              odio. Nullam maximus ante laoreet nunc ullamcorper tempor.
-              Vestibulum ultrices mi eros, vel viverra nulla placerat sit amet.
-              Sed pretium tortor purus, vel auctor mauris porttitor mattis.
-              Pellentesque maximus ante orci, a viverra nulla consectetur non.
-              Pellentesque quis pellentesque magna, nec volutpat tellus. Donec
-              neque tellus, tempus vitae neque eget, tempus interdum felis. Sed
-              ultrices ligula erat, sit amet faucibus massa tincidunt at.
-            </p>
-            <p>
-              Quisque vehicula massa vel lorem consectetur egestas. Donec semper
-              laoreet sem. Proin vitae risus id elit ornare rhoncus vitae
-              finibus eros. Praesent at dolor ut nulla scelerisque scelerisque.
-              Donec consectetur urna massa, non rhoncus augue tempor quis. Nam
-              vitae mi sollicitudin libero pretium rhoncus. Ut sodales est vitae
-              lacus molestie, molestie pretium ante vehicula. Maecenas ultrices,
-              nulla id fringilla elementum, nisi ipsum accumsan quam, sed
-              volutpat diam metus iaculis lorem. Nunc posuere feugiat leo, eget
-              mattis orci. Vestibulum maximus felis quis ex tincidunt
-              pellentesque. Pellentesque iaculis dignissim nisi rutrum vehicula.
-            </p>
-          </article>
-        </div>
-      </section>
       <section className="last-news-section">
         <h3>Mes dernières actus 📣</h3>
         <div className="homepage-articles-container last-news-container">
-          {articles.length === 0 ? (
+          {newsArticles.length === 0 ? (
             <p className="no-news">
               Vous trouverez dans cette section mes actualités les plus récentes
               ✍️ !
             </p>
           ) : (
             <article className="news-articles">
-              {articles.map((article, i) => (
+              {newsArticles.map((article, i) => (
                 <div
                   key={i}
                   className="news-article"

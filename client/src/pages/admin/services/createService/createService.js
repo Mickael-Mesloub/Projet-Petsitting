@@ -18,6 +18,12 @@ const CreateService = () => {
       <AdminLinks />
       <h2>Créer une nouvelle prestation</h2>
       <form>
+        <label for="category">Catégorie : </label>
+
+        <select name="category">
+          <option value="sitting">Garderie</option>
+          <option value="grooming">Toilettage</option>
+        </select>
         <label htmlFor="title">Titre : </label>
         <input type="text" name="title" />
         <label htmlFor="description">Description : </label>
