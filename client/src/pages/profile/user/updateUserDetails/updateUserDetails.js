@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice";
-// import "../../styles/profile.scss";
+import "./styles.scss";
 
 const UpdateProfile = () => {
   const [profile, setProfile] = useState([]);
@@ -24,9 +24,10 @@ const UpdateProfile = () => {
       getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
         .then((data) => setProfile(data))
         .catch((error) => console.log(error));
+    } else {
+      navigate("/");
     }
-    navigate("/");
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
     console.log(profile.user);
@@ -49,12 +50,16 @@ const UpdateProfile = () => {
       `${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/update-profile`,
       formData
     )
-      .then((data) => dispatch(loginUser(data.user)))
+      .then((data) => {
+        dispatch(loginUser(data.user));
+        navigate(`/profile/${userId}`);
+      })
+
       .then((error) => console.log(error));
   };
 
   return (
-    <main>
+    <main className="update-profile-main">
       {profile.user && (
         <>
           <h2>Modifier le profil</h2>
@@ -64,61 +69,52 @@ const UpdateProfile = () => {
             encType="multipart/form-data"
           >
             <div>
-              <label htmlFor="firstName">Prénom : </label>
               <input
                 type="text"
                 name="firstName"
-                id="firstName"
                 placeholder="Prénom"
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="lastName">Nom : </label>
               <input
                 type="text"
                 name="lastName"
-                id="lastName"
                 placeholder="Nom"
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="phone">Téléphone : </label>
               <input
                 type="tel"
                 name="phone"
-                id="phone"
-                placeholder="Format XX XX XX XX XX"
+                placeholder="Téléphone (format XX XX XX XX XX)"
                 pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="email">Email : </label>
               <input
                 type="email"
                 name="email"
-                id="email"
+                placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="password">Mot de passe : </label>
               <input
                 type="password"
                 name="password"
-                id="password"
+                placeholder="Mot de passe"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div>
-              <label htmlFor="file">Avatar : </label>
+            <div className="form-inputs file-input">
+              <label htmlFor="file">Changer d'avatar : </label>
               <input
                 type="file"
                 name="file"
                 accept="image/jpeg, image/png"
-                id="file"
                 onChange={(e) => setAvatar(e.target.files)}
               />
             </div>

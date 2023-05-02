@@ -98,6 +98,7 @@
           color: $beige;
           border-radius: 50%;
           font-size: 1.5rem;
+          transition: all 0.2s ease-in-out;
           &:hover {
             background: $section-bg;
             color: $medium-violet;
@@ -121,14 +122,36 @@
       width: 100%;
 
       .animal-card {
-        justify-content: flex-start;
-        flex-direction: row;
-        width: 85%;
+        flex-direction: row-reverse;
 
-        .animals-images-box {
+        gap: 16px;
+        width: 15em;
+        padding: 8px;
+        cursor: pointer;
+        transition: all 0.15s ease-out;
+
+        &:hover {
+          opacity: 0.85;
+          transform: translateX(15px);
+        }
+
+        .animal-name {
+          @extend %flex-center;
+          flex: 1;
+          > h3 {
+            font-size: 1.2em;
+            color: $dark-violet;
+          }
+        }
+
+        .animal-images-box {
+          width: 33%;
           .animal-image {
-            width: 150px;
-            height: 150px;
+            background: $animal-img-frame;
+            padding: 8px;
+            border-radius: 50%;
+            width: 75px;
+            height: 75px;
 
             > img {
               width: 100%;
@@ -138,6 +161,35 @@
             }
           }
         }
+      }
+    }
+    .plus-icon-container {
+      padding-top: 16px;
+
+      .plus-icon {
+        padding: 8px;
+        border-radius: 50%;
+        background: $medium-violet;
+        font-size: 30px;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+
+        &:hover {
+          background: $article-bg;
+          > * {
+            color: $medium-violet;
+          }
+        }
+
+        > * {
+          color: $beige;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .tooltip {
+        width: 150px;
       }
     }
   }
@@ -175,9 +227,17 @@
 // ********** TABLET FORMAT **********
 
 @include tablet {
-  .profilePage-main .profile-container {
-    .profile-card {
-      width: 80%;
+  .profilePage-main {
+    flex-direction: row;
+    align-items: flex-start;
+    .profile-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: flex-start;
+      .profile-card {
+        width: 75%;
+      }
     }
   }
 }
@@ -187,19 +247,40 @@
     flex-direction: row;
     align-items: flex-start;
     padding: 32px;
+
     .profile-container {
       width: 50%;
-
       > h2 {
         width: 80%;
       }
-    }
-    .profile-card {
-      width: 50%;
+      .profile-card {
+        width: 60%;
+      }
     }
 
     .animals-container {
       width: 50%;
+
+      .animals-cards {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 25px;
+
+        .animal-card {
+          width: 40%;
+          max-width: 50%;
+
+          &:hover {
+            transform: translateY(-2.5px);
+          }
+        }
+      }
+      .plus-icon-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding-top: 0;
+      }
     }
   }
 }

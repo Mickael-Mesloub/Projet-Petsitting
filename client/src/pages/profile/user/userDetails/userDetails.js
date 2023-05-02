@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MdAlternateEmail, MdCall, MdCreate } from "react-icons/md";
+import { BsPlus } from "react-icons/bs";
 import { capitalizeUsername } from "../../../../helpers/utils";
 import "./styles.scss";
+import Tooltip from "../../../../components/tooltip/Tooltip";
 
 const Profile = () => {
   const [profile, setProfile] = useState([]);
@@ -88,10 +90,20 @@ const Profile = () => {
           <>
             <div className="animals-cards">
               {profile.animals.map((animal, i) => (
-                <div key={i} className="animal-card">
-                  <div className="animals-images-box">
+                <div
+                  key={i}
+                  className="animal-card"
+                  onClick={() =>
+                    navigate(`/profile/${userId}/animals/${animal._id}`)
+                  }
+                >
+                  <div className="animal-name">
+                    <h3>{animal.name}</h3>
+                  </div>
+
+                  <div className="animal-images-box">
                     {animal.images && animal.images.length >= 1 ? (
-                      <div className="animal-image">
+                      <div className="animal-image" data-name={animal.name}>
                         <img
                           src={`${process.env.REACT_APP_BACKEND_URL}/${animal.images[0]}`}
                           alt={`${animal.name}_${i}`}
@@ -101,16 +113,18 @@ const Profile = () => {
                       <div>Aucune image téléchargée</div>
                     )}
                   </div>
-                  <div>
-                    <Link to={`/profile/${userId}/animals/${animal._id}`}>
-                      {animal.name}
-                    </Link>{" "}
-                  </div>
                 </div>
               ))}
-              <Link to={`/profile/${userId}/create-animal`}>
-                Ajouter un nouvel animal
-              </Link>
+              <div className="plus-icon-container">
+                <Tooltip text={"Ajouter un animal"} className="tooltip">
+                  <div
+                    className="plus-icon"
+                    onClick={() => navigate(`/profile/${userId}/create-animal`)}
+                  >
+                    <BsPlus />
+                  </div>
+                </Tooltip>
+              </div>
             </div>
           </>
         ) : (

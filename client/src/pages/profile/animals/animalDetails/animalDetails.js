@@ -5,9 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import "../allUserAnimals/styles.scss";
 
 const Animal = () => {
-  /*
-   ************************* AFFICHER LES RESERVATIONS ************************
-   */
   const [animal, setAnimal] = useState({});
   const [animalBookings, setAnimalBookings] = useState([]);
   const { userId, animalId } = useParams();
@@ -28,10 +25,10 @@ const Animal = () => {
   }, []);
 
   return (
-    <>
-      <main className="animal-main">
+    <main className="animal-main">
+      {animal && (
         <div className="animal-container">
-          <h1>{animal.name}</h1>
+          <h2>{animal.name}</h2>
           <div className="animal-description">« {animal.description} »</div>
           <div className="animal-images-container">
             {animal.images && animal.images.length > 0 ? (
@@ -66,30 +63,8 @@ const Animal = () => {
             Modifier
           </Link>
         </div>
-
-        {animalBookings && animalBookings.length > 0 ? (
-          <div className="animal-bookings-container">
-            {animalBookings.map((booking, i) => (
-              <div className="booking" key={i}>
-                <div>Date : {booking.date}</div>
-                <div>
-                  De : {booking.startTime} à {booking.endTime}
-                </div>
-                <div>Prestation réservée: {booking.service.name}</div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div>
-            <div>Aucune prestation n'a été réservée pour cet animal.</div>
-            <div>Pour réserver, c'est par ici : </div>
-            <div>
-              <Link to={`/${userId}/booking`}>Réserver</Link>
-            </div>
-          </div>
-        )}
-      </main>
-    </>
+      )}
+    </main>
   );
 };
 
