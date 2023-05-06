@@ -21,11 +21,14 @@ const Login = () => {
       password,
     })
       .then((data) => {
+        console.log(data);
         dispatch(loginUser(data.user));
         localStorage.setItem("jwt", data.token);
+        navigate("/");
       })
-      .catch((error) => console.log(error));
-    navigate("/");
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

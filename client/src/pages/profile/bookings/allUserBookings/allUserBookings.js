@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const Booking = () => {
-  const { userId, bookingId } = useParams();
+  const { bookingId } = useParams();
   const [booking, setBooking] = useState({});
 
   useEffect(() => {
     getMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/bookings/${bookingId}`
+      `${process.env.REACT_APP_BACKEND_URL}/profile/bookings/${bookingId}`
     )
       .then((data) => setBooking(data.booking))
       .catch((error) => console.log(error));
@@ -19,15 +19,15 @@ const Booking = () => {
   }, [booking]);
 
   return (
-    <>
+    <main>
       {booking && (
         <main>
-          <h1>
+          <h2>
             Réservation du {booking.date} pour {booking.animal.name}{" "}
-          </h1>
+          </h2>
         </main>
       )}
-    </>
+    </main>
   );
 };
 

@@ -3,29 +3,31 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 export const AdminMiddleware = (props) => {
-  const [loading, setLoading] = useState(true);
   const [loaded, setLoaded] = useState(false);
-  const { user } = useSelector((state) => state);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (user && user.isAdmin) {
+    if (!user.isLogged) {
+      setLoaded(false);
+    } else {
       setLoaded(true);
     }
-    setLoading(false);
   }, [user]);
 
   if (!localStorage.getItem("jwt")) {
     return <Navigate to={"/login"} />;
   }
-  switch (loaded && user.isAdmin) {
-    case true:
-      return props.children;
-
+  switch (loaded) {
+    case true: {
+      if (user.isAdmin) {
+        return props.children;
+      }
+      return <Navigate to={"/login"} />;
+    }
+    case false: {
+      return <h1>Loading</h1>;
+    }
     default:
-      return loading ? (
-        <h2>Chargement de la page...</h2>
-      ) : (
-        <Navigate to={"/login"} />
-      );
+      return <h1>Loading</h1>;
   }
 };

@@ -1,5 +1,3 @@
-import { Routes, Route } from "react-router-dom";
-
 // public
 import Home from "../pages/public/home/home";
 import Register from "../pages/public/auth/register/register";
@@ -14,7 +12,6 @@ import Booking from "../pages/public/createBooking/createBooking";
 
 // profile
 import Profile from "../pages/profile/user/userDetails/userDetails";
-import UserAnimals from "../pages/profile/animals/allUserAnimals/allUserAnimals";
 import Animal from "../pages/profile/animals/animalDetails/animalDetails";
 import UpdateProfile from "../pages/profile/user/updateUserDetails/updateUserDetails";
 import CreateAnimal from "../pages/profile/animals/createAnimal/createAnimal";
@@ -33,31 +30,34 @@ import AdminNewsDetails from "../pages/admin/news/newsArticleDetails/newsArticle
 import CreateArticle from "../pages/admin/news/createNewsArticle/createNewsArticle";
 import UpdateArticle from "../pages/admin/news/updateNewsArticle/updateNewsArticle";
 import AllUsers from "../pages/admin/users/allUsers/allUsers";
+import UserDetails from "../pages/admin/users/userDetails/userDetails";
 import Bookings from "../pages/admin/bookings/allBookings/allBookings";
 
+// PUBLIC
 export const publicRoutes = [
   { path: "/", element: <Home /> },
   { path: "/news", element: <PublicNews /> },
   { path: "/news/:articleId", element: <PublicNewsDetails /> },
   { path: "/services", element: <PublicServices /> },
   { path: "/contact", element: <Contact /> },
-  { path: "/:userId/booking", element: <Booking /> },
+  { path: "/booking", element: <Booking /> },
   { path: "*", element: <NotFoundPage /> },
 ];
 
+// PROFILE
 export const profileRoutes = [
-  { path: `/profile/:userId`, element: <Profile /> },
-  { path: `/profile/:userId/update-profile`, element: <UpdateProfile /> },
-  { path: `/profile/:userId/create-animal`, element: <CreateAnimal /> },
-  { path: `/profile/:userId/animals`, element: <UserAnimals /> },
-  { path: `/profile/:userId/animals/:animalId`, element: <Animal /> },
+  { path: `/profile`, element: <Profile /> },
+  { path: `/profile/update-profile`, element: <UpdateProfile /> },
+  { path: `/profile/create-animal`, element: <CreateAnimal /> },
+  { path: `/profile/animals/:animalId`, element: <Animal /> },
   {
-    path: `/profile/:userId/animals/:animalId/update-animal`,
+    path: `/profile/animals/:animalId/update-animal`,
     element: <UpdateAnimal />,
   },
-  { path: `/profile/:userId/bookings/:bookingId`, element: <GetBooking /> },
+  { path: `/profile/bookings/:bookingId`, element: <GetBooking /> },
 ];
 
+// ADMIN
 export const adminRoutes = [
   { path: "/admin", element: <AdminHome /> },
   { path: "/admin/services", element: <AdminServices /> },
@@ -72,10 +72,12 @@ export const adminRoutes = [
   { path: "/admin/news/create-article", element: <CreateArticle /> },
   { path: "/admin/news/:articleId/update-article", element: <UpdateArticle /> },
   { path: "/admin/users", element: <AllUsers /> },
+  { path: "/admin/users/:userId", element: <UserDetails /> },
   { path: "/admin/animals", element: <Animals /> },
   { path: "/admin/bookings", element: <Bookings /> },
 ];
 
+// AUTH
 export const authRoutes = [
   { path: "/register", element: <Register /> },
   { path: "/login", element: <Login /> },

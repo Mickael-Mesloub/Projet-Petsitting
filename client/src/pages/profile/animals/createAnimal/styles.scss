@@ -1,0 +1,12 @@
+@import "../../../../assets/styles/_placeholders";
+@import "../../../../assets/styles/_variables";
+@import "../../../../assets/styles/_mixins";
+
+.create-animal-main {
+  @extend %flex-center;
+  flex-direction: column;
+  padding: 32px;
+  > h2 {
+    padding-bottom: 32px;
+  }
+}

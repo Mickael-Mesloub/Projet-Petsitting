@@ -1,7 +1,7 @@
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import "../allUserAnimals/styles.scss";
+import { useNavigate, useParams } from "react-router-dom";
+import "./styles.scss";
 
 const UpdateAnimal = () => {
   const [animal, setAnimal] = useState({});
@@ -11,13 +11,16 @@ const UpdateAnimal = () => {
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
 
-  const { userId, animalId } = useParams();
+  const navigate = useNavigate();
+  const { animalId } = useParams();
 
   useEffect(() => {
     getMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}`
+      `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
     )
-      .then((data) => setAnimal(data.animal))
+      .then((data) => {
+        setAnimal(data.animal);
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -30,49 +33,54 @@ const UpdateAnimal = () => {
       formData.append("deleteImages[]", image);
     }
     putFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}/update-animal`,
+      `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}/update-animal`,
       formData
     )
       .then((data) => setAnimal(data))
-      .then(() => setSelectedImages([]));
+      .then(() => setSelectedImages([]))
+      .then(() => {
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("size", size);
+        if (images && images.length > 0) {
+          for (const image of images) {
+            formData.append("file", image);
+          }
+        }
+        // Mettre à jour les autres données de l'animal
 
-    // Mettre à jour les autres données de l'animal
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("size", size);
-    if (images && images.length > 0) {
-      for (const image of images) {
-        formData.append("file", image);
-      }
-    }
-    putFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}/update-animal`,
-      formData
-    ).then((data) => setAnimal(data));
+        putFormData(
+          `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}/update-animal`,
+          formData
+        )
+          .then(() => navigate(`/profile/animals/${animalId}`))
+          .catch((error) => console.log(error));
+      });
   };
 
   useEffect(() => {
     console.log(selectedImages);
-  }, []);
+  }, [selectedImages]);
 
   return (
-    <>
-      <h1>Modifier l'animal</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Nom : </label>
+    <main className="update-animal-main">
+      <h2>Modifier l'animal</h2>
+      <form className="update-animal-form" onSubmit={handleSubmit}>
         <input
+          placeholder="Nom"
           type="text"
           name="name"
           onChange={(event) => setName(event.target.value)}
         />
-        <label htmlFor="description">Présentation : </label>
         <textarea
+          placeholder="Décrivez-nous votre toutou..."
           name="description"
-          rows="5"
-          cols="50"
+          rows="10"
           onChange={(event) => setDescription(event.target.value)}
         ></textarea>
-        <label htmlFor="size">Taille : </label>
+        <label className="size-label" htmlFor="size">
+          Taille :{" "}
+        </label>
         <select
           name="size"
           onChange={(event) => setSize(event.target.value)}
@@ -94,42 +102,37 @@ const UpdateAnimal = () => {
             <legend>Sélectionnez les images à remplacer</legend>
             {animal.images.map((image, i) => (
               <div key={i}>
-                <input
-                  type="checkbox"
-                  checked={selectedImages.includes(image)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedImages([...selectedImages, image]);
-                    } else {
-                      setSelectedImages(
-                        selectedImages.filter(
-                          (selectedImage) => selectedImage !== image
-                        )
-                      );
-                    }
-                  }}
-                  name={`deleteImages[${i}]`}
-                />
-
                 <div
                   className={
                     selectedImages.includes(image)
                       ? "selected-image"
                       : "choose-image"
                   }
+                  onClick={() => {
+                    if (selectedImages.includes(image)) {
+                      setSelectedImages(
+                        selectedImages.filter(
+                          (selectedImage) => selectedImage !== image
+                        )
+                      );
+                    } else {
+                      setSelectedImages(selectedImages.concat(image));
+                    }
+                  }}
                 >
                   <img
                     src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
-                    alt=""
+                    alt={`${animal.name}_${i}`}
                   />
                 </div>
               </div>
             ))}
           </fieldset>
         )}
+
         <input type="submit" value="Modifier" />
       </form>
-    </>
+    </main>
   );
 };
 

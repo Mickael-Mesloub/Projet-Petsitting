@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { MdAlternateEmail, MdCall, MdCreate } from "react-icons/md";
 import { BsPlus } from "react-icons/bs";
 import { capitalizeUsername } from "../../../../helpers/utils";
-import "./styles.scss";
 import Tooltip from "../../../../components/tooltip/Tooltip";
+import "./styles.scss";
 
 const Profile = () => {
   const [profile, setProfile] = useState([]);
@@ -14,22 +14,19 @@ const Profile = () => {
   const [userLastNameCapitalized, setUserLastNameCapitalized] = useState("");
 
   const { user } = useSelector((state) => state);
-  const { userId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user && user._id === userId) {
-      getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
+    if (user) {
+      getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile`)
         .then((data) => {
           setProfile(data);
         })
         .catch((error) => {
           console.log(error);
         });
-    } else {
-      navigate("/login");
     }
-  }, [user, userId]);
+  }, [user]);
 
   useEffect(() => {
     capitalizeUsername(user, user.firstName).then((username) =>
@@ -44,7 +41,7 @@ const Profile = () => {
     <main className="profilePage-main">
       <div className="profile-container">
         <h2>Mon profil</h2>
-        {profile && profile.user && (
+        {profile.user && profile.user._id === user._id && (
           <div className="profile-card">
             <div className="user-avatar">
               <img
@@ -72,15 +69,12 @@ const Profile = () => {
 
             <div className="update-profile-link-container">
               <Link
-                to={`/profile/${userId}/update-profile`}
+                to={`/profile/update-profile`}
                 className="update-profile-link"
               >
                 <MdCreate />
               </Link>
             </div>
-            {/* <div>
-            <Link to={`/profile/${userId}/animals`}>Mes animaux</Link>
-          </div> */}
           </div>
         )}
       </div>
@@ -93,9 +87,7 @@ const Profile = () => {
                 <div
                   key={i}
                   className="animal-card"
-                  onClick={() =>
-                    navigate(`/profile/${userId}/animals/${animal._id}`)
-                  }
+                  onClick={() => navigate(`/profile/animals/${animal._id}`)}
                 >
                   <div className="animal-name">
                     <h3>{animal.name}</h3>
@@ -119,7 +111,7 @@ const Profile = () => {
                 <Tooltip text={"Ajouter un animal"} className="tooltip">
                   <div
                     className="plus-icon"
-                    onClick={() => navigate(`/profile/${userId}/create-animal`)}
+                    onClick={() => navigate(`/profile/create-animal`)}
                   >
                     <BsPlus />
                   </div>
@@ -128,9 +120,22 @@ const Profile = () => {
             </div>
           </>
         ) : (
-          <>
-            <p>Aucun animal</p>
-          </>
+          <div className="not-found">
+            <p>
+              Vous n'avez pas encore créé d'animal. Cliquez sur le bouton
+              ci-dessous pour en créer un :{" "}
+            </p>
+            <div className="plus-icon-container">
+              <Tooltip text={"Ajouter un animal"} className="tooltip">
+                <div
+                  className="plus-icon"
+                  onClick={() => navigate(`/profile/create-animal`)}
+                >
+                  <BsPlus />
+                </div>
+              </Tooltip>
+            </div>
+          </div>
         )}
       </div>
     </main>

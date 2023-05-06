@@ -10,7 +10,6 @@ const Booking = () => {
   const [animals, setAnimals] = useState([]);
   const [services, setServices] = useState([]);
   const [animalBookings, setAnimalBookings] = useState([]);
-  const { userId } = useParams();
   const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -23,7 +22,7 @@ const Booking = () => {
   }, []);
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals`)
+    getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/animals`)
       .then((data) => {
         console.log(data);
         setAnimals(data.animal);

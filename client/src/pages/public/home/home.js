@@ -52,7 +52,9 @@ const Home = () => {
   return (
     <main className="homepage-main">
       {user.isLogged ? (
-        <h3>Bienvenue {usernameCapitalized} 👋 !</h3>
+        <h3 className="welcome-message">
+          Bienvenue {usernameCapitalized} 👋 !
+        </h3>
       ) : (
         <section className="welcome-section">
           <h3>Bienvenue sur mon site 👋 !</h3>

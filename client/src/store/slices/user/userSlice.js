@@ -1,41 +1,41 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
-    name: 'userSlice',
-    initialState: {
-        isLogged: null,
-        isAdmin: false
+  name: "userSlice",
+  initialState: {
+    isLogged: null,
+    isAdmin: false,
+  },
+  reducers: {
+    loginUser: (state, action) => {
+      return {
+        ...state,
+        _id: action.payload._id,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        phone: action.payload.phone,
+        avatar: action.payload.avatar,
+        email: action.payload.email,
+        isLogged: true,
+        isAdmin: action.payload.isAdmin,
+      };
     },
-    reducers: {
-        loginUser: (state, action) => {
-            return {
-                ...state,
-                _id: action.payload._id,
-                firstName: action.payload.firstName,
-                lastName: action.payload.lastName,
-                phone: action.payload.phone,
-                avatar: action.payload.avatar,
-                email: action.payload.email,
-                isLogged: true,
-                isAdmin: action.payload.isAdmin
-            }
-        },
-        logoutUser: (state) => {
-            return {
-                ...state,
-                _id: '',
-                firstName: '',
-                lastName: '',
-                phone: '',
-                avatar: '',
-                email: '',
-                isLogged: null,
-                isAdmin: null
-            }
-        }
-    }
-})
+    logoutUser: (state) => {
+      return {
+        ...state,
+        _id: "",
+        firstName: "",
+        lastName: "",
+        phone: "",
+        avatar: "",
+        email: "",
+        isLogged: null,
+        isAdmin: null,
+      };
+    },
+  },
+});
 
-export const {loginUser, logoutUser} = userSlice.actions
+export const { loginUser, logoutUser } = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

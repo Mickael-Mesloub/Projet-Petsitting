@@ -8,6 +8,7 @@ export const findToken = () => {
 };
 
 export const getMethod = (url) => {
+  console.log(url);
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: "GET",
@@ -39,9 +40,9 @@ export const getMethod = (url) => {
 };
 
 export const postMethod = (url, data) => {
-  console.log(data);
-  console.log(url);
   return new Promise((resolve, reject) => {
+    console.log(data);
+    console.log(findToken());
     fetch(url, {
       method: "POST",
       headers: {
@@ -51,12 +52,21 @@ export const postMethod = (url, data) => {
       body: JSON.stringify(data),
     })
       .then((response) => {
+        console.log("LOG 2");
+        console.log(response);
+
         response
           .json()
           .then((data) => {
+            console.log("LOG DATA" + " " + data);
             if (response.ok) {
+              console.log("LOG 3");
+
               resolve(data);
             } else {
+              console.log("LOG 4");
+              console.log(data);
+
               reject(data);
             }
           })

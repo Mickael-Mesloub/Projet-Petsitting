@@ -39,7 +39,7 @@ const SecondaryMenu = () => {
             <li>
               <Tooltip text={"Profil"}>
                 <Link
-                  to={`/profile/${user._id}`}
+                  to={`/profile`}
                   className="secondary-menu-link logged-link"
                 >
                   <BiUserCircle />

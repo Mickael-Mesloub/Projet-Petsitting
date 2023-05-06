@@ -1,22 +1,19 @@
 import jwt from "jsonwebtoken";
 import userModel from "../../models/userModel.js";
 import formidable from "formidable";
-import { copyFile } from "../../utils/utils.js";
+import { copyFiles } from "../../utils/utils.js";
 
 export const register = (req, res) => {
   const form = formidable();
-  form.parse(req, (error, fields, files) => {
+  form.parse(req, async (error, fields, files) => {
     if (error) {
       return res.status(400).json({ error: "Une erreur est survenue." });
     }
 
     let avatar;
-    const { isAdmin, defaultAvatar } = req.body;
-
     if (files && files.file) {
-      avatar = copyFile(files.file !== undefined ? files.file : "");
-    } else {
-      avatar = isAdmin ? "static-images/admin.png" : defaultAvatar;
+      console.log(files.file);
+      avatar = await copyFiles(files.file ?? "", "images");
     }
 
     console.log(
@@ -24,18 +21,18 @@ export const register = (req, res) => {
       fields.lastName,
       fields.email,
       fields.phone,
-      fields.password
+      fields.password,
+      avatar
     );
 
-    userModel
+    await userModel
       .create({
         firstName: fields.firstName,
         lastName: fields.lastName,
         email: fields.email,
         phone: fields.phone,
         password: fields.password,
-        avatar,
-        isAdmin,
+        avatar: avatar[0],
       })
       .then((user) => {
         console.log(user);
@@ -79,6 +76,8 @@ export const login = async (req, res) => {
 
     const isMatch = await user.comparePassword(password);
 
+    console.log(isMatch);
+
     if (isMatch) {
       const token = user.createJWT();
       return res
@@ -118,6 +117,11 @@ export const verifyToken = async (req, res) => {
 
     // Si token valide: renvoie les infos du user
     const user = await userModel.findOne({ _id: decoded.id });
+
+    if (!user) {
+      return res.status(404).json({ error: "Cet utilisateur n'existe pas." });
+    }
+
     return res.status(200).json({
       user: {
         _id: user._id,

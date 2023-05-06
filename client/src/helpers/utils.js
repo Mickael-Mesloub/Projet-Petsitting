@@ -12,11 +12,9 @@ export const animalSize = (size) => {
 };
 
 export const capitalizeUsername = async (user, name) => {
-  if (user.isLogged) {
-    const username = await name;
-    const usernameFirstLetter = await username.charAt(0);
-    const capitalizedUsername =
-      (await usernameFirstLetter.toUpperCase()) + username.slice(1);
-    return capitalizedUsername;
-  }
+  const username = await name;
+  const usernameFirstLetter = await username.charAt(0);
+  const capitalizedUsername =
+    (await usernameFirstLetter.toUpperCase()) + username.slice(1);
+  return capitalizedUsername;
 };

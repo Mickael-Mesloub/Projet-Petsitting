@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { postFormData, postMethod } from "../../../../helpers/fetch";
+import { postFormData } from "../../../../helpers/fetch";
+import { useNavigate } from "react-router-dom";
 import "./styles.scss";
 
 const Register = () => {
@@ -11,8 +11,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState([]);
 
-  const { user } = useSelector((state) => state);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,13 +34,10 @@ const Register = () => {
       console.log(formData.get("password"));
     }
 
-    if (avatar && avatar.length > 0) {
-      for (const image of avatar) {
-        formData.append("avatar", image);
-      }
-    } else {
-      formData.append("avatar", "");
+    for (const i of avatar) {
+      formData.append("file", i);
     }
+
     console.log(formData.get("avatar"));
 
     for (const [key, value] of formData) {
@@ -49,15 +45,17 @@ const Register = () => {
     }
 
     postFormData(`${process.env.REACT_APP_BACKEND_URL}/register`, formData)
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        navigate("/login");
+      })
+
       .catch((error) => console.log(error));
   };
 
-  //   useEffect(() => {
-  //     console.log(
-  //       `${firstName}-${lastName}-${email}-${phone}-${password}-${avatar}`
-  //     );
-  //   }, [firstName, lastName, email, phone, password, avatar]);
+  useEffect(() => {
+    console.log(`${avatar.originalFilename}`);
+  }, [avatar]);
 
   return (
     <main className="registerPage-main">

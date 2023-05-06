@@ -1,17 +1,18 @@
-import { getMethod, postMethod } from "../../../../helpers/fetch";
+import { getMethod, postFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./styles.scss";
 
 const CreateAnimal = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState("small");
   const [files, setFiles] = useState([]);
 
-  const { userId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`);
+    getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile`);
   }, []);
 
   const handleSubmit = (event) => {
@@ -25,21 +26,26 @@ const CreateAnimal = () => {
       formData.append("file", file);
     }
 
-    postMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/create-animal`,
+    postFormData(
+      `${process.env.REACT_APP_BACKEND_URL}/profile/create-animal`,
       formData
-    );
+    ).then(() => navigate("/profile"));
   };
 
+  useEffect(() => {
+    console.log(size);
+  }, [size]);
+
   return (
-    <>
-      <h1>Ajouter un animal</h1>
+    <main className="create-animal-main">
+      <h2>Ajouter un animal</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Nom : </label>
         <input
           type="text"
           name="name"
           onChange={(event) => setName(event.target.value)}
+          required
         />
         <label htmlFor="description">Présentation : </label>
         <textarea
@@ -53,6 +59,7 @@ const CreateAnimal = () => {
           name="size"
           onChange={(event) => setSize(event.target.value)}
           defaultValue={size}
+          required
         >
           <option value="small">Petit toutou (moins de 10kg)</option>
           <option value="medium">Moyen toutou (entre 10kg et 25kg)</option>
@@ -65,9 +72,9 @@ const CreateAnimal = () => {
           onChange={(event) => setFiles(event.target.files)}
           multiple
         />
-        <input type="submit" value="Ajouter un animal" />
+        <input type="submit" value="Ajouter" />
       </form>
-    </>
+    </main>
   );
 };
 

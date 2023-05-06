@@ -7,7 +7,7 @@ form {
   flex-direction: column;
   max-width: 80%;
   margin: auto;
-  gap: 8px;
+  gap: 16px;
   padding: 32px;
   border-radius: 12px;
   background: $section-bg;
@@ -24,6 +24,12 @@ form {
     flex-direction: column;
   }
 
+  legend {
+    font-size: 14px;
+    padding: 8px;
+    text-align: center;
+  }
+
   input,
   fieldset,
   select,
@@ -35,7 +41,6 @@ form {
 
     &:focus {
       outline: none;
-      border: 3px solid $pink;
       box-shadow: 5px 5px 10px $dark-violet;
     }
   }
@@ -44,6 +49,7 @@ form {
     resize: none;
   }
 
+  label,
   select,
   input[type="number"] {
     text-align: center;
@@ -59,10 +65,18 @@ form {
     width: 10em;
   }
 
+  .selected-image img {
+    transform: scale(1.05);
+    border: 3px solid #f00;
+    opacity: 0.8;
+  }
+
   .selected-image,
   .choose-image {
-    width: 250px;
-    height: 200px;
+    width: 13em;
+    height: 11em;
+    padding-bottom: 8px;
+    cursor: pointer;
     transition: all 0.3s ease-in-out;
   }
 
@@ -70,11 +84,12 @@ form {
   .choose-image img {
     width: 100%;
     height: 100%;
+    border-radius: 12px;
+    box-shadow: 5px 5px 10px #000;
     transition: all 0.3s ease-in-out;
 
     &:hover {
-      transform: scale(1.05);
-      transition: all 0.3s ease-in-out;
+      opacity: 0.8;
     }
   }
 }
@@ -85,14 +100,12 @@ form {
 
 @include mediumScreens {
   form {
-    .form-inputs {
-      label,
-      input,
-      fieldset,
-      select,
-      textarea {
-        width: 18em;
-      }
+    label,
+    input,
+    fieldset,
+    select,
+    textarea {
+      width: 18em;
     }
   }
 }
@@ -101,14 +114,12 @@ form {
 
 @include tablet {
   form {
-    .form-inputs {
-      label,
-      input,
-      fieldset,
-      select,
-      textarea {
-        width: 20em;
-      }
+    label,
+    input,
+    fieldset,
+    select,
+    textarea {
+      width: 22em;
     }
   }
 }
@@ -117,5 +128,12 @@ form {
 
 @include desktop {
   form {
+    label,
+    input,
+    fieldset,
+    select,
+    textarea {
+      width: 25em;
+    }
   }
 }

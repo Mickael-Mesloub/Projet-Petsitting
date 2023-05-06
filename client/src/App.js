@@ -32,7 +32,10 @@ const App = () => {
           console.log(data);
           dispatch(loginUser(data.user));
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          //   localStorage.removeItem("jwt");
+          console.log(error);
+        });
     }
   }, []);
 

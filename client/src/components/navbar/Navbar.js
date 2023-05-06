@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./styles.scss";
 import { useState } from "react";
-import { BiLogIn, BiLogOut, BiUserCircle, BiCalendar } from "react-icons/bi";
-import { BsPersonWorkspace } from "react-icons/bs";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state);

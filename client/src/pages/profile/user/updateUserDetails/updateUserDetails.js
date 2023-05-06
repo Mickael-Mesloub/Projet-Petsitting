@@ -1,6 +1,6 @@
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice";
 import "./styles.scss";
@@ -15,13 +15,12 @@ const UpdateProfile = () => {
   const [avatar, setAvatar] = useState([]);
 
   const { user } = useSelector((state) => state);
-  const { userId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user && user._id === userId) {
-      getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}`)
+    if (user) {
+      getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile`)
         .then((data) => setProfile(data))
         .catch((error) => console.log(error));
     } else {
@@ -47,16 +46,20 @@ const UpdateProfile = () => {
 
     console.log(formData);
     putFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/update-profile`,
+      `${process.env.REACT_APP_BACKEND_URL}/profile/update-profile`,
       formData
     )
       .then((data) => {
         dispatch(loginUser(data.user));
-        navigate(`/profile/${userId}`);
+        navigate(`/profile`);
       })
 
       .then((error) => console.log(error));
   };
+
+  useEffect(() => {
+    console.log(password);
+  }, [password]);
 
   return (
     <main className="update-profile-main">
