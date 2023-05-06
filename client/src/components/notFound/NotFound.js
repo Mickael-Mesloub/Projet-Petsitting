@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
-import './styles.scss'
+import "./styles.scss";
 
-const NotFound = () => {
-    
-    return (
-
-        <main>
-            <h1 className="not-found-title">ERREUR 404: PAGE NOT FOUND</h1>
-            <p>Cette page n'existe pas.</p>
-            <p>Revenir à l'accueil : </p>
-            <Link to="/">Accueil</Link>
-        </main>
-    )
-}
+const NotFound = (props) => {
+  return (
+    <main className="notFoundPage-main">
+      <h2>{props.title}</h2>
+      <div className="notFound-content">
+        <p>{props.content}</p>
+        <p>{props.message}</p>
+        <div className="notFound-link-container">
+          <Link className="notFound-link" to={props.linkToHomepage}>
+            {props.linkToContent}
+          </Link>
+        </div>
+      </div>
+    </main>
+  );
+};
 
 export default NotFound;

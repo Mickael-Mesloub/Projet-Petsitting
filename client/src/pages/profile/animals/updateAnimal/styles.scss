@@ -1,0 +1,9 @@
+@import "../../../../assets/styles/_placeholders";
+@import "../../../../assets/styles/_variables";
+@import "../../../../assets/styles/_mixins";
+
+.update-animal-main {
+  > h2 {
+    padding-bottom: 32px;
+  }
+}

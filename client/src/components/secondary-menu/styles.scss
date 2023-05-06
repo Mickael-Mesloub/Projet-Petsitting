@@ -1,0 +1,81 @@
+@import "../../assets/styles/mixins";
+@import "../../assets/styles/_placeholders";
+@import "../../assets/styles/_variables";
+
+.secondary-menu {
+  > ul {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 10px;
+
+    > li {
+      display: inline-block;
+      border-radius: 50% 10% / 20% 0%;
+      padding: 5px;
+      margin: 0;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: $beige;
+        .secondary-menu-link {
+          color: $banner-footer-bg;
+        }
+        .logout-icon {
+          color: $red;
+        }
+      }
+
+      .secondary-menu-link {
+        color: $beige;
+        font-weight: 700;
+        font-size: 35px;
+      }
+
+      .logout-icon {
+        color: $red;
+      }
+    }
+    .secondary-menu-auth-link {
+      padding: 10px;
+      border: 3px solid $beige;
+      .secondary-menu-link {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+// ********** SMALLER SCREENS **********
+
+@include smallScreens {
+  .secondary-menu {
+    > ul {
+      width: auto;
+      .secondary-menu-auth-link {
+        .secondary-menu-link {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+// ********** TABLET FORMAT **********
+
+@include tablet {
+  .secondary-menu {
+    > ul {
+      justify-content: flex-end;
+      > li {
+        .secondary-menu-auth-link {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}

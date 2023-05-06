@@ -1,0 +1,106 @@
+@import "../../../../assets/styles/_placeholders";
+@import "../../../../assets/styles/_variables";
+@import "../../../../assets/styles/_mixins";
+
+.newspage-main {
+  > h2 {
+    padding-bottom: 42px;
+  }
+  > section {
+    @extend %section;
+
+    > .news-articles {
+      @extend %article;
+      flex-flow: column wrap;
+      gap: 16px;
+      .news-article {
+        @extend %flex-center;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        background: $section-bg;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+
+        &:hover {
+          transform: scale(1.02);
+          opacity: 0.8;
+        }
+
+        .article-image {
+          align-self: center;
+          > img {
+            width: 100%;
+            border-radius: 12px 12px 0 0;
+          }
+        }
+        .article-text-container {
+          @extend %flex-center;
+          flex-direction: column;
+          padding: 8px;
+          border-radius: 12px;
+
+          > h4 {
+            padding: 0;
+          }
+
+          > p {
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ********** TABLET FORMAT **********
+
+@include tablet {
+  .newspage-main {
+    > section {
+      align-items: center;
+      .news-articles {
+        width: 40em;
+
+        .news-article {
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: flex-start;
+          width: 100%;
+          gap: 2.5em;
+          padding: 16px;
+          .article-image {
+            display: flex;
+            justify-content: center;
+            width: 15em;
+
+            > img {
+              border-radius: 12px 12px 12px 12px;
+              box-shadow: 5px 5px 10px #000;
+            }
+          }
+          .article-text-container {
+            flex: 1;
+            align-items: center;
+            gap: 1.5em;
+
+            > h4 {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// ********** DESKTOP FORMAT **********
+
+@include desktop {
+  .newspage-main {
+    .news-articles {
+      width: 50em;
+    }
+  }
+}

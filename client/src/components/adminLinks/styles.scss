@@ -1,0 +1,8 @@
+@import "../../assets/styles/_mixins";
+@import "../../assets/styles/_placeholders";
+@import "../../assets/styles/_variables";
+
+.admin-links-container {
+  @extend %flex-center;
+  width: 50%;
+}

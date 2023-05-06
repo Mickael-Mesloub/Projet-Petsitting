@@ -1,49 +1,139 @@
 @import "./_placeholders";
+@import "./mixins";
+@import "./variables";
 
 form {
-    @extend %form;
-}
+  @extend %flex-center;
+  flex-direction: column;
+  max-width: 80%;
+  margin: auto;
+  gap: 16px;
+  padding: 32px;
+  border-radius: 12px;
+  background: $section-bg;
 
-form label {
-    margin-bottom: 5px;
-    margin-left: 5px;
-}
-
-fieldset {
+  .form-inputs {
     @extend %flex-center;
     flex-direction: column;
-}
+    gap: 8px;
+    width: 100%;
+  }
 
+  fieldset {
+    @extend %flex-center;
+    flex-direction: column;
+  }
 
-form input, fieldset, select {
-    margin-bottom: 10px;
-}
-
-select, input[type="number"] {
+  legend {
+    font-size: 14px;
+    padding: 8px;
     text-align: center;
-}
+  }
 
-form input[type="text"], select {
-    padding: 10px;
-}
+  input,
+  fieldset,
+  select,
+  textarea {
+    padding: 8px;
+    width: 15em;
+    border-radius: 8px;
+    border: 0.5px solid $dark-violet;
 
-form input[type="submit" ] {
+    &:focus {
+      outline: none;
+      box-shadow: 5px 5px 10px $dark-violet;
+    }
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  label,
+  select,
+  input[type="number"] {
+    text-align: center;
+  }
+
+  input[type="text"],
+  select {
+    padding: 12px;
+  }
+
+  input[type="submit"] {
     @extend %button;
-}
+    width: 10em;
+  }
 
-.selected-image, .choose-image {
-    width: 250px;
-    height: 200px;
-    transition: all .3s ease-in-out;
-}
+  .selected-image img {
+    transform: scale(1.05);
+    border: 3px solid #f00;
+    opacity: 0.8;
+  }
 
-.selected-image img, .choose-image img {
+  .selected-image,
+  .choose-image {
+    width: 13em;
+    height: 11em;
+    padding-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .selected-image img,
+  .choose-image img {
     width: 100%;
     height: 100%;
-    transition: all .3s ease-in-out;
+    border-radius: 12px;
+    box-shadow: 5px 5px 10px #000;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
-        transform: scale(1.05);
-        transition: all .3s ease-in-out;
+      opacity: 0.8;
     }
+  }
+}
+
+// ********** MEDIA QUERRIES **********
+
+// ********** MEDIUM SCREENS **********
+
+@include mediumScreens {
+  form {
+    label,
+    input,
+    fieldset,
+    select,
+    textarea {
+      width: 18em;
+    }
+  }
+}
+
+// ********** TABLETS **********
+
+@include tablet {
+  form {
+    label,
+    input,
+    fieldset,
+    select,
+    textarea {
+      width: 22em;
+    }
+  }
+}
+
+// ********** DESKTOP **********
+
+@include desktop {
+  form {
+    label,
+    input,
+    fieldset,
+    select,
+    textarea {
+      width: 25em;
+    }
+  }
 }

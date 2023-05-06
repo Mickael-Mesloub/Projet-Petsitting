@@ -1,5 +1,22 @@
-@import '../../assets/styles/_variables';
+@import "../../assets/styles/_variables";
+@import "../../assets/styles/_placeholders";
 
-.not-found-title {
-    font-family: $main-content-font;
+.notFoundPage-main {
+  @extend %flex-center;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  gap: 16px;
+
+  .notFound-content {
+    @extend %flex-center;
+    gap: 16px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 20px;
+    .notFound-link {
+      @extend %button;
+    }
+  }
 }

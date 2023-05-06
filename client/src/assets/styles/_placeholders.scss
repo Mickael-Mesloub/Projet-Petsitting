@@ -1,62 +1,133 @@
-@import './_variables.scss';
+@import "./_variables.scss";
 
 %flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  padding: 32px;
+  background: $section-bg;
+  color: $beige;
+  margin: 0 auto;
+}
+
+%article {
+  @extend %flex-center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  text-align: justify;
+  border-radius: 8px;
+  background: #fff;
+  color: $dark-violet;
+  box-shadow: 5px 5px 10px #000;
+}
+
+%section-h3,
+%article-h3 {
+  color: $dark-violet;
+  margin: 0 auto;
+  padding: 16px 0;
+  border-top: 3px solid $dark-violet;
+  border-bottom: 3px solid $dark-violet;
 }
 
 %button {
+  text-align: center;
+  background: $dark-violet;
+  color: $beige;
+  transition: all 0.2s ease-in-out;
+  padding: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border: 0;
+  box-shadow: 5px 5px 10px #000;
+
+  &:hover {
+    background: linear-gradient(90deg, $blue-violet-gradient);
+  }
+}
+
+%card {
+  @extend %flex-center;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+  background: $beige;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px $dark-violet;
+  transition: all 0.5s ease-in-out;
+}
+
+%bubble-icon {
+  @extend %flex-center;
+  width: 40px;
+  height: 40px;
+  background: $medium-violet;
+  color: $beige;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    background: $section-bg;
+    color: $medium-violet;
+  }
+  > * {
     padding: 8px;
-    text-align: center;
-    background-image: linear-gradient(90deg, $blue-violet-gradient);
-    color: #fff;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    font-family: $main-content-font;
-    letter-spacing: 1px;
-    font-size: 18px;
-    
-    &:hover {
-        background-image: linear-gradient(90deg, $violet-orange-gradient);
-    }
+    width: 100%;
+    height: 100%;
+  }
 }
 
 %admin-links {
-    @extend %button;
-    @extend %flex-center;
-    transition: all .5s ease-in-out;
-    background-image: linear-gradient(90deg, $violet-orange-gradient);
+  @extend %button;
+  @extend %flex-center;
+  transition: all 0.5s ease-in-out;
+  background-image: linear-gradient(90deg, $violet-orange-gradient);
 
-    &:hover { 
-        background: rgb(252,69,69);
-        transition: all .5s ease-in-out;
-        background: linear-gradient(90deg, rgba(252,69,69,1) 0%, rgba(252,167,69,1) 50%, rgba(255,217,23,1) 100%);
-    }
-
+  &:hover {
+    background: rgb(252, 69, 69);
+    transition: all 0.5s ease-in-out;
+    background: linear-gradient(
+      90deg,
+      rgba(252, 69, 69, 1) 0%,
+      rgba(252, 167, 69, 1) 50%,
+      rgba(255, 217, 23, 1) 100%
+    );
+  }
 }
 
 %form {
-    @extend %flex-center;
-    flex-direction: column;
-    padding: 15px;
+  @extend %flex-center;
+  flex-direction: column;
+  padding: 15px;
 }
 
 %admin-tables {
-    border-collapse: collapse;
-    margin: 20px auto;
+  border-collapse: collapse;
+  margin: 20px auto;
+  border: 1px solid #888;
+
+  th {
+    background-color: rgba(163, 102, 255, 0.3);
+  }
+
+  th,
+  td {
     border: 1px solid #888;
-
-    th {
-        background-color: rgba(163, 102, 255, .3);
-    }
-
-    th, td {
-        border: 1px solid #888;
-        padding: 10px;
-    }
+    padding: 10px;
+    font-size: 14px;
+  }
 }
-

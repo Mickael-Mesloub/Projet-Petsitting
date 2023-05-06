@@ -1,84 +1,104 @@
 import { getMethod, deleteMethod } from "../../../../helpers/fetch";
-import { useState, useEffect } from 'react';
-import { Link, useParams } from "react-router-dom";
-import Header from '../../../../components/header/Header';
-import '../allUserAnimals/styles.scss'
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { MdDelete, MdCreate } from "react-icons/md";
+import { Carousel } from "react-responsive-carousel";
+import "./styles.scss";
 
 const Animal = () => {
+  const [animal, setAnimal] = useState({});
+  const { animalId } = useParams();
+  const navigate = useNavigate();
 
-/*
-************************* AFFICHER LES RESERVATIONS ************************
-*/
-    const [animal, setAnimal] = useState({});
-    const [animalBookings, setAnimalBookings] = useState([])
-    const { userId, animalId } = useParams();
+  useEffect(() => {
+    if (animal) {
+      getMethod(
+        `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
+      )
+        .then((data) => {
+          setAnimal(data.animal);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, []);
 
-    useEffect(() => {
-        getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}`)
-            .then((data) => {
-                setAnimal(data.animal)
-                setAnimalBookings(data.bookings)
-            })
-            .catch((error) => console.log(error))
-    },[])
+  const settings = {
+    infinite: true,
+    showThumbs: false,
+    showStatus: false,
+    autoPlay: true,
+    infiniteLoop: true,
+    interval: 3000,
+  };
 
-    useEffect(() => {
-        console.log(animalBookings);
-    },[])
-
-    return (
-        <>
-            <Header />
-            
-            <main className="animal-main">
-                
-                <div className="animal-container">
-                    <h1>{animal.name}</h1>
-                    <div className="animal-description">« {animal.description} »</div>
-                    <div className="animal-images-container">
-                        {animal.images && animal.images.length > 0 ? animal.images.map((image, i) => 
-                            <div key={i} className="animal-image">
-                                <img src={`${process.env.REACT_APP_BACKEND_URL}/${image}`} alt="" />
-                            </div>
-                        )
-                        :
-                            <div>Aucune image téléchargée</div>
-                        }
-                    </div>
-                    <button onClick={() => {
-
-                        if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet animal ?")) {
-                            deleteMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/${userId}/animals/${animalId}`);
-                        }
-                        
-                    }}>Supprimer</button>
-                    <Link to={`/profile/${userId}/animals/${animalId}/update-animal`}>Modifier</Link>
+  return (
+    <main className="animal-main">
+      {animal && (
+        <div className="animal-container">
+          <h2>{animal.name}</h2>
+          <div className="animal-description"> {animal.description} </div>
+          <div className="animal-images-container">
+            {animal.images &&
+              animal.images.length === 1 &&
+              animal.images.map((image, i) => (
+                <div key={i} className="animal-image">
+                  <img
+                    src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                    alt={`${animal.name}_${i}`}
+                  />
                 </div>
-                
-                {animalBookings && animalBookings.length > 0 ? 
-                    <div className="animal-bookings-container">
-                    {animalBookings.map((booking, i) =>
-                        <div className="booking" key={i}>
-                            <div>Date : {booking.date}</div>
-                            <div>De : {booking.startTime} à {booking.endTime}</div>
-                            <div>Prestation réservée: {booking.service.name}</div>
-                        </div>
-                    )}
-                    </div>
-                
-                :   
-                    <div>
-                        <div>Aucune prestation n'a été réservée pour cet animal.</div>
-                        <div>Pour réserver, c'est par ici : </div>
-                        <div><Link to={`/${userId}/booking`} >Réserver</Link></div>
-                    </div>
+              ))}
+            {animal.images && animal.images.length > 1 && (
+              <div className="carousel">
+                <div className="carousel-slider">
+                  <Carousel {...settings}>
+                    {animal.images.map((image, i) => (
+                      <div key={i} className="carousel-slide">
+                        <img
+                          src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                          alt={`${i}_${animal.title}`}
+                        />
+                      </div>
+                    ))}
+                  </Carousel>
+                </div>
+              </div>
+            )}
+            {animal.images && animal.images.length === 0 && (
+              <p>Aucune image téléchargée.</p>
+            )}
+          </div>
 
+          <div className="delete-icon-container">
+            <div
+              className="delete-icon"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "Êtes-vous sûr(e) de vouloir supprimer cet animal ?"
+                  )
+                ) {
+                  deleteMethod(
+                    `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
+                  ).then(() => navigate("/profile"));
                 }
-            </main>
-               
-        </>
-    )
-
-}
+              }}
+            >
+              <MdDelete />
+            </div>
+          </div>
+          <div className="update-icon-container">
+            <Link
+              to={`/profile/animals/${animalId}/update-animal`}
+              className="update-icon"
+            >
+              <MdCreate />
+            </Link>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+};
 
 export default Animal;

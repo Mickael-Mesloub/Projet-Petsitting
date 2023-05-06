@@ -1,16 +1,11 @@
-import Header from "../../../../components/header/Header";
-
 const Bookings = () => {
+  // REACT_APP_BACKEND_URL
 
-    // REACT_APP_BACKEND_URL
-
-    return ( 
-        <>
-            <Header />
-            <h1>Réservations</h1>
-            
-        </>
-    )
-}
+  return (
+    <main>
+      <h2>Réservations</h2>
+    </main>
+  );
+};
 
 export default Bookings;

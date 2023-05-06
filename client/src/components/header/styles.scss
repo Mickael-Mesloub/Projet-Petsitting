@@ -1,109 +1,36 @@
-@import "../../assets/styles/mixins";
+@import "../../assets/styles/_mixins";
 @import "../../assets/styles/_placeholders";
 @import "../../assets/styles/_variables";
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Delius+Swash+Caps&family=Mali:wght@400;700&display=swap");
-
 
 header {
-    
-    @extend %flex-center;
-    justify-content: center;
-    padding: 20px;
-    background: linear-gradient(90deg , $revert-blue-violet-gradient);
-    min-height: 100vh;
+  @extend %flex-center;
+  justify-content: center;
+  padding: 20px;
+  background: $banner-footer-bg;
+  height: 100vh;
 
-    .background-icon {
-        position: absolute;
-        border-radius: 45%;
-    }
-    
-    .main-title {
-        font-family: $title-nav-font;
-        font-size: 50px;
-        color: rgba(255,255,255,0.8);
-    }
-    
-    
-    // ***** BOUTON BURGER ******
-    
-    .burger-menu-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 10px;
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        transition: all .3s ease-in-out;
-    }
-    
-    .burger-menu-btn:hover {
-        background: rgba(190, 130, 255, 0.884);
-        transition: all .3s ease-in-out;
-        border-radius: 50%;
-    }
-    
-    .burger-menu {        
-        background-color: #333;
-        height: 100vh;
-        top: 0;
-        right: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 1;
-    }
+  .background-icon {
+    display: block;
+    position: absolute;
+    border-radius: 45%;
+    z-index: -1;
+  }
 
-    .hidden-nav {
-        display: none;
-    }
-    
-    .burger-menu-links {
-        @extend %flex-center;
-        flex-direction: column;
-        margin-top: 60px;
-        margin-bottom: 10px;
-        padding: 0;
-        list-style: none;
-    }
-    
-    .burger-menu-links li {
-        margin-bottom: 15px;
-        transition: all .3s ease-in-out;
-    
-        &:hover {
-            transform: translateX(15px);
-            transition: all .3s ease-in-out;
-        }
-    }
-    
-    .burger-menu-link {
-        color: $beige;
-        font-family: $title-nav-font , serif;
-        font-size: 24px;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 10px;
-    }
-    
-    .burger-menu-link:hover {
-        color: rgba(190, 130, 255, 0.884);
-        transform: translateX(15px);
-        transition: all .3s ease-in-out;
-    }
-    
-    .auth-link, .logged-link {
-        color: $gold;
-    }
+  .main-title {
+    display: inline-block;
+    font-family: $title-nav-font;
+    font-size: 50px;
+    color: $beige;
+    text-shadow: 0.75px 0.75px 0.75px #000;
+    transition: all 0.25s ease-in-out;
 
-    .logout-link {
-        color: $red;
+    &:hover {
+      transform: scale(1.1);
+      opacity: 0.65;
     }
+  }
 
-    @include tablet {
-        min-height: 350px;
-        .burger-menu-btn, .burger-menu {
-            display: none;
-        }
-        
-    }
+  @include tablet {
+    height: 50vh;
+  }
 }

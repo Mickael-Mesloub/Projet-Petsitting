@@ -1,16 +1,13 @@
-import Header from '../../../components/header/Header'
-import './styles.scss'
-import AdminLinks from '../../../components/adminLinks/AdminLinks';
+import "./styles.scss";
+import AdminLinks from "../../../components/adminLinks/AdminLinks";
 
 const AdminHome = () => {
-
-    return (
-        <>  
-            <Header />
-            <AdminLinks />
-            <h1>AdminHome</h1>
-        </>
-    );
+  return (
+    <main>
+      <AdminLinks />
+      <h2>AdminHome</h2>
+    </main>
+  );
 };
 
 export default AdminHome;
