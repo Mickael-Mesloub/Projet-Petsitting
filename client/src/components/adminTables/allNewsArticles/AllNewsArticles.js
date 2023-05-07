@@ -50,7 +50,7 @@ const AdminNews = () => {
                 >
                   <td>{article.forWhichPage}</td>
                   <td>{article.title}</td>
-                  <td> {article.content.substring(0, 50)}...</td>
+                  <td> {article.content.substring(0, 30)}...</td>
 
                   <td
                     className="clickable update"

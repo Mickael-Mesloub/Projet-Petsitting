@@ -54,7 +54,7 @@ const AdminServices = () => {
                 >
                   <td>{service.category}</td>
                   <td>{service.name}</td>
-                  <td>{service.description.substring(0, 50)}...</td>
+                  <td>{service.description.substring(0, 30)}...</td>
                   <td>{service.price}</td>
                   <td>{service.visible.toString()}</td>
                   <td
@@ -76,7 +76,7 @@ const AdminServices = () => {
             </tbody>
           </table>
           <div className="link-container">
-            <Link to={`/admin/news/create-article`} className="link">
+            <Link to={`/admin/service/create-service`} className="link">
               Ajouter une prestation
             </Link>
           </div>

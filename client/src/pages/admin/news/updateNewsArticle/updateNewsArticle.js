@@ -1,7 +1,8 @@
-import AdminLinks from "../../../../components/adminLinks/AdminLinks";
 import { useState, useEffect } from "react";
 import { getMethod, putFormData } from "../../../../helpers/fetch";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toastError, toastSuccess } from "../../../../components/toast/Toast";
+import "./styles.scss";
 
 const UpdateArticle = () => {
   const { articleId } = useParams();
@@ -11,11 +12,7 @@ const UpdateArticle = () => {
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
 
-  // Pour la supression d'images :
-  // récupérer article (get) puis setArticle avec la data
-  // maper sur articles.images pour créer des inputs checkbox name="deleteImages" / afficher les images à supprimer.
-  // quand ckeck la box ou click image, setDeleteImages
-  //  => VOIR UPDATE article
+  const navigate = useNavigate();
 
   useEffect(() => {
     getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`)
@@ -36,38 +33,40 @@ const UpdateArticle = () => {
       formData
     )
       .then((data) => setArticle(data))
-      .then(() => setSelectedImages([]));
-
-    formData.append("title", title);
-    formData.append("content", content);
-    if (images && images.length > 0) {
-      for (const image of images) {
-        formData.append("file", image);
-      }
-    }
-    putFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`,
-      formData
-    ).then((data) => setArticle(data));
+      .then(() => setSelectedImages([]))
+      .then(() => {
+        formData.append("title", title);
+        formData.append("content", content);
+        if (images && images.length > 0) {
+          for (const image of images) {
+            formData.append("file", image);
+          }
+        }
+        putFormData(
+          `${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`,
+          formData
+        )
+          .then(() => {
+            toastSuccess("Modifié avec succès 🎉");
+            navigate(`/admin`);
+          })
+          .catch((error) => {
+            toastError("Modification échouée ❌");
+            console.log(error);
+          });
+      });
   };
 
-  useEffect(() => {
-    console.log(selectedImages);
-  }, [selectedImages]);
-
   return (
-    <main>
-      <AdminLinks />
+    <main className="updateArticle-main">
       <h2>Modifier l'article</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Titre : </label>
         <input
           type="text"
           name="title"
           placeholder={article.title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <label htmlFor="content">Contenu : </label>
         <textarea
           name="content"
           rows="5"
@@ -88,33 +87,27 @@ const UpdateArticle = () => {
             <legend>Sélectionnez les images à remplacer</legend>
             {article.images.map((image, i) => (
               <div key={i}>
-                <input
-                  type="checkbox"
-                  checked={selectedImages.includes(image)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedImages([...selectedImages, image]);
-                    } else {
-                      setSelectedImages(
-                        selectedImages.filter(
-                          (selectedImage) => selectedImage !== image
-                        )
-                      );
-                    }
-                  }}
-                  name={`deleteImages[${i}]`}
-                />
-
                 <div
                   className={
                     selectedImages.includes(image)
                       ? "selected-image"
                       : "choose-image"
                   }
+                  onClick={() => {
+                    if (selectedImages.includes(image)) {
+                      setSelectedImages(
+                        selectedImages.filter(
+                          (selectedImage) => selectedImage !== image
+                        )
+                      );
+                    } else {
+                      setSelectedImages(selectedImages.concat(image));
+                    }
+                  }}
                 >
                   <img
                     src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
-                    alt=""
+                    alt={`${article.title}_${i}`}
                   />
                 </div>
               </div>

@@ -1,0 +1,23 @@
+@import "../../../../assets/styles/_placeholders";
+@import "../../../../assets/styles/_mixins";
+@import "../../../../assets/styles/_variables";
+
+.updateService-main {
+  > h2 {
+    padding-bottom: 32px;
+  }
+  .buttons {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    .radio-button {
+      display: flex;
+      gap: 8px;
+    }
+  }
+  .character-counter {
+    width: 50%;
+    font-size: 12px;
+    text-align: right;
+  }
+}

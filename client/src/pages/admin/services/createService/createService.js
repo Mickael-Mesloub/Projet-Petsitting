@@ -1,12 +1,45 @@
 import { useState, useEffect } from "react";
-
-import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
+import { useNavigate } from "react-router-dom";
+import "./styles.scss";
+import { putMethod } from "../../../../helpers/fetch";
+import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 
 const CreateService = () => {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [selectedInput, setSelectedInput] = useState(true);
+  const [countChar, setCountChar] = useState(0);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const updatedService = {
+      name,
+      description,
+      price,
+      visible,
+    };
+
+    putMethod(
+      `${process.env.REACT_APP_BACKEND_URL}/admin/services/create-service`,
+      updatedService
+    )
+      .then(() => {
+        toastSuccess("Modifié avec succès 🎉");
+        navigate(`/admin`);
+      })
+      .catch((error) => {
+        toastError("Modification échouée ❌");
+        console.log(error);
+      });
+  };
 
   const handleRadioChange = (event) => {
-    setVisible(event.target.value === "yes");
+    setSelectedInput(!selectedInput);
+    setVisible(event.target.value);
   };
 
   useEffect(() => {
@@ -14,48 +47,58 @@ const CreateService = () => {
   }, [visible]);
 
   return (
-    <main>
-      <AdminLinks />
+    <main className="createService-main">
       <h2>Créer une nouvelle prestation</h2>
-      <form>
-        <label for="category">Catégorie : </label>
-
-        <select name="category">
-          <option value="sitting">Garderie</option>
-          <option value="grooming">Toilettage</option>
-        </select>
-        <label htmlFor="title">Titre : </label>
-        <input type="text" name="title" />
-        <label htmlFor="description">Description : </label>
-        <textarea name="description" rows="5" cols="50"></textarea>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Nom du service"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <textarea
+          name="description"
+          rows="5"
+          cols="50"
+          placeholder="Informations à propos du service"
+          onChange={(e) => {
+            setDescription(e.target.value);
+            setCountChar(e.target.value.length);
+          }}
+        ></textarea>
+        <div className="character-counter">Nb de caractères : {countChar}</div>
         <label htmlFor="price">Prix (en €) : </label>
-        <input type="number" name="price" />
+        <input
+          type="number"
+          name="price"
+          placeholder={`Prix en €`}
+          onChange={(e) => setPrice(e.target.value)}
+        />
         <fieldset>
-          <legend>
-            La prestation doit-elle être visible pour les utilisateurs?
-          </legend>
-          <div>
-            <input
-              type="radio"
-              name="yes"
-              value="yes"
-              checked={visible}
-              onChange={handleRadioChange}
-            />
-            <label htmlFor="yes">Oui</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="no"
-              value="no"
-              checked={!visible}
-              onChange={handleRadioChange}
-            />
-            <label htmlFor="no">Non</label>
+          <legend>Rendre la prestation visible pour les utilisateurs?</legend>
+          <div className="buttons">
+            <div className="radio-button">
+              <input
+                type="radio"
+                name="yes"
+                value="true"
+                checked={selectedInput}
+                onChange={handleRadioChange}
+              />
+              <label htmlFor="true">Oui</label>
+            </div>
+            <div className="radio-button">
+              <input
+                type="radio"
+                name="no"
+                value="false"
+                checked={!selectedInput}
+                onChange={handleRadioChange}
+              />
+              <label htmlFor="false">Non</label>
+            </div>
           </div>
         </fieldset>
-
         <input type="submit" value="Créer" />
       </form>
     </main>

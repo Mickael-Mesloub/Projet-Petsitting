@@ -23,6 +23,7 @@ const Animals = () => {
               <tr>
                 <th>ID</th>
                 <th>Nom</th>
+                <th>Description</th>
                 <th>Taille</th>
                 <th>ID du propriétaire</th>
               </tr>
@@ -32,6 +33,7 @@ const Animals = () => {
                 <tr key={i}>
                   <td>{animal._id}</td>
                   <td>{animal.name}</td>
+                  <td>{animal.description.substring(0, 30)}</td>
                   <td>{animal.size}</td>
                   <td>{animal.owner}</td>
                 </tr>

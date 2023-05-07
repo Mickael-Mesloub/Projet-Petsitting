@@ -1,0 +1,9 @@
+@import "../../../../assets/styles/_placeholders";
+@import "../../../../assets/styles/_mixins";
+@import "../../../../assets/styles/_variables";
+
+.updateArticle-main {
+  > h2 {
+    margin-bottom: 32px;
+  }
+}

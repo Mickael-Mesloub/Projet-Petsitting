@@ -41,15 +41,10 @@ const CreateAnimal = () => {
       });
   };
 
-  useEffect(() => {
-    console.log(size);
-  }, [size]);
-
   return (
     <main className="create-animal-main">
       <h2>Ajouter un animal</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Nom : </label>
         <input
           type="text"
           name="name"
@@ -57,7 +52,6 @@ const CreateAnimal = () => {
           onChange={(event) => setName(event.target.value)}
           required
         />
-        <label htmlFor="description">Présentation : </label>
         <textarea
           name="description"
           rows="5"
