@@ -41,7 +41,7 @@ const UpdateProfile = () => {
     formData.append("phone", phone);
     formData.append("email", email);
 
-    if (password != "") {
+    if (password !== "") {
       formData.append("password", password);
     }
 
