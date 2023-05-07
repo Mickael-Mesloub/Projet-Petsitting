@@ -19,9 +19,9 @@ const AdminLinks = () => {
       <Link to="/admin/services" className="admin-link">
         Services
       </Link>
-      <Link to="/admin/bookings" className="admin-link">
+      {/* <Link to="/admin/bookings" className="admin-link">
         Réservations
-      </Link>
+      </Link> */}
     </div>
   );
 };

@@ -13,7 +13,7 @@ export const register = (req, res) => {
     let avatar;
     if (files && files.file) {
       console.log(files.file);
-      avatar = await copyFiles(files.file ?? "", "images");
+      avatar = await copyFiles(files.file ?? [], "images");
     }
 
     console.log(
@@ -40,14 +40,7 @@ export const register = (req, res) => {
         console.log(`Nouvel utilisateur: ${user} et son TOKEN: ${token}`);
         return res.status(201).json({
           message: "Votre compte a bien été créé!",
-          user: {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            phone: user.phone,
-            avatar: user.avatar,
-            isAdmin: user.isAdmin,
-          },
+          user,
           token,
         });
       })
@@ -79,7 +72,7 @@ export const login = async (req, res) => {
     console.log(isMatch);
 
     if (isMatch) {
-      const token = user.createJWT();
+      const token = await user.createJWT();
       return res
         .status(200)
         .json({ message: `Bienvenue ${user.firstName}`, user, token });

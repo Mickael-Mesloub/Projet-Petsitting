@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdDelete, MdCreate } from "react-icons/md";
 import { Carousel } from "react-responsive-carousel";
+import { toastSuccess } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
 const Animal = () => {
@@ -80,7 +81,10 @@ const Animal = () => {
                 ) {
                   deleteMethod(
                     `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
-                  ).then(() => navigate("/profile"));
+                  ).then(() => {
+                    toastSuccess("Supprimé avec succès !");
+                    navigate("/profile");
+                  });
                 }
               }}
             >

@@ -1,0 +1,11 @@
+@import "../../../assets/styles/_placeholders";
+@import "../../../assets/styles/_mixins";
+@import "../../../assets/styles/_variables";
+
+.allAnimals-main {
+  @extend %table-component;
+
+  th {
+    background: $brown;
+  }
+}

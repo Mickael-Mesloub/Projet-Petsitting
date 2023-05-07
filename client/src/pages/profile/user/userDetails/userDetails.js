@@ -1,6 +1,6 @@
 import { getMethod } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MdAlternateEmail, MdCall, MdCreate } from "react-icons/md";
 import { BsPlus } from "react-icons/bs";
@@ -40,7 +40,7 @@ const Profile = () => {
   return (
     <main className="profilePage-main">
       <div className="profile-container">
-        <h2>Mon profil</h2>
+        <h2>Mon profil ✨ </h2>
         {profile.user && profile.user._id === user._id && (
           <div className="profile-card">
             <div className="user-avatar">
@@ -79,7 +79,7 @@ const Profile = () => {
         )}
       </div>
       <div className="animals-container">
-        <h2>Mes animaux :</h2>
+        <h2>Mes toutous 🐶 :</h2>
         {profile.animals && profile.animals.length > 0 ? (
           <>
             <div className="animals-cards">

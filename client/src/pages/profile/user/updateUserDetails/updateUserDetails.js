@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice";
+import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
 const UpdateProfile = () => {
@@ -39,7 +40,11 @@ const UpdateProfile = () => {
     formData.append("lastName", lastName);
     formData.append("phone", phone);
     formData.append("email", email);
-    formData.append("password", password);
+
+    if (password != "") {
+      formData.append("password", password);
+    }
+
     for (const i of avatar) {
       formData.append("file", i);
     }
@@ -51,15 +56,14 @@ const UpdateProfile = () => {
     )
       .then((data) => {
         dispatch(loginUser(data.user));
+        toastSuccess("Modifié avec succès 🎉");
         navigate(`/profile`);
       })
-
-      .then((error) => console.log(error));
+      .catch((error) => {
+        toastError("Modification échouée ❌");
+        console.log(error);
+      });
   };
-
-  useEffect(() => {
-    console.log(password);
-  }, [password]);
 
   return (
     <main className="update-profile-main">
@@ -71,47 +75,41 @@ const UpdateProfile = () => {
             method="post"
             encType="multipart/form-data"
           >
-            <div>
-              <input
-                type="text"
-                name="firstName"
-                placeholder="Prénom"
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Nom"
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Téléphone (format XX XX XX XX XX)"
-                pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                type="password"
-                name="password"
-                placeholder="Mot de passe"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="Prénom"
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Nom"
+              onChange={(e) => setLastName(e.target.value)}
+            />
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Téléphone (format XX XX XX XX XX)"
+              pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
+              onChange={(e) => setPhone(e.target.value)}
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Mot de passe"
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <div className="form-inputs file-input">
               <label htmlFor="file">Changer d'avatar : </label>
               <input

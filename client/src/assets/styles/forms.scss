@@ -34,8 +34,8 @@ form {
   fieldset,
   select,
   textarea {
+    width: 100%;
     padding: 8px;
-    width: 15em;
     border-radius: 8px;
     border: 0.5px solid $dark-violet;
 
@@ -96,44 +96,20 @@ form {
 
 // ********** MEDIA QUERRIES **********
 
-// ********** MEDIUM SCREENS **********
-
-@include mediumScreens {
-  form {
-    label,
-    input,
-    fieldset,
-    select,
-    textarea {
-      width: 18em;
-    }
-  }
-}
-
-// ********** TABLETS **********
-
-@include tablet {
-  form {
-    label,
-    input,
-    fieldset,
-    select,
-    textarea {
-      width: 22em;
-    }
-  }
-}
-
 // ********** DESKTOP **********
 
 @include desktop {
   form {
+    width: 50%;
     label,
     input,
     fieldset,
     select,
     textarea {
-      width: 25em;
+      width: 50%;
+    }
+    textarea {
+      height: 25em;
     }
   }
 }

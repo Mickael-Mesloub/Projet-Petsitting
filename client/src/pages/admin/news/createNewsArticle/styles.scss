@@ -1,0 +1,15 @@
+@import "../../../../assets/styles/_placeholders";
+@import "../../../../assets/styles/_mixins";
+@import "../../../../assets/styles/_variables";
+
+.createArticle-main {
+  h2 {
+    padding-bottom: 32px;
+  }
+
+  .character-counter {
+    width: 50%;
+    font-size: 12px;
+    text-align: right;
+  }
+}

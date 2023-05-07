@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { postFormData } from "../../../../helpers/fetch";
 import { useNavigate } from "react-router-dom";
+import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
 const Register = () => {
@@ -38,24 +39,16 @@ const Register = () => {
       formData.append("file", i);
     }
 
-    console.log(formData.get("avatar"));
-
-    for (const [key, value] of formData) {
-      console.log(key + " " + value);
-    }
-
     postFormData(`${process.env.REACT_APP_BACKEND_URL}/register`, formData)
       .then((data) => {
-        console.log(data);
+        toastSuccess("Compte créé 🎉 !");
         navigate("/login");
       })
-
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toastError("Création échouée ❌");
+        console.log(error);
+      });
   };
-
-  useEffect(() => {
-    console.log(`${avatar.originalFilename}`);
-  }, [avatar]);
 
   return (
     <main className="registerPage-main">
@@ -66,6 +59,7 @@ const Register = () => {
             type="text"
             name="firstName"
             placeholder="Prénom"
+            required
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
@@ -74,6 +68,7 @@ const Register = () => {
             type="text"
             name="lastName"
             placeholder="Nom"
+            required
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
@@ -91,6 +86,7 @@ const Register = () => {
             type="email"
             name="email"
             placeholder="Email"
+            required
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -98,6 +94,7 @@ const Register = () => {
           <input
             type="password"
             name="password"
+            required
             placeholder="Mot de passe"
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -108,6 +105,7 @@ const Register = () => {
             type="file"
             name="file"
             accept="image/jpeg, image/png"
+            required
             onChange={(e) => setAvatar(e.target.files)}
           />
         </div>

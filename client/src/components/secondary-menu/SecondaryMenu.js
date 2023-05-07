@@ -1,12 +1,13 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "./styles.scss";
-import { BiUserCircle, BiCalendar, BiDesktop } from "react-icons/bi";
+import { BiUserCircle, BiDesktop } from "react-icons/bi";
 import { BsPower } from "react-icons/bs";
 import Tooltip from "../tooltip/Tooltip";
+import "./styles.scss";
 
 const SecondaryMenu = () => {
   const { user } = useSelector((state) => state);
+
   return (
     <nav className="secondary-menu">
       <ul>

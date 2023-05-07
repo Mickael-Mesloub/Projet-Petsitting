@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../../../store/slices/user/userSlice.js";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../../store/slices/user/userSlice";
 import { postMethod } from "../../../../helpers/fetch";
 import "./styles.scss";
 import { useNavigate } from "react-router-dom";
+import { toastSuccess, toastError } from "../../../../components/toast/Toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,12 +21,13 @@ const Login = () => {
       password,
     })
       .then((data) => {
-        console.log(data);
         dispatch(loginUser(data.user));
         localStorage.setItem("jwt", data.token);
+        toastSuccess("Vous êtes connecté(e) 🎉 !");
         navigate("/");
       })
       .catch((error) => {
+        toastError("Identifiants incorrects ❌");
         console.log(error);
       });
   };
@@ -40,6 +41,7 @@ const Login = () => {
             type="email"
             name="email"
             placeholder="Email"
+            required
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -48,6 +50,7 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Mot de passe"
+            required
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>

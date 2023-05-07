@@ -17,6 +17,7 @@ import Footer from "./components/footer/Footer";
 import SecondaryMenu from "./components/secondary-menu/SecondaryMenu";
 import { AdminMiddleware } from "./middlewares/admin/AdminMiddleware";
 import { ProfileMiddleware } from "./middlewares/userMiddleware/ProfileMiddleware";
+import { Toast } from "./components/toast/Toast";
 
 const App = () => {
   const { user } = useSelector((state) => state);
@@ -41,6 +42,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <Toast />
       <SecondaryMenu />
       <Header />
       <Navbar />

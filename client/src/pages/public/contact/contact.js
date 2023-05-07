@@ -4,11 +4,12 @@ const Contact = () => {
   return (
     <main className="contactPage-main">
       <h2>Contact</h2>
-      <p>
-        Pour toute demande d'information, n'hésitez pas à me contacter en
-        remplissant le formulaire ci-dessous !
-      </p>
-      <form className="contact-form">
+      <p>Pour toute demande d'information, n'hésitez pas à me contacter !</p>
+      <div className="contact">
+        <p>📞 : 06-06-06-06-06</p>
+        <p>📧 : contact@rubieland.com</p>
+      </div>
+      {/* <form className="contact-form">
         <div className="form-inputs">
           <input
             type="email"
@@ -42,7 +43,7 @@ const Contact = () => {
           className="register-btn"
           value="Envoyer"
         />
-      </form>
+      </form> */}
     </main>
   );
 };

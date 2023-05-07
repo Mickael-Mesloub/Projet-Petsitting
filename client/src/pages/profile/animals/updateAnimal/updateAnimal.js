@@ -1,6 +1,7 @@
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
 const UpdateAnimal = () => {
@@ -20,6 +21,9 @@ const UpdateAnimal = () => {
     )
       .then((data) => {
         setAnimal(data.animal);
+        setName(data.animal.name);
+        setDescription(data.animal.description);
+        setSize(data.animal.size);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -53,8 +57,14 @@ const UpdateAnimal = () => {
           `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}/update-animal`,
           formData
         )
-          .then(() => navigate(`/profile/animals/${animalId}`))
-          .catch((error) => console.log(error));
+          .then(() => {
+            toastSuccess("Modifié avec succès 🎉");
+            navigate(`/profile/animals/${animalId}`);
+          })
+          .catch((error) => {
+            toastError("Modification échouée ❌");
+            console.log(error);
+          });
       });
   };
 
@@ -70,22 +80,20 @@ const UpdateAnimal = () => {
           placeholder="Nom"
           type="text"
           name="name"
+          defaultValue={name}
           onChange={(event) => setName(event.target.value)}
         />
         <textarea
           placeholder="Décrivez-nous votre toutou..."
           name="description"
           rows="10"
+          defaultValue={description}
           onChange={(event) => setDescription(event.target.value)}
         ></textarea>
         <label className="size-label" htmlFor="size">
           Taille :{" "}
         </label>
-        <select
-          name="size"
-          onChange={(event) => setSize(event.target.value)}
-          defaultValue={size}
-        >
+        <select name="size" onChange={(event) => setSize(event.target.value)}>
           <option value="small">Petit toutou (moins de 10kg)</option>
           <option value="medium">Moyen toutou (entre 10kg et 25kg)</option>
           <option value="large">Grand toutou (plus de 25kg)</option>

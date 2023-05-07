@@ -9,70 +9,86 @@ footer {
 
   .footer-container {
     @extend %flex-center;
+    justify-content: space-around;
+    flex-direction: column;
     border-top: 2px solid $beige;
     width: 90%;
     margin: 0 auto;
-    padding-top: 20px;
-    gap: 10px;
+    padding: 16px 8px;
+    gap: 8px;
 
     .footer-content-box {
-      width: 33%;
+      @extend %flex-center;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .start {
+      text-align: center;
+      color: $pink;
+      padding: 8px;
+      font-weight: 700;
     }
 
-    .social-media-box {
-      padding: 5px;
+    .end {
+      color: $beige;
 
-      > p {
+      p {
         text-align: center;
-        color: $beige;
-        padding-bottom: 16px;
       }
-      .social-media-icons-boxes {
+    }
+    .social-media-icons-boxes {
+      @extend %flex-center;
+      gap: 10px;
+
+      .social-media-icon {
         @extend %flex-center;
-        gap: 10px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        font-size: 1.5em;
+        transition: all 0.2s ease-in-out;
 
-        .social-media-icon {
-          @extend %flex-center;
-          height: 50px;
-          width: 50px;
-          border-radius: 50%;
-          font-size: 1.5em;
-          transition: all 0.2s ease-in-out;
-
-          &:hover {
-            transform: scale(1.1);
-          }
+        &:hover {
+          transform: scale(1.1);
         }
-        .fb-icon {
-          color: $beige;
-          &:hover {
-            background-color: #3b5998;
-            color: #fff;
-          }
+      }
+      .fb-icon {
+        color: $beige;
+        &:hover {
+          background-color: #3b5998;
+          color: #fff;
         }
-        .ig-icon {
-          color: $beige;
-          &:hover {
-            background: #d6249f;
-            background: radial-gradient(
-              circle at 30% 107%,
-              #fdf497 0%,
-              #fdf497 5%,
-              #fd5949 45%,
-              #d6249f 60%,
-              #285aeb 90%
-            );
-            color: #fff;
-          }
+      }
+      .ig-icon {
+        color: $beige;
+        &:hover {
+          background: #d6249f;
+          background: radial-gradient(
+            circle at 30% 107%,
+            #fdf497 0%,
+            #fdf497 5%,
+            #fd5949 45%,
+            #d6249f 60%,
+            #285aeb 90%
+          );
+          color: #fff;
         }
-        .tt-icon {
-          color: $beige;
-          &:hover {
-            background: #fff;
-            color: #00acee;
-          }
+      }
+      .tt-icon {
+        color: $beige;
+        &:hover {
+          background: #fff;
+          color: #00acee;
         }
       }
     }
+  }
+}
+
+@include desktop {
+  footer .footer-container {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
   }
 }

@@ -4,5 +4,19 @@
 
 .admin-links-container {
   @extend %flex-center;
-  width: 50%;
+  padding: 32px;
+  gap: 8px;
+  width: 100%;
+
+  .admin-link {
+    @extend %flex-center;
+    padding: 8px;
+    font-weight: 700;
+    color: $dark-blue;
+    text-decoration: none;
+
+    &:hover {
+      color: $gold;
+    }
+  }
 }

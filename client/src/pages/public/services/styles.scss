@@ -2,78 +2,77 @@
 @import "../../../assets/styles/_variables";
 @import "../../../assets/styles/_mixins";
 
-.prestationPage-main {
+.servicesPage-main {
   @extend %flex-center;
   > section {
     @extend %section;
-    > h2 {
+    > h2,
+    h3 {
       color: $dark-violet;
     }
 
-    > article {
+    > .services-container {
       @extend %article;
+      flex-direction: column;
 
-      .services-container {
-        width: 50%;
+      .service {
+        @extend %flex-center;
+        flex-direction: column;
+        width: 100%;
+        align-self: center;
+        position: relative;
+        color: $pink;
+        background: $dark-violet;
+        border-radius: 12px;
+        padding: 32px 16px;
+        transition: all 0.15s ease-in-out;
+        box-shadow: 5px 5px 10px $pink;
 
-        .service {
-          @extend %flex-center;
-          flex-direction: column;
-          align-self: center;
-          position: relative;
-          color: $pink;
-          background: $dark-violet;
-          border-radius: 12px;
-          padding: 32px 16px;
-          transition: all 0.15s ease-in-out;
-          box-shadow: 5px 5px 10px $pink;
+        &:hover {
+          transform: scale(1.05);
+          opacity: 0.95;
+        }
 
-          &:hover {
-            transform: scale(1.05);
-            opacity: 0.95;
-          }
+        .service-category {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          color: $dark-violet;
+          padding: 5px;
+          font-size: 12px;
+          border-radius: 8px;
+          font-weight: 700;
+        }
 
-          .service-category {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            color: $dark-violet;
-            padding: 5px;
-            font-size: 12px;
-            border-radius: 8px;
-            font-weight: 700;
-          }
+        .sitting {
+          background: $blue;
+        }
 
-          .sitting {
-            background: $blue;
-          }
+        .grooming {
+          background: $light-green;
+        }
 
-          .grooming {
-            background: $light-green;
-          }
+        .service-text {
+          width: 100%;
+          text-align: center;
+          padding: 8px;
+        }
+        .service-name {
+          text-align: center;
+          font-weight: 700;
+          font-size: 1.25em;
+          color: $beige;
+        }
 
-          .service-text {
-            width: 100%;
-            text-align: center;
-            padding: 8px;
-          }
-          .service-name {
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.25em;
-            color: $beige;
-          }
+        .service-description {
+          padding-bottom: 32px;
+        }
 
-          .service-description {
-            padding-bottom: 32px;
-          }
-
-          .service-price {
-            text-align: right;
-            background: $beige;
-            color: $dark-violet;
-            border-radius: 8px;
-          }
+        .service-price {
+          text-align: right;
+          background: $beige;
+          color: $dark-violet;
+          border-radius: 8px;
         }
       }
     }
@@ -81,15 +80,24 @@
 }
 
 @include tablet {
-  .prestationPage-main > section > article {
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-
+  .servicesPage-main > section {
     > .services-container {
-      width: 22em;
-      max-width: 22em;
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .service {
+        width: 48%;
+        max-width: 48%;
+      }
+    }
+  }
+}
+
+@include desktop {
+  .servicesPage-main > section > .services-container {
+    .service {
+      width: 32%;
+      max-width: 32%;
     }
   }
 }

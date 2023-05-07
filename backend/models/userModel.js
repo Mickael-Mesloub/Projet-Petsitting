@@ -70,6 +70,11 @@ const userModel = new mongoose.Schema(
 
 // Méthode de cryptage de mot de passe: s'exécute avant la sauvegarde d'un user
 
+userModel.pre("save", async function () {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
 userModel.pre("update", async function () {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
@@ -88,7 +93,6 @@ userModel.methods.comparePassword = function (candidatePassword, err) {
 // Méthode de création de JWT qui récupère et stocke l'email et l'id du user ainsi qu'une clé secrète et une "date d'expiration" du jeton
 
 userModel.methods.createJWT = function () {
-  console.log("OKKK");
   return jwt.sign(
     {
       id: this._id,

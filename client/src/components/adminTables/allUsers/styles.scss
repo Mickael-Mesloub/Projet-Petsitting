@@ -1,0 +1,12 @@
+@import "../../../assets/styles/_placeholders";
+@import "../../../assets/styles/_mixins";
+@import "../../../assets/styles/_variables";
+
+.allUsers-main {
+  @extend %table-component;
+  gap: 16px;
+
+  th {
+    background: $light-pink;
+  }
+}

@@ -1,6 +1,7 @@
 import { getMethod, postFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
 const CreateAnimal = () => {
@@ -29,7 +30,15 @@ const CreateAnimal = () => {
     postFormData(
       `${process.env.REACT_APP_BACKEND_URL}/profile/create-animal`,
       formData
-    ).then(() => navigate("/profile"));
+    )
+      .then(() => {
+        navigate("/profile");
+        toastSuccess("Ajouté avec succès 🎉");
+      })
+      .catch((error) => {
+        toastError("Création échouée ❌");
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -44,6 +53,7 @@ const CreateAnimal = () => {
         <input
           type="text"
           name="name"
+          placeholder="Nom"
           onChange={(event) => setName(event.target.value)}
           required
         />
@@ -52,6 +62,8 @@ const CreateAnimal = () => {
           name="description"
           rows="5"
           cols="50"
+          placeholder="Décrivez-nous votre toutou..."
+          required
           onChange={(event) => setDescription(event.target.value)}
         ></textarea>
         <label htmlFor="size">Taille : </label>

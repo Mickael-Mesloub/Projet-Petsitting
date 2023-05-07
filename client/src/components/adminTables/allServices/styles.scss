@@ -1,0 +1,19 @@
+@import "../../../assets/styles/_placeholders";
+@import "../../../assets/styles/_mixins";
+@import "../../../assets/styles/_variables";
+
+.allServices-main {
+  @extend %table-component;
+
+  th {
+    background: $beige;
+  }
+
+  .link-container {
+    padding: 32px;
+    text-align: center;
+    .link {
+      @extend %button;
+    }
+  }
+}

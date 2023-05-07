@@ -20,7 +20,7 @@ export const createArticle = async (req, res) => {
 
       console.log(fields);
 
-      articleModel
+      await articleModel
         .create({
           forWhichPage: fields.forWhichPage,
           title: fields.title,

@@ -19,7 +19,7 @@ import UpdateAnimal from "../pages/profile/animals/updateAnimal/updateAnimal";
 import GetBooking from "../pages/profile/bookings/allUserBookings/allUserBookings";
 
 //admin
-import AdminHome from "../pages/admin/home/home";
+import AdminDashboard from "../pages/admin/dashboard/dashboard";
 import Animals from "../pages/admin/animals/allAnimals/allAnimals";
 import AdminServices from "../pages/admin/services/allServices/allServices";
 import ServiceDetails from "../pages/admin/services/serviceDetails/serviceDetails";
@@ -59,7 +59,7 @@ export const profileRoutes = [
 
 // ADMIN
 export const adminRoutes = [
-  { path: "/admin", element: <AdminHome /> },
+  { path: "/admin", element: <AdminDashboard /> },
   { path: "/admin/services", element: <AdminServices /> },
   { path: "/admin/services/create-service", element: <CreateService /> },
   { path: "/admin/services/:serviceId", element: <ServiceDetails /> },

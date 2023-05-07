@@ -60,11 +60,8 @@
       display: flex;
       justify-content: center;
       width: 100%;
-      height: 15em;
-      max-height: 15em;
       > img {
         width: 100%;
-        height: 100%;
         border-radius: 12px 12px 0 0;
       }
     }
@@ -84,11 +81,6 @@
       .update-icon-container {
         right: 65px;
       }
-      .animal-images-container,
-      .carousel-slide {
-        height: 20em;
-        max-height: 20em;
-      }
     }
   }
 }
@@ -99,11 +91,6 @@
   .animal-main {
     .animal-container {
       width: 60%;
-      .animal-images-container,
-      .carousel-slide {
-        height: 22em;
-        max-height: 22em;
-      }
     }
   }
 }
@@ -114,25 +101,6 @@
   .animal-main {
     .animal-container {
       width: 50%;
-      .animal-images-container,
-      .carousel-slide {
-        height: 25em;
-        max-height: 25em;
-      }
-    }
-  }
-}
-
-// ********** LARGER SCREENS **********
-
-@include largeScreens {
-  .animal-main {
-    .animal-container {
-      .animal-images-container,
-      .carousel-slide {
-        height: 28em;
-        max-height: 28em;
-      }
     }
   }
 }

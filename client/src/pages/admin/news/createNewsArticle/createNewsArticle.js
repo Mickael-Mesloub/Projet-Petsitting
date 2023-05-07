@@ -1,12 +1,17 @@
-import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
 import { useEffect, useState } from "react";
-import { postFormData, postMethod } from "../../../../helpers/fetch.js";
+import { postFormData } from "../../../../helpers/fetch.js";
+import { toastError, toastSuccess } from "../../../../components/toast/Toast";
+import { useNavigate } from "react-router-dom";
+import "./styles.scss";
 
 const CreateNews = () => {
   const [forWhichPage, setForWhichPage] = useState("news");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);
+  const [countChar, setCountChar] = useState(0);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,23 +29,25 @@ const CreateNews = () => {
       `${process.env.REACT_APP_BACKEND_URL}/admin/news/create-article`,
       formData
     )
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+      .then(() => {
+        navigate("/admin");
+        toastSuccess("Créé avec succès 🎉");
+      })
+      .catch((error) => {
+        toastError("Création échouée ❌");
+        console.log(error);
+      });
   };
 
-  useEffect(() => {
-    console.log(forWhichPage);
-  }, [forWhichPage]);
-
   return (
-    <main>
-      <AdminLinks />
-      <h2>Nouvel article</h2>
+    <main className="createArticle-main">
+      <h2>Ajouter un article</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="forWhichPage">Pour quelle page ?</label>
         <select
           name="forWhichPage"
           value={forWhichPage}
+          required
           onChange={(e) => setForWhichPage(e.target.value)}
         >
           <option name="news" value="news">
@@ -51,20 +58,26 @@ const CreateNews = () => {
           </option>
         </select>
 
-        <label htmlFor="title">Titre : </label>
         <input
           type="text"
           name="title"
+          placeholder="Titre"
+          required
           onChange={(e) => setTitle(e.target.value)}
         />
-        <label htmlFor="content">Contenu : </label>
         <textarea
           name="content"
+          placeholder="Contenu"
           rows="5"
           cols="50"
-          onChange={(e) => setContent(e.target.value)}
+          required
+          onChange={(e) => {
+            setContent(e.target.value);
+            setCountChar(e.target.value.length);
+          }}
         ></textarea>
-        <label htmlFor="file">Images : </label>
+        <div className="character-counter">Nb de caractères : {countChar}</div>
+        <label htmlFor="file">Ajouter des images : </label>
         <input
           type="file"
           name="file"
@@ -72,7 +85,7 @@ const CreateNews = () => {
           multiple
           onChange={(e) => setFiles(e.target.files)}
         />
-        <input type="submit" value="Créer" />
+        <input type="submit" value="Ajouter" />
       </form>
     </main>
   );
