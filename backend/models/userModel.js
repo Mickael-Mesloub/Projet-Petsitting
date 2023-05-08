@@ -77,7 +77,7 @@ userModel.pre("save", async function () {
 
 userModel.pre("update", async function () {
   const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  this._update.password = await bcrypt.hash(this._update.password, salt);
 });
 
 // Méthode de comparaison de mdp: vérifie si le mdp rentré par user correspond au mdp stocké en DB

@@ -47,21 +47,22 @@ export const updateUserInfos = async (req, res) => {
           error: `Une erreur est survenue : ${error.message}. Veuillez réessayer.`,
         });
 
-      // Vérifiez si un nouveau mot de passe a été fourni
-      if (fields.password) {
-        // Générer un salt
-        const salt = await bcrypt.genSalt(10);
-        // Hasher le nouveau mot de passe
-        const hashedPassword = await bcrypt.hash(fields.password, salt);
-        // Mettre à jour le mot de passe de l'utilisateur
-        user.password = hashedPassword;
-      }
+      //   // Vérifiez si un nouveau mot de passe a été fourni
+      //   if (fields.password) {
+      //     // Générer un salt
+      //     const salt = await bcrypt.genSalt(10);
+      //     // Hasher le nouveau mot de passe
+      //     const hashedPassword = await bcrypt.hash(fields.password, salt);
+      //     // Mettre à jour le mot de passe de l'utilisateur
+      //     user.password = hashedPassword;
+      //   }
 
       // Mettre à jour les autres informations de l'utilisateur
       user.firstName = fields.firstName || user.firstName;
       user.lastName = fields.lastName || user.lastName;
       user.phone = fields.phone || user.phone;
       user.email = fields.email || user.email;
+      user.password = fields.password || user.password;
 
       let avatar;
       if (files && files.file) {

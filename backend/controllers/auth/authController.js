@@ -64,7 +64,12 @@ export const login = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ error: "Une erreur est survenue" });
+      return res
+        .status(404)
+        .json({
+          error:
+            "Identifiants incorrects. Cet utilisateur ne semble pas exister.",
+        });
     }
 
     const isMatch = await user.comparePassword(password);

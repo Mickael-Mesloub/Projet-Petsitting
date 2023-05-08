@@ -40,10 +40,7 @@ const UpdateProfile = () => {
     formData.append("lastName", lastName);
     formData.append("phone", phone);
     formData.append("email", email);
-
-    if (password !== "") {
-      formData.append("password", password);
-    }
+    formData.append("password", password);
 
     for (const i of avatar) {
       formData.append("file", i);
