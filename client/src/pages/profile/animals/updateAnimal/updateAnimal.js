@@ -58,10 +58,6 @@ const UpdateAnimal = () => {
       });
   };
 
-  useEffect(() => {
-    console.log(selectedImages);
-  }, [selectedImages]);
-
   return (
     <main className="update-animal-main">
       <h2>Modifier l'animal</h2>

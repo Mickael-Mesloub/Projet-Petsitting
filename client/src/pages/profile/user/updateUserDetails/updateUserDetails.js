@@ -29,10 +29,6 @@ const UpdateProfile = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(profile.user);
-  }, [profile.user]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -46,13 +42,12 @@ const UpdateProfile = () => {
       formData.append("file", i);
     }
 
-    console.log(formData);
     putFormData(
       `${process.env.REACT_APP_BACKEND_URL}/profile/update-profile`,
       formData
     )
       .then((data) => {
-        dispatch(loginUser(data.user));
+        dispatch(loginUser(data.updatedUser));
         toastSuccess("Modifié avec succès 🎉");
         navigate(`/profile`);
       })

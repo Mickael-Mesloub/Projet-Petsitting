@@ -18,8 +18,6 @@ export const getUserInfos = async (req, res) => {
 
     const user = await userModel.findById(userId);
 
-    console.log(user.password);
-
     if (!user) {
       return res.status(404).json({ error: "Cet utilisateur n'existe pas." });
     }
@@ -47,34 +45,39 @@ export const updateUserInfos = async (req, res) => {
           error: `Une erreur est survenue : ${error.message}. Veuillez réessayer.`,
         });
 
-      //   // Vérifiez si un nouveau mot de passe a été fourni
-      //   if (fields.password) {
-      //     // Générer un salt
-      //     const salt = await bcrypt.genSalt(10);
-      //     // Hasher le nouveau mot de passe
-      //     const hashedPassword = await bcrypt.hash(fields.password, salt);
-      //     // Mettre à jour le mot de passe de l'utilisateur
-      //     user.password = hashedPassword;
-      //   }
-
-      // Mettre à jour les autres informations de l'utilisateur
-      user.firstName = fields.firstName || user.firstName;
-      user.lastName = fields.lastName || user.lastName;
-      user.phone = fields.phone || user.phone;
-      user.email = fields.email || user.email;
-      user.password = fields.password || user.password;
-
-      let avatar;
-      if (files && files.file) {
-        avatar = await copyFiles(files.file ?? "", "images");
-        user.avatar = avatar[0] || user.avatar;
+      let newPassword = user.password;
+      // Vérifiez si un nouveau mot de passe a été fourni
+      if (fields.password) {
+        // Générer un salt
+        const salt = await bcrypt.genSalt(10);
+        // Hasher le nouveau mot de passe
+        const hashedPassword = await bcrypt.hash(fields.password, salt);
+        // Mettre à jour le mot de passe de l'utilisateur
+        newPassword = hashedPassword;
       }
 
-      await user.save();
+      let newAvatar;
+      if (files && files.file) {
+        newAvatar = await copyFiles(files.file ?? "", "images");
+      }
+
+      // Mettre à jour les autres informations de l'utilisateur
+      const updatedUser = await userModel.findByIdAndUpdate(
+        userId,
+        {
+          firstName: fields.firstName || user.firstName,
+          lastName: fields.lastName || user.lastName,
+          phone: fields.phone || user.phone,
+          email: fields.email || user.email,
+          password: newPassword,
+          avatar: newAvatar ? newAvatar[0] : user.avatar,
+        },
+        { new: true }
+      );
 
       return res.status(200).json({
         message: `Votre profil a été modifié avec succès!`,
-        user: user,
+        updatedUser: updatedUser,
       });
     });
   } catch (error) {
@@ -88,8 +91,6 @@ export const updateUserInfos = async (req, res) => {
 export const createAnimal = async (req, res) => {
   try {
     const userId = req.userId;
-    console.log("USERID" + userId);
-
     const form = formidable({ multiples: true });
     form.parse(req, async (error, fields, files) => {
       if (error) {
@@ -98,7 +99,7 @@ export const createAnimal = async (req, res) => {
         });
       }
 
-      const images = await copyFiles(files.file ?? [], "images/animals");
+      const images = await copyFiles(files.file ?? "", "images/animals");
 
       await animalModel
         .create({
@@ -130,7 +131,6 @@ export const createAnimal = async (req, res) => {
 export const getAllAnimals = async (req, res) => {
   try {
     const userId = req.userId;
-
     const animals = await animalModel.find({ owner: userId });
     return res.status(200).json(animals);
   } catch (error) {
@@ -248,7 +248,6 @@ export const deleteAnimal = async (req, res) => {
           Promise.all(deletePromises);
         }
 
-        console.log(deletedAnimal.images);
         deletedAnimal.images &&
           deletedAnimal.images.forEach((image) => {
             fs.unlink(`public/${image}`, (error) => {
@@ -281,15 +280,11 @@ export const deleteAllAnimals = (req, res) => {
   animalModel
     .deleteMany()
     .then((animal) => {
-      console.log(animal);
       fs.readdir("public/images/animals", (error, files) => {
-        console.log(files);
-
         if (error)
           return res.status(500).json({ error: "Aucun fichier trouvé." });
 
         files.forEach((file) => {
-          console.log(file);
           fs.unlink(`public/images/animals/${file}`, (error) => {
             if (error) {
               console.log(error);
@@ -345,8 +340,6 @@ export const getBookingDetails = async (req, res) => {
     }
 
     booking.animal = animal;
-
-    console.log(booking);
 
     return res.status(200).json({ booking });
   } catch (error) {

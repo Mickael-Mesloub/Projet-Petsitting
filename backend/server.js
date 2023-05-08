@@ -34,7 +34,7 @@ mongoose.connection.on("error", () => {
 });
 
 mongoose.connection.on("open", () => {
-  console.log("Connexion à la base de donénes établie");
+  console.log("Connexion à la base de données établie");
 });
 
 app.use("/register", registerRouter);

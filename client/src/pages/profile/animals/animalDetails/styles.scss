@@ -48,25 +48,24 @@
       }
     }
 
-    .animal-images-container .animal-image img {
-      width: 100%;
+    // CAROUSEL AND IMAGES CONTAINERS
+    .carousel,
+    .carousel-slide,
+    .animal-images-container {
       height: 100%;
-      border-radius: 12px;
-      box-shadow: 5px 5px 10px #000;
     }
 
-    .animal-images-container,
-    .carousel-slide {
-      display: flex;
-      justify-content: center;
+    .carousel-slide img,
+    .animal-images-container img {
+      height: 100%;
       width: 100%;
-      > img {
-        width: 100%;
-        border-radius: 12px 12px 0 0;
-      }
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
     }
   }
 }
+
+// ********** MEDIA QUERRIES  **********
 
 // ********** MEDIUM SCREENS FORMAT **********
 

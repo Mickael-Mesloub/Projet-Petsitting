@@ -18,8 +18,6 @@ export const createArticle = async (req, res) => {
         "images/news"
       );
 
-      console.log(fields);
-
       await articleModel
         .create({
           forWhichPage: fields.forWhichPage,
@@ -181,7 +179,6 @@ export const deleteAllArticles = (req, res) => {
 
         files.forEach((image) => {
           try {
-            console.log(image);
             fs.unlinkSync(`public/images/news/${image}`);
             console.log("Le fichier a été supprimé avec succès!");
           } catch (error) {

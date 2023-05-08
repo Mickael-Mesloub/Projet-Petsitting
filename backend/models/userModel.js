@@ -75,18 +75,12 @@ userModel.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-userModel.pre("update", async function () {
-  const salt = await bcrypt.genSalt(10);
-  this._update.password = await bcrypt.hash(this._update.password, salt);
-});
-
 // Méthode de comparaison de mdp: vérifie si le mdp rentré par user correspond au mdp stocké en DB
 
 userModel.methods.comparePassword = function (candidatePassword, err) {
   if (err) {
     console.log(err);
   }
-  console.log(candidatePassword, this.password);
   return bcrypt.compare(candidatePassword, this.password);
 };
 

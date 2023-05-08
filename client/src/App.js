@@ -30,11 +30,9 @@ const App = () => {
     if (token && !user.isLogged) {
       getMethod(`${process.env.REACT_APP_BACKEND_URL}/verify-token`)
         .then((data) => {
-          console.log(data);
           dispatch(loginUser(data.user));
         })
         .catch((error) => {
-          //   localStorage.removeItem("jwt");
           console.log(error);
         });
     }

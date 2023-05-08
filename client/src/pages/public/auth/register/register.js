@@ -20,19 +20,10 @@ const Register = () => {
 
     if (firstName && lastName && phone && email && password) {
       formData.append("firstName", firstName);
-      console.log(formData.get("firstName"));
-
       formData.append("lastName", lastName);
-      console.log(formData.get("lastName"));
-
       formData.append("phone", phone);
-      console.log(formData.get("phone"));
-
       formData.append("email", email);
-      console.log(formData.get("email"));
-
       formData.append("password", password);
-      console.log(formData.get("password"));
     }
 
     for (const i of avatar) {
@@ -40,7 +31,7 @@ const Register = () => {
     }
 
     postFormData(`${process.env.REACT_APP_BACKEND_URL}/register`, formData)
-      .then((data) => {
+      .then(() => {
         toastSuccess("Compte créé 🎉 !");
         navigate("/login");
       })

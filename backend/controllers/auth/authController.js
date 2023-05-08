@@ -12,18 +12,8 @@ export const register = (req, res) => {
 
     let avatar;
     if (files && files.file) {
-      console.log(files.file);
       avatar = await copyFiles(files.file ?? [], "images");
     }
-
-    console.log(
-      fields.firstName,
-      fields.lastName,
-      fields.email,
-      fields.phone,
-      fields.password,
-      avatar
-    );
 
     await userModel
       .create({
@@ -35,9 +25,7 @@ export const register = (req, res) => {
         avatar: avatar[0],
       })
       .then((user) => {
-        console.log(user);
         const token = user.createJWT();
-        console.log(`Nouvel utilisateur: ${user} et son TOKEN: ${token}`);
         return res.status(201).json({
           message: "Votre compte a bien été créé!",
           user,
@@ -64,17 +52,13 @@ export const login = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      return res
-        .status(404)
-        .json({
-          error:
-            "Identifiants incorrects. Cet utilisateur ne semble pas exister.",
-        });
+      return res.status(404).json({
+        error:
+          "Identifiants incorrects. Cet utilisateur ne semble pas exister.",
+      });
     }
 
     const isMatch = await user.comparePassword(password);
-
-    console.log(isMatch);
 
     if (isMatch) {
       const token = await user.createJWT();
@@ -106,7 +90,6 @@ export const verifyToken = async (req, res) => {
 
   // Analyser le token
   jwt.verify(token, process.env.SECRET_KEY, async (error, decoded) => {
-    console.log(decoded);
     // Si token invalide: renvoie une erreur
     if (error) {
       console.log(error);

@@ -8,7 +8,6 @@ export const findToken = () => {
 };
 
 export const getMethod = (url) => {
-  console.log(url);
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: "GET",
@@ -17,15 +16,12 @@ export const getMethod = (url) => {
       },
     })
       .then((response) => {
-        console.log(response);
         response
           .json()
           .then((data) => {
             if (response.ok) {
               resolve(data);
-              console.log(data);
             } else {
-              console.log(response.message);
               reject(data);
             }
           })
@@ -41,8 +37,6 @@ export const getMethod = (url) => {
 
 export const postMethod = (url, data) => {
   return new Promise((resolve, reject) => {
-    console.log(data);
-    console.log(findToken());
     fetch(url, {
       method: "POST",
       headers: {
@@ -52,21 +46,12 @@ export const postMethod = (url, data) => {
       body: JSON.stringify(data),
     })
       .then((response) => {
-        console.log("LOG 2");
-        console.log(response);
-
         response
           .json()
           .then((data) => {
-            console.log("LOG DATA" + " " + data);
             if (response.ok) {
-              console.log("LOG 3");
-
               resolve(data);
             } else {
-              console.log("LOG 4");
-              console.log(data);
-
               reject(data);
             }
           })
@@ -77,12 +62,7 @@ export const postMethod = (url, data) => {
 };
 
 export const postFormData = (url, formData) => {
-  for (const [key, value] of formData) {
-    console.log(key + " === " + value);
-  }
-  console.log(url);
   return new Promise((resolve, reject) => {
-    console.log("OK 2");
     fetch(url, {
       method: "POST",
       headers: {
@@ -91,21 +71,15 @@ export const postFormData = (url, formData) => {
       body: formData,
     })
       .then((response) => {
-        console.log("OK 3");
         if (!response.ok) {
-          console.log("OK 4");
-          console.log(response);
           throw new Error(response.statusText);
         }
-        console.log("OK 5");
         return response.json();
       })
       .then((data) => {
-        console.log("OK 6");
         resolve(data);
       })
       .catch((error) => {
-        console.log("OK 7");
         reject(error);
       });
   });
@@ -121,10 +95,8 @@ export const deleteMethod = async (url) => {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error(response.statusText);
         }
-        console.log(response);
         return response;
       })
       .then((data) => {
@@ -137,9 +109,7 @@ export const deleteMethod = async (url) => {
 };
 
 export const putFormData = (url, formData) => {
-  console.log("OK 1");
   return new Promise((resolve, reject) => {
-    console.log("OK 2");
     fetch(url, {
       method: "PUT",
       headers: {
@@ -148,20 +118,15 @@ export const putFormData = (url, formData) => {
       body: formData,
     })
       .then((response) => {
-        console.log("OK 3");
         if (!response.ok) {
-          console.log("OK 4");
           throw new Error(response.statusText);
         }
-        console.log("OK 5");
         return response.json();
       })
       .then((data) => {
-        console.log("OK 6");
         resolve(data);
       })
       .catch((error) => {
-        console.log("OK 7");
         reject(error);
       });
   });

@@ -30,24 +30,20 @@ const Home = () => {
 
   // Capitalize username's first letter
   useEffect(() => {
-    capitalizeUsername(user.firstName).then((username) =>
+    capitalizeText(user.firstName).then((username) =>
       setUsernameCapitalized(username)
     );
   }, [user]);
 
-  const capitalizeUsername = async (name) => {
+  const capitalizeText = async (name) => {
     if (user.isLogged) {
       const username = await name;
       const usernameFirstLetter = await username.charAt(0);
-      const capitalizeUsername =
+      const capitalizeText =
         (await usernameFirstLetter.toUpperCase()) + username.slice(1);
-      return capitalizeUsername;
+      return capitalizeText;
     }
   };
-
-  useEffect(() => {
-    console.log(homeArticles);
-  }, [homeArticles]);
 
   return (
     <main className="homepage-main">

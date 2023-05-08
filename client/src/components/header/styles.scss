@@ -30,7 +30,9 @@ header {
     }
   }
 
+  // ********** MERDIA QUERRIES ***********
+
   @include tablet {
-    height: 50vh;
+    height: 400px;
   }
 }

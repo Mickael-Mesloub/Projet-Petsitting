@@ -12,7 +12,6 @@ export const createService = async (req, res) => {
         visible,
       })
       .then((service) => {
-        console.log(`Nouveau service créé : ${service}`);
         return res
           .status(201)
           .json({ message: "Un nouveau service a été créé!", service });

@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
 
   const updateMenu = () => {
-    if (!isMenuClicked) {
+    if (isMenuClicked) {
       setBurgerClass("burger-bar clicked");
       setMenuClass("menu visible");
     } else {

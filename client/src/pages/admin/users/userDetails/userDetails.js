@@ -2,7 +2,7 @@ import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMethod } from "../../../../helpers/fetch";
-import { capitalizeUsername } from "../../../../helpers/utils.js";
+import { capitalizeText } from "../../../../helpers/utils.js";
 
 const AdminUserDetails = () => {
   const [user, setUser] = useState({});
@@ -18,18 +18,14 @@ const AdminUserDetails = () => {
 
   useEffect(() => {
     if (user.user) {
-      capitalizeUsername(user, user.user.firstName).then((username) =>
+      capitalizeText(user, user.user.firstName).then((username) =>
         setUserFirstNameCapitalized(username)
       );
-      capitalizeUsername(user, user.user.lastName).then((username) =>
+      capitalizeText(user, user.user.lastName).then((username) =>
         setUserLastNameCapitalized(username)
       );
     }
   }, [user.user]);
-
-  useEffect(() => {
-    console.log(userFirstNameCapitalized);
-  }, [user]);
 
   return (
     <main>

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MdAlternateEmail, MdCall, MdCreate } from "react-icons/md";
 import { BsPlus } from "react-icons/bs";
-import { capitalizeUsername } from "../../../../helpers/utils";
+import { capitalizeText } from "../../../../helpers/utils";
 import Tooltip from "../../../../components/tooltip/Tooltip";
 import "./styles.scss";
 
@@ -12,6 +12,7 @@ const Profile = () => {
   const [profile, setProfile] = useState([]);
   const [userFirstNameCapitalized, setUserFirstNameCapitalized] = useState("");
   const [userLastNameCapitalized, setUserLastNameCapitalized] = useState("");
+  const [animalNameCapitalized, setAnimalNameCapitalized] = useState("");
 
   const { user } = useSelector((state) => state);
   const navigate = useNavigate();
@@ -29,13 +30,24 @@ const Profile = () => {
   }, [user]);
 
   useEffect(() => {
-    capitalizeUsername(user, user.firstName).then((username) =>
-      setUserFirstNameCapitalized(username)
-    );
-    capitalizeUsername(user, user.lastName).then((username) =>
-      setUserLastNameCapitalized(username)
-    );
-  }, [user]);
+    if (profile.user) {
+      capitalizeText(profile.user.firstName).then((username) =>
+        setUserFirstNameCapitalized(username)
+      );
+      capitalizeText(profile.user.lastName).then((username) =>
+        setUserLastNameCapitalized(username)
+      );
+    }
+
+    if (profile.animals) {
+      for (const animal of profile.animals) {
+        console.log(animal);
+        capitalizeText(animal.name).then((newName) =>
+          setAnimalNameCapitalized(newName)
+        );
+      }
+    }
+  }, [profile.user, profile.animals]);
 
   return (
     <main className="profilePage-main">
@@ -90,7 +102,7 @@ const Profile = () => {
                   onClick={() => navigate(`/profile/animals/${animal._id}`)}
                 >
                   <div className="animal-name">
-                    <h3>{animal.name}</h3>
+                    <h3>{animalNameCapitalized}</h3>
                   </div>
 
                   <div className="animal-images-box">

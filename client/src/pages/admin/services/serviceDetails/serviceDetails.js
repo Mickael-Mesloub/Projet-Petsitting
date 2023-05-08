@@ -15,10 +15,6 @@ const ServiceDetails = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  useEffect(() => {
-    console.log(service);
-  }, [service]);
-
   return (
     <main>
       {service && (

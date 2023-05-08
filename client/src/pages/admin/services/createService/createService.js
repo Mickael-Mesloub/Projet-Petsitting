@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./styles.scss";
 import { putMethod } from "../../../../helpers/fetch";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
+import "./styles.scss";
 
 const CreateService = () => {
   const [name, setName] = useState("");
@@ -41,10 +41,6 @@ const CreateService = () => {
     setSelectedInput(!selectedInput);
     setVisible(event.target.value);
   };
-
-  useEffect(() => {
-    console.log(visible);
-  }, [visible]);
 
   return (
     <main className="createService-main">

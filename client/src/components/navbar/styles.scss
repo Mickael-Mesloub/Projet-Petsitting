@@ -18,10 +18,6 @@
   cursor: pointer;
   transition: right 0.7s ease-in-out;
 
-  &.clicked {
-    right: 50px;
-  }
-
   @include tablet {
     display: none;
   }
@@ -73,7 +69,7 @@
   .menu {
     position: fixed;
     right: 0;
-    height: 100vh;
+    height: 100%;
     background: $burger-menu-bg;
     transition: right 0.7s ease-in-out;
 

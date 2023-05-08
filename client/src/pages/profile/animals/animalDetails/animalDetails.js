@@ -4,10 +4,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdDelete, MdCreate } from "react-icons/md";
 import { Carousel } from "react-responsive-carousel";
 import { toastSuccess } from "../../../../components/toast/Toast";
+import { capitalizeText } from "../../../../helpers/utils";
 import "./styles.scss";
 
 const Animal = () => {
   const [animal, setAnimal] = useState({});
+  const [animalNameCapitalized, setAnimalNameCapitalized] = useState("");
+
   const { animalId } = useParams();
   const navigate = useNavigate();
 
@@ -23,6 +26,14 @@ const Animal = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (animal) {
+      capitalizeText(animal.name).then((newName) =>
+        setAnimalNameCapitalized(newName)
+      );
+    }
+  }, [animal]);
+
   const settings = {
     infinite: true,
     showThumbs: false,
@@ -36,7 +47,7 @@ const Animal = () => {
     <main className="animal-main">
       {animal && (
         <div className="animal-container">
-          <h2>{animal.name}</h2>
+          <h2>{animalNameCapitalized}</h2>
           <div className="animal-description"> {animal.description} </div>
           <div className="animal-images-container">
             {animal.images &&

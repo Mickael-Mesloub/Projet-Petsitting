@@ -36,8 +36,15 @@ const Footer = () => {
         <div className="footer-content-box contact">
           <p className="start">Me contacter</p>
           <div className="end">
-            <p>📞 : 06-06-06-06-06</p>
-            <p>📧 : contact@rubieland.com</p>
+            <address>
+              <Link className="contact-link" to="mailto:contact@rubieland.com">
+                📧 : contact@rubieland.com
+              </Link>
+
+              <Link className="contact-link" to="tel:+330606060606">
+                📞 : 06-06-06-06-06
+              </Link>
+            </address>
           </div>
         </div>
       </div>

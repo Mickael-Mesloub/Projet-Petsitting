@@ -29,13 +29,20 @@ footer {
       font-weight: 700;
     }
 
-    .end {
+    .end address {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .end,
+    .end address > * {
       color: $beige;
 
       p {
         text-align: center;
       }
     }
+
     .social-media-icons-boxes {
       @extend %flex-center;
       gap: 10px;
@@ -89,5 +96,9 @@ footer {
   footer .footer-container {
     flex-direction: row;
     align-items: flex-start;
+
+    .footer-content-box {
+      width: 33%;
+    }
   }
 }

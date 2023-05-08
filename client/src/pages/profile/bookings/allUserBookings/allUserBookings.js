@@ -14,10 +14,6 @@ const Booking = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  useEffect(() => {
-    console.log(booking);
-  }, [booking]);
-
   return (
     <main>
       {booking && (
