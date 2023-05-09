@@ -37,9 +37,11 @@ Suivre les étapes suivantes :
     - Et voilà ! Vous devriez avoir accès au site `Rubieland`!
     
 
-### Précisions concernant l'avenir du projet et le CRUD "Bookings"
+### Précisions concernant l'avenir du projet, la page Contact et le CRUD "Bookings"
 
 Étant toujours en cours de réflexion sur la manière dont seront organisés les tarifs, les prestations, les réservations de prestations etc, et donc le fonctionnement de la feature de réservation, le CRUD "bookings" n'est pas encore implémenté dans le site. 
+
+De même, la page Contact affiche un formulaire de contact qui n'est pas encore configuré pour envoyer la demande de l'utilisateur. C'est aussi une feature que je prévois de mettre en place à l'avenir et qui est encore en cours de réflexion. 
 
 #### Conclusion
 

@@ -1,6 +1,10 @@
 import "./styles.scss";
 
 const Contact = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submit")
+  }
   return (
     <main className="contactPage-main">
       <h2>Contact</h2>
@@ -9,7 +13,7 @@ const Contact = () => {
         <p>📞 : 06-06-06-06-06</p>
         <p>📧 : contact@rubieland.com</p>
       </div>
-      {/* <form className="contact-form">
+       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-inputs">
           <input
             type="email"
@@ -43,7 +47,8 @@ const Contact = () => {
           className="register-btn"
           value="Envoyer"
         />
-      </form> */}
+      </form>
+      
     </main>
   );
 };
