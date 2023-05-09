@@ -41,7 +41,6 @@ const Profile = () => {
 
     if (profile.animals) {
       for (const animal of profile.animals) {
-        console.log(animal);
         capitalizeText(animal.name).then((newName) =>
           setAnimalNameCapitalized(newName)
         );
@@ -102,7 +101,7 @@ const Profile = () => {
                   onClick={() => navigate(`/profile/animals/${animal._id}`)}
                 >
                   <div className="animal-name">
-                    <h3>{animalNameCapitalized}</h3>
+                    <h3>{animal.name}</h3>
                   </div>
 
                   <div className="animal-images-box">

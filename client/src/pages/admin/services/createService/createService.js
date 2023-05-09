@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { putMethod } from "../../../../helpers/fetch";
+import { postMethod } from "../../../../helpers/fetch";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
 const CreateService = () => {
+  const [category, setCategory] = useState("grooming");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -16,28 +17,30 @@ const CreateService = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const updatedService = {
+    const newService = {
+      category,
       name,
       description,
       price,
       visible,
     };
 
-    putMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/admin/services/create-service`,
-      updatedService
+    postMethod(
+      `${process.env.REACT_APP_BACKEND_URL}/admin/create-service`,
+      newService
     )
       .then(() => {
-        toastSuccess("Modifié avec succès 🎉");
+        toastSuccess("Créé avec succès 🎉");
         navigate(`/admin`);
       })
       .catch((error) => {
-        toastError("Modification échouée ❌");
+        toastError("Création échouée ❌");
         console.log(error);
       });
   };
 
   const handleRadioChange = (event) => {
+    setVisible(event.target.value === "yes");
     setSelectedInput(!selectedInput);
     setVisible(event.target.value);
   };
@@ -46,10 +49,21 @@ const CreateService = () => {
     <main className="createService-main">
       <h2>Créer une nouvelle prestation</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="category">Catégorie : </label>
+        <select
+          name="category"
+          onChange={(event) => setCategory(event.target.value)}
+          defaultValue={category}
+          required
+        >
+          <option value="grooming">Soin/Éducation</option>
+          <option value="sitting">Garde à domicile</option>
+        </select>
         <input
           type="text"
           name="name"
           placeholder="Nom du service"
+          required
           onChange={(e) => setName(e.target.value)}
         />
         <textarea
@@ -57,6 +71,7 @@ const CreateService = () => {
           rows="5"
           cols="50"
           placeholder="Informations à propos du service"
+          required
           onChange={(e) => {
             setDescription(e.target.value);
             setCountChar(e.target.value.length);
@@ -68,6 +83,7 @@ const CreateService = () => {
           type="number"
           name="price"
           placeholder={`Prix en €`}
+          required
           onChange={(e) => setPrice(e.target.value)}
         />
         <fieldset>
@@ -79,6 +95,7 @@ const CreateService = () => {
                 name="yes"
                 value="true"
                 checked={selectedInput}
+                required
                 onChange={handleRadioChange}
               />
               <label htmlFor="true">Oui</label>

@@ -6,6 +6,7 @@ import "./styles.scss";
 
 const UpdateService = () => {
   const [service, setService] = useState({});
+  const [category, setCategory] = useState("grooming");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -29,6 +30,7 @@ const UpdateService = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const updatedService = {
+      category,
       name,
       description,
       price,
@@ -50,6 +52,7 @@ const UpdateService = () => {
   };
 
   const handleRadioChange = (event) => {
+    setVisible(event.target.value === "yes");
     setSelectedInput(!selectedInput);
     setVisible(event.target.value);
   };
@@ -58,6 +61,15 @@ const UpdateService = () => {
     <main className="updateService-main">
       <h2>Modifier la prestation</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="category">Catégorie : </label>
+        <select
+          name="category"
+          onChange={(event) => setCategory(event.target.value)}
+          defaultValue={category}
+        >
+          <option value="grooming">Soin/Éducation</option>
+          <option value="sitting">Garde à domicile</option>
+        </select>
         <input
           type="text"
           name="name"

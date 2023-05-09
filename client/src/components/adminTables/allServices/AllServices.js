@@ -76,7 +76,7 @@ const AdminServices = () => {
             </tbody>
           </table>
           <div className="link-container">
-            <Link to={`/admin/service/create-service`} className="link">
+            <Link to={`/admin/services/create-service`} className="link">
               Ajouter une prestation
             </Link>
           </div>

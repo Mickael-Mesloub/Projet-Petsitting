@@ -36,6 +36,7 @@
     h3 {
       @extend %section-h3;
     }
+
     .homepage-articles-container {
       display: flex;
       flex-direction: column;
@@ -68,9 +69,11 @@
 
     .last-news-container {
       align-items: flex-start;
+
       .news-articles {
         flex-flow: column wrap;
         gap: 16px;
+
         .news-article {
           @extend %flex-center;
           flex-direction: column;
@@ -89,15 +92,19 @@
 
           .article-image {
             align-self: center;
+            max-height: 50%;
+
             > img {
               width: 100%;
               border-radius: 12px;
               box-shadow: 5px 5px 10px #000;
             }
           }
+
           .article-text-container {
             @extend %flex-center;
             flex-direction: column;
+            gap: 16px;
             padding: 16px;
             border-radius: 12px;
 
@@ -106,6 +113,7 @@
             }
 
             > p {
+              text-align: center;
               line-height: 1.5;
             }
           }
@@ -128,6 +136,7 @@
         }
       }
     }
+
     .presentation-section {
       .homepage-articles-container {
         flex-direction: column;
@@ -136,6 +145,8 @@
         }
       }
     }
+
+    // LAST NEWS SECTION
 
     .last-news-section {
       .last-news-container {
@@ -148,11 +159,13 @@
             align-items: flex-start;
             width: 100%;
             gap: 2.5em;
+
             .article-image {
               display: flex;
               justify-content: center;
               width: 15em;
             }
+
             .article-text-container {
               flex: 1;
               align-items: center;
@@ -176,6 +189,7 @@
     .presentation-section {
       .homepage-articles-container {
         flex-flow: row wrap;
+
         > article {
           width: 30%;
 
@@ -185,9 +199,11 @@
         }
       }
     }
+
     .last-news-section {
       .last-news-container {
         flex-wrap: nowrap;
+
         .news-articles {
           width: 50em;
         }

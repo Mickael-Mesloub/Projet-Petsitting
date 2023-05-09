@@ -75,6 +75,7 @@ const CreateAnimal = () => {
           type="file"
           name="file"
           accept="image/png, image/jpeg"
+          required
           onChange={(event) => setFiles(event.target.files)}
           multiple
         />

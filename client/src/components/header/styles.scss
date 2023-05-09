@@ -9,30 +9,20 @@ header {
   background: $banner-footer-bg;
   height: 100vh;
 
-  .background-icon {
-    display: block;
-    position: absolute;
-    border-radius: 45%;
-    z-index: -1;
-  }
-
   .main-title {
     display: inline-block;
     font-family: $title-nav-font;
     font-size: 50px;
     color: $beige;
     text-shadow: 0.75px 0.75px 0.75px #000;
-    transition: all 0.25s ease-in-out;
-
-    &:hover {
-      transform: scale(1.1);
-      opacity: 0.65;
-    }
   }
+}
 
-  // ********** MERDIA QUERRIES ***********
+// ********** MERDIA QUERRIES ***********
 
-  @include tablet {
-    height: 400px;
+@include tablet {
+  header {
+    height: 100px;
+    justify-content: flex-start;
   }
 }

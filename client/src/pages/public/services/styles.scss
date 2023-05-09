@@ -4,8 +4,10 @@
 
 .servicesPage-main {
   @extend %flex-center;
+
   > section {
     @extend %section;
+
     > h2,
     h3 {
       color: $dark-violet;
@@ -29,7 +31,7 @@
         box-shadow: 5px 5px 10px $pink;
 
         &:hover {
-          transform: scale(1.05);
+          transform: scale(1.015);
           opacity: 0.95;
         }
 
@@ -57,6 +59,7 @@
           text-align: center;
           padding: 8px;
         }
+
         .service-name {
           text-align: center;
           font-weight: 700;
@@ -85,6 +88,7 @@
       justify-content: center;
       flex-direction: row;
       flex-wrap: wrap;
+
       .service {
         width: 48%;
         max-width: 48%;

@@ -1,6 +1,7 @@
 import userModel from "../../models/userModel.js";
 import animalModel from "../../models/animalModel.js";
 import bookingModel from "../../models/bookingModel.js";
+import fs from "fs";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -23,15 +24,13 @@ export const getUserDetails = async (req, res) => {
     const bookings = await Promise.all(promises);
     const animalsBookings = bookings.flat();
 
-    return res
-      .status(200)
-      .json({
-        message:
-          "Voici les détails de l'utilisateur, ses animaux et ses réservations : ",
-        user,
-        animals,
-        animalsBookings,
-      });
+    return res.status(200).json({
+      message:
+        "Voici les détails de l'utilisateur, ses animaux et ses réservations : ",
+      user,
+      animals,
+      animalsBookings,
+    });
   } catch (error) {
     return res.status(400).json({ error: "Utilisateur introuvable." });
   }
@@ -44,15 +43,29 @@ export const deleteUser = async (req, res) => {
 
   userModel
     .findByIdAndDelete(req.params.id)
-    .then((user) => {
+    .then((deletedUser) => {
+      if (!deletedUser) {
+        return res.status(404).json({ error: "Utilisateur introuvable." });
+      }
+
+      if (deletedUser.avatar) {
+        fs.unlink(`public/${deletedUser.avatar}`, (error) => {
+          if (error) {
+            console.log(error);
+            return res.status(500).json({
+              error: `Une erreur est survenue et le fichier n'a pas pu être supprimé : ${error.message}. Veuillez réessayer.`,
+            });
+          }
+          console.log("Fichier supprimé avec succès!");
+        });
+      }
+
       return res.status(204).send();
     })
     .catch((error) => {
-      return res
-        .status(500)
-        .json({
-          error: `Une erreur est survenue et l'utilisateur n'a pas pu être supprimé : ${error.message}`,
-        });
+      return res.status(500).json({
+        error: `Une erreur est survenue et l'utilisateur n'a pas pu être supprimé : ${error.message}`,
+      });
     });
 };
 
@@ -67,10 +80,8 @@ export const deleteAllUsers = (req, res) => {
       console.log(
         "Une erreur est survenue lors de la supression des utilisateurs."
       );
-      return res
-        .status(500)
-        .json({
-          error: ` Une erreur est survenue et les utilisateurs n'ont pas pu être supprimés : ${error.message}`,
-        });
+      return res.status(500).json({
+        error: ` Une erreur est survenue et les utilisateurs n'ont pas pu être supprimés : ${error.message}`,
+      });
     });
 };

@@ -5,6 +5,7 @@ import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
 const UpdateArticle = () => {
+  const [forWhichPage, setForWhichPage] = useState("news");
   const { articleId } = useParams();
   const [article, setArticle] = useState({});
   const [title, setTitle] = useState("");
@@ -35,6 +36,8 @@ const UpdateArticle = () => {
       .then((data) => setArticle(data))
       .then(() => setSelectedImages([]))
       .then(() => {
+        formData.append("forWhichPage", forWhichPage);
+
         formData.append("title", title);
         formData.append("content", content);
         if (images && images.length > 0) {
@@ -61,6 +64,20 @@ const UpdateArticle = () => {
     <main className="updateArticle-main">
       <h2>Modifier l'article</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="forWhichPage">Pour quelle page ?</label>
+        <select
+          name="forWhichPage"
+          value={forWhichPage}
+          required
+          onChange={(e) => setForWhichPage(e.target.value)}
+        >
+          <option name="news" value="news">
+            Actualités
+          </option>
+          <option name="home" value="home">
+            Accueil
+          </option>
+        </select>
         <input
           type="text"
           name="title"

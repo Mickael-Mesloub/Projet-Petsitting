@@ -83,6 +83,7 @@ const CreateNews = () => {
           name="file"
           accept="image/jpeg, image/png"
           multiple
+          required
           onChange={(e) => setFiles(e.target.files)}
         />
         <input type="submit" value="Ajouter" />
