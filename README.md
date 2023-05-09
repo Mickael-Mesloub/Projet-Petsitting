@@ -34,7 +34,16 @@ Suivre les étapes suivantes :
     
     - une fois les serveurs lancés, vous pouvez commencer à utiliser le site en vous rendant sur `http://localhost:3000/`.
     
-    - Et voilà ! Vous devriez avoir accès au site `Rubieland` ! Bonne visite !
+    - Et voilà ! Vous devriez avoir accès au site `Rubieland`!
+    
+
+### Précisions concernant l'avenir du projet et le CRUD "Bookings"
+
+Étant toujours en cours de réflexion sur la manière dont seront organisés les tarifs, les prestations, les réservations de prestations etc, et donc le fonctionnement de la feature de réservation, le CRUD "bookings" n'est pas encore implémenté dans le site. 
+
+#### Conclusion
+
+Félicitations, vous être arrivé(e) au bout de ce document ! Vous êtes prêt(e) à faire vos premiers pas sur le site Rubieland ! Bonne visite !
     
 
 
