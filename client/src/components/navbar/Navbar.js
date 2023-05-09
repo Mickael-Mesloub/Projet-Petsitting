@@ -4,7 +4,6 @@ import "./styles.scss";
 import { useState } from "react";
 
 const Navbar = () => {
-  const { user } = useSelector((state) => state);
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
   const [menu_class, setMenuClass] = useState("menu hidden");
   const [isMenuClicked, setIsMenuClicked] = useState(false);

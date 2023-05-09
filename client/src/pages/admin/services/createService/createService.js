@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postMethod } from "../../../../helpers/fetch";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";

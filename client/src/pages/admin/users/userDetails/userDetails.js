@@ -1,5 +1,4 @@
-import AdminLinks from "../../../../components/adminLinks/AdminLinks.js";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMethod } from "../../../../helpers/fetch";
 import { capitalizeText } from "../../../../helpers/utils.js";
