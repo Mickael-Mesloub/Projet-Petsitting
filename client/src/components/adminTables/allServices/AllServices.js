@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { deleteMethod, getMethod } from "../../../helpers/fetch";
-import "./styles.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { MdCreate, MdDelete } from "react-icons/md";
+import "./styles.scss";
 
 const AdminServices = () => {
   const [services, setServices] = useState([]);

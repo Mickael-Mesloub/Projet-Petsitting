@@ -1,4 +1,5 @@
 import "./styles.scss";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const handleSubmit = (e) => {
@@ -10,8 +11,15 @@ const Contact = () => {
       <h2>Contact</h2>
       <p>Pour toute demande d'information, n'hésitez pas à me contacter !</p>
       <div className="contact">
-        <p>📞 : 06-06-06-06-06</p>
-        <p>📧 : contact@rubieland.com</p>
+        <address>
+            <Link className="contact-link" to="mailto:contact@rubieland.com">
+              📧 : contact@rubieland.com
+            </Link>
+            <br />
+            <Link className="contact-link" to="tel:+33606060606">
+              📞 : 06-06-06-06-06
+            </Link>
+          </address>
       </div>
        <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-inputs">

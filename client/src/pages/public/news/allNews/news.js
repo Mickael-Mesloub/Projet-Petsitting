@@ -20,8 +20,9 @@ const News = () => {
 
   return (
     <main className="newspage-main">
+    <section>
       <h2>Actualités</h2>
-      <section>
+      
         {articles && articles.length === 0 ? (
           <p>
             Vous pourrez suivre mes actualités prochainement sur cette page ✍️ !

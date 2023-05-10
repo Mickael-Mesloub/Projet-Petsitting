@@ -129,8 +129,12 @@
       }
     }
   }
+  
+  
+  //  ********** MEDIA QUERRIES **********
+  
 
-  // MENU FOR TABLET AND DESKTOP FORMATS
+  //  ********** TABLET AND DESKTOP FORMATS  **********
 
   @include tablet {
     .burger-menu-btn {
@@ -162,10 +166,12 @@
             transform: translateX(0);
             transform: scale(1.08);
           }
+          
           .burger-menu-link,
           .admin-menu-link {
             font-size: 18px;
           }
+          
           .admin-menu-link {
             color: $dark-violet;
             font-size: 15px;

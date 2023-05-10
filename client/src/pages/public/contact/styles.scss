@@ -7,10 +7,23 @@
   background: $section-bg;
   flex-direction: column;
   gap: 16px;
-
+  
+  > h2 {
+    padding: 32px;
+    font-size: 32px;
+    color: $dark-violet;
+  }
+  
   > p {
-    padding: 12px;
-    text-align: justify;
+    text-align: center;
+  }
+  
+  .contact {
+
+    .contact-link {
+      display: inline-block;
+      padding: 5px;
+    }
   }
 
   .contact-form {

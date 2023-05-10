@@ -41,7 +41,7 @@ const Footer = () => {
                 📧 : contact@rubieland.com
               </Link>
 
-              <Link className="contact-link" to="tel:+330606060606">
+              <Link className="contact-link" to="tel:+33606060606">
                 📞 : 06-06-06-06-06
               </Link>
             </address>

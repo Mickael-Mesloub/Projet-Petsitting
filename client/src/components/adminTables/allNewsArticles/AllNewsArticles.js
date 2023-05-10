@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { deleteMethod, getMethod } from "../../../helpers/fetch.js";
 import { Link, useNavigate } from "react-router-dom";
-import "./styles.scss";
 import { MdCreate, MdDelete } from "react-icons/md";
+import "./styles.scss";
 
 const AdminNews = () => {
   const [articles, setArticles] = useState([]);

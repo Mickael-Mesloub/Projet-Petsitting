@@ -14,6 +14,8 @@
   .animals-container {
     width: 85%;
     > h2 {
+      color: $dark-violet;
+      font-size: 30px;
       padding-bottom: 32px;
     }
 
@@ -222,11 +224,13 @@
   .profilePage-main {
     flex-direction: row;
     align-items: flex-start;
+    
     .profile-container {
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: flex-start;
+      
       .profile-card {
         width: 75%;
       }
@@ -242,9 +246,11 @@
 
     .profile-container {
       width: 50%;
+      
       > h2 {
-        width: 80%;
+        width: 60%;
       }
+      
       .profile-card {
         width: 60%;
       }

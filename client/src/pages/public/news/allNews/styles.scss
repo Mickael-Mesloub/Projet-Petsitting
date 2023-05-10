@@ -3,11 +3,14 @@
 @import "../../../../assets/styles/_mixins";
 
 .newspage-main {
-  > h2 {
-    padding-bottom: 42px;
-  }
+  
   > section {
     @extend %section;
+    
+    > h2 {
+      font-size: 32px;
+    color: $dark-violet;
+  }
 
     > .news-articles {
       @extend %article;

@@ -95,7 +95,6 @@ const CreateService = () => {
                 name="yes"
                 value="true"
                 checked={selectedInput}
-                required
                 onChange={handleRadioChange}
               />
               <label htmlFor="true">Oui</label>
