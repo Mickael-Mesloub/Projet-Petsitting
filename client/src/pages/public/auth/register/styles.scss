@@ -2,34 +2,4 @@
 
 .registerPage-main {
   background: $form-bg;
-
-  > h2 {
-    padding-bottom: 32px;
-  }
-
-  .file-input {
-    padding-bottom: 16px;
-  }
-
-  .file-input label {
-    display: inline-block;
-    text-align: center;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-
-  .file-input input[type="file"] {
-    display: block;
-    font-size: 16px;
-    color: $dark-violet;
-    border-radius: 8px;
-    padding: 12px;
-    background-color: #f9f9f9;
-  }
-
-  .file-input input[type="file"]:focus {
-    outline: none;
-    border: 3px solid $pink;
-    box-shadow: 5px 10px 10px $dark-violet;
-  }
 }

@@ -8,11 +8,6 @@
   > section {
     @extend %section;
     
-    > h2 {
-      font-size: 32px;
-    }
-
-    > h2,
     h3 {
       color: $dark-violet;
     }

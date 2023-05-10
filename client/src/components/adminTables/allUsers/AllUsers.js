@@ -14,7 +14,7 @@ const AdminAllUsers = () => {
   return (
     <main className="allUsers-main">
       <h3>Utilisateurs</h3>
-      {users && users.length > 0 && (
+      {users && users.length > 0 ? (
         <div className="table-container">
           <table>
             <thead>
@@ -39,6 +39,8 @@ const AdminAllUsers = () => {
             </tbody>
           </table>
         </div>
+      ):(
+      <div>Chargement...</div>
       )}
     </main>
   );
