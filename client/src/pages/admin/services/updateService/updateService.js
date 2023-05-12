@@ -6,7 +6,7 @@ import "./styles.scss";
 
 const UpdateService = () => {
   const [service, setService] = useState({});
-  const [category, setCategory] = useState("grooming");
+  const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -23,6 +23,7 @@ const UpdateService = () => {
     )
       .then((data) => {
         setService(data);
+        setCategory(data.category)
       })
       .catch((error) => console.log(error));
   }, []);
@@ -64,8 +65,9 @@ const UpdateService = () => {
         <label htmlFor="category">Catégorie : </label>
         <select
           name="category"
+          value={category}
           onChange={(event) => setCategory(event.target.value)}
-          defaultValue={category}
+          // defaultValue={category}
         >
           <option value="grooming">Soin/Éducation</option>
           <option value="sitting">Garde à domicile</option>
@@ -73,14 +75,14 @@ const UpdateService = () => {
         <input
           type="text"
           name="name"
-          placeholder={service.name}
+          defaultValue={service.name}
           onChange={(e) => setName(e.target.value)}
         />
         <textarea
           name="description"
           rows="5"
           cols="50"
-          placeholder={service.description}
+          defaultValue={service.description}
           onChange={(e) => {
             setDescription(e.target.value);
             setCountChar(e.target.value.length);
@@ -91,13 +93,14 @@ const UpdateService = () => {
         <input
           type="number"
           name="price"
-          placeholder={`${service.price}€`}
+          defaultValue={service.price}
           onChange={(e) => setPrice(e.target.value)}
         />
         <fieldset>
           <legend>Rendre la prestation visible pour les utilisateurs?</legend>
           <div className="buttons">
             <div className="radio-button">
+            <label htmlFor="true">Oui</label>
               <input
                 type="radio"
                 name="yes"
@@ -105,9 +108,9 @@ const UpdateService = () => {
                 checked={selectedInput}
                 onChange={handleRadioChange}
               />
-              <label htmlFor="true">Oui</label>
             </div>
             <div className="radio-button">
+            <label htmlFor="false">Non</label>
               <input
                 type="radio"
                 name="no"
@@ -115,7 +118,6 @@ const UpdateService = () => {
                 checked={!selectedInput}
                 onChange={handleRadioChange}
               />
-              <label htmlFor="false">Non</label>
             </div>
           </div>
         </fieldset>

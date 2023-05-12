@@ -32,9 +32,9 @@ export const AdminMiddleware = (props) => {
       );
     }
     case false: {
-      return <h2 text-align="center">Loading</h2>;
+      return <h2 text-align="center">Chargement...</h2>;
     }
     default:
-      return <h2 text-align="center">Loading</h2>;
+      return <h2 text-align="center">Chargement...</h2>;
   }
 };

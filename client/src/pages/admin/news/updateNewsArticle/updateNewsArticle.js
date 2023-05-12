@@ -5,7 +5,7 @@ import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
 const UpdateArticle = () => {
-  const [forWhichPage, setForWhichPage] = useState("news");
+  const [forWhichPage, setForWhichPage] = useState("");
   const { articleId } = useParams();
   const [article, setArticle] = useState({});
   const [title, setTitle] = useState("");
@@ -17,7 +17,11 @@ const UpdateArticle = () => {
 
   useEffect(() => {
     getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`)
-      .then((data) => setArticle(data))
+      .then((data) => {
+        setArticle(data);
+        setForWhichPage(data.forWhichPage);
+        
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -59,7 +63,7 @@ const UpdateArticle = () => {
           });
       });
   };
-
+  
   return (
     <main className="updateArticle-main">
       <h2>Modifier l'article</h2>
@@ -81,14 +85,14 @@ const UpdateArticle = () => {
         <input
           type="text"
           name="title"
-          placeholder={article.title}
+          defaultValue={article.title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           name="content"
           rows="5"
           cols="50"
-          placeholder={article.content}
+          defaultValue={article.content}
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <label htmlFor="file">Images : </label>

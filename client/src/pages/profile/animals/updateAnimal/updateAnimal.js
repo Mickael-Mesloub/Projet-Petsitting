@@ -20,6 +20,8 @@ const UpdateAnimal = () => {
     )
       .then((data) => {
         setAnimal(data.animal);
+        setName(data.animal.name);
+        setDescription(data.animal.description);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -57,30 +59,41 @@ const UpdateAnimal = () => {
           .catch((error) => console.log(error));
       });
   };
+  
+  const handleChange = (e) => {
+    setSize(e.target.value)
+    console.log(size)
+  }
+  
+  useEffect(() => {
+    console.log("size", size)
+  },[size])
 
   return (
     <main className="update-animal-main">
       <h2>Modifier l'animal</h2>
       <form className="update-animal-form" onSubmit={handleSubmit}>
+        <label htmlFor="name">Nom du toutou : </label>
         <input
-          placeholder="Nom"
+          defaultValue={name}
           type="text"
           name="name"
           onChange={(event) => setName(event.target.value)}
         />
+        <label htmlFor="description">Décrivez-nous votre toutou : </label>
         <textarea
-          placeholder="Décrivez-nous votre toutou..."
+          defaultValue={description}
           name="description"
           rows="10"
           onChange={(event) => setDescription(event.target.value)}
         ></textarea>
         <label className="size-label" htmlFor="size">
-          Taille :{" "}
+          Taille :
         </label>
         <select
           name="size"
-          onChange={(event) => setSize(event.target.value)}
-          defaultValue={size}
+          onChange={handleChange}
+          value={size}
         >
           <option value="small">Petit toutou (moins de 10kg)</option>
           <option value="medium">Moyen toutou (entre 10kg et 25kg)</option>

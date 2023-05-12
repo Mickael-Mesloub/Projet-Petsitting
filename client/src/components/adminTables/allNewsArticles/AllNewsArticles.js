@@ -48,7 +48,7 @@ const AdminNews = () => {
                   className={article.forWhichPage === "news" ? "news" : "home"}
                   key={i}
                 >
-                  <td>{article.forWhichPage}</td>
+                  <td>{article.forWhichPage === "news" ? "Actualités" : "Accueil"}</td>
                   <td>{article.title}</td>
                   <td> {article.content.substring(0, 30)}...</td>
 

@@ -12,6 +12,15 @@ const Animals = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+  
+  const convertSize = (size) => {
+    switch(size) {
+      case "small" : return "Petit";
+      case "medium" : return "Moyen";
+      case "large" : return "Grand";
+      default : return "";
+    }
+  };
 
   return (
     <main className="allAnimals-main">
@@ -33,8 +42,8 @@ const Animals = () => {
                 <tr key={i}>
                   <td>{animal._id}</td>
                   <td>{animal.name}</td>
-                  <td>{animal.description.substring(0, 30)}</td>
-                  <td>{animal.size}</td>
+                  <td>{animal.description.substring(0, 30)}...</td>
+                  <td>{convertSize(animal.size)}</td>
                   <td>{animal.owner}</td>
                 </tr>
               ))}

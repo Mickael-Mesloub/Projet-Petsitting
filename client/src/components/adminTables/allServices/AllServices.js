@@ -26,6 +26,22 @@ const AdminServices = () => {
         .catch((error) => console.log(error));
     }
   };
+  
+  const setCategoryClass = (category) => {
+     switch(category) {
+      case "grooming" : return "grooming";
+      case "sitting" : return "sitting";
+      default : return "";
+    }
+  }
+  
+  const convertCategory = (category) => {
+    switch(category) {
+      case "grooming" : return "Soin/Éducation";
+      case "sitting" : return "Garde";
+      default : return "";
+    }
+  };
 
   return (
     <main className="allServices-main">
@@ -48,15 +64,15 @@ const AdminServices = () => {
               {services.map((service, i) => (
                 <tr
                   className={
-                    service.category === "grooming" ? "grooming" : "sitting"
+                    setCategoryClass(service.category)
                   }
                   key={i}
                 >
-                  <td>{service.category}</td>
+                  <td>{convertCategory(service.category)}</td>
                   <td>{service.name}</td>
                   <td>{service.description.substring(0, 30)}...</td>
-                  <td>{service.price}</td>
-                  <td>{service.visible.toString()}</td>
+                  <td>{`${service.price}€`}</td>
+                  <td>{service.visible == true ? "Oui" : "Non"}</td>
                   <td
                     className="clickable update"
                     onClick={() =>

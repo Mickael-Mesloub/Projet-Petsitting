@@ -47,7 +47,7 @@ const CreateService = () => {
 
   return (
     <main className="createService-main">
-      <h2>Créer une nouvelle prestation</h2>
+      <h2>Ajouter une nouvelle prestation</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="category">Catégorie : </label>
         <select
@@ -111,7 +111,7 @@ const CreateService = () => {
             </div>
           </div>
         </fieldset>
-        <input type="submit" value="Créer" />
+        <input type="submit" value="Ajouter" />
       </form>
     </main>
   );
