@@ -77,15 +77,17 @@ const CreateNews = () => {
           }}
         ></textarea>
         <div className="character-counter">Nb de caractères : {countChar}</div>
-        <label htmlFor="file">Ajouter des images : </label>
-        <input
-          type="file"
-          name="file"
-          accept="image/jpeg, image/png"
-          multiple
-          required
-          onChange={(e) => setFiles(e.target.files)}
-        />
+        <div className="form-inputs file-input">
+          <label htmlFor="file">Ajouter des images : </label>
+          <input
+            type="file"
+            name="file"
+            accept="image/jpeg, image/png"
+            multiple
+            required
+            onChange={(e) => setFiles(e.target.files)}
+          />
+        </div>
         <input type="submit" value="Ajouter" />
       </form>
     </main>

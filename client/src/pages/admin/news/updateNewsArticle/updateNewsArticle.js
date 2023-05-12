@@ -95,14 +95,16 @@ const UpdateArticle = () => {
           defaultValue={article.content}
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
-        <label htmlFor="file">Images : </label>
-        <input
-          type="file"
-          name="file"
-          accept="image/jpeg, image/png"
-          multiple
-          onChange={(e) => setImages(e.target.files)}
-        />
+        <div className="form-inputs file-input">
+          <label htmlFor="file">Images : </label>
+          <input
+            type="file"
+            name="file"
+            accept="image/jpeg, image/png"
+            multiple
+            onChange={(e) => setImages(e.target.files)}
+          />
+        </div>
         {article.images && article.images.length > 0 && (
           <fieldset>
             <legend>Sélectionnez les images à remplacer</legend>

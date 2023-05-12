@@ -96,13 +96,15 @@ const UpdateAnimal = () => {
           <option value="medium">Moyen toutou (entre 10kg et 25kg)</option>
           <option value="large">Grand toutou (plus de 25kg)</option>
         </select>
-        <input
-          type="file"
-          name="file"
-          accept="image/png, image/jpeg"
-          onChange={(event) => setImages(event.target.files)}
-          multiple
-        />
+        <div className="form-inputs file-input">
+          <input
+            type="file"
+            name="file"
+            accept="image/png, image/jpeg"
+            onChange={(event) => setImages(event.target.files)}
+            multiple
+          />
+        </div>
         {animal.images && animal.images.length > 0 && (
           <fieldset>
             <legend>Sélectionnez les images à remplacer</legend>
