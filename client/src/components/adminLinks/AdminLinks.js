@@ -17,7 +17,7 @@ const AdminLinks = () => {
         Animaux
       </Link>
       <Link to="/admin/services" className="admin-link">
-        Services
+        Prestations
       </Link>
       {/* <Link to="/admin/bookings" className="admin-link">
         Réservations

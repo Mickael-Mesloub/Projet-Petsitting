@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getMethod } from "../../../helpers/fetch";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import "./styles.scss";
 
 const Home = () => {
@@ -46,6 +47,15 @@ const Home = () => {
   };
 
   return (
+    <>
+      <Helmet>
+          <title>Rubieland 🐶 - Accueil</title>
+          <meta 
+              name="description" 
+              content="Bienvenue sur la page d'accueil de Rubieland !"
+          />
+          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85" />
+      </Helmet>
     <main className="homepage-main">
       {user.isLogged ? (
         <h3 className="welcome-message">
@@ -132,6 +142,7 @@ const Home = () => {
         </div>
       </section>
     </main>
+    </>
   );
 };
 

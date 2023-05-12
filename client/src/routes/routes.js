@@ -22,15 +22,15 @@ import GetBooking from "../pages/profile/bookings/allUserBookings/allUserBooking
 import AdminDashboard from "../pages/admin/dashboard/dashboard";
 import Animals from "../pages/admin/animals/allAnimals/allAnimals";
 import AdminServices from "../pages/admin/services/allServices/allServices";
-import ServiceDetails from "../pages/admin/services/serviceDetails/serviceDetails";
+// import ServiceDetails from "../pages/admin/services/serviceDetails/serviceDetails";
 import UpdateService from "../pages/admin/services/updateService/updateService";
 import CreateService from "../pages/admin/services/createService/createService";
 import AdminNews from "../pages/admin/news/allNewsArticles/allNewsArticles";
-import AdminNewsDetails from "../pages/admin/news/newsArticleDetails/newsArticleDetails";
+// import AdminNewsDetails from "../pages/admin/news/newsArticleDetails/newsArticleDetails";
 import CreateArticle from "../pages/admin/news/createNewsArticle/createNewsArticle";
 import UpdateArticle from "../pages/admin/news/updateNewsArticle/updateNewsArticle";
 import AllUsers from "../pages/admin/users/allUsers/allUsers";
-import UserDetails from "../pages/admin/users/userDetails/userDetails";
+// import UserDetails from "../pages/admin/users/userDetails/userDetails";
 import Bookings from "../pages/admin/bookings/allBookings/allBookings";
 
 // PUBLIC
@@ -62,17 +62,17 @@ export const adminRoutes = [
   { path: "/admin", element: <AdminDashboard /> },
   { path: "/admin/services", element: <AdminServices /> },
   { path: "/admin/services/create-service", element: <CreateService /> },
-  { path: "/admin/services/:serviceId", element: <ServiceDetails /> },
+  // { path: "/admin/services/:serviceId", element: <ServiceDetails /> },
   {
     path: "/admin/services/:serviceId/update-service",
     element: <UpdateService />,
   },
   { path: "/admin/news", element: <AdminNews /> },
-  { path: "/admin/news/:articleId", element: <AdminNewsDetails /> },
+  // { path: "/admin/news/:articleId", element: <AdminNewsDetails /> },
   { path: "/admin/news/create-article", element: <CreateArticle /> },
   { path: "/admin/news/:articleId/update-article", element: <UpdateArticle /> },
   { path: "/admin/users", element: <AllUsers /> },
-  { path: "/admin/users/:userId", element: <UserDetails /> },
+  // { path: "/admin/users/:userId", element: <UserDetails /> },
   { path: "/admin/animals", element: <Animals /> },
   { path: "/admin/bookings", element: <Bookings /> },
 ];

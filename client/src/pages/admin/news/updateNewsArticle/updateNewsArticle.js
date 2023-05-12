@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useNavigate, useParams } from "react-router-dom";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
+import { Helmet } from "react-helmet";
 import "./styles.scss";
 
 const UpdateArticle = () => {
@@ -65,81 +66,91 @@ const UpdateArticle = () => {
   };
   
   return (
-    <main className="updateArticle-main">
-      <h2>Modifier l'article</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="forWhichPage">Pour quelle page ?</label>
-        <select
-          name="forWhichPage"
-          value={forWhichPage}
-          required
-          onChange={(e) => setForWhichPage(e.target.value)}
-        >
-          <option name="news" value="news">
-            Actualités
-          </option>
-          <option name="home" value="home">
-            Accueil
-          </option>
-        </select>
-        <input
-          type="text"
-          name="title"
-          defaultValue={article.title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          name="content"
-          rows="5"
-          cols="50"
-          defaultValue={article.content}
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-        <div className="form-inputs file-input">
-          <label htmlFor="file">Images : </label>
-          <input
-            type="file"
-            name="file"
-            accept="image/jpeg, image/png"
-            multiple
-            onChange={(e) => setImages(e.target.files)}
+    <>
+      <Helmet>
+          <title>Rubieland 🐶 {article ? `- Admin - Modifier un article - ${article.title}` : "- Admin - Modifier un article"}</title>
+          <meta 
+              name="description" 
+              content={article ? `Formulaire pour modifier un article - ${article.title}` : "Formulaire pour modifier un article"}
           />
-        </div>
-        {article.images && article.images.length > 0 && (
-          <fieldset>
-            <legend>Sélectionnez les images à remplacer</legend>
-            {article.images.map((image, i) => (
-              <div key={i}>
-                <div
-                  className={
-                    selectedImages.includes(image)
-                      ? "selected-image"
-                      : "choose-image"
-                  }
-                  onClick={() => {
-                    if (selectedImages.includes(image)) {
-                      setSelectedImages(
-                        selectedImages.filter(
-                          (selectedImage) => selectedImage !== image
-                        )
-                      );
-                    } else {
-                      setSelectedImages(selectedImages.concat(image));
+          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85" />
+      </Helmet>
+      <main className="updateArticle-main">
+        <h2>Modifier l'article</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="forWhichPage">Pour quelle page ?</label>
+          <select
+            name="forWhichPage"
+            value={forWhichPage}
+            required
+            onChange={(e) => setForWhichPage(e.target.value)}
+          >
+            <option name="news" value="news">
+              Actualités
+            </option>
+            <option name="home" value="home">
+              Accueil
+            </option>
+          </select>
+          <input
+            type="text"
+            name="title"
+            defaultValue={article.title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <textarea
+            name="content"
+            rows="5"
+            cols="50"
+            defaultValue={article.content}
+            onChange={(e) => setContent(e.target.value)}
+          ></textarea>
+          <div className="form-inputs file-input">
+            <label htmlFor="file">Images : </label>
+            <input
+              type="file"
+              name="file"
+              accept="image/jpeg, image/png"
+              multiple
+              onChange={(e) => setImages(e.target.files)}
+            />
+          </div>
+          {article.images && article.images.length > 0 && (
+            <fieldset>
+              <legend>Sélectionnez les images à remplacer</legend>
+              {article.images.map((image, i) => (
+                <div key={i}>
+                  <div
+                    className={
+                      selectedImages.includes(image)
+                        ? "selected-image"
+                        : "choose-image"
                     }
-                  }}
-                >
-                  <img
-                    src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
-                    alt={`${article.title}_${i}`}
-                  />
+                    onClick={() => {
+                      if (selectedImages.includes(image)) {
+                        setSelectedImages(
+                          selectedImages.filter(
+                            (selectedImage) => selectedImage !== image
+                          )
+                        );
+                      } else {
+                        setSelectedImages(selectedImages.concat(image));
+                      }
+                    }}
+                  >
+                    <img
+                      src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                      alt={`${article.title}_${i}`}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </fieldset>
-        )}
-        <input type="submit" value="Modifier" />
-      </form>
-    </main>
+              ))}
+            </fieldset>
+          )}
+          <input type="submit" value="Modifier" />
+        </form>
+      </main>
+    </>
   );
 };
 

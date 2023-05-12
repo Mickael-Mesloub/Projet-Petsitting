@@ -2,6 +2,7 @@ import { useState } from "react";
 import { postFormData } from "../../../../helpers/fetch";
 import { useNavigate } from "react-router-dom";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
+import { Helmet } from "react-helmet";
 import "./styles.scss";
 
 const Register = () => {
@@ -42,72 +43,82 @@ const Register = () => {
   };
 
   return (
-    <main className="registerPage-main">
-      <h2>Inscrivez-vous</h2>
-      <form encType="multipart/form-data" method="POST" onSubmit={handleSubmit}>
-        <div className="form-inputs">
-          <input
-            type="text"
-            name="firstName"
-            placeholder="Prénom"
-            required
-            onChange={(e) => setFirstName(e.target.value)}
+    <>
+      <Helmet>
+          <title>Rubieland 🐶 - S'inscrire</title>
+          <meta 
+              name="description" 
+              content="S'inscrire à Rubieland"
           />
-        </div>
-        <div className="form-inputs">
+          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, inscription, compte" />
+      </Helmet>
+      <main className="registerPage-main">
+        <h2>Inscrivez-vous</h2>
+        <form encType="multipart/form-data" method="POST" onSubmit={handleSubmit}>
+          <div className="form-inputs">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="Prénom"
+              required
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div className="form-inputs">
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Nom"
+              required
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div className="form-inputs">
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Téléphone (format XX XX XX XX XX)"
+              pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div className="form-inputs">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="form-inputs">
+            <input
+              type="password"
+              name="password"
+              required
+              placeholder="Mot de passe"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="form-inputs file-input">
+            <label htmlFor="file">Choisissez un avatar : </label>
+            <input
+              type="file"
+              name="file"
+              accept="image/jpeg, image/png"
+              required
+              onChange={(e) => setAvatar(e.target.files)}
+            />
+          </div>
           <input
-            type="text"
-            name="lastName"
-            placeholder="Nom"
-            required
-            onChange={(e) => setLastName(e.target.value)}
+            type="submit"
+            name="submit"
+            className="register-btn"
+            value="M'inscrire"
           />
-        </div>
-        <div className="form-inputs">
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Téléphone (format XX XX XX XX XX)"
-            pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </div>
-        <div className="form-inputs">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="form-inputs">
-          <input
-            type="password"
-            name="password"
-            required
-            placeholder="Mot de passe"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="form-inputs file-input">
-          <label htmlFor="file">Choisissez un avatar : </label>
-          <input
-            type="file"
-            name="file"
-            accept="image/jpeg, image/png"
-            required
-            onChange={(e) => setAvatar(e.target.files)}
-          />
-        </div>
-        <input
-          type="submit"
-          name="submit"
-          className="register-btn"
-          value="M'inscrire"
-        />
-      </form>
-    </main>
+        </form>
+      </main>
+    </>
   );
 };
 
