@@ -201,6 +201,7 @@ export const updateAnimal = async (req, res) => {
 
       animal.name = fields.name || animal.name;
       animal.description = fields.description || animal.description;
+      animal.size = fields.size || animal.size;
       animal.images = updatedImages;
       animal
         .save()

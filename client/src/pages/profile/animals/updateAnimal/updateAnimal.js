@@ -22,6 +22,7 @@ const UpdateAnimal = () => {
         setAnimal(data.animal);
         setName(data.animal.name);
         setDescription(data.animal.description);
+        setSize(data.animal.size);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -49,8 +50,8 @@ const UpdateAnimal = () => {
             formData.append("file", image);
           }
         }
+        
         // Mettre à jour les autres données de l'animal
-
         putFormData(
           `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}/update-animal`,
           formData
@@ -64,10 +65,6 @@ const UpdateAnimal = () => {
     setSize(e.target.value)
     console.log(size)
   }
-  
-  useEffect(() => {
-    console.log("size", size)
-  },[size])
 
   return (
     <main className="update-animal-main">
