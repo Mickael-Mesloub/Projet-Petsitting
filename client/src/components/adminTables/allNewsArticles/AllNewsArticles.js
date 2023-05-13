@@ -49,8 +49,8 @@ const AdminNews = () => {
                   key={i}
                 >
                   <td>{article.forWhichPage === "news" ? "Actualités" : "Accueil"}</td>
-                  <td>{article.title}</td>
-                  <td> {article.content.substring(0, 30)}...</td>
+                  <td>{article.title.length > 30 ? `${article.title.substring(0, 30)}...` : article.title}</td>
+                  <td>{article.content.length > 30 ? `${article.content.substring(0, 30)}...` : article.content}</td>
 
                   <td
                     className="clickable update"

@@ -56,7 +56,7 @@ const News = () => {
                   <div className="article-text-container">
                     <h4>{article.title}</h4>
                     <p className="article-content">
-                      {article.content.substring(0, 150)}...
+                      {article.content.length > 100 ? `${article.content.substring(0, 100)}...` : article.content}
                     </p>
                   </div>
                 </div>

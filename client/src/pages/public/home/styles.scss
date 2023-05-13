@@ -1,4 +1,4 @@
-@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/_mixins";
 @import "../../../assets/styles/_placeholders";
 @import "../../../assets/styles/_variables";
 
@@ -46,12 +46,30 @@
         text-align: center;
         color: $dark-violet;
       }
+      
+      .show-more-less-btn {
+        display: inline-block;
+        width: 100%;
+        padding: 16px 0 0;
+        font-weight: 700;
+        text-align: right;
+        cursor: pointer;
+        
+        &:hover {
+          color: $medium-violet;
+        }
+      }
 
       > article {
         @extend %article;
+        
 
         > h4 {
           padding: 0;
+        }
+        
+        > p {
+          text-align: left;
         }
       }
 
@@ -134,7 +152,7 @@
         flex-flow: row nowrap;
         justify-content: center;
         > article {
-          width: 38%;
+          width: 50%;
         }
       }
     }
@@ -142,8 +160,9 @@
     .presentation-section {
       .homepage-articles-container {
         flex-direction: column;
+        align-items: center;
         article {
-          width: 100%;
+          width: 75%;
         }
       }
     }
@@ -190,13 +209,19 @@
   .homepage-main {
     .presentation-section {
       .homepage-articles-container {
-        flex-flow: row wrap;
-
+        
         > article {
-          width: 30%;
+          width: 50%;
 
           > p {
             line-height: 2;
+          }
+          
+          &.full-content {
+          
+            > p {
+              text-align: justify;
+            }
           }
         }
       }

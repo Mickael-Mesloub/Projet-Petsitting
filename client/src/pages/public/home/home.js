@@ -8,6 +8,8 @@ import "./styles.scss";
 const Home = () => {
   const [homeArticles, setHomeArticles] = useState([]);
   const [newsArticles, setNewsArticles] = useState([]);
+  const [selectedArticle, setSelectedArticle] = useState(null);
+
   const [usernameCapitalized, setUsernameCapitalized] = useState("");
   const { user } = useSelector((state) => state);
   const navigate = useNavigate();
@@ -23,13 +25,13 @@ const Home = () => {
           (article) => article.forWhichPage === "news"
         );
 
-        // set the last 3 news articles for the "latest news" section
+        // Afficher les 3 derniers articles
         setNewsArticles(newsArticles.slice(-3));
       })
       .catch((error) => console.log(error));
   }, []);
 
-  // Capitalize username's first letter
+  
   useEffect(() => {
     capitalizeText(user.firstName).then((username) =>
       setUsernameCapitalized(username)
@@ -45,6 +47,14 @@ const Home = () => {
       return capitalizeText;
     }
   };
+  
+  const toggleShowMore = (article) => {
+    if (selectedArticle === article) {
+      setSelectedArticle(null);
+    } else {
+      setSelectedArticle(article);
+    }
+  };
 
   return (
     <>
@@ -52,7 +62,7 @@ const Home = () => {
           <title>Rubieland 🐶 - Accueil</title>
           <meta 
               name="description" 
-              content="Bienvenue sur la page d'accueil de Rubieland !"
+              content="Page d'accueil de Rubieland"
           />
           <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85" />
       </Helmet>
@@ -87,19 +97,35 @@ const Home = () => {
         </section>
       )}
       {homeArticles && (
-        <section className="presentation-section">
-          <h3>Laissez-moi vous présenter... </h3>
-          <div className="homepage-articles-container">
-            {homeArticles.map((article, i) => (
-              <article key={i}>
-                <h4>{article.title} </h4>
-                <p>{article.content} </p>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
-
+      <section className="presentation-section">
+        <h3>Laissez-moi vous présenter... </h3>
+        <div className="homepage-articles-container">
+          {homeArticles.map((article, i) => (
+            <article className={selectedArticle === article ? "full-content" : "less-content"} key={i}>
+              <h4>{article.title}</h4>
+              {selectedArticle === article ? (
+                <p>{article.content}<span
+                    className="show-more-less-btn"
+                    onClick={() => toggleShowMore(article)}
+                  >
+                    Lire moins
+                  </span></p>
+              ) : (
+                <p>
+                  {`${article.content.substring(0, 100)}...`}
+                  <span
+                    className="show-more-less-btn"
+                    onClick={() => toggleShowMore(article)}
+                  >
+                    Lire la suite
+                  </span>
+                </p>
+              )}
+            </article>
+        ))}
+        </div>
+      </section>
+    )}
       <section className="last-news-section">
         <h3>Mes dernières actus 📣</h3>
         <div className="homepage-articles-container last-news-container">
@@ -127,7 +153,7 @@ const Home = () => {
                   <div className="article-text-container">
                     <h4>{article.title}</h4>
                     <p className="article-content">
-                      {article.content.substring(0, 150)}...
+                      {article.content.length > 100 ? `${article.content.substring(0, 100)}...` : article.content}
                     </p>
                   </div>
                 </div>

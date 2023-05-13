@@ -69,8 +69,8 @@ const AdminServices = () => {
                   key={i}
                 >
                   <td>{convertCategory(service.category)}</td>
-                  <td>{service.name}</td>
-                  <td>{service.description.substring(0, 30)}...</td>
+                  <td>{service.name.length > 30 ? `${service.name.substring(0, 30)}...` : service.name}</td>
+                  <td>{service.description.length > 30 ? `${service.description.substring(0, 30)}...` : service.description}</td>
                   <td>{`${service.price}€`}</td>
                   <td>{service.visible == true ? "Oui" : "Non"}</td>
                   <td

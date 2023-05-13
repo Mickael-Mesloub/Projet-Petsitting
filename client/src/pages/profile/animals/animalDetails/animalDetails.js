@@ -121,8 +121,8 @@ const Animal = () => {
               </Link>
             </div>
             <div className="cancel-confirm-buttons">
-            <Link to="/profile" className="cancel">Retour</Link>
-          </div>
+              <Link to="/profile" className="cancel">Retourner au profil</Link>
+            </div>
           </div>
         )}
       </main>
