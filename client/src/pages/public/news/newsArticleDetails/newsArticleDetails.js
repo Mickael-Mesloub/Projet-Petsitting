@@ -76,8 +76,8 @@ const NewsArticleDetails = () => {
               </div>
             </article>
             <div className="link-container">
-              <div className="cancel-confirm-buttons">
-                <Link to="/news" className="cancel">Retourner aux actus</Link>
+              <div className="link-button">
+                <Link to="/news" className="link-to-page">Retourner aux actus</Link>
               </div>
             </div>
           </section>
@@ -85,8 +85,8 @@ const NewsArticleDetails = () => {
           <div className="not-found">
             <p> ❌ Cet article n'existe pas ❌ </p>
             <div className="link-container">
-              <div className="cancel-confirm-buttons">
-                <Link to="/news" className="cancel">Retourner aux actus</Link>
+              <div className="link-button">
+                <Link to="/news" className="link-to-page">Retourner aux actus</Link>
               </div>
             </div>
           </div>

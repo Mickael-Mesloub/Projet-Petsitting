@@ -43,6 +43,10 @@
         height: 30px;
       }
     }
+    
+    .link-to-page {
+      @extend %button;
+    }
 
     // CAROUSEL AND IMAGES CONTAINERS
     .carousel,

@@ -23,7 +23,13 @@ const UpdateProfile = () => {
   useEffect(() => {
     if (user) {
       getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile`)
-        .then((data) => setProfile(data))
+        .then((data) => {
+          setProfile(data)
+          setFirstName(data.user.firstName)
+          setLastName(data.user.lastName)
+          setPhone(data.user.phone)
+          setEmail(data.user.email)
+        })
         .catch((error) => console.log(error));
     } else {
       navigate("/");
@@ -80,26 +86,26 @@ const UpdateProfile = () => {
               <input
                 type="text"
                 name="firstName"
-                placeholder="Prénom"
+                defaultValue={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
                 type="text"
                 name="lastName"
-                placeholder="Nom"
+                defaultValue={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
               <input
                 type="tel"
                 name="phone"
-                placeholder="Téléphone (format XX XX XX XX XX)"
+                defaultValue={phone}
                 pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
                 onChange={(e) => setPhone(e.target.value)}
               />
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                defaultValue={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input

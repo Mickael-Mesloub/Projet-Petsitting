@@ -61,7 +61,7 @@ const Profile = () => {
       </Helmet>
       <main className="profilePage-main">
         <div className="profile-container">
-          <h2>Mon profil ✨ </h2>
+          <h2>✨ Mon profil ✨ </h2>
           {profile.user && profile.user._id === user._id && (
             <div className="profile-card">
               <div className="user-avatar">
