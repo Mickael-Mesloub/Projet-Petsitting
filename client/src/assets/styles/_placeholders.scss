@@ -6,6 +6,7 @@
   align-items: center;
 }
 
+// SECTIONS AND ARTICLES
 %section {
   display: flex;
   flex-direction: column;
@@ -39,11 +40,13 @@
   border-bottom: 3px solid $dark-violet;
 }
 
+// BUTTONS
 %button {
+  display: inline-block;
+  width: fit-content;
   text-align: center;
   background: $dark-violet;
   color: $beige;
-  transition: all 0.2s ease-in-out;
   padding: 5px;
   font-weight: 700;
   text-transform: uppercase;
@@ -52,6 +55,7 @@
   font-size: 16px;
   border: 0;
   box-shadow: 5px 5px 10px #000;
+  transition: all 0.15s ease-in-out;
 
   &:hover {
     background: rgba(9, 9, 121, 0.8);
@@ -59,6 +63,29 @@
   }
 }
 
+%confirm-btn {
+  @extend %button;
+  background: $confirm-btn;
+  
+  &:hover {
+    background: $confirm-btn;
+    opacity: 0.75;
+    transform: scale(1.05);
+  }
+}
+
+%cancel-btn {
+  @extend %button;
+  background: $cancel-btn;
+  
+  &:hover {
+    background: $cancel-btn;
+    opacity: 0.75;
+    transform: scale(1.05);
+  }
+}
+
+// PROFILE AND ANIMAL CARDS
 %card {
   @extend %flex-center;
   flex-direction: column;
@@ -92,8 +119,7 @@
   }
 }
 
-// TABLES COMPONENTS
-
+// TABLES
 %admin-tables {
   border-collapse: collapse;
   border: 1px solid #888;

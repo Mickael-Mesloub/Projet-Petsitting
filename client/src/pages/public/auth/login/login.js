@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice";
 import { postMethod } from "../../../../helpers/fetch";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toastSuccess, toastError } from "../../../../components/toast/Toast";
 import "./styles.scss";
 
@@ -64,12 +64,10 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <input
-            type="submit"
-            name="submit"
-            className="login-btn"
-            value="Connexion"
-          />
+          <div className="cancel-confirm-buttons">
+            <Link to="/" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Me connecter" />
+          </div>
         </form>
       </main>
     </>

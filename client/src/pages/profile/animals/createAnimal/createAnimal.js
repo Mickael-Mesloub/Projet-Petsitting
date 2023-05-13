@@ -1,6 +1,6 @@
 import { getMethod, postFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import { Helmet } from "react-helmet";
 import "./styles.scss";
@@ -91,7 +91,10 @@ const CreateAnimal = () => {
               multiple
             />
           </div>
-          <input type="submit" value="Ajouter" />
+          <div className="cancel-confirm-buttons">
+            <Link to="/profile" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Ajouter" />
+          </div>
         </form>
       </main>
     </>

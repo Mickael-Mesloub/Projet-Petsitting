@@ -1,6 +1,6 @@
-import "./styles.scss";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import "./styles.scss";
 
 const Contact = () => {
   const handleSubmit = (e) => {
@@ -50,7 +50,6 @@ const Contact = () => {
               pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
             />
           </div>
-  
           <div className="form-inputs">
             <textarea
               placeholder="Écrivez votre message ici"
@@ -58,15 +57,11 @@ const Contact = () => {
               rows="10"
             ></textarea>
           </div>
-  
-          <input
-            type="submit"
-            name="submit"
-            className="register-btn"
-            value="Envoyer"
-          />
+          <div className="cancel-confirm-buttons">
+            <Link to="/" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Envoyer" />
+          </div>
         </form>
-        
       </main>
     </>
   );

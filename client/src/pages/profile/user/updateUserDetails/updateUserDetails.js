@@ -1,6 +1,6 @@
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../../../store/slices/user/userSlice";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
@@ -117,7 +117,10 @@ const UpdateProfile = () => {
                   onChange={(e) => setAvatar(e.target.files)}
                 />
               </div>
-              <input type="submit" name="submit" value="Modifier" />
+              <div className="cancel-confirm-buttons">
+            <Link to="/profile" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Modifier" />
+          </div>
             </form>
           </>
         )}

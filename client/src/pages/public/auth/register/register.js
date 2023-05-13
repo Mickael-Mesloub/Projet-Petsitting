@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { postFormData } from "../../../../helpers/fetch";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import { Helmet } from "react-helmet";
 import "./styles.scss";
@@ -110,12 +110,10 @@ const Register = () => {
               onChange={(e) => setAvatar(e.target.files)}
             />
           </div>
-          <input
-            type="submit"
-            name="submit"
-            className="register-btn"
-            value="M'inscrire"
-          />
+          <div className="cancel-confirm-buttons">
+            <Link to="/" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="M'inscrire" />
+          </div>
         </form>
       </main>
     </>

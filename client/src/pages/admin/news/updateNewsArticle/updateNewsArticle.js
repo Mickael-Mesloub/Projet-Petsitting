@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getMethod, putFormData } from "../../../../helpers/fetch";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import { Helmet } from "react-helmet";
 import "./styles.scss";
@@ -147,7 +147,10 @@ const UpdateArticle = () => {
               ))}
             </fieldset>
           )}
-          <input type="submit" value="Modifier" />
+          <div className="cancel-confirm-buttons">
+            <Link to="/admin" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Modifier" />
+          </div>
         </form>
       </main>
     </>

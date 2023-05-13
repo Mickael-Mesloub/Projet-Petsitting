@@ -99,30 +99,40 @@ form {
   }
 }
 
-.file-input {
-    padding-bottom: 16px;
-}
-
 .file-input label {
-display: inline-block;
-text-align: center;
-margin-bottom: 5px;
-font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .file-input input[type="file"] {
-display: block;
-font-size: 16px;
-font-weight: 700;
-color: $dark-violet;
-border-radius: 8px;
-padding: 12px;
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: $dark-violet;
+  border-radius: 8px;
+  padding: 12px;
 }
 
 .file-input input[type="file"]:focus {
-outline: none;
-box-shadow: 5px 10px 10px $dark-violet;
+  outline: none;
+  box-shadow: 5px 10px 10px $dark-violet;
+}
 
+.cancel-confirm-buttons {
+  @extend %flex-center;
+  flex-direction: column-reverse;
+  gap: 16px;
+  width: 100%;
+  
+  .confirm {
+    @extend %confirm-btn;
+  }
+  
+  .cancel {
+    @extend %cancel-btn;
+  }
 }
 
 // ********** MEDIA QUERRIES **********
@@ -141,6 +151,10 @@ box-shadow: 5px 10px 10px $dark-violet;
     }
     textarea {
       height: 25em;
+    }
+    .cancel-confirm-buttons {
+      flex-direction: row;
+      justify-content: space-around;
     }
   }
 }

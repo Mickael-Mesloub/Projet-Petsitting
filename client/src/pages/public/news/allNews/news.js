@@ -34,7 +34,7 @@ const News = () => {
         <h2>Actualités</h2>
         
           {articles && articles.length === 0 ? (
-            <p>
+            <p className="no-content">
               Vous pourrez suivre mes actualités prochainement sur cette page ✍️ !
             </p>
           ) : (

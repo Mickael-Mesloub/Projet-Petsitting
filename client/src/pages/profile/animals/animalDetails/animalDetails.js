@@ -120,6 +120,9 @@ const Animal = () => {
                 <MdCreate />
               </Link>
             </div>
+            <div className="cancel-confirm-buttons">
+            <Link to="/profile" className="cancel">Retour</Link>
+          </div>
           </div>
         )}
       </main>

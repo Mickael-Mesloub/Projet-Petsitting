@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMethod, putMethod } from "../../../../helpers/fetch";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
@@ -130,7 +130,10 @@ const UpdateService = () => {
               </div>
             </div>
           </fieldset>
-          <input type="submit" value="Modifier" />
+          <div className="cancel-confirm-buttons">
+            <Link to="/admin" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Modifier" />
+          </div>
         </form>
       </main>
     </>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postMethod } from "../../../../helpers/fetch";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import { Helmet } from "react-helmet";
@@ -121,7 +121,10 @@ const CreateService = () => {
               </div>
             </div>
           </fieldset>
-          <input type="submit" value="Ajouter" />
+          <div className="cancel-confirm-buttons">
+            <Link to="/admin" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Ajouter" />
+          </div>
         </form>
       </main>
     </>

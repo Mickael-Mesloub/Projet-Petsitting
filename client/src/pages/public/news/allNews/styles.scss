@@ -6,6 +6,11 @@
   
   > section {
     @extend %section;
+    
+    > .no-content {
+      font-weight: 700;
+      color: $dark-violet;
+    }
 
     > .news-articles {
       @extend %article;

@@ -1,6 +1,6 @@
 import { getMethod, putFormData } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "./styles.scss";
 
@@ -147,7 +147,10 @@ const UpdateAnimal = () => {
               ))}
             </fieldset>
           )}
-          <input type="submit" value="Modifier" />
+          <div className="cancel-confirm-buttons">
+            <Link to={`/profile/animals/${animalId}`} className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Modifier" />
+          </div>
         </form>
       </main>
     </>

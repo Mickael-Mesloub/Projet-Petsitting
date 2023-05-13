@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postFormData } from "../../../../helpers/fetch.js";
 import { toastError, toastSuccess } from "../../../../components/toast/Toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "./styles.scss";
 
@@ -98,7 +98,10 @@ const CreateNews = () => {
               onChange={(e) => setFiles(e.target.files)}
             />
           </div>
-          <input type="submit" value="Ajouter" />
+          <div className="cancel-confirm-buttons">
+            <Link to="/admin" className="cancel">Retour</Link>
+            <input className="confirm" type="submit" value="Ajouter" />
+          </div>
         </form>
       </main>
     </>

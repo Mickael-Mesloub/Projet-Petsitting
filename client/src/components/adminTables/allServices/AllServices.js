@@ -45,7 +45,7 @@ const AdminServices = () => {
 
   return (
     <main className="allServices-main">
-      <h3>Services</h3>
+      <h3>Prestations</h3>
       {services && services.length > 0 ? (
         <div className="table-container">
           <table>
