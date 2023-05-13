@@ -8,7 +8,7 @@ import PublicNewsDetails from "../pages/public/news/newsArticleDetails/newsArtic
 import PublicServices from "../pages/public/services/services";
 import NotFoundPage from "../pages/public/notFound/notFound";
 import Contact from "../pages/public/contact/contact";
-import Booking from "../pages/public/createBooking/createBooking";
+// import Booking from "../pages/public/createBooking/createBooking";
 
 // profile
 import Profile from "../pages/profile/user/userDetails/userDetails";
@@ -16,7 +16,7 @@ import Animal from "../pages/profile/animals/animalDetails/animalDetails";
 import UpdateProfile from "../pages/profile/user/updateUserDetails/updateUserDetails";
 import CreateAnimal from "../pages/profile/animals/createAnimal/createAnimal";
 import UpdateAnimal from "../pages/profile/animals/updateAnimal/updateAnimal";
-import GetBooking from "../pages/profile/bookings/allUserBookings/allUserBookings";
+// import GetBooking from "../pages/profile/bookings/allUserBookings/allUserBookings";
 
 //admin
 import AdminDashboard from "../pages/admin/dashboard/dashboard";
@@ -31,7 +31,7 @@ import CreateArticle from "../pages/admin/news/createNewsArticle/createNewsArtic
 import UpdateArticle from "../pages/admin/news/updateNewsArticle/updateNewsArticle";
 import AllUsers from "../pages/admin/users/allUsers/allUsers";
 // import UserDetails from "../pages/admin/users/userDetails/userDetails";
-import Bookings from "../pages/admin/bookings/allBookings/allBookings";
+// import Bookings from "../pages/admin/bookings/allBookings/allBookings";
 
 // PUBLIC
 export const publicRoutes = [
@@ -40,7 +40,7 @@ export const publicRoutes = [
   { path: "/news/:articleId", element: <PublicNewsDetails /> },
   { path: "/services", element: <PublicServices /> },
   { path: "/contact", element: <Contact /> },
-  { path: "/booking", element: <Booking /> },
+  // { path: "/booking", element: <Booking /> },
   { path: "*", element: <NotFoundPage /> },
 ];
 
@@ -54,7 +54,7 @@ export const profileRoutes = [
     path: `/profile/animals/:animalId/update-animal`,
     element: <UpdateAnimal />,
   },
-  { path: `/profile/bookings/:bookingId`, element: <GetBooking /> },
+  // { path: `/profile/bookings/:bookingId`, element: <GetBooking /> },
 ];
 
 // ADMIN
@@ -74,7 +74,7 @@ export const adminRoutes = [
   { path: "/admin/users", element: <AllUsers /> },
   // { path: "/admin/users/:userId", element: <UserDetails /> },
   { path: "/admin/animals", element: <Animals /> },
-  { path: "/admin/bookings", element: <Bookings /> },
+  // { path: "/admin/bookings", element: <Bookings /> },
 ];
 
 // AUTH
