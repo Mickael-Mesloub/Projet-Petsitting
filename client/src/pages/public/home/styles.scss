@@ -63,13 +63,9 @@
       > article {
         @extend %article;
         
-
-        > h4 {
-          padding: 0;
-        }
-        
         > p {
           text-align: left;
+          line-height: 1.5;
         }
       }
 
@@ -125,10 +121,6 @@
             gap: 16px;
             padding: 16px;
             border-radius: 12px;
-
-            > h4 {
-              padding: 0;
-            }
 
             > p {
               text-align: center;
@@ -207,34 +199,9 @@
 
 @include desktop {
   .homepage-main {
-    .presentation-section {
-      .homepage-articles-container {
-        
-        > article {
-          width: 50%;
-
-          > p {
-            line-height: 2;
-          }
-          
-          &.full-content {
-          
-            > p {
-              text-align: justify;
-            }
-          }
-        }
-      }
-    }
-
-    .last-news-section {
-      .last-news-container {
-        flex-wrap: nowrap;
-
-        .news-articles {
-          width: 50em;
-        }
-      }
+    .welcome-section .homepage-articles-container, .presentation-section .homepage-articles-container, .last-news-section .homepage-articles-container{
+      width: 50em;
+      align-self: center;
     }
   }
 }
