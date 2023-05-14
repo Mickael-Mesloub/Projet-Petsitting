@@ -11,7 +11,9 @@ const AdminNews = () => {
   useEffect(() => {
     getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news`)
       .then((data) => {
-        setArticles(data);
+        setArticles(
+          data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        );
       })
       .catch((error) => console.log(error));
   }, []);
@@ -48,9 +50,19 @@ const AdminNews = () => {
                   className={article.forWhichPage === "news" ? "news" : "home"}
                   key={i}
                 >
-                  <td>{article.forWhichPage === "news" ? "Actualités" : "Accueil"}</td>
-                  <td>{article.title.length > 30 ? `${article.title.substring(0, 30)}...` : article.title}</td>
-                  <td>{article.content.length > 30 ? `${article.content.substring(0, 30)}...` : article.content}</td>
+                  <td>
+                    {article.forWhichPage === "news" ? "Actualités" : "Accueil"}
+                  </td>
+                  <td>
+                    {article.title.length > 30
+                      ? `${article.title.substring(0, 30)}...`
+                      : article.title}
+                  </td>
+                  <td>
+                    {article.content.length > 30
+                      ? `${article.content.substring(0, 30)}...`
+                      : article.content}
+                  </td>
 
                   <td
                     className="clickable update"

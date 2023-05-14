@@ -1,6 +1,6 @@
 import { getMethod } from "../../../../helpers/fetch";
 import { useState, useEffect } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "./styles.scss";
 
@@ -14,7 +14,11 @@ const News = () => {
         const newsArticles = data.filter(
           (article) => article.forWhichPage === "news"
         );
-        setArticles(newsArticles);
+        setArticles(
+          newsArticles.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          )
+        );
       })
       .catch((error) => console.log(error));
   }, []);
@@ -22,20 +26,21 @@ const News = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - Actualités</title>
-          <meta 
-              name="description" 
-              content="Toutes les actualités de Rubieland"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, article, actualités, news" />
+        <title>Rubieland 🐶 - Actualités</title>
+        <meta name="description" content="Toutes les actualités de Rubieland" />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, article, actualités, news"
+        />
       </Helmet>
       <main className="newspage-main">
-      <section>
-        <h2>Actualités</h2>
-        
+        <section>
+          <h2>Actualités</h2>
+
           {articles && articles.length === 0 ? (
             <p className="no-content">
-              Vous pourrez suivre mes actualités prochainement sur cette page ✍️ !
+              Vous pourrez suivre mes actualités prochainement sur cette page ✍️
+              !
             </p>
           ) : (
             <article className="news-articles">
@@ -54,9 +59,20 @@ const News = () => {
                     </div>
                   )}
                   <div className="article-text-container">
-                    <h4>{article.title}</h4>
+                    <em style={{ fontSize: "13px" }}>
+                      Publié le{" "}
+                      {new Date(article.createdAt).toLocaleDateString()}
+                    </em>
+                    <h4>
+                      {article.title.length > 30
+                        ? `${article.title.substring(0, 30)}...`
+                        : article.title}
+                    </h4>
+
                     <p className="article-content">
-                      {article.content.length > 100 ? `${article.content.substring(0, 100)}...` : article.content}
+                      {article.content.length > 50
+                        ? `${article.content.substring(0, 50)}...`
+                        : article.content}
                     </p>
                   </div>
                 </div>
