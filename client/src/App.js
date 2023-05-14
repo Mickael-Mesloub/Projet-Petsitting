@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { getMethod } from "./helpers/fetch";
 import {
   publicRoutes,
-  profileRoutes,
+  userProfileRoutes,
   adminRoutes,
   authRoutes,
 } from "./routes/routes";
@@ -63,7 +63,7 @@ const App = () => {
           />
         ))}
 
-        {profileRoutes.map((route, i) => (
+        {userProfileRoutes.map((route, i) => (
           <Route
             path={route.path}
             element={<ProfileMiddleware>{route.element}</ProfileMiddleware>}

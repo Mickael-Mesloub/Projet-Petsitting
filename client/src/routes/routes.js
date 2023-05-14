@@ -45,7 +45,7 @@ export const publicRoutes = [
 ];
 
 // PROFILE
-export const profileRoutes = [
+export const userProfileRoutes = [
   { path: `/profile`, element: <Profile /> },
   { path: `/profile/update-profile`, element: <UpdateProfile /> },
   { path: `/profile/create-animal`, element: <CreateAnimal /> },

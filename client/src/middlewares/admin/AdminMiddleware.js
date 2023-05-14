@@ -1,11 +1,11 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { toastError } from "../../components/toast/Toast"
+import { toastError } from "../../components/toast/Toast";
 
 export const AdminMiddleware = (props) => {
   const [loaded, setLoaded] = useState(false);
-  const user = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state);
 
   useEffect(() => {
     if (!user.isLogged) {
@@ -16,19 +16,21 @@ export const AdminMiddleware = (props) => {
   }, [user]);
 
   if (!localStorage.getItem("jwt")) {
-    return ( 
-      toastError("Vous devez être connecté(e) en tant qu'administrateur pour accéder à cette page !"),
-      <Navigate to={"/login"}/>
-      );
+    return (
+      toastError(
+        "Vous devez être connecté(e) en tant qu'administrateur pour accéder à cette page !"
+      ),
+      (<Navigate to={"/login"} />)
+    );
   }
   switch (loaded) {
     case true: {
       if (user.isAdmin) {
         return props.children;
       }
-      return ( 
-      toastError("Vous n'êtes pas autorisé(e) à consulter cette page !"),
-      <Navigate to={"/"}/>
+      return (
+        toastError("Vous n'êtes pas autorisé(e) à consulter cette page !"),
+        (<Navigate to={"/"} />)
       );
     }
     case false: {

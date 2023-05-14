@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdDelete, MdCreate } from "react-icons/md";
 import { Carousel } from "react-responsive-carousel";
-import { toastSuccess } from "../../../../components/toast/Toast";
+import { toastError, toastSuccess } from "../../../../components/toast/Toast";
 import { capitalizeText } from "../../../../helpers/utils";
 import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
 import "./styles.scss";
 
 const Animal = () => {
@@ -13,19 +14,29 @@ const Animal = () => {
   const [animalNameCapitalized, setAnimalNameCapitalized] = useState("");
 
   const { animalId } = useParams();
+  const { user } = useSelector((state) => state);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (animal) {
+    if (user) {
       getMethod(
         `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
       )
         .then((data) => {
-          setAnimal(data.animal);
+          console.log(user._id);
+          console.log(data.animal.owner);
+          if (user._id && user._id !== data.animal.owner) {
+            toastError(
+              "Vous n'êtes pas autorisé(e) à consulter cette page! ⛔"
+            );
+            navigate("/");
+          } else {
+            setAnimal(data.animal);
+          }
         })
         .catch((error) => console.log(error));
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (animal) {
@@ -47,15 +58,25 @@ const Animal = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - {animal ? `Mes toutous - ${animal.name}`  : "Mes toutous"}  </title>
-          <meta 
-              name="description" 
-              content={animal ? `Tout ce qu'il faut savoir sur ${animal.name}`  : "Profil de mon toutou"}
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, profil, informations, détails" />
+        <title>
+          Rubieland 🐶 -{" "}
+          {animal ? `Mes toutous - ${animal.name}` : "Mes toutous"}{" "}
+        </title>
+        <meta
+          name="description"
+          content={
+            animal
+              ? `Tout ce qu'il faut savoir sur ${animal.name}`
+              : "Profil de mon toutou"
+          }
+        />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, profil, informations, détails"
+        />
       </Helmet>
       <main className="animal-main">
-        {animal && (
+        {user._id && user._id === animal.owner ? (
           <div className="animal-container">
             <h2>{animalNameCapitalized}</h2>
             <div className="animal-description"> {animal.description} </div>
@@ -90,7 +111,7 @@ const Animal = () => {
                 <p>Aucune image téléchargée.</p>
               )}
             </div>
-  
+
             <div className="delete-icon-container">
               <div
                 className="delete-icon"
@@ -121,9 +142,13 @@ const Animal = () => {
               </Link>
             </div>
             <div className="link-button">
-              <Link to="/profile" className="link-to-page">Retourner au profil</Link>
+              <Link to="/profile" className="link-to-page">
+                Retourner au profil
+              </Link>
             </div>
           </div>
+        ) : (
+          <h2>Chargement...</h2>
         )}
       </main>
     </>
