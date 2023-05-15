@@ -23,8 +23,6 @@ const Animal = () => {
         `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
       )
         .then((data) => {
-          console.log(user._id);
-          console.log(data.animal.owner);
           if (user._id && user._id !== data.animal.owner) {
             toastError(
               "Vous n'êtes pas autorisé(e) à consulter cette page! ⛔"
