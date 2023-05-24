@@ -41,14 +41,14 @@ const CreateNews = () => {
   };
 
   return (
-     <>
+    <>
       <Helmet>
-          <title>Rubieland 🐶 - Admin - Ajouter un article</title>
-          <meta 
-              name="description" 
-              content="Formulaire pour ajouter un article"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85" />
+        <title>Rubieland 🐶 - Admin - Ajouter un article</title>
+        <meta name="description" content="Formulaire pour ajouter un article" />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85"
+        />
       </Helmet>
       <main className="createArticle-main">
         <h2>Ajouter un article</h2>
@@ -67,7 +67,7 @@ const CreateNews = () => {
               Accueil
             </option>
           </select>
-  
+
           <input
             type="text"
             name="title"
@@ -86,7 +86,9 @@ const CreateNews = () => {
               setCountChar(e.target.value.length);
             }}
           ></textarea>
-          <div className="character-counter">Nb de caractères : {countChar}</div>
+          <div className="character-counter">
+            Nb de caractères : {countChar}
+          </div>
           <div className="form-inputs file-input">
             <label htmlFor="file">Ajouter des images : </label>
             <input
@@ -94,12 +96,13 @@ const CreateNews = () => {
               name="file"
               accept="image/jpeg, image/png"
               multiple
-              required
               onChange={(e) => setFiles(e.target.files)}
             />
           </div>
           <div className="cancel-confirm-buttons">
-            <Link to="/admin" className="cancel">Retour</Link>
+            <Link to="/admin" className="cancel">
+              Retour
+            </Link>
             <input className="confirm" type="submit" value="Ajouter" />
           </div>
         </form>
