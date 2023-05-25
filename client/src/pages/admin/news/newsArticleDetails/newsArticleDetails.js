@@ -8,7 +8,7 @@ const AdminNewsDetails = () => {
   const [article, setArticle] = useState({});
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`)
+    getMethod(`${process.env.REACT_APP_API_URL}/admin/news/${articleId}`)
       .then((data) => setArticle(data))
       .catch((error) => console.log(error));
   }, [articleId]);
@@ -27,7 +27,7 @@ const AdminNewsDetails = () => {
                 <div key={i} className="admin-news-image">
                   <Link
                     key={i}
-                    to={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                    to={`${process.env.REACT_APP_API_URL}/${image}`}
                   >
                     ${image}
                   </Link>
@@ -45,7 +45,7 @@ const AdminNewsDetails = () => {
                 )
               ) {
                 deleteMethod(
-                  `${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`
+                  `${process.env.REACT_APP_API_URL}/admin/news/${articleId}`
                 );
               }
             }}

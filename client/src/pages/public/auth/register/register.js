@@ -31,7 +31,7 @@ const Register = () => {
       formData.append("file", i);
     }
 
-    postFormData(`${process.env.REACT_APP_BACKEND_URL}/register`, formData)
+    postFormData(`${process.env.REACT_APP_API_URL}/register`, formData)
       .then(() => {
         toastSuccess("Compte créé 🎉 !");
         navigate("/login");
@@ -45,16 +45,20 @@ const Register = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - S'inscrire</title>
-          <meta 
-              name="description" 
-              content="S'inscrire à Rubieland"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, inscription, compte" />
+        <title>Rubieland 🐶 - S'inscrire</title>
+        <meta name="description" content="S'inscrire à Rubieland" />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, inscription, compte"
+        />
       </Helmet>
       <main className="registerPage-main">
         <h2>Inscrivez-vous</h2>
-        <form encType="multipart/form-data" method="POST" onSubmit={handleSubmit}>
+        <form
+          encType="multipart/form-data"
+          method="POST"
+          onSubmit={handleSubmit}
+        >
           <div className="form-inputs">
             <input
               type="text"
@@ -111,7 +115,9 @@ const Register = () => {
             />
           </div>
           <div className="cancel-confirm-buttons">
-            <Link to="/" className="cancel">Retour</Link>
+            <Link to="/" className="cancel">
+              Retour
+            </Link>
             <input className="confirm" type="submit" value="M'inscrire" />
           </div>
         </form>

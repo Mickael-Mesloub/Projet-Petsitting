@@ -6,14 +6,14 @@ import {
   registerRouter,
   loginRouter,
   verifyTokenRouter,
-} from "./routers/publicRouters/authRouter.js";
-import serviceRouter from "./routers/adminRouters/serviceRouter.js";
-import articleRouter from "./routers/adminRouters/articleRouter.js";
-import userRouter from "./routers/adminRouters/userRouter.js";
-import publicRouter from "./routers/publicRouters/publicRouter.js";
-import profileRouter from "./routers/publicRouters/profileRouter.js";
-import animalRouter from "./routers/adminRouters/animalRouter.js";
-import bookingRouter from "./routers/adminRouters/bookingRouter.js";
+} from "./routers/auth/authRouter.js";
+import serviceRouter from "./routers/admin/serviceRouter.js";
+import articleRouter from "./routers/admin/articleRouter.js";
+import userRouter from "./routers/admin/userRouter.js";
+import publicRouter from "./routers/public/publicRouter.js";
+import profileRouter from "./routers/profile/profileRouter.js";
+import animalRouter from "./routers/admin/animalRouter.js";
+import bookingRouter from "./routers/admin/bookingRouter.js";
 import * as dotenv from "dotenv";
 
 const app = express();

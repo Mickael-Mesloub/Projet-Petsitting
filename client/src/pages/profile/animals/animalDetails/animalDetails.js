@@ -19,9 +19,7 @@ const Animal = () => {
 
   useEffect(() => {
     if (user) {
-      getMethod(
-        `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
-      )
+      getMethod(`${process.env.REACT_APP_API_URL}/profile/animals/${animalId}`)
         .then((data) => {
           if (user._id && user._id !== data.animal.owner) {
             toastError(
@@ -84,7 +82,7 @@ const Animal = () => {
                 animal.images.map((image, i) => (
                   <div key={i} className="animal-image">
                     <img
-                      src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                      src={`${process.env.REACT_APP_API_URL}/${image}`}
                       alt={`${animal.name}_${i}`}
                     />
                   </div>
@@ -96,7 +94,7 @@ const Animal = () => {
                       {animal.images.map((image, i) => (
                         <div key={i} className="carousel-slide">
                           <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                            src={`${process.env.REACT_APP_API_URL}/${image}`}
                             alt={`${i}_${animal.title}`}
                           />
                         </div>
@@ -120,7 +118,7 @@ const Animal = () => {
                     )
                   ) {
                     deleteMethod(
-                      `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
+                      `${process.env.REACT_APP_API_URL}/profile/animals/${animalId}`
                     ).then(() => {
                       toastSuccess("Supprimé avec succès !");
                       navigate("/profile");

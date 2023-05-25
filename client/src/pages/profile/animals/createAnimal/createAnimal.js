@@ -14,7 +14,7 @@ const CreateAnimal = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile`);
+    getMethod(`${process.env.REACT_APP_API_URL}/profile`);
   }, []);
 
   const handleSubmit = (event) => {
@@ -29,7 +29,7 @@ const CreateAnimal = () => {
     }
 
     postFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/create-animal`,
+      `${process.env.REACT_APP_API_URL}/profile/create-animal`,
       formData
     )
       .then(() => {
@@ -45,12 +45,15 @@ const CreateAnimal = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - Ajouter un toutou</title>
-          <meta 
-              name="description" 
-              content="Ajouter un toutou associé à son profil utilisateur"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, ajouter, profil, informations, détails" />
+        <title>Rubieland 🐶 - Ajouter un toutou</title>
+        <meta
+          name="description"
+          content="Ajouter un toutou associé à son profil utilisateur"
+        />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, ajouter, profil, informations, détails"
+        />
       </Helmet>
       <main className="create-animal-main">
         <h2>Ajouter un animal</h2>
@@ -92,7 +95,9 @@ const CreateAnimal = () => {
             />
           </div>
           <div className="cancel-confirm-buttons">
-            <Link to="/profile" className="cancel">Retour</Link>
+            <Link to="/profile" className="cancel">
+              Retour
+            </Link>
             <input className="confirm" type="submit" value="Ajouter" />
           </div>
         </form>

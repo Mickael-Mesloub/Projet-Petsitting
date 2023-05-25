@@ -17,7 +17,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    postMethod(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+    postMethod(`${process.env.REACT_APP_API_URL}/login`, {
       email,
       password,
     })
@@ -36,12 +36,12 @@ const Login = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - Se connecter</title>
-          <meta 
-              name="description" 
-              content="Se connecter à Rubieland"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, connexion, compte" />
+        <title>Rubieland 🐶 - Se connecter</title>
+        <meta name="description" content="Se connecter à Rubieland" />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, connexion, compte"
+        />
       </Helmet>
       <main className="loginPage-main">
         <h2>Connectez-vous</h2>
@@ -65,7 +65,9 @@ const Login = () => {
             />
           </div>
           <div className="cancel-confirm-buttons">
-            <Link to="/" className="cancel">Retour</Link>
+            <Link to="/" className="cancel">
+              Retour
+            </Link>
             <input className="confirm" type="submit" value="Me connecter" />
           </div>
         </form>

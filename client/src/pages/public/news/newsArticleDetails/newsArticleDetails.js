@@ -12,7 +12,7 @@ const NewsArticleDetails = () => {
   const { articleId } = useParams();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/news/${articleId}`)
+    getMethod(`${process.env.REACT_APP_API_URL}/news/${articleId}`)
       .then((data) => {
         setArticle(data);
         setArticleImages(data.images);
@@ -32,12 +32,18 @@ const NewsArticleDetails = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - {article ? `Actualités - ${article.title}`   : "Actualités"} </title>
-          <meta 
-              name="description" 
-              content={article ? `Actualités - ${article.title}` : "Actualités"}
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, article, actualités, news" />
+        <title>
+          Rubieland 🐶 -{" "}
+          {article ? `Actualités - ${article.title}` : "Actualités"}{" "}
+        </title>
+        <meta
+          name="description"
+          content={article ? `Actualités - ${article.title}` : "Actualités"}
+        />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, article, actualités, news"
+        />
       </Helmet>
       <main className="article-page-main">
         {article && article._id === articleId ? (
@@ -46,7 +52,7 @@ const NewsArticleDetails = () => {
               {articleImages && articleImages.length === 1 && (
                 <div className="article-image-container">
                   <img
-                    src={`${process.env.REACT_APP_BACKEND_URL}/${articleImages[0]}`}
+                    src={`${process.env.REACT_APP_API_URL}/${articleImages[0]}`}
                     alt={article.title}
                   />
                 </div>
@@ -58,7 +64,7 @@ const NewsArticleDetails = () => {
                       {articleImages.map((image, i) => (
                         <div key={i} className="carousel-slide">
                           <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                            src={`${process.env.REACT_APP_API_URL}/${image}`}
                             alt={`${i}_${article.title}`}
                           />
                         </div>
@@ -77,7 +83,9 @@ const NewsArticleDetails = () => {
             </article>
             <div className="link-container">
               <div className="link-button">
-                <Link to="/news" className="link-to-page">Retourner aux actus</Link>
+                <Link to="/news" className="link-to-page">
+                  Retourner aux actus
+                </Link>
               </div>
             </div>
           </section>
@@ -86,7 +94,9 @@ const NewsArticleDetails = () => {
             <p> ❌ Cet article n'existe pas ❌ </p>
             <div className="link-container">
               <div className="link-button">
-                <Link to="/news" className="link-to-page">Retourner aux actus</Link>
+                <Link to="/news" className="link-to-page">
+                  Retourner aux actus
+                </Link>
               </div>
             </div>
           </div>

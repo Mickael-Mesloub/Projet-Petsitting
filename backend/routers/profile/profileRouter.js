@@ -12,7 +12,7 @@ import {
   getBookingDetails,
   updateBooking,
   cancelBooking,
-} from "../../controllers/public/profileController.js";
+} from "../../controllers/profile/profileController.js";
 
 const profileRouter = express.Router();
 

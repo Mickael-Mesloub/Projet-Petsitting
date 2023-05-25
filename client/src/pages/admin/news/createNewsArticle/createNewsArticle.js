@@ -27,7 +27,7 @@ const CreateNews = () => {
     }
 
     postFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/admin/news/create-article`,
+      `${process.env.REACT_APP_API_URL}/admin/news/create-article`,
       formData
     )
       .then(() => {

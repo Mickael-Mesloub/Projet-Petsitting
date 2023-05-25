@@ -20,9 +20,7 @@ const UpdateAnimal = () => {
 
   useEffect(() => {
     if (user) {
-      getMethod(
-        `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}`
-      )
+      getMethod(`${process.env.REACT_APP_API_URL}/profile/animals/${animalId}`)
         .then((data) => {
           if (user._id && user._id !== data.animal.owner) {
             toastError(
@@ -49,7 +47,7 @@ const UpdateAnimal = () => {
       formData.append("deleteImages[]", image);
     }
     putFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}/update-animal`,
+      `${process.env.REACT_APP_API_URL}/profile/animals/${animalId}/update-animal`,
       formData
     )
       .then((data) => setAnimal(data))
@@ -66,7 +64,7 @@ const UpdateAnimal = () => {
 
         // Mettre à jour les autres données de l'animal
         putFormData(
-          `${process.env.REACT_APP_BACKEND_URL}/profile/animals/${animalId}/update-animal`,
+          `${process.env.REACT_APP_API_URL}/profile/animals/${animalId}/update-animal`,
           formData
         )
           .then(() => navigate(`/profile/animals/${animalId}`))
@@ -162,7 +160,7 @@ const UpdateAnimal = () => {
                         }}
                       >
                         <img
-                          src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                          src={`${process.env.REACT_APP_API_URL}/${image}`}
                           alt={`${animal.name}_${i}`}
                         />
                       </div>

@@ -6,7 +6,7 @@ const AdminAllUsers = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/users`)
+    getMethod(`${process.env.REACT_APP_API_URL}/admin/users`)
       .then((data) => setUsers(data.users))
       .catch((error) => console.log(error));
   }, []);
@@ -39,8 +39,8 @@ const AdminAllUsers = () => {
             </tbody>
           </table>
         </div>
-      ):(
-      <div>Chargement...</div>
+      ) : (
+        <div>Chargement...</div>
       )}
     </main>
   );

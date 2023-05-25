@@ -27,7 +27,7 @@ const CreateService = () => {
     };
 
     postMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/admin/create-service`,
+      `${process.env.REACT_APP_API_URL}/admin/create-service`,
       newService
     )
       .then(() => {
@@ -49,12 +49,15 @@ const CreateService = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - Admin - Ajouter une prestation</title>
-          <meta 
-              name="description" 
-              content="Formulaire pour ajouter une prestation"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85" />
+        <title>Rubieland 🐶 - Admin - Ajouter une prestation</title>
+        <meta
+          name="description"
+          content="Formulaire pour ajouter une prestation"
+        />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85"
+        />
       </Helmet>
       <main className="createService-main">
         <h2>Ajouter une prestation</h2>
@@ -87,7 +90,9 @@ const CreateService = () => {
               setCountChar(e.target.value.length);
             }}
           ></textarea>
-          <div className="character-counter">Nb de caractères : {countChar}</div>
+          <div className="character-counter">
+            Nb de caractères : {countChar}
+          </div>
           <label htmlFor="price">Prix (en €) : </label>
           <input
             type="number"
@@ -122,7 +127,9 @@ const CreateService = () => {
             </div>
           </fieldset>
           <div className="cancel-confirm-buttons">
-            <Link to="/admin" className="cancel">Retour</Link>
+            <Link to="/admin" className="cancel">
+              Retour
+            </Link>
             <input className="confirm" type="submit" value="Ajouter" />
           </div>
         </form>

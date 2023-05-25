@@ -7,9 +7,7 @@ const Booking = () => {
   const [booking, setBooking] = useState({});
 
   useEffect(() => {
-    getMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/bookings/${bookingId}`
-    )
+    getMethod(`${process.env.REACT_APP_API_URL}/profile/bookings/${bookingId}`)
       .then((data) => setBooking(data.booking))
       .catch((error) => console.log(error));
   }, []);

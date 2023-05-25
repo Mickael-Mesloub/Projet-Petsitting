@@ -19,12 +19,10 @@ const UpdateService = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/admin/services/${serviceId}`
-    )
+    getMethod(`${process.env.REACT_APP_API_URL}/admin/services/${serviceId}`)
       .then((data) => {
         setService(data);
-        setCategory(data.category)
+        setCategory(data.category);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -40,7 +38,7 @@ const UpdateService = () => {
     };
 
     putMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/admin/services/${serviceId}`,
+      `${process.env.REACT_APP_API_URL}/admin/services/${serviceId}`,
       updatedService
     )
       .then(() => {
@@ -62,12 +60,24 @@ const UpdateService = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 {service ? `- Admin - Modifier une prestation - ${service.name}` : "- Admin - Modifier une prestation"}</title>
-          <meta 
-              name="description" 
-              content={service ? `Formulaire pour modifier une prestation - ${service.name}` : "Formulaire pour modifier une prestation"}
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85" />
+        <title>
+          Rubieland 🐶{" "}
+          {service
+            ? `- Admin - Modifier une prestation - ${service.name}`
+            : "- Admin - Modifier une prestation"}
+        </title>
+        <meta
+          name="description"
+          content={
+            service
+              ? `Formulaire pour modifier une prestation - ${service.name}`
+              : "Formulaire pour modifier une prestation"
+          }
+        />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85"
+        />
       </Helmet>
       <main className="updateService-main">
         <h2>Modifier la prestation</h2>
@@ -97,7 +107,9 @@ const UpdateService = () => {
               setCountChar(e.target.value.length);
             }}
           ></textarea>
-          <div className="character-counter">Nb de caractères : {countChar}</div>
+          <div className="character-counter">
+            Nb de caractères : {countChar}
+          </div>
           <label htmlFor="price">Prix (en €) : </label>
           <input
             type="number"
@@ -109,7 +121,7 @@ const UpdateService = () => {
             <legend>Rendre la prestation visible pour les utilisateurs?</legend>
             <div className="buttons">
               <div className="radio-button">
-              <label htmlFor="true">Oui</label>
+                <label htmlFor="true">Oui</label>
                 <input
                   type="radio"
                   name="yes"
@@ -119,7 +131,7 @@ const UpdateService = () => {
                 />
               </div>
               <div className="radio-button">
-              <label htmlFor="false">Non</label>
+                <label htmlFor="false">Non</label>
                 <input
                   type="radio"
                   name="no"
@@ -131,7 +143,9 @@ const UpdateService = () => {
             </div>
           </fieldset>
           <div className="cancel-confirm-buttons">
-            <Link to="/admin" className="cancel">Retour</Link>
+            <Link to="/admin" className="cancel">
+              Retour
+            </Link>
             <input className="confirm" type="submit" value="Modifier" />
           </div>
         </form>

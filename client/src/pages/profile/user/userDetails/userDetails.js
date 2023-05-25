@@ -20,7 +20,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile`)
+      getMethod(`${process.env.REACT_APP_API_URL}/profile`)
         .then((data) => {
           setProfile(data);
         })
@@ -52,12 +52,12 @@ const Profile = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - Mon profil</title>
-          <meta 
-              name="description" 
-              content="La page profil de l'utilisateur"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, profil, informations, détails" />
+        <title>Rubieland 🐶 - Mon profil</title>
+        <meta name="description" content="La page profil de l'utilisateur" />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, profil, informations, détails"
+        />
       </Helmet>
       <main className="profilePage-main">
         <div className="profile-container">
@@ -66,7 +66,7 @@ const Profile = () => {
             <div className="profile-card">
               <div className="user-avatar">
                 <img
-                  src={`${process.env.REACT_APP_BACKEND_URL}/${profile.user.avatar}`}
+                  src={`${process.env.REACT_APP_API_URL}/${profile.user.avatar}`}
                   alt={`${profile.user.firstName}_${profile.user.lastName}_avatar`}
                 />
               </div>
@@ -87,7 +87,7 @@ const Profile = () => {
                   <p className="email-address">{profile.user.email}</p>
                 </div>
               </div>
-  
+
               <div className="update-profile-link-container">
                 <Link
                   to={`/profile/update-profile`}
@@ -113,12 +113,12 @@ const Profile = () => {
                     <div className="animal-name">
                       <h3>{animal.name}</h3>
                     </div>
-  
+
                     <div className="animal-images-box">
                       {animal.images && animal.images.length >= 1 ? (
                         <div className="animal-image" data-name={animal.name}>
                           <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/${animal.images[0]}`}
+                            src={`${process.env.REACT_APP_API_URL}/${animal.images[0]}`}
                             alt={`${animal.name}_${i}`}
                           />
                         </div>

@@ -17,11 +17,10 @@ const UpdateArticle = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`)
+    getMethod(`${process.env.REACT_APP_API_URL}/admin/news/${articleId}`)
       .then((data) => {
         setArticle(data);
         setForWhichPage(data.forWhichPage);
-        
       })
       .catch((error) => console.log(error));
   }, []);
@@ -35,7 +34,7 @@ const UpdateArticle = () => {
       formData.append("deleteImages[]", image);
     }
     putFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`,
+      `${process.env.REACT_APP_API_URL}/admin/news/${articleId}`,
       formData
     )
       .then((data) => setArticle(data))
@@ -51,7 +50,7 @@ const UpdateArticle = () => {
           }
         }
         putFormData(
-          `${process.env.REACT_APP_BACKEND_URL}/admin/news/${articleId}`,
+          `${process.env.REACT_APP_API_URL}/admin/news/${articleId}`,
           formData
         )
           .then(() => {
@@ -64,16 +63,28 @@ const UpdateArticle = () => {
           });
       });
   };
-  
+
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 {article ? `- Admin - Modifier un article - ${article.title}` : "- Admin - Modifier un article"}</title>
-          <meta 
-              name="description" 
-              content={article ? `Formulaire pour modifier un article - ${article.title}` : "Formulaire pour modifier un article"}
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85" />
+        <title>
+          Rubieland 🐶{" "}
+          {article
+            ? `- Admin - Modifier un article - ${article.title}`
+            : "- Admin - Modifier un article"}
+        </title>
+        <meta
+          name="description"
+          content={
+            article
+              ? `Formulaire pour modifier un article - ${article.title}`
+              : "Formulaire pour modifier un article"
+          }
+        />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85"
+        />
       </Helmet>
       <main className="updateArticle-main">
         <h2>Modifier l'article</h2>
@@ -139,7 +150,7 @@ const UpdateArticle = () => {
                     }}
                   >
                     <img
-                      src={`${process.env.REACT_APP_BACKEND_URL}/${image}`}
+                      src={`${process.env.REACT_APP_API_URL}/${image}`}
                       alt={`${article.title}_${i}`}
                     />
                   </div>
@@ -148,7 +159,9 @@ const UpdateArticle = () => {
             </fieldset>
           )}
           <div className="cancel-confirm-buttons">
-            <Link to="/admin" className="cancel">Retour</Link>
+            <Link to="/admin" className="cancel">
+              Retour
+            </Link>
             <input className="confirm" type="submit" value="Modifier" />
           </div>
         </form>

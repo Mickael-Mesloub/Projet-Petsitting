@@ -9,7 +9,7 @@ const AdminNews = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news`)
+    getMethod(`${process.env.REACT_APP_API_URL}/admin/news`)
       .then((data) => {
         setArticles(
           data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -20,7 +20,7 @@ const AdminNews = () => {
 
   const deleteArticle = (id) => {
     if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer cet article ?")) {
-      deleteMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/news/${id}`)
+      deleteMethod(`${process.env.REACT_APP_API_URL}/admin/news/${id}`)
         .then(() => {
           // Supprime l'article de la liste des articles et met à jour la data
           setArticles(articles.filter((article) => article._id !== id));

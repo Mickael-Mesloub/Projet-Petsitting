@@ -15,7 +15,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/news`)
+    getMethod(`${process.env.REACT_APP_API_URL}/news`)
       .then((data) => {
         const homeArticles = data.filter(
           (article) => article.forWhichPage === "home"
@@ -158,7 +158,7 @@ const Home = () => {
                     {article.images.length > 0 && (
                       <div className="article-image">
                         <img
-                          src={`${process.env.REACT_APP_BACKEND_URL}/${article.images[0]}`}
+                          src={`${process.env.REACT_APP_API_URL}/${article.images[0]}`}
                           alt={article.title}
                         />
                       </div>

@@ -14,7 +14,7 @@ const Booking = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/verify-token`)
+    getMethod(`${process.env.REACT_APP_API_URL}/verify-token`)
       .then((data) => {
         dispatch(loginUser(data.user));
       })
@@ -22,7 +22,7 @@ const Booking = () => {
   }, []);
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile/animals`)
+    getMethod(`${process.env.REACT_APP_API_URL}/profile/animals`)
       .then((data) => {
         console.log(data);
         setAnimals(data.animal);
@@ -32,7 +32,7 @@ const Booking = () => {
   }, []);
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/services`)
+    getMethod(`${process.env.REACT_APP_API_URL}/services`)
       .then((data) => setServices(data))
       .catch((error) => console.log(error));
   }, []);

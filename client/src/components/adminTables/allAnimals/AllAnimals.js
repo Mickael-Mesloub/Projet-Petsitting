@@ -6,19 +6,23 @@ const Animals = () => {
   const [animals, setAnimals] = useState([]);
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/animals`)
+    getMethod(`${process.env.REACT_APP_API_URL}/admin/animals`)
       .then((data) => {
         setAnimals(data.animals);
       })
       .catch((error) => console.log(error));
   }, []);
-  
+
   const convertSize = (size) => {
-    switch(size) {
-      case "small" : return "Petit";
-      case "medium" : return "Moyen";
-      case "large" : return "Grand";
-      default : return "";
+    switch (size) {
+      case "small":
+        return "Petit";
+      case "medium":
+        return "Moyen";
+      case "large":
+        return "Grand";
+      default:
+        return "";
     }
   };
 

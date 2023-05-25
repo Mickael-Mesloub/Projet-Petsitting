@@ -28,7 +28,7 @@ const App = () => {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token && !user.isLogged) {
-      getMethod(`${process.env.REACT_APP_BACKEND_URL}/verify-token`)
+      getMethod(`${process.env.REACT_APP_API_URL}/verify-token`)
         .then((data) => {
           dispatch(loginUser(data.user));
         })

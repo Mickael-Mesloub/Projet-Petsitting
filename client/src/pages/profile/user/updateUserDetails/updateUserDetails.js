@@ -22,13 +22,13 @@ const UpdateProfile = () => {
 
   useEffect(() => {
     if (user) {
-      getMethod(`${process.env.REACT_APP_BACKEND_URL}/profile`)
+      getMethod(`${process.env.REACT_APP_API_URL}/profile`)
         .then((data) => {
-          setProfile(data)
-          setFirstName(data.user.firstName)
-          setLastName(data.user.lastName)
-          setPhone(data.user.phone)
-          setEmail(data.user.email)
+          setProfile(data);
+          setFirstName(data.user.firstName);
+          setLastName(data.user.lastName);
+          setPhone(data.user.phone);
+          setEmail(data.user.email);
         })
         .catch((error) => console.log(error));
     } else {
@@ -50,7 +50,7 @@ const UpdateProfile = () => {
     }
 
     putFormData(
-      `${process.env.REACT_APP_BACKEND_URL}/profile/update-profile`,
+      `${process.env.REACT_APP_API_URL}/profile/update-profile`,
       formData
     )
       .then((data) => {
@@ -67,12 +67,15 @@ const UpdateProfile = () => {
   return (
     <>
       <Helmet>
-          <title>Rubieland 🐶 - Modifier mon profil</title>
-          <meta 
-              name="description" 
-              content="Modifier les informations de l'utilisateur"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, modifier, profil, informations, détails" />
+        <title>Rubieland 🐶 - Modifier mon profil</title>
+        <meta
+          name="description"
+          content="Modifier les informations de l'utilisateur"
+        />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, modifier, profil, informations, détails"
+        />
       </Helmet>
       <main className="update-profile-main">
         {profile.user && (
@@ -124,9 +127,11 @@ const UpdateProfile = () => {
                 />
               </div>
               <div className="cancel-confirm-buttons">
-            <Link to="/profile" className="cancel">Retour</Link>
-            <input className="confirm" type="submit" value="Modifier" />
-          </div>
+                <Link to="/profile" className="cancel">
+                  Retour
+                </Link>
+                <input className="confirm" type="submit" value="Modifier" />
+              </div>
             </form>
           </>
         )}

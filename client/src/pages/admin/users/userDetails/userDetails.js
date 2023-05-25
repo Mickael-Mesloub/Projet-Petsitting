@@ -10,7 +10,7 @@ const AdminUserDetails = () => {
   const { userId } = useParams();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/users/${userId}`)
+    getMethod(`${process.env.REACT_APP_API_URL}/admin/users/${userId}`)
       .then((data) => setUser(data))
       .catch((error) => console.log(error));
   }, []);

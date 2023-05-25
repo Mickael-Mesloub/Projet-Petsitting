@@ -8,9 +8,7 @@ const ServiceDetails = () => {
   const { serviceId } = useParams();
 
   useEffect(() => {
-    getMethod(
-      `${process.env.REACT_APP_BACKEND_URL}/admin/services/${serviceId}`
-    )
+    getMethod(`${process.env.REACT_APP_API_URL}/admin/services/${serviceId}`)
       .then((data) => setService(data))
       .catch((error) => console.log(error));
   }, []);
@@ -35,7 +33,7 @@ const ServiceDetails = () => {
                   )
                 ) {
                   deleteMethod(
-                    `${process.env.REACT_APP_BACKEND_URL}/admin/services/${serviceId}`
+                    `${process.env.REACT_APP_API_URL}/admin/services/${serviceId}`
                   );
                 }
               }}

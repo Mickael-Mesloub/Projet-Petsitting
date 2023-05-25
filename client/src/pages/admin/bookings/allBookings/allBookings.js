@@ -1,5 +1,5 @@
 const Bookings = () => {
-  // REACT_APP_BACKEND_URL
+  // REACT_APP_API_URL
 
   return (
     <main>

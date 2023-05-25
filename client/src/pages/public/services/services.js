@@ -7,7 +7,7 @@ const Services = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/services`)
+    getMethod(`${process.env.REACT_APP_API_URL}/services`)
       .then((data) => {
         setServices(data);
       })
@@ -22,14 +22,17 @@ const Services = () => {
   );
 
   return (
-     <>
+    <>
       <Helmet>
-          <title>Rubieland 🐶 - Prestations</title>
-          <meta 
-              name="description" 
-              content="Toutes les prestations disponibles pour le toilettage canin et le dogsitting"
-          />
-          <meta name="keywords" content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, prestation, service, réserver, tarif, prix" />
+        <title>Rubieland 🐶 - Prestations</title>
+        <meta
+          name="description"
+          content="Toutes les prestations disponibles pour le toilettage canin et le dogsitting"
+        />
+        <meta
+          name="keywords"
+          content="site, dogsitting, garderie, toilettage, éducation, canin, chien, vendée, la roche sur yon, essarts en bocage, 85000, 85, prestation, service, réserver, tarif, prix"
+        />
       </Helmet>
       <main className="servicesPage-main">
         {services && services.length === 0 ? (
@@ -41,7 +44,9 @@ const Services = () => {
             <article className="services-container">
               {groomingServices.map((service, i) => (
                 <div className="service" key={`grooming-${i}`}>
-                  <div className="service-category grooming">Soin/Éducation</div>
+                  <div className="service-category grooming">
+                    Soin/Éducation
+                  </div>
                   <p className="service-text service-name">{service.name}</p>
                   <p className="service-text service-description">
                     {service.description}

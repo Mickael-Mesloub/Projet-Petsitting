@@ -9,7 +9,7 @@ const AdminServices = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getMethod(`${process.env.REACT_APP_BACKEND_URL}/services`)
+    getMethod(`${process.env.REACT_APP_API_URL}/services`)
       .then((data) => {
         setServices(data);
       })
@@ -18,7 +18,7 @@ const AdminServices = () => {
 
   const deleteService = (id) => {
     if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer ce service ?")) {
-      deleteMethod(`${process.env.REACT_APP_BACKEND_URL}/admin/services/${id}`)
+      deleteMethod(`${process.env.REACT_APP_API_URL}/admin/services/${id}`)
         .then(() => {
           // Supprime le service de la liste des services et met à jour la data
           setServices(services.filter((service) => service._id !== id));
@@ -26,20 +26,26 @@ const AdminServices = () => {
         .catch((error) => console.log(error));
     }
   };
-  
+
   const setCategoryClass = (category) => {
-     switch(category) {
-      case "grooming" : return "grooming";
-      case "sitting" : return "sitting";
-      default : return "";
+    switch (category) {
+      case "grooming":
+        return "grooming";
+      case "sitting":
+        return "sitting";
+      default:
+        return "";
     }
-  }
-  
+  };
+
   const convertCategory = (category) => {
-    switch(category) {
-      case "grooming" : return "Soin/Éducation";
-      case "sitting" : return "Garde";
-      default : return "";
+    switch (category) {
+      case "grooming":
+        return "Soin/Éducation";
+      case "sitting":
+        return "Garde";
+      default:
+        return "";
     }
   };
 
@@ -62,15 +68,18 @@ const AdminServices = () => {
             </thead>
             <tbody>
               {services.map((service, i) => (
-                <tr
-                  className={
-                    setCategoryClass(service.category)
-                  }
-                  key={i}
-                >
+                <tr className={setCategoryClass(service.category)} key={i}>
                   <td>{convertCategory(service.category)}</td>
-                  <td>{service.name.length > 30 ? `${service.name.substring(0, 30)}...` : service.name}</td>
-                  <td>{service.description.length > 30 ? `${service.description.substring(0, 30)}...` : service.description}</td>
+                  <td>
+                    {service.name.length > 30
+                      ? `${service.name.substring(0, 30)}...`
+                      : service.name}
+                  </td>
+                  <td>
+                    {service.description.length > 30
+                      ? `${service.description.substring(0, 30)}...`
+                      : service.description}
+                  </td>
                   <td>{`${service.price}€`}</td>
                   <td>{service.visible == true ? "Oui" : "Non"}</td>
                   <td
