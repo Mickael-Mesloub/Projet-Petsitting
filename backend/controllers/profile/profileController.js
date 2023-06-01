@@ -58,7 +58,14 @@ export const updateUserInfos = async (req, res) => {
 
       let newAvatar;
       if (files && files.file) {
-        newAvatar = await copyFiles(files.file ?? "", "images");
+        fs.unlink(`public/${user.avatar}`, (error) => {
+          if (error && error.code !== "ENOENT") {
+            return res.status(500).json({
+              error: `Une erreur est survenue et le(s) fichier(s) n'a / n'ont pas pu être supprimé(s) : ${error.message}. Veuillez réessayer.`,
+            });
+          }
+        });
+        newAvatar = await copyFiles(files.file ?? "", "images/avatars");
       }
 
       // Mettre à jour les autres informations de l'utilisateur

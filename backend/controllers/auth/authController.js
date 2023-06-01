@@ -12,7 +12,7 @@ export const register = (req, res) => {
 
     let avatar;
     if (files && files.file) {
-      avatar = await copyFiles(files.file ?? [], "images");
+      avatar = await copyFiles(files.file ?? [], "images/avatars");
     }
 
     await userModel
